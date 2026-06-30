@@ -3,7 +3,7 @@ import MovieScreen from "./components/MovieScreen";
 import SeatRow from "./components/SeatRow";
 import TicketCheckout from "./components/TicketCheckout";
 import BookingInfo from "./components/BookingInfo";
-import bgMovie from "@assets/bgmovie.jpg";
+import bgMovie from "@assets/images/bgmovie.jpg";
 import { selectSeatRowList } from "@/redux/slices/movie-booking/movieBookingSelectors";
 
 const MovieBooking = () => {
