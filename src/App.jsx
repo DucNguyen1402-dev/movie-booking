@@ -1,11 +1,18 @@
-import MovieBooking from "./pages/customer/MovieBooking/MovieBooking";
+import Dashboard from "./Dashboard";
+import {Routes , Route, Navigate} from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
 
-function App() {
+
+export default function App() {
   return (
-    <>
-      <MovieBooking />
-    </>
+    <Routes>
+      <Route path ="/" element = {<MainLayout/>}>
+       <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
+      
+    </Routes>
   );
 }
 
-export default App;
+
