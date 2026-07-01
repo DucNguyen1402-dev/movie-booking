@@ -5,12 +5,11 @@ import { IoTicket, IoSettings, IoLogOut } from "react-icons/io5";
 import { ImProfile } from "react-icons/im";
 import { MdLocalMovies } from "react-icons/md";
 
-
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const SIDEBAR_LINKS = [
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     label: "Dashboard",
     icon: MdDashboard,
     iconColor: "text-indigo-500",
@@ -111,10 +110,10 @@ export default function Sidebar() {
             AD
           </button>
           <div className="absolute bottom-10 left-0 w-50 opacity-0 rounded-xl border border-gray-700 bg-[#1f1f1f] shadow-2xl overflow-hidden transition-opacity duration-500 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto  ">
-            <button className="flex w-full items-center gap-3 px-4 py-3 hover:bg-gray-800  cursor-pointer transition-colors duration-300">
+            <Link className="flex w-full items-center gap-3 px-4 py-3 hover:bg-gray-800  cursor-pointer transition-colors duration-300" to = "/admin/profile">
               <ImProfile className="text-lg text-gray-400" />
               <span className="text-sm text-white">Hồ sơ</span>
-            </button>
+            </Link>
 
             <div className="flex items-center justify-between px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors duration-300">
               <div className="flex items-center gap-3">
