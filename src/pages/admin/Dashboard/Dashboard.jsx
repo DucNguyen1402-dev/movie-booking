@@ -1,6 +1,31 @@
-
-
+import {useEffect, useState } from "react";
+import {getMovies} from "@features/admin/movie/api/movieApi.js";
 function Dashboard() {
+
+
+
+
+    const [movies, setMovies] = useState([]);
+
+
+   useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const data = await getMovies();
+        setMovies(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
+   
+
+
+const nowShowingMovies = movies.filter((movie) => movie.dangChieu);
+
+const upcomingMovies = movies.filter((movie) => movie.sapChieu);
   return (
   
     <div className="flex-1 flex flex-col">
@@ -48,6 +73,7 @@ function Dashboard() {
               <span className="p-2 bg-blue-500/10 text-blue-500 rounded-lg text-xs">
                 🎟️
               </span>
+
             </div>
             <div className="mt-4">
               <h3 className="text-2xl font-bold text-white">1,240</h3>
@@ -58,22 +84,36 @@ function Dashboard() {
           </div>
 
           {/* Card 3: Phim đang chiếu */}
-          <div className="bg-[#1e1e1e] p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-gray-400">
-                Phim đang hoạt động
-              </span>
-              <span className="p-2 bg-red-500/10 text-red-500 rounded-lg text-xs">
-                🎬
-              </span>
-            </div>
-            <div className="mt-4">
-              <h3 className="text-2xl font-bold text-white">18 Phim</h3>
-              <p className="text-xs text-gray-500 mt-1">
-                3 phim sắp khởi chiếu tuần tới
-              </p>
-            </div>
-          </div>
+         <div className="group rounded-2xl border border-gray-800 bg-[#1b1b1b] p-6 transition-all duration-300 hover:border-red-500/40 hover:shadow-lg hover:shadow-red-500/5">
+  <div className="flex items-start justify-between">
+    <div>
+      <p className="text-sm font-medium text-gray-400 uppercase tracking-wide">
+        Tất cả phim
+      </p>
+
+      <h2 className="mt-3 text-4xl font-bold text-white">
+        {movies.length}
+      </h2>
+
+      <p className="mt-1 text-sm text-gray-500">
+        Phim trong hệ thống
+      </p>
+    </div>
+
+    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-red-500/10 text-2xl transition-colors duration-300 group-hover:bg-red-500/20">
+      🎬
+    </div>
+  </div>
+
+  <div className="mt-6 border-t border-gray-800 pt-4">
+    <p className="text-sm text-gray-400">
+      <span className="font-semibold text-red-400">
+        {upcomingMovies.length}
+      </span>{" "}
+      phim sắp khởi chiếu tuần tới
+    </p>
+  </div>
+</div>
 
           {/* Card 4: Thành viên mới */}
           <div className="bg-[#1e1e1e] p-6 rounded-xl border border-gray-800 flex flex-col justify-between">
