@@ -1,7 +1,7 @@
-import { selectModalState } from "../../redux/selectors";
+import { selectModalState } from "@features/admin/movie-management/redux/selectors";
 import { useSelector } from "react-redux";
-import { useProcessedMovies } from "../../hooks/useProcessedMovies";
-import { setModalState } from "../../redux/slice";
+import { useProcessedMovies } from "@features/admin/movie-management/hooks/useProcessedMovies";
+import { setModalState } from "@features/admin/movie-management/redux/slice";
 import { useDispatch } from "react-redux";
 import { useDeleteMovie } from "@hooks/useDeleteMovie";
 

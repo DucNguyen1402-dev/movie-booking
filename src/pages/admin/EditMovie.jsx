@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { LockKeyhole, Star } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setModalState } from "@features/admin/movie-management/redux/slice";
 import { useMovies } from "@hooks/useMovies";
+import { MODAL_TYPES } from "@features/admin/movie-management/constants/modalTypes.js";
+// import { useEditMovie } from "@hooks/useEditMovie"
+
 
 const EMPTY_MOVIE = {
   maPhim: 0,
@@ -22,7 +26,11 @@ const EMPTY_MOVIE = {
 
 export default function EditMovie() {
   const { id } = useParams();
+  // const editMutation = useEditMovie();
+
   const { data: movies = [] } = useMovies();
+
+  const dispatch = useDispatch();
 
   const editMovie =
     movies.find((movie) => movie.maPhim === Number(id)) ?? EMPTY_MOVIE;
@@ -38,7 +46,10 @@ export default function EditMovie() {
     setImgPreview(editMovie.hinhAnh);
   }, [editMovie]);
 
-  // Xử lý thay đổi input text/number/date
+
+  const onDiscardChange = () => dispatch(setModalState({ type: MODAL_TYPES.DISCARD_MOVIE_CHANGES }));
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setMovie((prev) => ({
@@ -47,20 +58,20 @@ export default function EditMovie() {
     }));
   };
 
-  // Xử lý thay đổi các nút checkbox/toggle state
+
   const handleCheckbox = (e) => {
     const { name, checked } = e.target;
     setMovie((prev) => ({ ...prev, [name]: checked }));
   };
 
-  // Xử lý upload file ảnh để preview tạm thời trước khi submit dạng FormData
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImgPreview(reader.result);
-        setMovie((prev) => ({ ...prev, hinhAnh: file })); // Lưu file object để chuẩn bị gửi API
+        setMovie((prev) => ({ ...prev, hinhAnh: file }));
       };
       reader.readAsDataURL(file);
     }
@@ -68,21 +79,28 @@ export default function EditMovie() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Tạo FormData để gửi lên API (vì có kèm file hình ảnh)
     const formData = new FormData();
     for (let key in movie) {
       formData.append(key, movie[key]);
     }
+    return formData;
 
-    console.log("Dữ liệu gửi đi API:");
-    // Log thử xem cấu trúc raw object gửi đi
-    console.log(movie);
-
-    // Gọi API cập nhật tại đây (Ví dụ: axios.post('/api/QuanLyPhim/CapNhatPhimUpload', formData))
-    alert("Cập nhật phim thành công!");
   };
 
+
+
+
+  const onSaveChange = (e) => {
+    const data = handleSubmit(e);
+
+    const onConfirm = () => {
+      editMutation.mutate(movie.maPhim);
+      dispatch(setModalState({ type: null, data: null }));
+    };
+    dispatch(setModalState({ type: MODAL_TYPES.SAVE_MOVIE_CHANGES, data: onConfirm }));
+
+
+  }
   return (
     <div className="mx-auto min-h-screen space-y-8 bg-[#0f172a] p-20 text-gray-100">
       <div className="flex items-center justify-between">
@@ -98,12 +116,14 @@ export default function EditMovie() {
         <div className="mt-6 flex space-x-3">
           <button
             type="submit"
+            onClick={onSaveChange}
             className="w-2/3 cursor-pointer rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors duration-300 hover:bg-blue-500"
           >
             Lưu thay đổi
           </button>
           <button
             type="button"
+            onClick={onDiscardChange}
             className="w-1/3 cursor-pointer rounded-lg border-none bg-rose-600 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-rose-500"
           >
             Hủy

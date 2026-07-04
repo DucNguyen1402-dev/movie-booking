@@ -4,10 +4,9 @@ import SearchBar from "@features/admin/movie-management/components/SearchBar";
 import MovieStatusFilter from "@features/admin/movie-management/components/MovieStatusFilter";
 import SortSelect from "@features/admin/movie-management/components/SortSelect";
 import MoviesTable from "@features/admin/movie-management/components/MoviesTable/MoviesTable";
-import Backdrop from "@features/admin/movie-management/components/Backdrop";
-import Modal from "@features/admin/movie-management/components/Modal/Modal";
+import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
-import { selectModalState, selectTrailerState } from "@features/admin/movie-management/redux/selectors";
+import { selectTrailerState } from "@features/admin/movie-management/redux/selectors";
 import { useSelector } from "react-redux";
 import TrailerModal from "@features/admin/movie-management/components/TrailerModal";
 import {useLockBodyScroll} from "@hooks/useLockBodyScroll"
@@ -16,11 +15,11 @@ import {useLockBodyScroll} from "@hooks/useLockBodyScroll"
 
 
 export default function MovieManagement() {
-  const {type } = useSelector(selectModalState);
-  const isModalOpen = type !== null;
+
+
   const isTrailerOpen = useSelector(selectTrailerState);
   
-  const isLock = isModalOpen || isTrailerOpen;
+  const isLock = isTrailerOpen;
   useLockBodyScroll(isLock);
 
   return (
@@ -39,21 +38,6 @@ export default function MovieManagement() {
 
       {/* 3. DATA TABLE */}
       <MoviesTable />
-
-      <AnimatePresence>
-        {isModalOpen && (
-          <motion.div
-            className="fixed inset-0 z-80 flex items-center justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Backdrop />
-            <Modal />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <AnimatePresence>
         {isTrailerOpen && (

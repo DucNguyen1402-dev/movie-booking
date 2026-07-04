@@ -25,3 +25,13 @@ export const deleteMovie = async (id) => {
     },
   });
 };
+
+
+// export const editMovie = async (id) => {
+//   return api.delete("/QuanLyPhim/XoaPhim", {
+//     params: {
+//       maPhim: id,
+//     },
+//   });
+// };
+
