@@ -1,9 +1,27 @@
-import axios from "axios";
+import { api } from "./client";
 
-export const api = axios.create({
-  baseURL: "https://movienew.cybersoft.edu.vn/api",
-  headers: {
-    TokenCybersoft: import.meta.env.VITE_CYBERSOFT_TOKEN,
-  },
-});
+export const getUsers = async () => {
+  const response = await api.get("/QuanLyNguoiDung/LayDanhSachLoaiNguoiDung");
 
+  return response.data.content;
+};
+
+
+export const getMovies = async () => {
+  const response = await api.get("/QuanLyPhim/LayDanhSachPhim", {
+    params: {
+      maNhom: "GP01",
+    },
+  });
+
+  return response.data.content;
+};
+
+
+export const deleteMovie = async (id) => {
+  return api.delete("/QuanLyPhim/XoaPhim", {
+    params: {
+      maPhim: id,
+    },
+  });
+};

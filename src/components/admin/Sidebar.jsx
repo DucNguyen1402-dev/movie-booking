@@ -15,7 +15,7 @@ const SIDEBAR_LINKS = [
     iconColor: "text-indigo-500",
   },
   {
-    path: "/admin/movies",
+    path: "/admin/movies/",
     label: "Quản lý Phim",
     icon: BiSolidMoviePlay,
     iconColor: "text-red-500",
