@@ -1,9 +1,11 @@
 import MovieItem from "./MovieItem";
 import { useProcessedMovies } from "../../hooks/useProcessedMovies";
+import { useLocation } from "react-router-dom";
 
 export default function MoviesTable() {
   const movies = useProcessedMovies();
-
+   const location = useLocation();
+   const updatedMovieId = location.state?.updatedMovieId;
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-800/80 bg-[#1e293b] shadow-xl">
       <div className="overflow-x-auto">
@@ -20,7 +22,7 @@ export default function MoviesTable() {
           </thead>
           <tbody className="divide-y divide-slate-700/40 text-sm">
             {movies.map((movie) => (
-              <MovieItem key={movie.maPhim} movie={movie} />
+              <MovieItem key={movie.maPhim} movie={movie}  updatedMovieId ={updatedMovieId}/>
             ))}
           </tbody>
         </table>

@@ -5,6 +5,8 @@ import Dashboard from "../pages/admin/Dashboard";
 import Profile from "../pages/admin/Profile";
 import MovieManagement from "../pages/admin/MovieManagement";
 import EditMovie from "../pages/admin/EditMovie";
+import AddMovie from "../pages/admin/AddMovie";
+import { EditProvider } from "../features/admin/edit-movie/context/EditContext";
 
 export default function AdminRoutes() {
   return (
@@ -17,7 +19,15 @@ export default function AdminRoutes() {
 
         <Route path="movies">
           <Route index element={<MovieManagement />} />
-          <Route path="edit/:id" element={<EditMovie />} />
+          <Route
+            path="edit/:id"
+            element={
+              <EditProvider>
+                <EditMovie />
+              </EditProvider>
+            }
+          />
+          <Route path="add" element={<AddMovie />} />
         </Route>
       </Route>
     </Routes>

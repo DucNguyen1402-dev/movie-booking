@@ -1,23 +1,44 @@
 import { Star, TvMinimalPlay, SquarePen, Trash2, Flame } from "lucide-react";
-import {formatDate} from "../../utils/format/date"
-import {useDispatch} from "react-redux";
-import {setModalState, setTrailerState,setTrailderId } from "../../redux/slice"
-import {Link} from "react-router-dom";
-import {MODAL_TYPES} from "../../constants/modalTypes"
+import { formatDate } from "../../utils/format/date";
+import { useDispatch } from "react-redux";
+import {
+  setModalState,
+  setTrailerState,
+  setTrailderId,
+} from "../../redux/slice";
+import { Link } from "react-router-dom";
+import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import { useRef, useEffect } from "react";
 
-export default function MovieItem({ movie }) {
+export default function MovieItem({ movie, updatedMovieId }) {
+  const rowRef = useRef(null);
+  const isJustUpdated = movie.maPhim === Number(updatedMovieId);
+
+  useEffect(() => {
+    if (isJustUpdated) {
+      rowRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [isJustUpdated]);
 
   const dispatch = useDispatch();
-  const onDeleteClick = () =>  dispatch(setModalState({type: MODAL_TYPES.DELETE_MOVIE, data:movie.maPhim}));
+  const onDeleteClick = () =>
+    dispatch(
+      setModalState({ type: MODAL_TYPES.DELETE_MOVIE, data: movie.maPhim }),
+    );
 
   const onTrailerClick = () => {
-    dispatch(setTrailderId(movie.maPhim))
-    dispatch(setTrailerState(true))
+    dispatch(setTrailderId(movie.maPhim));
+    dispatch(setTrailerState(true));
   };
-  
+
+
   return (
     <tr
-      className="group transition-colors duration-300 hover:bg-slate-700/20"
+      ref={isJustUpdated ? rowRef : null}
+      className={`group transition-colors hover:bg-slate-700/20 ${isJustUpdated ? "animate-row-blink" : "duration-300"}`}
     >
       <td className="px-6 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
 
@@ -87,7 +108,7 @@ export default function MovieItem({ movie }) {
       <td className="px-6 py-4 text-right">
         <div className="flex items-center justify-end gap-1.5">
           <button
-           onClick  = {onTrailerClick}
+            onClick={onTrailerClick}
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-red-500/10 hover:text-red-400"
             title="Xem Trailer"
           >
@@ -103,7 +124,7 @@ export default function MovieItem({ movie }) {
           <button
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-rose-500/10 hover:text-rose-400"
             title="Xóa phim"
-            onClick = {onDeleteClick}
+            onClick={onDeleteClick}
           >
             <Trash2 className="h-4 w-4" />
           </button>

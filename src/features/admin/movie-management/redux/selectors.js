@@ -12,3 +12,7 @@ export const selectDeleteId = (state) => state.movieManagement.deleteId;
 export const selectTrailerState = (state) => state.movieManagement.isTrailerOpen;
 
 export const selectTrailerId = (state) => state.movieManagement.traillerId;
+
+export const selectConfirmUpdate = (state) => state.movieManagement.confirmUpdate;
+
+export const selectUpdateState = (state) => state.movieManagement.updateState;

@@ -10,7 +10,7 @@ import { selectTrailerState } from "@features/admin/movie-management/redux/selec
 import { useSelector } from "react-redux";
 import TrailerModal from "@features/admin/movie-management/components/TrailerModal";
 import {useLockBodyScroll} from "@hooks/useLockBodyScroll"
-
+import {Link} from "react-router-dom";
 
 
 
@@ -25,9 +25,9 @@ export default function MovieManagement() {
   return (
     <div className="min-h-screen bg-[#0f172a] p-6 font-sans text-slate-100">
       {/* 1. HEADER & ACTION BAR */}
-      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-end">
+      <Link className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-end" to ="/admin/movies/add">
         <AddMovieBtn />
-      </div>
+      </Link>
 
       {/* 2. FILTER & SEARCH BAR */}
       <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm sm:grid-cols-3">
