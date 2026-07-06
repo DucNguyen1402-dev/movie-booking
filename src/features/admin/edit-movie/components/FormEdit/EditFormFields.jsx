@@ -1,9 +1,9 @@
 import { LockKeyhole, Star } from "lucide-react";
-import {useEditMovie} from "../../context/EditContext";
+import { useEditMovie } from "../../context/EditContext";
+import { getRateClasses } from "../../config/editConfig";
 
 export default function EditFormFields() {
-   
-    const {editStates, editActions} = useEditMovie();
+  const { editStates, editActions } = useEditMovie();
 
   return (
     <div className="space-y-8 rounded-xl bg-gray-100 p-8 shadow-sm lg:col-span-2">
@@ -115,7 +115,7 @@ export default function EditFormFields() {
           </span>
         </label>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-gray-700">Đánh giá:</span>
           <div className="flex items-center gap-2">
             <input
@@ -125,7 +125,7 @@ export default function EditFormFields() {
               max="10"
               value={editStates.movie.danhGia}
               onChange={editActions.handleChange}
-              className="w-8 rounded-sm border border-gray-400 px-1 py-px text-center focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className={`w-8 rounded-sm border border-gray-300 px-1 py-px text-center text-white focus:ring-1 focus:outline-none ${getRateClasses(editStates.movie.danhGia)}`}
             />
             <Star className="h-4 w-4 fill-current text-yellow-500" />
           </div>

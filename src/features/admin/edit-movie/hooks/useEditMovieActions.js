@@ -9,7 +9,9 @@ import {
 } from "@features/admin/movie-management/redux/slice";
 import { useNotification } from "@contexts/admin/Notification/NotificationContext";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
+import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 export function useEditMovieActions({
   movie,
   setMovie,
@@ -21,6 +23,7 @@ export function useEditMovieActions({
 
   const { notifActions } = useNotification();
   const { id: editId } = useParams();
+  const { showLoading, hideLoading } = useLoading();
 
   const navigate = useNavigate();
 
@@ -81,14 +84,19 @@ export function useEditMovieActions({
       return;
     }
 
-    const formData = new FormData();
+    const start = Date.now();
 
+    const formData = new FormData();
     for (const key in movie) {
       formData.append(key, movie[key]);
     }
 
     try {
+      reduxDispatch(setModalState({ type: null }));
+      showLoading();
       await mutateAsync(formData);
+      await ensureMinDuration(start, MIN_LOADING_TIME);
+      hideLoading();
       navigate("/admin/movies", {
         state: {
           updatedMovieId: editId,
@@ -103,13 +111,20 @@ export function useEditMovieActions({
       console.log(error.response);
       notifActions.showNotification({
         variant: "error",
-        message: error.response?.data?.content ?? "Something went wrong",
+        message: error.response?.data?.content ?? "Something went wrong! try again",
       });
     } finally {
-      reduxDispatch(setModalState({ type: null }));
       reduxDispatch(setConfirmUpdate(false));
     }
-  }, [movie, mutateAsync, editMovie, editId, navigate, notifActions, reduxDispatch]);
+  }, [
+    movie,
+    mutateAsync,
+    editMovie,
+    editId,
+    navigate,
+    notifActions,
+    reduxDispatch,
+  ]);
 
   const onSaveClick = () =>
     reduxDispatch(setModalState({ type: MODAL_TYPES.SAVE_MOVIE_CHANGES }));
