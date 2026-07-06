@@ -11,7 +11,7 @@ import {
 import { useLockBodyScroll } from "@hooks/useLockBodyScroll";
 import Backdrop from "@/components/admin/Backdrop";
 import { useLogin } from "@hooks/useLogin";
-import { useNotification } from "@hooks/useNotification";
+import { useNotification } from "@contexts/admin/Notification/NotificationContext";
 
 
 function MainLayout() {
@@ -48,7 +48,7 @@ function MainLayout() {
           </AnimatePresence>
 
           <AnimatePresence>
-            {notif.isClosed && (
+            {notif.isClose && (
               <motion.div
                 className="fixed inset-0 z-80 flex items-center justify-center"
                 initial={{ opacity: 0 }}

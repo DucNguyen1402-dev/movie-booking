@@ -9,7 +9,6 @@ const initialState = {
   isTrailerOpen: false,
   traillerId: null,
   confirmUpdate: false,
-  updateState: {type: null, message: null},
 };
 
 const movieManagementSlice = createSlice({
@@ -38,12 +37,10 @@ const movieManagementSlice = createSlice({
     setConfirmUpdate(state, action){
       state.confirmUpdate = action.payload;
     },
-    setUpdateState(state, action){
-      state.updateState = action.payload;
-    }
+
   },
 
 });
 
-export const { setKeyword , filterStatus,setSortType, setModalState, setTrailerState, setTrailderId, setConfirmUpdate, setUpdateState} = movieManagementSlice.actions;
+export const { setKeyword , filterStatus,setSortType, setModalState, setTrailerState, setTrailderId, setConfirmUpdate} = movieManagementSlice.actions;
 export default movieManagementSlice.reducer;

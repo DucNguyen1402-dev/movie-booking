@@ -1,5 +1,4 @@
-export const selectKeyword = (state) =>
-  state.movieManagement.keyword;
+export const selectKeyword = (state) => state.movieManagement.keyword;
 
 export const selectStatus = (state) => state.movieManagement.status;
 
@@ -9,10 +8,11 @@ export const selectModalState = (state) => state.movieManagement.modalState;
 
 export const selectDeleteId = (state) => state.movieManagement.deleteId;
 
-export const selectTrailerState = (state) => state.movieManagement.isTrailerOpen;
+export const selectTrailerState = (state) =>
+  state.movieManagement.isTrailerOpen;
 
 export const selectTrailerId = (state) => state.movieManagement.traillerId;
 
-export const selectConfirmUpdate = (state) => state.movieManagement.confirmUpdate;
+export const selectConfirmUpdate = (state) =>
+  state.movieManagement.confirmUpdate;
 
-export const selectUpdateState = (state) => state.movieManagement.updateState;

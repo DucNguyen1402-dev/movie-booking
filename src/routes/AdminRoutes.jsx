@@ -7,29 +7,32 @@ import MovieManagement from "../pages/admin/MovieManagement";
 import EditMovie from "../pages/admin/EditMovie";
 import AddMovie from "../pages/admin/AddMovie";
 import { EditProvider } from "../features/admin/edit-movie/context/EditContext";
+import { NotificationProvider } from "@contexts/admin/Notification/NotificationContext";
 
 export default function AdminRoutes() {
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Navigate to="dashboard" replace />} />
+    <NotificationProvider>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Navigate to="dashboard" replace />} />
 
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="profile" element={<Profile />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="profile" element={<Profile />} />
 
-        <Route path="movies">
-          <Route index element={<MovieManagement />} />
-          <Route
-            path="edit/:id"
-            element={
-              <EditProvider>
-                <EditMovie />
-              </EditProvider>
-            }
-          />
-          <Route path="add" element={<AddMovie />} />
+          <Route path="movies">
+            <Route index element={<MovieManagement />} />
+            <Route
+              path="edit/:id"
+              element={
+                <EditProvider>
+                  <EditMovie />
+                </EditProvider>
+              }
+            />
+            <Route path="add" element={<AddMovie />} />
+          </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </NotificationProvider>
   );
 }

@@ -3,17 +3,19 @@ import { updateMovie } from "@services/admin/api";
 import {
   setModalState,
   setConfirmUpdate,
-  setUpdateState,
 } from "@features/admin/movie-management/redux/slice";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { useNotification } from "@contexts/admin/Notification/NotificationContext";
 
 export function useUpdateMovie() {
   const queryClient = useQueryClient();
   const { id } = useParams();
 
-  const dispatch = useDispatch();
+  const reduxDispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { dispatch: notificationDispatch } = useNotification();
 
   return useMutation({
     mutationFn: updateMovie,
@@ -22,35 +24,38 @@ export function useUpdateMovie() {
         queryKey: ["movies"],
       });
 
-      dispatch(setModalState({ type: null }));
+      reduxDispatch(setModalState({ type: null }));
       navigate("/admin/movies", {
         state: {
           updatedMovieId: id,
         },
       });
-      dispatch(
-        setUpdateState({
+
+      notificationDispatch({
+        type: "SHOW_NOTIFICATION",
+        payload: {
           type: "success",
           message: "update successfully",
-        }),
-      );
+        },
+      });
 
       setTimeout(() => {
-        dispatch(setUpdateState({ type: null, message: null }));
-        dispatch(setConfirmUpdate(false));
+        notificationDispatch({ type: "HIDE_NOTIFICATION" });
+        reduxDispatch(setConfirmUpdate(false));
       }, 2500);
     },
     onError: (error) => {
-      dispatch(setModalState({ type: null }));
-      dispatch(
-        setUpdateState({
+      reduxDispatch(setModalState({ type: null }));
+      notificationDispatch({
+        type: "SHOW_NOTIFICATION",
+        payload: {
           type: "error",
           message: error.response?.data?.content,
-        }),
-      );
+        },
+      });
       setTimeout(() => {
-        dispatch(setUpdateState({ type: null, message: null }));
-        dispatch(setConfirmUpdate(false));
+        notificationDispatch({ type: "HIDE_NOTIFICATION" });
+        reduxDispatch(setConfirmUpdate(false));
       }, 2500);
     },
   });

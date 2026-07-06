@@ -5,9 +5,9 @@ import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
 import { NUMBER_FIELDS } from "@constants/admin/movies";
 import {
   setModalState,
-  setConfirmUpdate,
-  setUpdateState,
+  setConfirmUpdate
 } from "@features/admin/movie-management/redux/slice";
+import { useNotification } from "@contexts/admin/Notification/NotificationContext";
 
 export function useEditMovieActions({
   movie,
@@ -15,8 +15,10 @@ export function useEditMovieActions({
   setImgPreview,
   editMovie,
 }) {
-  const dispatch = useDispatch();
+  const reduxDispatch = useDispatch();
   const { mutate } = useUpdateMovie();
+
+  const { dispatch: notificationDispatch } = useNotification();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,15 +46,14 @@ export function useEditMovieActions({
   };
 
   const onCancelClick = () =>
-    dispatch(setModalState({ type: MODAL_TYPES.CANCEL_MOVIE_CHANGES }));
-
+    reduxDispatch(setModalState({ type: MODAL_TYPES.CANCEL_MOVIE_CHANGES }));
 
   function normalizeMovie(movie) {
-  return {
-    ...movie,
-    ngayKhoiChieu: movie.ngayKhoiChieu.split("T")[0],
-  };
-}
+    return {
+      ...movie,
+      ngayKhoiChieu: movie.ngayKhoiChieu.split("T")[0],
+    };
+  }
 
   const hasMovieChanged = (movie, editMovie) => {
     for (const key in movie) {
@@ -65,19 +66,19 @@ export function useEditMovieActions({
   };
 
   const handleSaveMovie = useCallback(() => {
-
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
-      dispatch(setModalState({ type: null }));
-      dispatch(
-        setUpdateState({
+      reduxDispatch(setModalState({ type: null }));
+      notificationDispatch({
+        type: "SHOW_NOTIFICATION",
+        payload: {
           type: "warning",
           message:
             "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
-        }),
-      );
+        },
+      });
       setTimeout(() => {
-        dispatch(setUpdateState({ type: null, message: null }));
-        dispatch(setConfirmUpdate(false));
+        notificationDispatch({ type: "HIDE_NOTIFICATION" });
+        reduxDispatch(setConfirmUpdate(false));
       }, 5000);
 
       return;
@@ -93,7 +94,7 @@ export function useEditMovieActions({
   }, [movie, mutate]);
 
   const onSaveClick = () =>
-    dispatch(setModalState({ type: MODAL_TYPES.SAVE_MOVIE_CHANGES }));
+    reduxDispatch(setModalState({ type: MODAL_TYPES.SAVE_MOVIE_CHANGES }));
 
   return {
     handleChange,
