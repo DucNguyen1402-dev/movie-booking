@@ -1,62 +1,33 @@
-import { useRef, useEffect, useReducer, useContext, createContext } from "react";
+import { useContext, createContext } from "react";
 import { notificationStyles } from "@config/admin/notification/styles";
 import { notificationIcons } from "@config/admin/notification/icons";
-
-const initialState = {
-  isClose: false,
-  message: null,
-  type: null,
-};
-const notificationReducer = (state, action) => {
-
-  switch (action.type) {
-    case "SHOW_NOTIFICATION":
-      return {
-        ...state,
-        isClose: true,
-        type: action.payload?.type,
-        message: action.payload?.message,
-      };
-
-    case "HIDE_NOTIFICATION":
-      return {
-        ...state,
-        isClose: false,
-        type: null,
-        message: null,
-      };
-  }
-};
+import { useNotificationStates } from "@hooks/useNotification/useNotificationStates";
+import { useNotificationEffects } from "@hooks/useNotification/useNotificationEffects";
+import { useNotificationActions } from "@hooks/useNotification/useNotificationActions";
 
 const notificationContext = createContext(null);
 
 export function NotificationProvider({ children }) {
-  const [notification, dispatch] = useReducer(
-    notificationReducer,
-    initialState,
-  );
+  const { notification, dispatch, notificationRef, timeoutRef } =
+    useNotificationStates();
 
-  const ref = useRef(null);
+  const notifActions = useNotificationActions({
+    dispatch,
+    timeoutRef,
+  });
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
-        dispatch({ type: "HIDE_NOTIFICATION" });
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useNotificationEffects({
+    notificationRef,
+    dispatch,
+  });
 
   const value = {
     message: notification.message,
-    ref,
-    styles: notificationStyles[notification.type] ?? "",
-    Icon: notificationIcons[notification.type] ?? "span",
-    isClose: notification.isClose,
-    dispatch
+    notificationRef,
+    styles: notificationStyles[notification.variant] ?? "",
+    Icon: notificationIcons[notification.variant] ?? "span",
+    isOpen: notification.isOpen,
+    notifActions,
   };
 
   return (

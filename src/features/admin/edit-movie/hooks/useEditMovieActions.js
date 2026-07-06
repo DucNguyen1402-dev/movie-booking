@@ -5,9 +5,10 @@ import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
 import { NUMBER_FIELDS } from "@constants/admin/movies";
 import {
   setModalState,
-  setConfirmUpdate
+  setConfirmUpdate,
 } from "@features/admin/movie-management/redux/slice";
 import { useNotification } from "@contexts/admin/Notification/NotificationContext";
+import { useNavigate, useParams } from "react-router-dom";
 
 export function useEditMovieActions({
   movie,
@@ -16,9 +17,12 @@ export function useEditMovieActions({
   editMovie,
 }) {
   const reduxDispatch = useDispatch();
-  const { mutate } = useUpdateMovie();
+  const { mutateAsync } = useUpdateMovie();
 
-  const { dispatch: notificationDispatch } = useNotification();
+  const { notifActions } = useNotification();
+  const { id: editId } = useParams();
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -65,21 +69,14 @@ export function useEditMovieActions({
     return false;
   };
 
-  const handleSaveMovie = useCallback(() => {
+  const handleSaveMovie = useCallback(async () => {
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
       reduxDispatch(setModalState({ type: null }));
-      notificationDispatch({
-        type: "SHOW_NOTIFICATION",
-        payload: {
-          type: "warning",
-          message:
-            "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
-        },
+      notifActions.showNotification({
+        variant: "warning",
+        message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
       });
-      setTimeout(() => {
-        notificationDispatch({ type: "HIDE_NOTIFICATION" });
-        reduxDispatch(setConfirmUpdate(false));
-      }, 5000);
+      reduxDispatch(setConfirmUpdate(false));
 
       return;
     }
@@ -90,8 +87,29 @@ export function useEditMovieActions({
       formData.append(key, movie[key]);
     }
 
-    mutate(formData);
-  }, [movie, mutate]);
+    try {
+      await mutateAsync(formData);
+      navigate("/admin/movies", {
+        state: {
+          updatedMovieId: editId,
+          notification: {
+            variant: "success",
+            message: "Update successfully",
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      console.log(error.response);
+      notifActions.showNotification({
+        variant: "error",
+        message: error.response?.data?.content ?? "Something went wrong",
+      });
+    } finally {
+      reduxDispatch(setModalState({ type: null }));
+      reduxDispatch(setConfirmUpdate(false));
+    }
+  }, [movie, mutateAsync, editMovie, editId, navigate, notifActions, reduxDispatch]);
 
   const onSaveClick = () =>
     reduxDispatch(setModalState({ type: MODAL_TYPES.SAVE_MOVIE_CHANGES }));

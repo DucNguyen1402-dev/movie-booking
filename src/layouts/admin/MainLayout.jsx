@@ -48,7 +48,7 @@ function MainLayout() {
           </AnimatePresence>
 
           <AnimatePresence>
-            {notif.isClose && (
+            {notif.isOpen && (
               <motion.div
                 className="fixed inset-0 z-80 flex items-center justify-center"
                 initial={{ opacity: 0 }}
@@ -57,7 +57,7 @@ function MainLayout() {
                 transition={{ duration: 0.3 }}
               >
                 <Notification
-                  ref={notif.ref}
+                  notificationRef={notif.notificationRef}
                   styles={notif.styles}
                   Icon={notif.Icon}
                   message={notif.message}
