@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useMovies } from "@hooks/useMovies";
+import { useMovies } from "@hooks/admin/useMovies";
 import {
   selectKeyword,
   selectStatus,

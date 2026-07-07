@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import AddMovieBtn from "@features/admin/movie-management/components/addMovieBtn";
 import SearchBar from "@features/admin/movie-management/components/SearchBar";
 import MovieStatusFilter from "@features/admin/movie-management/components/MovieStatusFilter";
@@ -6,28 +6,37 @@ import SortSelect from "@features/admin/movie-management/components/SortSelect";
 import MoviesTable from "@features/admin/movie-management/components/MoviesTable/MoviesTable";
 import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
-import { selectTrailerState } from "@features/admin/movie-management/redux/selectors";
-import { useSelector } from "react-redux";
+import { useTrailerContext } from "@features/admin/movie-management/contexts/TrailerContext";
 import TrailerModal from "@features/admin/movie-management/components/TrailerModal";
-import {useLockBodyScroll} from "@hooks/useLockBodyScroll"
-
-
-
+import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
+import { Link, useLocation } from "react-router-dom";
+import { useNotification } from "@contexts/admin/NotificationContext";
 
 export default function MovieManagement() {
+  const location = useLocation();
 
+  const { notifActions } = useNotification();
 
-  const isTrailerOpen = useSelector(selectTrailerState);
-  
-  const isLock = isTrailerOpen;
-  useLockBodyScroll(isLock);
+  useEffect(() => {
+    if (location.state?.notification) {
+      notifActions.showNotification(location.state.notification);
+    }
+  }, [location.state]);
+
+  const { trailer } = useTrailerContext();
+
+  useLockBodyScroll(trailer.url !== null);
+
 
   return (
     <div className="min-h-screen bg-[#0f172a] p-6 font-sans text-slate-100">
       {/* 1. HEADER & ACTION BAR */}
-      <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-end">
+      <Link
+        className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-end"
+        to="/admin/movies/add"
+      >
         <AddMovieBtn />
-      </div>
+      </Link>
 
       {/* 2. FILTER & SEARCH BAR */}
       <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm sm:grid-cols-3">
@@ -40,7 +49,7 @@ export default function MovieManagement() {
       <MoviesTable />
 
       <AnimatePresence>
-        {isTrailerOpen && (
+        {trailer.url !== null && (
           <motion.div
             className="fixed inset-0 z-80 flex items-center justify-center overflow-hidden"
             initial={{ opacity: 0 }}

@@ -1,5 +1,5 @@
-import { useMovies } from "@hooks/useMovies.js";
-import { useUsers } from "@hooks/useUsers.js";
+import { useMovies } from "@hooks/admin/useMovies.js";
+import { useUsers } from "@hooks/admin/useUsers.js";
 import { useDashboardDerived } from "@features/admin/dashboard/hooks/useDashboardDerived";
 import MetricsSection from "@features/admin/dashboard/components/MetricsSection.jsx";
 import TopRevenueMovies from "@features/admin/dashboard/components/TopRevenueMovies.jsx";

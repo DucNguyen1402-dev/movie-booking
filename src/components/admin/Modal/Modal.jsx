@@ -1,23 +1,23 @@
 import DeleteModal from "./DeleteModal";
 import SaveChangesModal from "./EditModal/SaveMovieChangesModal";
-import DiscardChangesModal from "./EditModal/DiscardMovieChangesModal"
-import { useSelector } from "react-redux";
-import { selectModalState } from "../../../features/admin/movie-management/redux/selectors";
-
+import DiscardChangesModal from "./EditModal/DiscardMovieChangesModal";
+import { useModalContext } from "@contexts/admin/ModalContext";
 
 const MODALS = {
   deleteMovie: DeleteModal,
   discardMovieChanges: DiscardChangesModal,
-  saveMovieChanges: SaveChangesModal
+  saveMovieChanges: SaveChangesModal,
 };
 
 export default function Modal() {
-  const { type } = useSelector(selectModalState);
+  const { modal, close } = useModalContext();
 
+  const onCancel = () => close();
+  const onConfirm = () => modal.onConfirm();
 
-  if (!type) return null;
+  if (!modal.type) return null;
 
-  const Component = MODALS[type];
+  const Component = MODALS[modal.type];
 
-  return <Component />;
+  return <Component onCancel={onCancel} onConfirm={onConfirm} />;
 }

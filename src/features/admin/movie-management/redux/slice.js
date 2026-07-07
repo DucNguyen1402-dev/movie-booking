@@ -4,10 +4,6 @@ const initialState = {
   keyword: "",
   status: "",
   sortType: "",
-  deleteId: null,
-  modalState: { type:null, data: null},
-  isTrailerOpen: false,
-  traillerId: null
 };
 
 const movieManagementSlice = createSlice({
@@ -24,18 +20,9 @@ const movieManagementSlice = createSlice({
       state.sortType = action.payload;
     },
 
-    setModalState(state, action){
-       state.modalState = action.payload;
-    },
-    setTrailerState(state, action){
-      state.isTrailerOpen = action.payload;
-    },
-    setTrailderId(state, action){
-      state.traillerId = action.payload;
-    }
   },
 
 });
 
-export const { setKeyword , filterStatus,setSortType, setModalState, setTrailerState, setTrailderId} = movieManagementSlice.actions;
+export const { setKeyword , filterStatus,setSortType} = movieManagementSlice.actions;
 export default movieManagementSlice.reducer;

@@ -1,17 +1,14 @@
-import { selectTrailerId } from "@features/admin/movie-management/redux/selectors";
-import { setTrailerState } from "@features/admin/movie-management/redux/slice";
-import { useSelector } from "react-redux";
 import { useProcessedMovies } from "../hooks/useProcessedMovies";
 import { CircleX } from "lucide-react";
-import { useDispatch } from "react-redux";
+import { useTrailerContext } from "../contexts/TrailerContext";
 
 export default function TrailerModal() {
   const movies = useProcessedMovies();
-  const dispatch = useDispatch();
-  const trailerId = useSelector(selectTrailerId);
-  const tartgetMovie = movies.find((movie) => movie.maPhim === trailerId);
-  const embedUrl = tartgetMovie.trailer.replace("watch?v=", "embed/");
-  const onClose = () => dispatch(setTrailerState(false));
+  const { trailer, close: closeTrailer } = useTrailerContext();
+
+  const embedUrl = trailer.url
+    ? trailer.url.replace("watch?v=", "embed/")
+    : null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
@@ -22,12 +19,12 @@ export default function TrailerModal() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-zinc-700 px-6 py-4">
           <h2 className="text-lg font-semibold text-white">
-            {tartgetMovie.tenPhim} Trailer
+            {trailer.movieName} Trailer
           </h2>
 
           <button
             className="cursor-pointer text-2xl text-gray-400 transition-colors duration-300 hover:text-white"
-            onClick={onClose}
+            onClick={() => closeTrailer()}
           >
             <CircleX />
           </button>
@@ -38,7 +35,7 @@ export default function TrailerModal() {
           <iframe
             className="h-full w-full"
             src={embedUrl}
-            title={tartgetMovie.tenPhim}
+            title={trailer.movieName}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
