@@ -1,17 +1,20 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { useUpdateMovie } from "@hooks/useUpdateMovie";
 import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
 import { NUMBER_FIELDS } from "@constants/admin/movies";
 import {
   setModalState,
   setConfirmUpdate,
 } from "@features/admin/movie-management/redux/slice";
-import { useNotification } from "@contexts/admin/Notification/NotificationContext";
+import { useNotification } from "@contexts/admin/NotificationContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
+import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
+import { useMutation } from "@tanstack/react-query";
+import { updateMovie } from "@services/admin/api";
+
 export function useEditMovieActions({
   movie,
   setMovie,
@@ -19,7 +22,9 @@ export function useEditMovieActions({
   editMovie,
 }) {
   const reduxDispatch = useDispatch();
-  const { mutateAsync } = useUpdateMovie();
+  const { mutateAsync } = useMutation({
+    mutationFn: updateMovie,
+  });
 
   const { notifActions } = useNotification();
   const { id: editId } = useParams();
@@ -99,19 +104,26 @@ export function useEditMovieActions({
       hideLoading();
       navigate("/admin/movies", {
         state: {
-          updatedMovieId: editId,
+          movieId: editId,
           notification: {
             variant: "success",
             message: "Update successfully",
           },
+          highlight: HIGHLIGHT_TYPES.UPDATE,
         },
       });
     } catch (error) {
-      console.log(error);
-      console.log(error.response);
+      hideLoading();
+      const content = error.response?.data?.content;
+      //Chỗ này có vẻ là do tên phim không thể edit nhưng message trả về hơi bị sai
+      // fix tạm
+      const message =
+        content === "Phim này không thể bị xóa!"
+          ? "Phim này không thể chỉnh sửa "
+          : content;
       notifActions.showNotification({
         variant: "error",
-        message: error.response?.data?.content ?? "Something went wrong! try again",
+        message,
       });
     } finally {
       reduxDispatch(setConfirmUpdate(false));

@@ -1,23 +1,12 @@
-import { selectModalState } from "@features/admin/movie-management/redux/selectors";
-import { useSelector } from "react-redux";
-import { useProcessedMovies } from "@features/admin/movie-management/hooks/useProcessedMovies";
 import { setModalState } from "@features/admin/movie-management/redux/slice";
-import { useDispatch } from "react-redux";
-import { useDeleteMovie } from "@hooks/useDeleteMovie";
+
 
 export default function DeleteModal() {
-  const movies = useProcessedMovies();
-  const {data: deleteId} = useSelector(selectModalState);
-  const targetDeletion = movies.find((movie) => movie.maPhim === deleteId);
-
-  const dispatch = useDispatch();
 
   const onCancel = () => dispatch(setModalState({type: null, data: null}));
 
-  const deleteMutation = useDeleteMovie();
-
   const onConfirm = () => {
-    deleteMutation.mutate(deleteId);
+  
     dispatch(setModalState({type: null, data: null}));
   };
 

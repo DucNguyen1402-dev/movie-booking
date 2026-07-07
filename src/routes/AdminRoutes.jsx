@@ -8,34 +8,36 @@ import AddMovie from "../pages/admin/AddMovie";
 import { EditProvider } from "../features/admin/edit-movie/context/EditContext";
 import { NotificationProvider } from "@contexts/admin/Notification/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
-
+import { ModalProvider } from "@contexts/admin/ModalContext";
 
 export default function AdminRoutes() {
   return (
-    <LoadingProvider>
-      <NotificationProvider>
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Navigate to="dashboard" replace />} />
+    <ModalProvider>
+      <LoadingProvider>
+        <NotificationProvider>
+          <Routes>
+            <Route path="/" element={<MainLayout />}>
+              <Route index element={<Navigate to="dashboard" replace />} />
 
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="profile" element={<Profile />} />
 
-            <Route path="movies">
-              <Route index element={<MovieManagement />} />
-              <Route
-                path="edit/:id"
-                element={
-                  <EditProvider>
-                    <EditMovie />
-                  </EditProvider>
-                }
-              />
-              <Route path="add" element={<AddMovie />} />
+              <Route path="movies">
+                <Route index element={<MovieManagement />} />
+                <Route
+                  path="edit/:id"
+                  element={
+                    <EditProvider>
+                      <EditMovie />
+                    </EditProvider>
+                  }
+                />
+                <Route path="add" element={<AddMovie />} />
+              </Route>
             </Route>
-          </Route>
-        </Routes>
-      </NotificationProvider>
-    </LoadingProvider>
+          </Routes>
+        </NotificationProvider>
+      </LoadingProvider>
+    </ModalProvider>
   );
 }

@@ -6,17 +6,19 @@ import { createMovieFormData } from "../utils/createMovieFormData";
 import { useNavigate } from "react-router-dom";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import {useLoading} from "@contexts/admin/LoadingSpinnerContext"
+import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
+import { useNotification } from "@contexts/admin/NotificationContext";
 
 export function useAddMovie() {
   const [imgPreview, setImgPreview] = useState("");
   const { mutateAsync } = useMutation({
     mutationFn: addMovie,
   });
-  
-  const navigate = useNavigate();
-  const {showLoading, hideLoading}  =useLoading();
 
+  const navigate = useNavigate();
+  const { showLoading, hideLoading } = useLoading();
+  const { notifActions } = useNotification();
   const {
     register,
     handleSubmit,
@@ -37,18 +39,35 @@ export function useAddMovie() {
     const formData = createMovieFormData(data);
 
     try {
-   
       const response = await mutateAsync(formData);
-      hideLoading();
+    
       await ensureMinDuration(start, MIN_LOADING_TIME);
-     
+      hideLoading();
       navigate("/admin/movies", {
-       state:{
-          addedMovieId: response.data.content.maPhim
-       }
+        state: {
+          movieId: response.data.content.maPhim,
+          highlight: HIGHLIGHT_TYPES.ADD,
+          notification: {
+            variant: "success",
+            message: "Add successfully",
+          },
+        },
       });
     } catch (error) {
-      console.log(error)
+      const content = error.response?.data?.content;
+      //Chỗ này có vẻ là do tên phim bị trùng nhưng content trả về tử backend không rõ ràng
+      // fix tạm
+      const message =
+        content === "Upload file không thành công!"
+          ? "Tên phim đã tồn tại"
+          : content;
+
+      hideLoading();
+      notifActions.showNotification({
+        variant: "error",
+        message,
+      });
+      console.log(error);
     }
   };
 

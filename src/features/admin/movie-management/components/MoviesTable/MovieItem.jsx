@@ -1,51 +1,31 @@
 import { Star, TvMinimalPlay, SquarePen, Trash2, Flame } from "lucide-react";
 import { formatDate } from "../../utils/format/date";
-import { useDispatch } from "react-redux";
-import {
-  setModalState,
-  setTrailerState,
-  setTrailderId,
-} from "../../redux/slice";
+import { useMovieItem } from "../../hooks/useMovieItem";
 import { Link } from "react-router-dom";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useRef, useEffect } from "react";
 
-export default function MovieItem({ movie, updatedMovieId, addedMovieId }) {
-  const rowRef = useRef(null);
-  const isJustUpdated = movie.maPhim === Number(updatedMovieId);
-  const isJustAdded = movie.maPhim === Number(addedMovieId);
+export default function MovieItem({ movie, movieId, highlight }) {
+  const {
+    onDeleteClick,
+    onTrailerClick,
+    isTargetMovie,
+    highlightAnimation,
+    rowRef,
+  } = useMovieItem({
+    movie,
+    movieId,
+    highlight,
+  });
 
-  useEffect(() => {
-    if (isJustUpdated) {
-      rowRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-
-    if (isJustAdded) {
-      rowRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [isJustUpdated, isJustAdded]);
-
-  const dispatch = useDispatch();
-  const onDeleteClick = () =>
-    dispatch(
-      setModalState({ type: MODAL_TYPES.DELETE_MOVIE, data: movie.maPhim }),
-    );
-
-  const onTrailerClick = () => {
-    dispatch(setTrailderId(movie.maPhim));
-    dispatch(setTrailerState(true));
-  };
+  //Phim không thể cùng lúc đang chiếu và sắp chiếu
+  // không thể sửa backend nên fix tạm
+  if (movie.dangChieu && movie.sapChieu) {
+    movie.sapChieu = false;
+  }
 
   return (
     <tr
-      ref={isJustUpdated || isJustAdded ? rowRef : null}
-      className={`group transition-colors hover:bg-slate-700/20 ${isJustUpdated || isJustAdded ? "animate-row-blink" : "duration-300"}`}
+      ref={isTargetMovie ? rowRef : null}
+      className={`group transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"}`}
     >
       <td className="px-6 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
 

@@ -10,18 +10,18 @@ import {
 import { useLockBodyScroll } from "@hooks/useLockBodyScroll";
 import { useNotification } from "@contexts/admin/Notification/NotificationContext";
 import {useLoading} from "@contexts/admin/LoadingSpinnerContext"
+import {useModal} from "@contexts/admin/ModalContext"
 
 export default function GlobalUI() {
-  const { type: modalType } = useSelector(selectModalState);
-  const isModalOpen = modalType !== null;
-  useLockBodyScroll(isModalOpen);
+  const modal = useModal();
+  useLockBodyScroll(modal.isOpen);
 
   const loading = useLoading();
   const notif = useNotification();
   return (
     <>
       <AnimatePresence>
-        {isModalOpen && (
+        {modal.isOpen && (
           <motion.div
             className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
