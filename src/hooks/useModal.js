@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 export function useModal() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [modal, setModal] = useState({ type: null, onConfirm: null });
 
+  const open = ({ type, onConfirm }) => setModal({ type, onConfirm });
+  const close = () => setModal({ type: null, onConfirm: null });
 
-  const openModal = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-  
   return {
     open,
     close,
-    isOpen
+    modal,
+    setModal,
   };
 }

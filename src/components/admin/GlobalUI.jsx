@@ -1,19 +1,15 @@
 import { AnimatePresence, motion } from "motion/react";
-import { useSelector } from "react-redux";
 import Modal from "@/components/admin/Modal/Modal";
 import Notification from "@components/admin/Notification";
 import LoadingSpinner from "@components/admin/LoadingSpinner";
 import Backdrop from "@/components/admin/Backdrop";
-import {
-  selectModalState,
-} from "@features/admin/movie-management/redux/selectors";
 import { useLockBodyScroll } from "@hooks/useLockBodyScroll";
-import { useNotification } from "@contexts/admin/Notification/NotificationContext";
+import { useNotification } from "@contexts/admin/NotificationContext";
 import {useLoading} from "@contexts/admin/LoadingSpinnerContext"
-import {useModal} from "@contexts/admin/ModalContext"
+import {useModalContext} from "@contexts/admin/ModalContext"
 
 export default function GlobalUI() {
-  const modal = useModal();
+  const {modal} = useModalContext();
   useLockBodyScroll(modal.isOpen);
 
   const loading = useLoading();
@@ -21,7 +17,7 @@ export default function GlobalUI() {
   return (
     <>
       <AnimatePresence>
-        {modal.isOpen && (
+        {modal.type !== null && (
           <motion.div
             className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}

@@ -6,7 +6,7 @@ import MovieManagement from "../pages/admin/MovieManagement";
 import EditMovie from "../pages/admin/EditMovie";
 import AddMovie from "../pages/admin/AddMovie";
 import { EditProvider } from "../features/admin/edit-movie/context/EditContext";
-import { NotificationProvider } from "@contexts/admin/Notification/NotificationContext";
+import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
 

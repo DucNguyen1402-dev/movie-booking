@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import TrailerModal from "@features/admin/movie-management/components/TrailerModal";
 import { useLockBodyScroll } from "@hooks/useLockBodyScroll";
 import { Link, useLocation } from "react-router-dom";
-import { useNotification } from "@contexts/admin/Notification/NotificationContext";
+import { useNotification } from "@contexts/admin/NotificationContext";
 
 export default function MovieManagement() {
   const location = useLocation();

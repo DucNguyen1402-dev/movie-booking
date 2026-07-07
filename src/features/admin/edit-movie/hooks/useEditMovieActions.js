@@ -14,6 +14,7 @@ import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
 import { useMutation } from "@tanstack/react-query";
 import { updateMovie } from "@services/admin/api";
+import { useModalContext } from "@contexts/admin/ModalContext";
 
 export function useEditMovieActions({
   movie,
@@ -29,6 +30,7 @@ export function useEditMovieActions({
   const { notifActions } = useNotification();
   const { id: editId } = useParams();
   const { showLoading, hideLoading } = useLoading();
+  const modal = useModalContext();
 
   const navigate = useNavigate();
 
@@ -57,8 +59,10 @@ export function useEditMovieActions({
     }
   };
 
-  const onCancelClick = () =>
-    reduxDispatch(setModalState({ type: MODAL_TYPES.CANCEL_MOVIE_CHANGES }));
+  const onCancelClick = () => {
+    modal.setType(MODAL_TYPES.CANCEL_MOVIE_CHANGES);
+    modal.open();
+  };
 
   function normalizeMovie(movie) {
     return {
@@ -138,8 +142,10 @@ export function useEditMovieActions({
     reduxDispatch,
   ]);
 
-  const onSaveClick = () =>
-    reduxDispatch(setModalState({ type: MODAL_TYPES.SAVE_MOVIE_CHANGES }));
+  const onSaveClick = () => {
+    modal.setType(MODAL_TYPES.SAVE_MOVIE_CHANGES);
+    modal.open();
+  };
 
   return {
     handleChange,

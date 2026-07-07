@@ -1,8 +1,7 @@
 import DeleteModal from "./DeleteModal";
 import SaveChangesModal from "./EditModal/SaveMovieChangesModal";
 import DiscardChangesModal from "./EditModal/DiscardMovieChangesModal"
-import { useSelector } from "react-redux";
-import { selectModalState } from "../../../features/admin/movie-management/redux/selectors";
+import { useModalContext } from "@contexts/admin/ModalContext";
 
 
 const MODALS = {
@@ -12,12 +11,12 @@ const MODALS = {
 };
 
 export default function Modal() {
-  const { type } = useSelector(selectModalState);
+  const {modal} = useModalContext();
 
 
-  if (!type) return null;
+  if (!modal.type) return null;
 
-  const Component = MODALS[type];
+  const Component = MODALS[modal.type];
 
-  return <Component />;
+  return <Component/>;
 }

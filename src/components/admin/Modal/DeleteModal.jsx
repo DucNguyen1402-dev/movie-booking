@@ -1,22 +1,15 @@
-import { setModalState } from "@features/admin/movie-management/redux/slice";
-
+import { useModalContext } from "@contexts/admin/ModalContext";
 
 export default function DeleteModal() {
+  const { modal, close } = useModalContext();
 
-  const onCancel = () => dispatch(setModalState({type: null, data: null}));
-
-  const onConfirm = () => {
-  
-    dispatch(setModalState({type: null, data: null}));
-  };
-
+  const onCancel = () => close();
+  const onConfirm = () => modal.onConfirm();
   return (
     <div className="z-100 flex max-w-90 flex-col gap-3 rounded-xl border border-gray-300 bg-white p-6 text-slate-900">
       <h2 className="text-lg font-bold tracking-wider">Delete Confirmation</h2>
       <div className="space-y-2 text-sm text-gray-500">
-        <p>
-          Are you sure you want to delete the movie "{targetDeletion.tenPhim}"?
-        </p>
+        <p>Are you sure you want to delete the movie ?</p>
         <p>This action cannot be undone.</p>
       </div>
 

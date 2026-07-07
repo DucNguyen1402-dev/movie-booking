@@ -14,7 +14,7 @@ export function ModalProvider({ children }) {
   );
 }
 
-export function useModal() {
+export function useModalContext() {
   const context = useContext(modalContext);
 
   if (!context) {
