@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import AddMovieBtn from "@features/admin/movie-management/components/addMovieBtn";
 import SearchBar from "@features/admin/movie-management/components/SearchBar";
 import MovieStatusFilter from "@features/admin/movie-management/components/MovieStatusFilter";
@@ -6,10 +6,9 @@ import SortSelect from "@features/admin/movie-management/components/SortSelect";
 import MoviesTable from "@features/admin/movie-management/components/MoviesTable/MoviesTable";
 import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
-import { selectTrailerState } from "@features/admin/movie-management/redux/selectors";
-import { useSelector } from "react-redux";
+import { useTrailerContext } from "@features/admin/movie-management/contexts/TrailerContext";
 import TrailerModal from "@features/admin/movie-management/components/TrailerModal";
-import { useLockBodyScroll } from "@hooks/useLockBodyScroll";
+import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { Link, useLocation } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
 
@@ -24,10 +23,10 @@ export default function MovieManagement() {
     }
   }, [location.state]);
 
-  const isTrailerOpen = useSelector(selectTrailerState);
+  const { trailer } = useTrailerContext();
 
-  const isLock = isTrailerOpen;
-  useLockBodyScroll(isLock);
+  useLockBodyScroll(trailer.url !== null);
+
 
   return (
     <div className="min-h-screen bg-[#0f172a] p-6 font-sans text-slate-100">
@@ -50,7 +49,7 @@ export default function MovieManagement() {
       <MoviesTable />
 
       <AnimatePresence>
-        {isTrailerOpen && (
+        {trailer.url !== null && (
           <motion.div
             className="fixed inset-0 z-80 flex items-center justify-center overflow-hidden"
             initial={{ opacity: 0 }}

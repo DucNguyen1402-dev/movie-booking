@@ -15,6 +15,7 @@ export function EditProvider({ children }) {
   });
 
   const editActions = useEditMovieActions({
+    editId: editStates.id,
     movie: editStates.movie,
     setMovie: editStates.setMovie,
     setImgPreview: editStates.setImgPreview,
@@ -25,8 +26,6 @@ export function EditProvider({ children }) {
     editMovie: derivedMovie.editMovie,
     setMovie: editStates.setMovie,
     setImgPreview: editStates.setImgPreview,
-    isSaveConfirmed: editStates.isSaveConfirmed,
-    handleSaveMovie: editActions.handleSaveMovie,
   });
 
   const value = {

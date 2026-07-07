@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import { Star, TvMinimalPlay, SquarePen, Trash2, Flame } from "lucide-react";
 import { formatDate } from "../../utils/format/date";
 import { useMovieItem } from "../../hooks/useMovieItem";
-import { Link } from "react-router-dom";
+import { useTrailerContext } from "../../contexts/TrailerContext";
 
 export default function MovieItem({ movie, movieId, highlight }) {
   const {
     onDeleteClick,
-    onTrailerClick,
+    setIsTrailerOpen,
     isTargetMovie,
     highlightAnimation,
     rowRef,
@@ -21,6 +22,11 @@ export default function MovieItem({ movie, movieId, highlight }) {
   if (movie.dangChieu && movie.sapChieu) {
     movie.sapChieu = false;
   }
+
+  const trailer = useTrailerContext();
+
+  const onOpenTrailerClick = () =>
+    trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
 
   return (
     <tr
@@ -95,7 +101,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
       <td className="px-6 py-4 text-right">
         <div className="flex items-center justify-end gap-1.5">
           <button
-            onClick={onTrailerClick}
+            onClick={onOpenTrailerClick}
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-red-500/10 hover:text-red-400"
             title="Xem Trailer"
           >

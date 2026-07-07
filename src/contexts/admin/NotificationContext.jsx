@@ -1,9 +1,9 @@
 import { useContext, createContext } from "react";
 import { notificationStyles } from "@config/admin/notification/styles";
 import { notificationIcons } from "@config/admin/notification/icons";
-import { useNotificationStates } from "@hooks/useNotification/useNotificationStates";
-import { useNotificationEffects } from "@hooks/useNotification/useNotificationEffects";
-import { useNotificationActions } from "@hooks/useNotification/useNotificationActions";
+import { useNotificationStates } from "@hooks/admin/useNotification/useNotificationStates";
+import { useNotificationEffects } from "@hooks/admin/useNotification/useNotificationEffects";
+import { useNotificationActions } from "@hooks/admin/useNotification/useNotificationActions";
 
 const notificationContext = createContext(null);
 

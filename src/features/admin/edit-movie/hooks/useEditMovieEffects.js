@@ -4,8 +4,6 @@ export function useEditMovieEffects({
   editMovie,
   setMovie,
   setImgPreview,
-  isSaveConfirmed,
-  handleSaveMovie,
 }) {
   useEffect(() => {
     if (!editMovie) return;
@@ -17,9 +15,4 @@ export function useEditMovieEffects({
     setImgPreview(editMovie.hinhAnh);
   }, [editMovie, setMovie, setImgPreview]);
 
-  useEffect(() => {
-    if (!isSaveConfirmed) return;
-    
-    handleSaveMovie();
-  }, [isSaveConfirmed]);
 }

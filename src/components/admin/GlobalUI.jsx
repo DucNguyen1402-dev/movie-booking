@@ -3,7 +3,7 @@ import Modal from "@/components/admin/Modal/Modal";
 import Notification from "@components/admin/Notification";
 import LoadingSpinner from "@components/admin/LoadingSpinner";
 import Backdrop from "@/components/admin/Backdrop";
-import { useLockBodyScroll } from "@hooks/useLockBodyScroll";
+import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import {useLoading} from "@contexts/admin/LoadingSpinnerContext"
 import {useModalContext} from "@contexts/admin/ModalContext"

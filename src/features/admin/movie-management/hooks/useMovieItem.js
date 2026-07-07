@@ -1,8 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteMovie } from "@services/admin/api";
-import { useDispatch } from "react-redux";
-import { setTrailerState, setTrailderId } from "../redux/slice";
-
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useRef, useEffect } from "react";
 import { MOVIE_HIGHLIGHTS } from "@config/admin/movieHighlight";
@@ -33,7 +30,6 @@ export function useMovieItem({ movie, movieId, highlight }) {
     });
   }, [isTargetMovie]);
 
-  const dispatch = useDispatch();
   const onDeleteClick = () =>
     modal.open({
       type: MODAL_TYPES.DELETE_MOVIE,
@@ -65,14 +61,9 @@ export function useMovieItem({ movie, movieId, highlight }) {
     }
   };
 
-  const onTrailerClick = () => {
-    dispatch(setTrailderId(movie.maPhim));
-    dispatch(setTrailerState(true));
-  };
 
   return {
     onDeleteClick,
-    onTrailerClick,
     isTargetMovie,
     highlightAnimation,
     rowRef,

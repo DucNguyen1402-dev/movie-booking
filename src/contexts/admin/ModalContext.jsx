@@ -1,5 +1,5 @@
 import { useContext, createContext } from "react";
-import {useModal} from "@hooks/useModal";
+import {useModal} from "@hooks/admin/useModal";
 
 const modalContext = createContext(null);
 

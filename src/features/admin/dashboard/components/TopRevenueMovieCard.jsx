@@ -1,5 +1,4 @@
-import { Trophy, TrendingUp, Ticket, ArrowUpRight } from "lucide-react";
-import {Link} from "react-router-dom";
+import { Trophy, TrendingUp, Ticket } from "lucide-react";
 
 export default function TopRevenueMovieCard({ topRevenueMovie }) {
   return (
@@ -82,15 +81,10 @@ export default function TopRevenueMovieCard({ topRevenueMovie }) {
         </div>
 
 
-        <div className="flex items-center justify-between border-t border-gray-900 pt-4">
+        <div className="border-t border-gray-900 pt-4">
           <p className="text-xs text-gray-500 italic">
             * Dữ liệu cập nhật dựa trên doanh thu thực tế.
           </p>
-
-          <Link to="/admin/movies" className="flex h-8 items-center gap-1 rounded-lg border border-amber-500/10 bg-amber-500/5 px-3 text-xs font-medium text-amber-400 transition-all hover:bg-amber-500/20 hover:text-white cursor-pointer duration-300">
-            Xem báo cáo phim
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
         </div>
       </div>
     </div>

@@ -1,13 +1,8 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
 import { NUMBER_FIELDS } from "@constants/admin/movies";
-import {
-  setModalState,
-  setConfirmUpdate,
-} from "@features/admin/movie-management/redux/slice";
 import { useNotification } from "@contexts/admin/NotificationContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
@@ -17,22 +12,22 @@ import { updateMovie } from "@services/admin/api";
 import { useModalContext } from "@contexts/admin/ModalContext";
 
 export function useEditMovieActions({
+  editId,
   movie,
   setMovie,
   setImgPreview,
   editMovie,
 }) {
-  const reduxDispatch = useDispatch();
+  const navigate = useNavigate();
   const { mutateAsync } = useMutation({
     mutationFn: updateMovie,
   });
 
   const { notifActions } = useNotification();
-  const { id: editId } = useParams();
   const { showLoading, hideLoading } = useLoading();
   const modal = useModalContext();
 
-  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,10 +54,20 @@ export function useEditMovieActions({
     }
   };
 
-  const onCancelClick = () => {
-    modal.setType(MODAL_TYPES.CANCEL_MOVIE_CHANGES);
-    modal.open();
+  const handleCancelChange = () => {
+    modal.close();
+    navigate("/admin/movies", {
+      state: {
+        movieId: editId,
+      },
+    });
   };
+
+  const onCancelClick = () =>
+    modal.open({
+      type: MODAL_TYPES.CANCEL_MOVIE_CHANGES,
+      onConfirm: handleCancelChange,
+    });
 
   function normalizeMovie(movie) {
     return {
@@ -83,12 +88,11 @@ export function useEditMovieActions({
 
   const handleSaveMovie = useCallback(async () => {
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
-      reduxDispatch(setModalState({ type: null }));
+       modal.close();
       notifActions.showNotification({
         variant: "warning",
         message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
       });
-      reduxDispatch(setConfirmUpdate(false));
 
       return;
     }
@@ -101,7 +105,7 @@ export function useEditMovieActions({
     }
 
     try {
-      reduxDispatch(setModalState({ type: null }));
+      modal.close();
       showLoading();
       await mutateAsync(formData);
       await ensureMinDuration(start, MIN_LOADING_TIME);
@@ -129,8 +133,6 @@ export function useEditMovieActions({
         variant: "error",
         message,
       });
-    } finally {
-      reduxDispatch(setConfirmUpdate(false));
     }
   }, [
     movie,
@@ -139,12 +141,13 @@ export function useEditMovieActions({
     editId,
     navigate,
     notifActions,
-    reduxDispatch,
   ]);
 
   const onSaveClick = () => {
-    modal.setType(MODAL_TYPES.SAVE_MOVIE_CHANGES);
-    modal.open();
+    modal.open({
+      type: MODAL_TYPES.SAVE_MOVIE_CHANGES,
+      onConfirm: handleSaveMovie,
+    });
   };
 
   return {
