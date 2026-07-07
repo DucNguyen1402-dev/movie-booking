@@ -10,9 +10,10 @@ import { Link } from "react-router-dom";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useRef, useEffect } from "react";
 
-export default function MovieItem({ movie, updatedMovieId }) {
+export default function MovieItem({ movie, updatedMovieId, addedMovieId }) {
   const rowRef = useRef(null);
   const isJustUpdated = movie.maPhim === Number(updatedMovieId);
+  const isJustAdded = movie.maPhim === Number(addedMovieId);
 
   useEffect(() => {
     if (isJustUpdated) {
@@ -21,7 +22,14 @@ export default function MovieItem({ movie, updatedMovieId }) {
         block: "center",
       });
     }
-  }, [isJustUpdated]);
+
+    if (isJustAdded) {
+      rowRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [isJustUpdated, isJustAdded]);
 
   const dispatch = useDispatch();
   const onDeleteClick = () =>
@@ -34,11 +42,10 @@ export default function MovieItem({ movie, updatedMovieId }) {
     dispatch(setTrailerState(true));
   };
 
-
   return (
     <tr
-      ref={isJustUpdated ? rowRef : null}
-      className={`group transition-colors hover:bg-slate-700/20 ${isJustUpdated ? "animate-row-blink" : "duration-300"}`}
+      ref={isJustUpdated || isJustAdded ? rowRef : null}
+      className={`group transition-colors hover:bg-slate-700/20 ${isJustUpdated || isJustAdded ? "animate-row-blink" : "duration-300"}`}
     >
       <td className="px-6 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
 

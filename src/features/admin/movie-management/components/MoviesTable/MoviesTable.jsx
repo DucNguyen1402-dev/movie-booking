@@ -4,8 +4,13 @@ import { useLocation } from "react-router-dom";
 
 export default function MoviesTable() {
   const movies = useProcessedMovies();
+
    const location = useLocation();
    const updatedMovieId = location.state?.updatedMovieId;
+   const addedMovieId = location.state?.addedMovieId;
+
+   console.log(addedMovieId)
+
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-800/80 bg-[#1e293b] shadow-xl">
       <div className="overflow-x-auto">
@@ -22,7 +27,7 @@ export default function MoviesTable() {
           </thead>
           <tbody className="divide-y divide-slate-700/40 text-sm">
             {movies.map((movie) => (
-              <MovieItem key={movie.maPhim} movie={movie}  updatedMovieId ={updatedMovieId}/>
+              <MovieItem key={movie.maPhim} movie={movie}  updatedMovieId ={updatedMovieId} addedMovieId = {addedMovieId}/>
             ))}
           </tbody>
         </table>
