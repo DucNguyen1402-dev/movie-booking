@@ -6,10 +6,11 @@ export function useShowtimeForm({ movie }) {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
-    defaultValues: movie,
+    defaultValues: {},
   });
 
   useEffect(() => {
@@ -22,5 +23,7 @@ export function useShowtimeForm({ movie }) {
     register,
     handleSubmit,
     errors,
+    watch,
+    reset
   };
 }

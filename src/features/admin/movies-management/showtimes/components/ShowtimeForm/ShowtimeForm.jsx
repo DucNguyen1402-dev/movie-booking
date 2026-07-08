@@ -1,41 +1,34 @@
-import { useShowtimeForm } from "../hooks/useShowtimeForm";
-import { validationRules } from "../config/validation-rules";
-import { useModalContext } from "@contexts/admin/ModalContext";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useNavigate } from "react-router-dom";
+import { useShowtimeForm } from "../../hooks/useShowtimeForm";
+import { validationRules } from "../../config/validation-rules";
+import { useShowtimeActions } from "../../hooks/useShowtimeActions";
+import { useCinemaSystems } from "../../hooks/useCinemaSystems";
+import Select from "react-select";
+import { Controller, useForm } from "react-hook-form";
+import { CinemaOption } from "./CinemaOption";
+import { CinemaSingleValue } from "./CinemaSingleValue";
 
 export default function ShowtimeForm({ movie }) {
-  const navigate = useNavigate();
+  // const { handleSubmit, register, errors } = useShowtimeForm({ movie });
 
-  const { handleSubmit, register, errors } = useShowtimeForm({ movie });
 
-  const modal = useModalContext();
+   const {data : cinemaSystems =[]} = useCinemaSystems();
 
-  const handleShowtimeCanceling = () => {
-    modal.close();
-    navigate("/admin/movies", { state: { movieId: movie.maPhim } });
+
+  const { control, handleSubmit, register,  formState: { errors }, } = useForm();
+    const { onCancelClick, onConfirmClick } = useShowtimeActions({
+    handleSubmit,
+    movie,
+  });
+
+  const options = cinemaSystems.map((system) => ({
+    value: system.maHeThongRap,
+    label: system.tenHeThongRap,
+    logo: system.logo,
+  }));
+
+  const onSubmit = (data) => {
+    console.log(data);
   };
-
-  const onCancelClick = () =>
-    modal.open({
-      type: MODAL_TYPES.SHOWTIME_CREATION,
-      title: "Hủy tạo lịch chiếu?",
-      subtitle: "Mọi thông tin bạn đã nhập sẽ không được lưu.",
-      onConfirm: handleShowtimeCanceling,
-    });
-
-  const handleShowtimeCreation = () => {
-    modal.close();
-    navigate("/admin/movies", { state: { movieId: movie.maPhim } });
-  };
-
-  const onConfirmClick = () =>
-    modal.open({
-      type: MODAL_TYPES.SHOWTIME_CREATION,
-      title: "Xác nhận tạo lịch chiếu?",
-      subtitle: "Bạn có chắc muốn tạo lịch chiếu này?",
-      onConfirm: handleShowtimeCreation,
-    });
 
   return (
     <div className="space-y-6 rounded-3xl bg-gray-50 p-6 shadow-sm lg:col-span-2">
@@ -53,17 +46,36 @@ export default function ShowtimeForm({ movie }) {
               Hệ thống rạp
             </label>
 
-            <select
-              id="cinema-system"
-              {...register("heThongRapChieu", {
+            <Controller
+              name="maHeThongRap"
+              control={control}
+              rules={{
                 required: "Vui lòng chọn hệ thống rạp",
-              })}
-              className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option>CGV</option>
-              <option>BHD</option>
-              <option>Galaxy</option>
-            </select>
+              }}
+              render={({ field, fieldState }) => (
+                <>
+                  <Select
+                    options={options}
+                    placeholder="Chọn hệ thống rạp"
+                    components={{
+                      Option: CinemaOption,
+                      SingleValue: CinemaSingleValue,
+                    }}
+                    value={
+                      options.find((option) => option.value === field.value) ??
+                      null
+                    }
+                    onChange={(option) => field.onChange(option.value)}
+                  />
+
+                  {fieldState.error && (
+                    <p className="mt-1 text-sm text-red-500">
+                      {fieldState.error.message}
+                    </p>
+                  )}
+                </>
+              )}
+            />
           </div>
 
           <div className="flex flex-col gap-1.5 text-slate-700">
@@ -83,6 +95,11 @@ export default function ShowtimeForm({ movie }) {
             >
               <option>CGV Vincom Đồng Khởi</option>
             </select>
+            {errors.cumRapChieu && (
+              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+                {errors.cumRapChieu.message}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1.5 text-slate-700">
@@ -104,6 +121,11 @@ export default function ShowtimeForm({ movie }) {
               <option>Rạp 2</option>
               <option>Rạp 7</option>
             </select>
+            {errors.maRap && (
+              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+                {errors.maRap.message}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1.5 text-slate-700">
@@ -118,8 +140,13 @@ export default function ShowtimeForm({ movie }) {
               type="number"
               id="ticket-price"
               {...register("giaVe", validationRules.giaVe)}
-              className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.giaVe && (
+              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+                {errors.giaVe.message}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1.5 text-slate-700">
@@ -137,6 +164,11 @@ export default function ShowtimeForm({ movie }) {
 
               className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.ngayChieu && (
+              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+                {errors.ngayChieu.message}
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col gap-1.5 text-slate-700">
@@ -153,6 +185,11 @@ export default function ShowtimeForm({ movie }) {
               {...register("gioChieu", validationRules.gioChieu)}
               className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
             />
+            {errors.gioChieu && (
+              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+                {errors.gioChieu.message}
+              </p>
+            )}
           </div>
         </form>
 

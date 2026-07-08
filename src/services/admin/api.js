@@ -35,3 +35,22 @@ export const login = (data) => {
 export const addMovie = async (data) => {
   return api.post("/QuanLyPhim/ThemPhimUploadHinh", data);
 };
+
+export const getCinemaSystems = async () =>{
+   const { data }  = await api.get("QuanLyRap/LayThongTinHeThongRap");
+
+   return data.content;
+}
+
+export const getCinemaClusters = async (system) => {
+  const {data} = await api.get(`QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${system}`);
+  
+  return data.content;
+}
+
+export const getCinemaClustersWithShowtimes = async (system) => {
+  const {data} = await api.get(`QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${system}&maNhom=GP01`);
+  
+  return data.content;
+}
+

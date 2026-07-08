@@ -5,7 +5,7 @@ import Profile from "../pages/admin/Profiles/Profile";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
 import EditMovie from "../pages/admin/Movies/EditMovie";
 import AddMovie from "../pages/admin/Movies/AddMovie";
-import ShowtimeManagement from "../pages/admin/ShowTime/ShowtimeManagement"
+import Showtimes from "../pages/admin/Movies/Showtime"
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
@@ -42,7 +42,7 @@ export default function AdminRoutes() {
                   }
                 />
                 <Route path="add" element={<AddMovie />} />
-                <Route path="showtimes/:id" element={<ShowtimeManagement />} />
+                <Route path="showtimes/:id" element={<Showtimes />} />
               
               </Route>
             

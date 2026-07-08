@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom";
 import { useMemo } from "react";
 import { useMovies } from "@hooks/admin/useMovies";
 import MovieSelectionCard from "@features/admin/movies-management/showtimes/components/MovieSelectionCard";
-import ShowtimeForm from "@features/admin/movies-management/showtimes/components/ShowtimeForm";
+import ShowtimeForm from "@features/admin/movies-management/showtimes/components/ShowtimeForm/ShowtimeForm";
 
 
-export default function ShowtimeManagement() {
+export default function Showtimes() {
 const { id } = useParams();
 
 const { data: movies = [] } = useMovies();
