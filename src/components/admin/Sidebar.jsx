@@ -55,7 +55,7 @@ export default function Sidebar() {
 </div>
 
       {/* Navigation Links */}
-      <nav className="flex-1 px-4 py-6 space-y-4">
+      <nav className="flex-1 px-4 py-6 space-y-6 mt-5">
         {SIDEBAR_LINKS.map((link) => (
           <NavLink
             to={link.path}

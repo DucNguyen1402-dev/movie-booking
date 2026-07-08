@@ -4,4 +4,5 @@ export const MODAL_TYPES = {
   TRAILER: "trailer",
   CANCEL_MOVIE_CHANGES: "discardMovieChanges",
   SAVE_MOVIE_CHANGES: "saveMovieChanges",
+  SHOWTIME_CREATION: "showtimeCreation"
 };

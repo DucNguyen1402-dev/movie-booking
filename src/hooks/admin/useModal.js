@@ -1,10 +1,17 @@
 import { useState } from "react";
 
 export function useModal() {
-  const [modal, setModal] = useState({ type: null, onConfirm: null });
+  const [modal, setModal] = useState({
+    type: null,
+    onConfirm: null,
+    title: "",
+    subtitle: "",
+  });
 
-  const open = ({ type, onConfirm }) => setModal({ type, onConfirm });
-  const close = () => setModal({ type: null, onConfirm: null });
+  const open = ({ type, onConfirm, title, subtitle }) =>
+    setModal({ type, onConfirm, title, subtitle });
+  const close = () =>
+    setModal({ type: null, onConfirm: null, title: "", subtitle: "" });
 
   return {
     open,
