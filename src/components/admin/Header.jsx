@@ -30,6 +30,11 @@ export default function Header() {
       title: "Add phim",
       description: "Thêm phim mới",
     },
+    {
+      path: "/admin/showtimes",
+      title: "Showtime Managements",
+      description: "Quản lý và tạo mới lịch chiếu phim",
+    },
   ];
 
   let page = null;
@@ -39,7 +44,7 @@ export default function Header() {
 
 
   return (
-    <header className="sticky top-0 z-20 flex h-20 items-center border-b border-gray-800 bg-[#1e1e1e]/80  px-8 backdrop-blur-md ">
+    <header className="sticky top-0 z-20 flex h-25 items-center border-b border-gray-800 bg-[#1e1e1e]/80  px-8 backdrop-blur-md ">
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold text-white">{page?.title}</h1>
         {page?.description && (
