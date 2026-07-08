@@ -11,12 +11,12 @@ import { useMutation } from "@tanstack/react-query";
 import { updateMovie } from "@services/admin/api";
 import { useModalContext } from "@contexts/admin/ModalContext";
 
+
 export function useEditMovieActions({
   editId,
-  movie,
-  setMovie,
-  setImgPreview,
   editMovie,
+  trigger,
+  getValues,
 }) {
   const navigate = useNavigate();
   const { mutateAsync } = useMutation({
@@ -28,31 +28,15 @@ export function useEditMovieActions({
   const modal = useModalContext();
 
 
+const handleFileChange = (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMovie((prev) => ({
-      ...prev,
-      [name]: NUMBER_FIELDS.includes(name) ? Number(value) : value,
-    }));
-  };
+  const reader = new FileReader();
 
-  const handleCheckbox = (e) => {
-    const { name, checked } = e.target;
-    setMovie((prev) => ({ ...prev, [name]: checked }));
-  };
+  reader.readAsDataURL(file);
+};
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImgPreview(reader.result);
-        setMovie((prev) => ({ ...prev, hinhAnh: file }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleCancelChange = () => {
     modal.close();
@@ -87,6 +71,8 @@ export function useEditMovieActions({
   };
 
   const handleSaveMovie = useCallback(async () => {
+    const movie = getValues();
+
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
        modal.close();
       notifActions.showNotification({
@@ -135,7 +121,6 @@ export function useEditMovieActions({
       });
     }
   }, [
-    movie,
     mutateAsync,
     editMovie,
     editId,
@@ -143,7 +128,9 @@ export function useEditMovieActions({
     notifActions,
   ]);
 
-  const onSaveClick = () => {
+  const onSaveClick = async () => {
+    const isValid = await trigger();
+    if (!isValid) return;
     modal.open({
       type: MODAL_TYPES.SAVE_MOVIE_CHANGES,
       onConfirm: handleSaveMovie,
@@ -151,8 +138,6 @@ export function useEditMovieActions({
   };
 
   return {
-    handleChange,
-    handleCheckbox,
     handleFileChange,
     handleSaveMovie,
     onCancelClick,

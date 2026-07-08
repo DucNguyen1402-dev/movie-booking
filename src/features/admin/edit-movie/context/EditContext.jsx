@@ -1,6 +1,7 @@
 import { useEditMovieState } from "../hooks/useEditMovieState";
 import { useDerivedEditMovie } from "../hooks/useDerivedEditMovie";
 import { useEditMovieEffects } from "../hooks/useEditMovieEffects";
+import {useEditForm} from "../hooks/useEditForm"
 import { useEditMovieActions } from "../hooks/useEditMovieActions";
 import { createContext, useContext } from "react";
 
@@ -14,23 +15,23 @@ export function EditProvider({ children }) {
     movies: editStates.movies,
   });
 
+  const editForm = useEditForm();
   const editActions = useEditMovieActions({
     editId: editStates.id,
-    movie: editStates.movie,
-    setMovie: editStates.setMovie,
-    setImgPreview: editStates.setImgPreview,
     editMovie: derivedMovie.editMovie,
+    trigger: editForm.trigger,
+    getValues: editForm.getValues,
   });
 
   useEditMovieEffects({
     editMovie: derivedMovie.editMovie,
-    setMovie: editStates.setMovie,
-    setImgPreview: editStates.setImgPreview,
+    formReset: editForm.reset
   });
 
   const value = {
     editStates,
     editActions,
+    editForm
   };
 
   return <EditContext.Provider value={value}>{children}</EditContext.Provider>;

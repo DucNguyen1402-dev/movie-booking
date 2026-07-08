@@ -2,17 +2,14 @@ import { useEffect } from "react";
 
 export function useEditMovieEffects({
   editMovie,
-  setMovie,
-  setImgPreview,
+  formReset
 }) {
   useEffect(() => {
     if (!editMovie) return;
-
-    setMovie({
+    formReset({
       ...editMovie,
       ngayKhoiChieu: editMovie.ngayKhoiChieu.split("T")[0],
     });
-    setImgPreview(editMovie.hinhAnh);
-  }, [editMovie, setMovie, setImgPreview]);
+  }, [editMovie, formReset]);
 
 }

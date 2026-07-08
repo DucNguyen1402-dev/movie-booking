@@ -1,5 +1,5 @@
 import { useAddMovie } from "@features/admin/add-movie/hooks/useAddMovie";
-import { movieValidation } from "@features/admin/add-movie/validations/movieValidation";
+import { validationRules } from "@config/admin/validation-rules";
 
 export default function AddMovie() {
   const {
@@ -32,7 +32,7 @@ export default function AddMovie() {
               <div className="space-y-2">
                 <input
                   type="text"
-                  {...register("tenPhim", movieValidation.tenPhim)}
+                  {...register("tenPhim", validationRules.tenPhim)}
                   className="w-full rounded border border-neutral-300 px-3 py-2 text-gray-700 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                 />
                 {errors.tenPhim && (
@@ -50,7 +50,7 @@ export default function AddMovie() {
               <div className="space-y-2">
                 <input
                   type="text"
-                  {...register("trailer", movieValidation.trailer)}
+                  {...register("trailer", validationRules.trailer)}
                   className="w-full rounded border border-neutral-300 px-3 py-2 text-gray-700 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                 />
                 {errors.trailer && (
@@ -69,7 +69,7 @@ export default function AddMovie() {
             <div className="space-y-2">
               <textarea
                 rows="3"
-                {...register("moTa", movieValidation.moTa)}
+                {...register("moTa", validationRules.moTa)}
                 className="w-full rounded border border-neutral-300 px-3 py-2 text-gray-700 focus:ring-1 focus:ring-blue-500 focus:outline-none"
               ></textarea>
               {errors.moTa && (
@@ -88,7 +88,7 @@ export default function AddMovie() {
               <div className="space-y-2">
                 <input
                   type="date"
-                  {...register("ngayKhoiChieu", movieValidation.ngayKhoiChieu)}
+                  {...register("ngayKhoiChieu", validationRules.ngayKhoiChieu)}
                   className="w-full rounded border border-neutral-300 px-3 py-2 text-gray-700 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                 />
                 {errors.ngayKhoiChieu && (

@@ -1,4 +1,4 @@
-export const movieValidation = {
+export const validationRules = {
   tenPhim: {
     required: "Tên phim không được bỏ trống",
     minLength: {
@@ -34,5 +34,16 @@ export const movieValidation = {
   ngayKhoiChieu: {
     required: "Ngày khởi chiếu không được bỏ trống",
   },
-
+  danhGia: {
+    required: "Vui lòng nhập điểm đánh giá",
+    min: {
+      value: 1,
+      message: "Điểm đánh giá phải từ 1 trở lên",
+    },
+    max: {
+      value: 10,
+      message: "Điểm đánh giá không được vượt quá 10",
+    },
+    valueAsNumber: true,
+  },
 };
