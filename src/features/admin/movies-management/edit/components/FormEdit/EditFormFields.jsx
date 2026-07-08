@@ -1,5 +1,5 @@
 import { LockKeyhole, Star } from "lucide-react";
-import { useEditMovie } from "../../context/EditContext";
+import { useEditMovie } from "../../contexts/EditContext";
 import { getRateClasses } from "../../config/editConfig";
 import { validationRules } from "@config/admin/validation-rules";
 

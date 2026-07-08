@@ -1,4 +1,4 @@
-import { useEditMovie } from "../../context/EditContext";
+import { useEditMovie } from "../../contexts/EditContext";
   
 export default function ActionButtons() {
   const { editActions } = useEditMovie();

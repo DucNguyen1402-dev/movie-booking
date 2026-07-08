@@ -1,4 +1,4 @@
-import { useEditMovie } from "../../context/EditContext";
+import { useEditMovie } from "../../contexts/EditContext";
 
 export default function HeaderContent({movieId, groupId}) {
     const { editForm: {watch} } = useEditMovie();

@@ -31,9 +31,9 @@ export default function Header() {
       description: "Thêm phim mới",
     },
     {
-      path: "/admin/showtimes",
+      path: "/admin/movies/showtimes/:id",
       title: "Showtime Managements",
-      description: "Quản lý và tạo mới lịch chiếu phim",
+      description: "Tạo mới lịch chiếu phim",
     },
   ];
 

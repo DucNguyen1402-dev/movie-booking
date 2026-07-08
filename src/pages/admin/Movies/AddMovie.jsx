@@ -1,4 +1,4 @@
-import { useAddMovie } from "@features/admin/add-movie/hooks/useAddMovie";
+import { useAddMovie } from "@features/admin/movies-management/add/hooks/useAddMovie";
 import { validationRules } from "@config/admin/validation-rules";
 
 export default function AddMovie() {

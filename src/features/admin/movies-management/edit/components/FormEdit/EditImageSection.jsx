@@ -1,4 +1,4 @@
-import { useEditMovie } from "../../context/EditContext";
+import { useEditMovie } from "../../contexts/EditContext";
 import { useMemo } from "react";
 
 export default function EditImageSection() {

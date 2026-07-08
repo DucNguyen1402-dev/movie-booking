@@ -8,6 +8,7 @@ import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNavigate } from "react-router-dom";
 
 export function useMovieItem({ movie, movieId, highlight }) {
   const { mutateAsync } = useMutation({ mutationFn: deleteMovie });
@@ -20,6 +21,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoading();
   const { notifActions } = useNotification();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isTargetMovie) return;
@@ -29,6 +31,9 @@ export function useMovieItem({ movie, movieId, highlight }) {
       block: "center",
     });
   }, [isTargetMovie]);
+
+  const onCreateShowTimeClick = () =>
+    navigate(`/admin/movies/showtimes/${movie.maPhim}`);
 
   const onDeleteClick = () =>
     modal.open({
@@ -61,11 +66,11 @@ export function useMovieItem({ movie, movieId, highlight }) {
     }
   };
 
-
   return {
     onDeleteClick,
     isTargetMovie,
     highlightAnimation,
     rowRef,
+    onCreateShowTimeClick
   };
 }

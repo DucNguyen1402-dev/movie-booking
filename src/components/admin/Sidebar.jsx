@@ -1,49 +1,33 @@
-import { MdDashboard, MdDarkMode } from "react-icons/md";
-import { BiSolidMoviePlay } from "react-icons/bi";
-import { FaRegCalendarAlt, FaUserFriends } from "react-icons/fa";
-import { IoTicket, IoSettings, IoLogOut } from "react-icons/io5";
-import { ImProfile } from "react-icons/im";
-import { MdLocalMovies } from "react-icons/md";
 
+import {ChartColumn, LayoutDashboard, Clapperboard , Users, Film, UserPen, SquareArrowRightExit} from "lucide-react";
 import { NavLink, Link } from "react-router-dom";
 
 const SIDEBAR_LINKS = [
   {
     path: "/admin/dashboard",
     label: "Dashboard",
-    icon: MdDashboard,
+    icon: LayoutDashboard,
     iconColor: "text-indigo-500",
   },
   {
     path: "/admin/movies/",
-    label: "Quản lý Phim",
-    icon: BiSolidMoviePlay,
+    label: "Movie management",
+    icon: Clapperboard,
     iconColor: "text-red-500",
-  },
-  {
-    path: "/admin/showtimes",
-    label: "Lịch Chiếu",
-    icon: FaRegCalendarAlt,
-    iconColor: "text-blue-500",
   },
   {
     path: "/admin/tickets",
-    label: "Vé & Doanh Thu",
-    icon: IoTicket,
-    iconColor: "text-red-500",
-  },
-  {
-    path: "/admin/users",
-    label: "Người Dùng",
-    icon: FaUserFriends,
+    label: "User management",
+    icon: Users,
     iconColor: "text-purple-500",
   },
   {
-    path: "/admin/settings",
-    label: "Cài Đặt",
-    icon: IoSettings,
-    iconColor: "text-gray-500",
+    path: "/admin/users",
+    label: "Statistics",
+    icon: ChartColumn,
+    iconColor: "text-blue-500",
   },
+
 ];
 
 export default function Sidebar() {
@@ -56,7 +40,7 @@ export default function Sidebar() {
      <div className="h-20 border-b border-gray-800 flex items-center px-6">
   <div className="flex items-center gap-3">
     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-600 shadow-lg shadow-red-600/20">
-      <MdLocalMovies className="text-2xl text-white" />
+      <Film className="text-2xl text-white" />
     </div>
 
     <div className="leading-tight">
@@ -80,7 +64,7 @@ export default function Sidebar() {
               `${navLinkClasses} ${
                 isActive
                   ? "bg-rose-600 text-white"
-                  : "transition-colors duration-400 hover:bg-rose-400 hover:text-white"
+                  : "transition-colors duration-300 hover:bg-rose-400 hover:text-white"
               }`
             }
           >
@@ -111,21 +95,13 @@ export default function Sidebar() {
           </button>
           <div className="absolute bottom-10 left-0 w-50 opacity-0 rounded-xl border border-gray-700 bg-[#1f1f1f] shadow-2xl overflow-hidden transition-opacity duration-500 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto  ">
             <Link className="flex w-full items-center gap-3 px-4 py-3 hover:bg-gray-800  cursor-pointer transition-colors duration-300" to = "/admin/profile">
-              <ImProfile className="text-lg text-gray-400" />
+              <UserPen className="text-lg text-gray-400" />
               <span className="text-sm text-white">Hồ sơ</span>
             </Link>
-
-            <div className="flex items-center justify-between px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors duration-300">
-              <div className="flex items-center gap-3">
-                <MdDarkMode className="text-lg text-gray-400" />
-                <span className="text-sm text-white">Chế độ tối</span>
-              </div>
-            </div>
-
             <div className="h-px bg-gray-700" />
 
             <button className="flex w-full items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 cursor-pointer transition-colors duration-300">
-              <IoLogOut className="text-lg" />
+              <SquareArrowRightExit className="text-lg" />
               <span className="text-sm">Đăng xuất</span>
             </button>
           </div>
