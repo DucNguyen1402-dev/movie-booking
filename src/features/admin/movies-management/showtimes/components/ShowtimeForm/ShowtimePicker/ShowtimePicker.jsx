@@ -22,6 +22,8 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
+
   return (
     <div className="flex flex-col gap-1.5 text-slate-700">
       <label
@@ -57,8 +59,9 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
                 value={field.value}
                 onChange={field.onChange}
                 timePickerVisible={timePickerVisible}
+                timePickerRef = {timePickerRef}
               />
-              
+            
               {fieldState.error && (
                 <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
                   {fieldState.error.message}s

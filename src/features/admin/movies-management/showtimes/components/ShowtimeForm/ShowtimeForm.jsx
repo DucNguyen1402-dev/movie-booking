@@ -8,12 +8,10 @@ import CinemaClusters from "./CinemaClusters/CinemaClusters";
 import Theather from "./Theather/Theather";
 import ShowDate from "./ShowDate/ShowDate";
 import TicketPrice from "./TicketPrice/TicketPrice";
-import Showtime from "./ShowTime/Showtime";
+import Showtime from "./ShowtimePicker/ShowtimePicker";
 
 export default function ShowtimeForm({ movie }) {
-  const { handleSubmit, control, watch,  getValues, setValue } = useShowtimeForm({
-    movie,
-  });
+  const { handleSubmit, control, watch} = useShowtimeForm();
   const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
     movie,
@@ -37,6 +35,7 @@ export default function ShowtimeForm({ movie }) {
     cinemaClusters.find((cluster) => cluster.maCumRap === selectedCluster)
       ?.danhSachRap ?? [];
 
+  
   return (
     <div className="space-y-6 rounded-3xl bg-gray-50 p-6 shadow-sm lg:col-span-2">
       <h2 className="text-2xl font-bold tracking-wide text-slate-800">
@@ -44,7 +43,7 @@ export default function ShowtimeForm({ movie }) {
       </h2>
 
       <div>
-        <form className="grid gap-5 md:grid-cols-2">
+        <form className="grid gap-5 md:grid-cols-2" onSubmit = {(e) => e.preventDefault() }>
           <CinemaSystems cinemaSystems={cinemaSystems} control={control} />
           <CinemaClusters
             cinemaClusters={cinemaClusters}
@@ -70,7 +69,7 @@ export default function ShowtimeForm({ movie }) {
           <Showtime
             isTimePickerDisabled={isTimePickerDisabled}
             control = {control}
-              watch = {watch}
+            watch = {watch}
           />
           s
         </form>

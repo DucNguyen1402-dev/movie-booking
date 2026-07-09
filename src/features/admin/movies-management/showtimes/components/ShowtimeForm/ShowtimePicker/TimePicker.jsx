@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-export default function TimePicker({ value, onChange, timePickerVisible }) {
+export default function TimePicker({ value, onChange, timePickerVisible, timePickerRef }) {
   const [currentHour, currentMinute] = value ? value.split(":") : ["00", "00"];
   const hours = Array.from({ length: 24 }, (_, i) =>
     String(i).padStart(2, "0"),
@@ -34,10 +34,11 @@ export default function TimePicker({ value, onChange, timePickerVisible }) {
 
   return (
     <div
+    ref = {timePickerRef}
       className={`absolute top-[108%] left-0 transition-opacity duration-300 ${timePickerVisible ? "" : "pointer-events-none opacity-0"}`}
     >
       <div className="h-64 space-y-4 overflow-hidden rounded-md bg-slate-800 px-4 py-3 text-white">
-        <div className="flex items-center justify-between gap-2 rounded-full bg-slate-900 px-4 py-1 text-lg">
+        <div className="flex items-center justify-between gap-2 rounded-full bg-slate-900 px-8 py-1 text-lg">
           <span>{currentHour}</span>
           <span className="font-bold">:</span>
           <span>{currentMinute}</span>
@@ -54,26 +55,26 @@ export default function TimePicker({ value, onChange, timePickerVisible }) {
                   key={hour}
                   data-ative-time={isActive}
                   onClick={() => handleSelectHour(hour)}
-                  className={`rounded-full border-none px-3 py-0.5 text-sm transition-colors duration-200 ${isActive ? "bg-blue-500 text-slate-50" : "cursor-pointer text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
+                  className={`rounded-full border-none px-5 py-0.75 text-sm transition-colors duration-200 ${isActive ? "bg-blue-500 text-slate-50" : "cursor-pointer text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
                 >
                   {hour}
                 </button>
               );
             })}
           </div>
-          <div className="mx-4 min-h-full w-0.5 rounded-full bg-slate-100"></div>
+          <div className="mx-5 min-h-full w-0.5 rounded-full bg-slate-100"></div>
           <div
             className="snap-mandator flex h-full snap-y scrollbar-none flex-col gap-2 overflow-y-scroll scroll-smooth"
             ref={minuteRef}
           >
             {minutes.map((minute) => {
-              const isActive = minute === currentHour;
+              const isActive = minute === currentMinute;
               return (
                 <button
                   key={minute}
                   data-ative-time={isActive}
-                  onClick={(minute) => handleSelectMinute(minute)}
-                  className={`rounded-full border-none px-3 py-0.5 text-sm transition-colors duration-200 ${isActive ? "bg-blue-500 text-slate-50" : "cursor-pointer text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
+                  onClick={() => handleSelectMinute(minute)}
+                  className={`rounded-full border-none px-5 py-0.75 text-sm transition-colors duration-200 ${isActive ? "bg-blue-500 text-slate-50" : "cursor-pointer text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
                 >
                   {minute}
                 </button>

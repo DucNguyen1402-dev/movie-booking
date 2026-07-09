@@ -50,7 +50,6 @@ export default function ShowDate({ control, watch, isDatePickerDisabled }) {
           datePickerRef={datePickerRef}
           dayPickerVisible={dayPickerVisible}
           control={control}
-          setDayPickerVisible={setDayPickerVisible}
         />
       </div>
     </div>

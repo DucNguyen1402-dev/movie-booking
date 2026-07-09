@@ -11,9 +11,9 @@ export const datePickerStyles= {
   week: "flex",
   day: "h-9 w-9 p-0 ",
   day_button:
-    "size-9 rounded-full text-sm transition-colors duration-200 hover:bg-blue-400 cursor-pointer hover:text-slate-300",
+    "size-9 rounded-full text-sm cursor-pointer ",
   today: "font-semibold text-rose-400",
-  selected: "bg-blue-600 rounded-full transition-colors duration-300",
+  selected: "bg-blue-600 rounded-full scale-108 transition-all duration-200",
   disabled: "text-slate-400 opacity-50",
   outside: "text-slate-300",
 };

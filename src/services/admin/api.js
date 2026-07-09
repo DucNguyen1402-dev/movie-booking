@@ -48,9 +48,16 @@ export const getCinemaClusters = async (system) => {
   return data.content;
 }
 
-export const getCinemaClustersWithShowtimes = async (system) => {
-  const {data} = await api.get(`QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${system}&maNhom=GP01`);
-  
-  return data.content;
-}
+export const createShowtime = async (payload) => {
+  try {
+    const { data } = await api.post(
+      "QuanLyDatVe/TaoLichChieu",
+      payload
+    );
 
+    return data.content;
+  } catch (error) {
+    console.log(error.response?.data);
+    throw error;
+  }
+};

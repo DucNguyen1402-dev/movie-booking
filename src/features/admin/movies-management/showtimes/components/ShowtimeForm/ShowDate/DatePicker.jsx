@@ -20,7 +20,6 @@ export default function DatePicker({
   datePickerRef,
   dayPickerVisible,
   control,
-  setDayPickerVisible,
 }) {
   return (
     <div
@@ -39,7 +38,7 @@ export default function DatePicker({
               onSelect={(date) => {
                 if (!date) return;
                 field.onChange(format(date, "yyyy-MM-dd"));
-                setDayPickerVisible(false);
+
               }}
               defaultMonth={new Date()}
               disabled={{ before: new Date() }}

@@ -8,6 +8,7 @@ export default function Theather({ list, control, isTheaterDisabled }) {
     value: list.maRap,
     label: list.tenRap,
   }));
+
   return (
     <div className="flex flex-col gap-1.5 text-slate-700">
       <label

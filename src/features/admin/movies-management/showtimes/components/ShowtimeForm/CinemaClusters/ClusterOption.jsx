@@ -4,12 +4,15 @@ import { MapPin } from "lucide-react";
 export default function ClusterOption(props) {
   return (
     <components.Option {...props}>
-      <div className="flex items-center gap-6 border-b border-gray-300">
+      <div className="flex items-center gap-6 border-b border-gray-300 pb-2">
         <span>{props.data.label}</span>
-        <span className="text-[15px] text-gray-500 inline-flex gap-1">
-          <MapPin className ="shrink-0 size-4  text-orange-600"/> 
+        <div className="inline-flex gap-1 text-[15px]">
+          <div className="flex size-5 shrink-0 items-center justify-center rounded-full bg-sky-500">
+            <MapPin className="size-3 font-bold text-white" />
+          </div>
+
           <span>{props.data.address}</span>
-        </span>
+        </div>
       </div>
     </components.Option>
   );
