@@ -1,7 +1,7 @@
 
 
 export const datePickerStyles= {
-  root: "rounded-md border border-slate-300 bg-slate-800 text-white p-4 w-fit",
+  root: "rounded-md border border-slate-300 bg-slate-800  text-white p-4 w-fit ",
   month: "space-y-4",
   month_caption: "flex items-center",
   caption_label: "text-sm font-semibold",

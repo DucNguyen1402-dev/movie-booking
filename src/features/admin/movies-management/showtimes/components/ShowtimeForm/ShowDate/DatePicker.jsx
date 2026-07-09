@@ -24,7 +24,7 @@ export default function DatePicker({
 }) {
   return (
     <div
-      className={`absolute top-[105%] left-0 transition-opacity duration-300 ${dayPickerVisible ? "" : "pointer-events-none opacity-0"}`}
+      className={`absolute z-10 top-[105%] left-0 transition-opacity duration-300 ${dayPickerVisible ? "opacity-100" : "pointer-events-none opacity-0"}`}
       ref={datePickerRef}
     >
       <Controller
@@ -51,6 +51,7 @@ export default function DatePicker({
                 {fieldState.error.message}s
               </p>
             )}
+    
           </>
         )}
       />

@@ -8,12 +8,12 @@ import CinemaClusters from "./CinemaClusters/CinemaClusters";
 import Theather from "./Theather/Theather";
 import ShowDate from "./ShowDate/ShowDate";
 import TicketPrice from "./TicketPrice/TicketPrice";
+import Showtime from "./ShowTime/Showtime";
 
 export default function ShowtimeForm({ movie }) {
-  const { handleSubmit, register, errors, control, watch } =
-    useShowtimeForm({
-      movie,
-    });
+  const { handleSubmit, control, watch,  getValues, setValue } = useShowtimeForm({
+    movie,
+  });
   const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
     movie,
@@ -67,7 +67,12 @@ export default function ShowtimeForm({ movie }) {
             validationRules={validationRules.giaVe}
             isTicketPriceDisabled={isTicketPriceDisabled}
           />
-s
+          <Showtime
+            isTimePickerDisabled={isTimePickerDisabled}
+            control = {control}
+              watch = {watch}
+          />
+          s
         </form>
 
         <div className="mt-12 flex justify-end gap-3">
