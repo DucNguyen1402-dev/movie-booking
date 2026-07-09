@@ -2,33 +2,31 @@ import { useShowtimeForm } from "../../hooks/useShowtimeForm";
 import { validationRules } from "../../config/validation-rules";
 import { useShowtimeActions } from "../../hooks/useShowtimeActions";
 import { useCinemaSystems } from "../../hooks/useCinemaSystems";
-import Select from "react-select";
-import { Controller, useForm } from "react-hook-form";
-import { CinemaOption } from "./CinemaOption";
-import { CinemaSingleValue } from "./CinemaSingleValue";
+import { useCinemaClusters } from "../../hooks/useCinemaClusters";
+import CinemaSystems from "./CinemaSystems/CinemaSystems";
+import CinemaClusters from "./CinemaClusters/CinemaClusters";
+import Theather from "./Theather/Theather";
+import ShowDate from "../ShowDate/ShowDate"
 
 export default function ShowtimeForm({ movie }) {
-  // const { handleSubmit, register, errors } = useShowtimeForm({ movie });
-
-
-   const {data : cinemaSystems =[]} = useCinemaSystems();
-
-
-  const { control, handleSubmit, register,  formState: { errors }, } = useForm();
-    const { onCancelClick, onConfirmClick } = useShowtimeActions({
+  const { handleSubmit, register, errors, control, watch , getValues} = useShowtimeForm({
+    movie,
+  });
+  const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
     movie,
   });
 
-  const options = cinemaSystems.map((system) => ({
-    value: system.maHeThongRap,
-    label: system.tenHeThongRap,
-    logo: system.logo,
-  }));
+  const { data: cinemaSystems = [] } = useCinemaSystems();
+  const selectedCinemaSystem = watch("maHeThongRap");
+  const isClusterDisabled = !selectedCinemaSystem;
+  const { data: cinemaClusters = [] } = useCinemaClusters(selectedCinemaSystem);
+  const selectedCluster = watch("maCumRap");
+  const isTheaterDisabled = !selectedCluster;
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  let theaterList =
+    cinemaClusters.find((cluster) => cluster.maCumRap === selectedCluster)
+      ?.danhSachRap ?? [];
 
   return (
     <div className="space-y-6 rounded-3xl bg-gray-50 p-6 shadow-sm lg:col-span-2">
@@ -38,95 +36,18 @@ export default function ShowtimeForm({ movie }) {
 
       <div>
         <form className="grid gap-5 md:grid-cols-2">
-          <div className="flex flex-col gap-1.5 text-slate-700">
-            <label
-              className="mb-2 cursor-pointer text-sm font-medium"
-              htmlFor="cinema-system"
-            >
-              Hệ thống rạp
-            </label>
-
-            <Controller
-              name="maHeThongRap"
-              control={control}
-              rules={{
-                required: "Vui lòng chọn hệ thống rạp",
-              }}
-              render={({ field, fieldState }) => (
-                <>
-                  <Select
-                    options={options}
-                    placeholder="Chọn hệ thống rạp"
-                    components={{
-                      Option: CinemaOption,
-                      SingleValue: CinemaSingleValue,
-                    }}
-                    value={
-                      options.find((option) => option.value === field.value) ??
-                      null
-                    }
-                    onChange={(option) => field.onChange(option.value)}
-                  />
-
-                  {fieldState.error && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {fieldState.error.message}
-                    </p>
-                  )}
-                </>
-              )}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1.5 text-slate-700">
-            <label
-              className="mb-2 cursor-pointer text-sm font-medium"
-              htmlFor="cinema-cluster"
-            >
-              Cụm rạp
-            </label>
-
-            <select
-              id="cinema-cluster"
-              {...register("cumRapChieu", {
-                required: "Vui lòng chọn cụm rạp",
-              })}
-              className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option>CGV Vincom Đồng Khởi</option>
-            </select>
-            {errors.cumRapChieu && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                {errors.cumRapChieu.message}
-              </p>
-            )}
-          </div>
-
-          <div className="flex flex-col gap-1.5 text-slate-700">
-            <label
-              className="mb-2 cursor-pointer text-sm font-medium"
-              htmlFor="theater"
-            >
-              Rạp
-            </label>
-
-            <select
-              id="theater"
-              {...register("maRap", {
-                required: "Vui lòng chọn rap",
-              })}
-              className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option>Rạp 1</option>
-              <option>Rạp 2</option>
-              <option>Rạp 7</option>
-            </select>
-            {errors.maRap && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                {errors.maRap.message}
-              </p>
-            )}
-          </div>
+          <CinemaSystems cinemaSystems={cinemaSystems} control={control} />
+          <CinemaClusters
+            cinemaClusters={cinemaClusters}
+            control={control}
+            isClusterDisabled={isClusterDisabled}
+          />
+          <Theather
+            list={theaterList}
+            control={control}
+            isTheaterDisabled={isTheaterDisabled}
+          />
+          <ShowDate control ={control} getValues = {getValues} watch ={watch}/>
 
           <div className="flex flex-col gap-1.5 text-slate-700">
             <label
@@ -139,6 +60,7 @@ export default function ShowtimeForm({ movie }) {
             <input
               type="number"
               id="ticket-price"
+              placeholder="VND"
               {...register("giaVe", validationRules.giaVe)}
               className="w-full rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
             />
@@ -149,27 +71,7 @@ export default function ShowtimeForm({ movie }) {
             )}
           </div>
 
-          <div className="flex flex-col gap-1.5 text-slate-700">
-            <label
-              className="mb-2 cursor-pointer text-sm font-medium"
-              htmlFor="show-date"
-            >
-              Ngày chiếu
-            </label>
-
-            <input
-              type="date"
-              id="show-date"
-              {...register("ngayChieu", validationRules.ngayChieu)}
-
-              className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            {errors.ngayChieu && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                {errors.ngayChieu.message}
-              </p>
-            )}
-          </div>
+         
 
           <div className="flex flex-col gap-1.5 text-slate-700">
             <label

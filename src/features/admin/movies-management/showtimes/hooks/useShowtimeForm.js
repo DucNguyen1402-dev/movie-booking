@@ -2,28 +2,19 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 
 export function useShowtimeForm({ movie }) {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors },
-  } = useForm({
+   const { control, handleSubmit, register,  formState: { errors }, watch , getValues} = useForm({
     mode: "onBlur",
-    defaultValues: {},
-  });
+    defaultValues: movie
+   }
+   );
 
-  useEffect(() => {
-    if (!movie) return;
-
-    reset(movie);
-  }, [movie]);
 
   return {
     register,
     handleSubmit,
     errors,
+    control,
     watch,
-    reset
+    getValues
   };
 }

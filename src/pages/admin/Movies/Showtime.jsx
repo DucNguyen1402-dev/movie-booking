@@ -25,7 +25,7 @@ const movieToSchedule = useMemo(() => {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-800 p-4">
-      <div className="mx-auto mt-5 max-w-5xl space-y-6">
+      <div className="mx-auto mt-5 max-w-6xl space-y-6">
         <div className="grid gap-6 lg:grid-cols-3">
           <MovieSelectionCard movie = {movieToSchedule}/>
           <ShowtimeForm movie = {movieToSchedule}/>

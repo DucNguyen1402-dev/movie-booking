@@ -3,8 +3,9 @@ import { getCinemaClusters } from "@services/admin/api";
 
 export function useCinemaClusters(system) {
   return useQuery({
-    queryKey: ["cinema-clusters"],
+    queryKey: ["cinema-clusters", system],
     queryFn: () => getCinemaClusters(system),
+    enabled: !!system,
     staleTime: 1000 * 60 * 10, 
   });
 }
