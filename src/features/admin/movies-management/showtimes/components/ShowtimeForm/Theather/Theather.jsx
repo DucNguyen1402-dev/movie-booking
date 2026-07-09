@@ -24,7 +24,7 @@ export default function Theather({ list, control, isTheaterDisabled }) {
         render={({field, fieldState}) => (
           <>
             <Select
-               inputId="theater"
+              inputId="theater"
               options={options}
               placeholder={
                 isTheaterDisabled ? "Vui lòng chọn cụm rạp trước" : "Chọn rạp"

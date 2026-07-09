@@ -6,23 +6,32 @@ import { useCinemaClusters } from "../../hooks/useCinemaClusters";
 import CinemaSystems from "./CinemaSystems/CinemaSystems";
 import CinemaClusters from "./CinemaClusters/CinemaClusters";
 import Theather from "./Theather/Theather";
-import ShowDate from "../ShowDate/ShowDate"
+import ShowDate from "./ShowDate/ShowDate";
+import TicketPrice from "./TicketPrice/TicketPrice";
 
 export default function ShowtimeForm({ movie }) {
-  const { handleSubmit, register, errors, control, watch , getValues} = useShowtimeForm({
-    movie,
-  });
+  const { handleSubmit, register, errors, control, watch } =
+    useShowtimeForm({
+      movie,
+    });
   const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
     movie,
   });
 
   const { data: cinemaSystems = [] } = useCinemaSystems();
+
   const selectedCinemaSystem = watch("maHeThongRap");
-  const isClusterDisabled = !selectedCinemaSystem;
-  const { data: cinemaClusters = [] } = useCinemaClusters(selectedCinemaSystem);
   const selectedCluster = watch("maCumRap");
+  const selectedTheater = watch("maRap");
+
+  const { data: cinemaClusters = [] } = useCinemaClusters(selectedCinemaSystem);
+
+  const isClusterDisabled = !selectedCinemaSystem;
   const isTheaterDisabled = !selectedCluster;
+  const isDatePickerDisabled = !selectedTheater;
+  const isTicketPriceDisabled = !selectedTheater;
+  const isTimePickerDisabled = !selectedTheater;
 
   let theaterList =
     cinemaClusters.find((cluster) => cluster.maCumRap === selectedCluster)
@@ -47,52 +56,18 @@ export default function ShowtimeForm({ movie }) {
             control={control}
             isTheaterDisabled={isTheaterDisabled}
           />
-          <ShowDate control ={control} getValues = {getValues} watch ={watch}/>
-
-          <div className="flex flex-col gap-1.5 text-slate-700">
-            <label
-              className="mb-2 cursor-pointer text-sm font-medium"
-              htmlFor="ticket-price"
-            >
-              Giá vé
-            </label>
-
-            <input
-              type="number"
-              id="ticket-price"
-              placeholder="VND"
-              {...register("giaVe", validationRules.giaVe)}
-              className="w-full rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            {errors.giaVe && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                {errors.giaVe.message}
-              </p>
-            )}
-          </div>
-
-         
-
-          <div className="flex flex-col gap-1.5 text-slate-700">
-            <label
-              className="mb-2 cursor-pointer text-sm font-medium"
-              htmlFor="show-time"
-            >
-              Giờ chiếu
-            </label>
-
-            <input
-              type="time"
-              id="show-time"
-              {...register("gioChieu", validationRules.gioChieu)}
-              className="w-full cursor-pointer rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
-            />
-            {errors.gioChieu && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                {errors.gioChieu.message}
-              </p>
-            )}
-          </div>
+          <ShowDate
+            control={control}
+            watch={watch}
+            isDatePickerDisabled={isDatePickerDisabled}
+          />
+          <TicketPrice
+            control={control}
+            watch={watch}
+            validationRules={validationRules.giaVe}
+            isTicketPriceDisabled={isTicketPriceDisabled}
+          />
+s
         </form>
 
         <div className="mt-12 flex justify-end gap-3">
