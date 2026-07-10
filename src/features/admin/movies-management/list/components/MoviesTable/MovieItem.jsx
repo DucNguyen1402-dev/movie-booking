@@ -5,9 +5,11 @@ import { useMovieItem } from "../../hooks/useMovieItem";
 import { useTrailerContext } from "../../contexts/TrailerContext";
 
 export default function MovieItem({ movie, movieId, highlight }) {
+
   const {
     onDeleteClick,
     onCreateShowTimeClick,
+    onEditClick,
     isTargetMovie,
     highlightAnimation,
     rowRef,
@@ -24,6 +26,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
   }
 
   const trailer = useTrailerContext();
+  
 
   const onOpenTrailerClick = () =>
     trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
@@ -109,13 +112,13 @@ export default function MovieItem({ movie, movieId, highlight }) {
           >
             <TvMinimalPlay className="h-4 w-4" />
           </button>
-          <Link
+          <button
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-indigo-500/10 hover:text-indigo-400"
             title="Sửa thông tin"
-            to={`/admin/movies/edit/${movie.maPhim}`}
+            onClick = {onEditClick}
           >
             <SquarePen className="h-4 w-4" />
-          </Link>
+          </button>
           <button
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-rose-500/10 hover:text-rose-400"
             title="Xóa phim"

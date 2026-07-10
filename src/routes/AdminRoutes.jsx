@@ -1,16 +1,18 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import MainLayout from "../layouts/admin/MainLayout";
 import Dashboard from "../pages/admin/Dashboard/Dashboard";
 import Profile from "../pages/admin/Profiles/Profile";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
 import EditMovie from "../pages/admin/Movies/EditMovie";
 import AddMovie from "../pages/admin/Movies/AddMovie";
-import Showtimes from "../pages/admin/Movies/Showtime"
+import ShowtimeManagement from "../pages/admin/Movies/Showtime/ShowtimeManagement";
+import ShowtimeCreation from "../pages/admin/Movies/Showtime/ShowtimeCreation";
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
 import { TrailerProvider } from "@features/admin/movies-management/list/contexts/TrailerContext";
+import { useEffect, useRef } from "react";
 
 export default function AdminRoutes() {
   return (
@@ -18,7 +20,10 @@ export default function AdminRoutes() {
       <LoadingProvider>
         <NotificationProvider>
           <Routes>
-            <Route path="/" element={<MainLayout />}>
+            <Route
+              path="/"
+              element={<MainLayout />}
+            >
               <Route index element={<Navigate to="dashboard" replace />} />
 
               <Route path="dashboard" element={<Dashboard />} />
@@ -42,10 +47,12 @@ export default function AdminRoutes() {
                   }
                 />
                 <Route path="add" element={<AddMovie />} />
-                <Route path="showtimes/:id" element={<Showtimes />} />
-              
+                <Route path="showtimes/:id" element={<ShowtimeManagement />} />
+                <Route
+                  path="showtimes/:id/add"
+                  element={<ShowtimeCreation />}
+                />
               </Route>
-            
             </Route>
           </Routes>
         </NotificationProvider>

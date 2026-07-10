@@ -5,6 +5,7 @@ import MetricsSection from "@features/admin/dashboard/components/MetricsSection.
 import TopRevenueMovies from "@features/admin/dashboard/components/TopRevenueMovies.jsx";
 import MovieStatusCard from "@features/admin/dashboard/components/MovieStatusCard.jsx";
 import TopRevenueMovieCard from "@features/admin/dashboard/components/TopRevenueMovieCard.jsx";
+import {FileClock} from "lucide-react"
 
  function Dashboard() {
 
@@ -33,9 +34,10 @@ import TopRevenueMovieCard from "@features/admin/dashboard/components/TopRevenue
       <div className="flex-1 space-y-8 overflow-y-auto p-8">
         {/* Page Title */}
         <div className="mx-auto w-fit space-y-4 text-center">
-          <h1 className="text-2xl font-bold text-white">Tổng quan hệ thống</h1>
-          <p className="mt-1 text-sm text-gray-400">
-            Cập nhật dữ liệu thời gian thực của rạp phim.
+          <h1 className="text-3xl font-bold text-white">Tổng quan hệ thống</h1>
+          <p className="mt-1 text-sm text-gray-400 flex items-center gap-2">
+            <FileClock className ="size-6 text-blue-500"/>
+            <span>Cập nhật dữ liệu thời gian thực của rạp phim.</span>
           </p>
         </div>
 

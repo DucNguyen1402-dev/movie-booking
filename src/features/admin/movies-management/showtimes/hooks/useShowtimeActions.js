@@ -1,16 +1,20 @@
 import { useModalContext } from "@contexts/admin/ModalContext";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useNavigate } from "react-router-dom";
-import {createShowtime} from "@services/admin/api"
+import { createShowtime } from "@services/admin/api";
 import { format } from "date-fns";
+import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useNotification } from "@contexts/admin/NotificationContext";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
   const modal = useModalContext();
+  const { showLoading, hideLoading } = useLoading();
+  const {notifActions} = useNotification();
 
   const handleShowtimeCanceling = () => {
     modal.close();
-    navigate("/admin/movies", { state: { movieId: movie.maPhim } });
+    navigate(`/admin/movies/showtimes/${movie.maPhim}`);
   };
 
   const onCancelClick = () =>
@@ -23,22 +27,37 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const handleShowtimeCreation = async (data) => {
     const { ngayChieu, gioChieu, giaVe, maRap, maCumRap } = data;
-  
+
     const payload = {
-      maRap : String(maRap),
+      maRap: String(maRap),
       maPhim: movie.maPhim,
-      ngayChieuGioChieu: `${format(data.ngayChieu, "dd/MM/yyyy")} ${data.gioChieu}:00`,
+      ngayChieuGioChieu: `${format(ngayChieu, "dd/MM/yyyy")} ${gioChieu}:00`,
       giaVe: Number(giaVe),
     };
-   console.log(maCumRap)
-   console.log(payload)
-  
-    const content = await createShowtime(payload);
-   
+    console.log(maCumRap);
+    console.log(payload);
 
-    // modal.close();
-
-    // navigate("/admin/movies", { state: { movieId: movie.maPhim } });
+    try {
+      modal.close();
+      showLoading();
+      await createShowtime(payload);
+      hideLoading();
+      navigate("/admin/movies", {
+        state: {
+          movieId: movie.maPhim,
+          notification: {
+            variant: "success",
+            message: "Đã tạo lịch chiếu thành công.",
+          },
+        },
+      });
+    } catch (error) {
+       hideLoading();
+        notifActions.showNotification({
+        variant: "error",
+        message: error.response?.data?.content,
+      });
+    }
   };
 
   const onConfirmClick = () =>

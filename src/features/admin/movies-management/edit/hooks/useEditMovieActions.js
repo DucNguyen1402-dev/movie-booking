@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
-import { NUMBER_FIELDS } from "@constants/admin/movies";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";

@@ -9,12 +9,12 @@ import { AnimatePresence, motion } from "motion/react";
 import { useTrailerContext } from "@features/admin/movies-management/list/contexts/TrailerContext";
 import TrailerModal from "@features/admin/movies-management/list/components/TrailerModal";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
 
 export default function MovieManagement() {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const { notifActions } = useNotification();
 
   useEffect(() => {
@@ -27,16 +27,21 @@ export default function MovieManagement() {
 
   useLockBodyScroll(trailer.url !== null);
 
+  const onAddMovieClick = () =>
+    navigate("/admin/movies/add", {
+      state: {
+        history: [...(location.state?.history ?? []), location.pathname],
+      },
+    });
 
   return (
     <div className="min-h-screen bg-[#0f172a] p-6 font-sans text-slate-100">
       {/* 1. HEADER & ACTION BAR */}
-      <Link
-        className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-end"
-        to="/admin/movies/add"
-      >
-        <AddMovieBtn />
-      </Link>
+      <div className="flex items-center justify-end">
+        <div className="mb-8 flex flex-col gap-4" onClick={onAddMovieClick}>
+          <AddMovieBtn />
+        </div>
+      </div>
 
       {/* 2. FILTER & SEARCH BAR */}
       <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm sm:grid-cols-3">

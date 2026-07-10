@@ -5,7 +5,7 @@ import MovieSelectionCard from "@features/admin/movies-management/showtimes/comp
 import ShowtimeForm from "@features/admin/movies-management/showtimes/components/ShowtimeForm/ShowtimeForm";
 
 
-export default function Showtimes() {
+export default function ShowtimeCreation() {
 const { id } = useParams();
 
 const { data: movies = [] } = useMovies();
