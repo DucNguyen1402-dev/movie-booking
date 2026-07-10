@@ -36,28 +36,30 @@ export const addMovie = async (data) => {
   return api.post("/QuanLyPhim/ThemPhimUploadHinh", data);
 };
 
-export const getCinemaSystems = async () =>{
-   const { data }  = await api.get("QuanLyRap/LayThongTinHeThongRap");
+export const getCinemaSystems = async () => {
+  const { data } = await api.get("QuanLyRap/LayThongTinHeThongRap");
 
-   return data.content;
-}
+  return data.content;
+};
 
 export const getCinemaClusters = async (system) => {
-  const {data} = await api.get(`QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${system}`);
-  
+  const { data } = await api.get(
+    `QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${system}`,
+  );
+
   return data.content;
-}
+};
 
 export const createShowtime = async (payload) => {
-  try {
-    const { data } = await api.post(
-      "QuanLyDatVe/TaoLichChieu",
-      payload
-    );
+  const { data } = await api.post("QuanLyDatVe/TaoLichChieu", payload);
 
-    return data.content;
-  } catch (error) {
-    console.log(error.response?.data);
-    throw error;
-  }
+  return data.content;
+};
+
+export const getShowtimeData = async (id) => {
+  const { data } = await api.get(
+    `QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
+  );
+
+  return data.content;
 };
