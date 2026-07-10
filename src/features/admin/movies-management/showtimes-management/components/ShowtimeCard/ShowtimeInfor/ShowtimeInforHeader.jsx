@@ -3,12 +3,12 @@ import { MapPin } from "lucide-react";
 export default function ShowtimeInforHeader({ diaChi, tenCumRap }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-indigo-500 shadow-lg shadow-indigo-500/50 transition-transform hover:scale-105">
+      <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500 shadow-lg shadow-indigo-500/50 transition-transform hover:scale-105">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="h-6 w-6 text-yellow-300 drop-shadow-[0_0_3px_rgba(253,224,71,0.8)] filter"
+          className="h-4 w-4 text-yellow-300 drop-shadow-[0_0_3px_rgba(253,224,71,0.8)] filter"
         >
           <path
             fillRule="evenodd"

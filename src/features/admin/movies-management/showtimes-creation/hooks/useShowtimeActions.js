@@ -1,6 +1,6 @@
 import { useModalContext } from "@contexts/admin/ModalContext";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { createShowtime } from "@services/admin/api";
 import { format } from "date-fns";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
@@ -9,8 +9,12 @@ import { useNotification } from "@contexts/admin/NotificationContext";
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
   const modal = useModalContext();
+  const location = useLocation();
+  const history = location.state?.history ?? [];
+  const previousPath = history.at(-1) ?? "/admin/movies";
+
   const { showLoading, hideLoading } = useLoading();
-  const {notifActions} = useNotification();
+  const { notifActions } = useNotification();
 
   const handleShowtimeCanceling = () => {
     modal.close();
@@ -26,23 +30,21 @@ export function useShowtimeActions({ handleSubmit, movie }) {
     });
 
   const handleShowtimeCreation = async (data) => {
-    const { ngayChieu, gioChieu, giaVe, maRap, maCumRap } = data;
+    const { ngayChieu, gioChieu, giaVe, maCumRap } = data;
 
     const payload = {
-      maRap: String(maRap),
+      maRap: String(maCumRap),
       maPhim: movie.maPhim,
       ngayChieuGioChieu: `${format(ngayChieu, "dd/MM/yyyy")} ${gioChieu}:00`,
       giaVe: Number(giaVe),
     };
-    console.log(maCumRap);
-    console.log(payload);
 
     try {
       modal.close();
       showLoading();
       await createShowtime(payload);
       hideLoading();
-      navigate("/admin/movies", {
+      navigate(previousPath, {
         state: {
           movieId: movie.maPhim,
           notification: {
@@ -52,8 +54,8 @@ export function useShowtimeActions({ handleSubmit, movie }) {
         },
       });
     } catch (error) {
-       hideLoading();
-        notifActions.showNotification({
+      hideLoading();
+      notifActions.showNotification({
         variant: "error",
         message: error.response?.data?.content,
       });
