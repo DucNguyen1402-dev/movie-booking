@@ -4,7 +4,8 @@ const MovieIcon = ({ className = "" }) => {
 
   return (
     <div
-      className={`group/inner relative flex h-8 w-10 cursor-pointer items-center justify-center rounded-md border border-slate-700/50 bg-linear-to-br from-red-950/80 via-red-900 to-red-800 shadow-xl transition-all duration-300 group-hover/outer:scale-105 group-hover/outer:shadow-cyan-500/20 ${className}`}
+      className={`group/inner relative flex h-8 w-10 items-center justify-center rounded-md border border-slate-700/50 bg-linear-to-br from-red-950/80 via-red-900 to-red-800 shadow-xl transition-all duration-300 group-hover/outer:scale-105 group-hover/outer:shadow-cyan-500/20 ${className}`}
+      
     >
       <div className="absolute top-0 bottom-0 left-1.5 flex flex-col justify-around gap-1 py-2">
         {dots.map((_, i) => (

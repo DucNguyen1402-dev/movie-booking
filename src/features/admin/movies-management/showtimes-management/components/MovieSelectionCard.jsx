@@ -3,7 +3,7 @@ import MovieIcon from "@components/admin/MovieIcon";
 
 export default function MovieSelectionCard({ movie,onShowtimeCreationClick }) {
   return (
-    <section className="w-90 rounded-xl border border-slate-300 bg-slate-400 px-3 pt-4 pb-3 shadow-sm">
+    <section className="w-90 rounded-xl border  bg-linear-to-b from-slate-400 via-slate-300 to-slate-200 px-3 pt-4 pb-3 shadow-sm">
       <div className="group/outer flex flex-col items-center justify-center gap-4">
         <div className="flex w-full flex-col items-center gap-2">
           <MovieIcon className="shrink-0 self-start" />
@@ -12,12 +12,12 @@ export default function MovieSelectionCard({ movie,onShowtimeCreationClick }) {
           </h1>
         </div>
 
-        <div className="flex items-center justify-center overflow-hidden rounded-md">
+        <div className="flex items-center justify-center overflow-hidden rounded-md  ">
           <img src={movie.hinhAnh} alt={movie.tenPhim} className="w-80" />
         </div>
         <button
           onClick={onShowtimeCreationClick}
-          className="mt-6 flex cursor-pointer items-center gap-1 self-end rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white transition-colors duration-400 hover:bg-green-700"
+          className="mt-6 flex cursor-pointer items-center gap-1 self-end rounded-md bg-green-600 px-3 py-2.5 text-sm font-medium text-white transition-colors duration-400 hover:bg-green-700"
         >
           <CalendarCog className="size-5 font-bold" />
           <span>Tạo lịch chiếu mới</span>

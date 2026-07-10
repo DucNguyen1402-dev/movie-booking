@@ -48,7 +48,7 @@ useEffect(() => {
           movie={targetMovie}
           onShowtimeCreationClick={onShowtimeCreationClick}
         />
-        <ShowtimeCard showtimeData = {showtimeData.heThongRapChieu}/>
+        <ShowtimeCard showtimeInfor = {showtimeData.heThongRapChieu}/>
       </div>
     </div>
   );
