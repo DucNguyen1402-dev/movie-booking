@@ -1,15 +1,18 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import MainLayout from "../layouts/admin/MainLayout";
-import Dashboard from "../pages/admin/Dashboard";
-import Profile from "../pages/admin/Profile";
-import MovieManagement from "../pages/admin/MovieManagement";
-import EditMovie from "../pages/admin/EditMovie";
-import AddMovie from "../pages/admin/AddMovie";
-import { EditProvider } from "@features/admin/edit-movie/context/EditContext";
+import Dashboard from "../pages/admin/Dashboard/Dashboard";
+import Profile from "../pages/admin/Profiles/Profile";
+import MovieManagement from "../pages/admin/Movies/MovieManagement";
+import EditMovie from "../pages/admin/Movies/EditMovie";
+import AddMovie from "../pages/admin/Movies/AddMovie";
+import ShowtimeManagement from "../pages/admin/Movies/Showtime/ShowtimeManagement";
+import ShowtimeCreation from "../pages/admin/Movies/Showtime/ShowtimeCreation";
+import UsersManagement from "../pages/admin/Users/UsersManagement";
+import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import { TrailerProvider } from "@features/admin/movie-management/contexts/TrailerContext";
+import { TrailerProvider } from "@features/admin/movies-management/list/contexts/TrailerContext";
 
 export default function AdminRoutes() {
   return (
@@ -41,7 +44,17 @@ export default function AdminRoutes() {
                   }
                 />
                 <Route path="add" element={<AddMovie />} />
+                <Route path="showtimes/:id" element={<ShowtimeManagement />} />
+                <Route
+                  path="showtimes/:id/add"
+                  element={<ShowtimeCreation />}
+                />
               </Route>
+
+              <Route path="users">
+                <Route index element={<UsersManagement />} />
+              </Route>
+              
             </Route>
           </Routes>
         </NotificationProvider>
