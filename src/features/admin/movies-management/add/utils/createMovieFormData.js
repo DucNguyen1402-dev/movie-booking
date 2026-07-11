@@ -1,4 +1,4 @@
-import {formatDate} from "../utils/format"
+import {formatDate} from "./format"
 
 export const createMovieFormData = (data) => {
   const formData = new FormData();

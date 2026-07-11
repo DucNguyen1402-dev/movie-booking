@@ -22,8 +22,6 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-
-
   return (
     <div className="flex flex-col gap-1.5 text-slate-700">
       <label
@@ -49,27 +47,29 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
             {isTimePickerDisabled ? "Vui lòng chọn rạp chiếu trước" : timeLabel}
           </span>
         </button>
-        <Controller
-          name="gioChieu"
-          rules={{ required: "Vui lòng chọn giờ chiếu" }}
-          control={control}
-          render={({ field, fieldState }) => (
-            <>
-              <TimePicker
-                value={field.value}
-                onChange={field.onChange}
-                timePickerVisible={timePickerVisible}
-                timePickerRef = {timePickerRef}
-              />
-            
-              {fieldState.error && (
-                <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                  {fieldState.error.message}s
-                </p>
-              )}
-            </>
-          )}
-        />
+        <>
+          <Controller
+            name="gioChieu"
+            rules={{ required: "Vui lòng chọn giờ chiếu" }}
+            control={control}
+            render={({ field, fieldState }) => (
+              <>
+                <TimePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  timePickerVisible={timePickerVisible}
+                  timePickerRef={timePickerRef}
+                />
+
+                {fieldState.error && (
+                  <p className="absolute z-10 mt-1 w-full rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+                    {fieldState.error.message}
+                  </p>
+                )}
+              </>
+            )}
+          />
+        </>
       </div>
     </div>
   );

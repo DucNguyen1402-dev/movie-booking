@@ -5,10 +5,10 @@ export default function ShowtimeHeader({ tenHeThongRap, logo }) {
         <div className="flex items-center gap-4">
           <img
             src={logo}
-            className="h-12 w-12 rounded-full border border-gray-300 object-cover"
+            className="h-14 w-14 rounded-full border border-gray-300 object-cover"
           />
 
-          <h2 className="text-lg font-semibold">{tenHeThongRap}</h2>
+          <h2 className="text-xl font-semibold">{tenHeThongRap}</h2>
         </div>
       </div>
     </div>

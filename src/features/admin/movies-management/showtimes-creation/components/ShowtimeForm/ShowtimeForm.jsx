@@ -6,12 +6,12 @@ import { useCinemaClusters } from "../../hooks/useCinemaClusters";
 import CinemaSystems from "./CinemaSystems/CinemaSystems";
 import CinemaClusters from "./CinemaClusters/CinemaClusters";
 import Theather from "./Theather/Theather";
-import ShowDate from "./ShowDate/ShowDate";
+import DateInput from "@features/admin/shared/components/DateInput/DateInput";
 import TicketPrice from "./TicketPrice/TicketPrice";
 import Showtime from "./ShowtimePicker/ShowtimePicker";
 
 export default function ShowtimeForm({ movie }) {
-  const { handleSubmit, control, watch} = useShowtimeForm();
+  const { handleSubmit, control, watch } = useShowtimeForm();
   const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
     movie,
@@ -35,15 +35,17 @@ export default function ShowtimeForm({ movie }) {
     cinemaClusters.find((cluster) => cluster.maCumRap === selectedCluster)
       ?.danhSachRap ?? [];
 
-  
   return (
-    <div className="space-y-6 rounded-3xl bg-gray-50 p-6 shadow-sm lg:col-span-2">
+    <div className="relative space-y-6 rounded-3xl bg-gray-50 p-8 shadow-sm lg:col-span-2">
       <h2 className="text-2xl font-bold tracking-wide text-slate-800">
         Thông tin lịch chiếu
       </h2>
 
       <div>
-        <form className="grid gap-5 md:grid-cols-2" onSubmit = {(e) => e.preventDefault() }>
+        <form
+          className="grid gap-5 md:grid-cols-2"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <CinemaSystems cinemaSystems={cinemaSystems} control={control} />
           <CinemaClusters
             cinemaClusters={cinemaClusters}
@@ -55,10 +57,19 @@ export default function ShowtimeForm({ movie }) {
             control={control}
             isTheaterDisabled={isTheaterDisabled}
           />
-          <ShowDate
+          <DateInput
             control={control}
-            watch={watch}
-            isDatePickerDisabled={isDatePickerDisabled}
+            value={watch("ngayChieu")}
+            name ="ngayChieu"
+            rules ={{required: "Vui lòng nhập ngày chiếu phim"}}
+            disabled = {isDatePickerDisabled}
+            labels={{
+              placeholder: "Chọn ngày chiếu",
+              form: "Ngày chiếu",
+              disabled: "Vui lòng chọn rạp chiếu trước",
+              requied: "Vui lòng chọn ngày chiếu phim"
+            }}
+
           />
           <TicketPrice
             control={control}
@@ -68,10 +79,9 @@ export default function ShowtimeForm({ movie }) {
           />
           <Showtime
             isTimePickerDisabled={isTimePickerDisabled}
-            control = {control}
-            watch = {watch}
+            control={control}
+            watch={watch}
           />
-          s
         </form>
 
         <div className="mt-12 flex justify-end gap-3">
@@ -89,6 +99,9 @@ export default function ShowtimeForm({ movie }) {
             Tạo lịch chiếu
           </button>
         </div>
+        <p className="absolute bottom-3 left-3 text-sm text-gray-500 italic">
+          * Vui lòng kiểm tra kỹ thông tin trước khi tạo lịch chiếu.
+        </p>
       </div>
     </div>
   );

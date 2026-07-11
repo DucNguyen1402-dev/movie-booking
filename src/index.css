@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -23,7 +22,7 @@ body {
 
 @keyframes updateHightlight {
   50% {
-    background-color:  rgb(234 179 8 / 0.18);
+    background-color: rgb(234 179 8 / 0.18);
   }
 }
 
@@ -33,6 +32,44 @@ body {
 
 @keyframes addHightlight {
   50% {
-    background-color: rgb(34 197 94 / 0.18); 
+    background-color: rgb(34 197 94 / 0.18);
+  }
+}
+
+@theme {
+  --animate-flash: flash 3s ease-in-out 1;
+
+  @keyframes flash {
+    0%,
+    100% {
+      background-color: transparent;
+    }
+
+    12% {
+     background-color: rgb(16 185 129 / 0.3); 
+      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
+    }
+
+    24% {
+      background-color: transparent;
+    }
+
+    44% {
+    background-color: rgb(16 185 129 / 0.3); /* emerald-500/15 */
+      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
+    }
+
+    56% {
+      background-color: transparent;
+    }
+
+    76% {
+      bbackground-color: rgb(16 185 129 / 0.3); /* emerald-500/15 */
+      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
+    }
+
+    88% {
+      background-color: transparent;
+    }
   }
 }

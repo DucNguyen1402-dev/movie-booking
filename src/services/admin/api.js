@@ -53,7 +53,7 @@ export const getCinemaClusters = async (system) => {
 export const createShowtime = async (payload) => {
   const { data } = await api.post("QuanLyDatVe/TaoLichChieu", payload);
 
-  return data.content;
+  return data;
 };
 
 export const getShowtimeData = async (id) => {

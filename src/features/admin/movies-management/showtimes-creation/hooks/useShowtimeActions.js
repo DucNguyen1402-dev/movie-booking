@@ -18,7 +18,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const handleShowtimeCanceling = () => {
     modal.close();
-    navigate(`/admin/movies/showtimes/${movie.maPhim}`);
+    navigate(previousPath, {state: {history}});
   };
 
   const onCancelClick = () =>
@@ -31,7 +31,8 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const handleShowtimeCreation = async (data) => {
     const { ngayChieu, gioChieu, giaVe, maCumRap } = data;
-
+  
+    //Chỗ này backend yêu cầu payload là maRap nhưng giá trị thực phải là maCumRap thì mới tạo lịch được
     const payload = {
       maRap: String(maCumRap),
       maPhim: movie.maPhim,
@@ -46,11 +47,12 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       hideLoading();
       navigate(previousPath, {
         state: {
-          movieId: movie.maPhim,
+           maCumRap,
           notification: {
             variant: "success",
             message: "Đã tạo lịch chiếu thành công.",
           },
+          history,
         },
       });
     } catch (error) {
@@ -62,13 +64,20 @@ export function useShowtimeActions({ handleSubmit, movie }) {
     }
   };
 
-  const onConfirmClick = () =>
+  const onValid = (data) => {
     modal.open({
       type: MODAL_TYPES.SHOWTIME_CREATION,
       title: "Xác nhận tạo lịch chiếu?",
       subtitle: "Bạn có chắc muốn tạo lịch chiếu này?",
-      onConfirm: handleSubmit(handleShowtimeCreation),
+      onConfirm: () =>
+        handleShowtimeCreation({
+          ...data,
+          ngayChieu: format(data.ngayChieu, "yyyy-MM-dd"),
+        }),
     });
+  };
+
+  const onConfirmClick = () => handleSubmit(onValid)();
 
   return {
     onCancelClick,

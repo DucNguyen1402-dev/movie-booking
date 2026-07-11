@@ -1,5 +1,7 @@
-export function formatDate(date) {
-  const [year, month, day] = date.split("-");
+import { format } from "date-fns";
 
-  return `${day}/${month}/${year}`;
+export function formatDate(value) {
+  const date = new Date(value);
+
+  return format(value, "dd/MM/yyyy");
 }

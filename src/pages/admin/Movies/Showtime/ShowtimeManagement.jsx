@@ -4,10 +4,13 @@ import { getShowtimeData } from "@services/admin/api";
 import MovieSelectionCard from "@features/admin/movies-management/showtimes-management/components/MovieSelectionCard";
 import ShowtimeCard from "@features/admin/movies-management/showtimes-management/components/ShowtimeCard/ShowtimeCard";
 import { useMutation } from "@tanstack/react-query";
-import { useParams} from "react-router-dom";
+import { useParams, useLocation} from "react-router-dom";
 
 export default function ShowtimeManagement() {
   const { id } = useParams();
+  const location = useLocation();
+ 
+
   const [showtimeData, setShowtimeData] = useState([]);
 
   const { data: movies = [] } = useMovies();

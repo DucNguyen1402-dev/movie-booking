@@ -12,9 +12,9 @@ export default function MovieSelectionCard({ movie }) {
       </div>
 
       <div className="space-y-4 rounded-xl p-8">
-        <div className="flex items-center gap-2">
-          <div className="flex size-8 items-center justify-center rounded-md bg-red-500">
-            <Film className="size-5 text-white" />
+        <div className="flex gap-4">
+          <div className="shrink-0 grow-0 flex w-12 h-10 items-center justify-center rounded-md bg-red-500">
+            <Film className="size-6 text-white" />
           </div>
           <h1 className="text-[26px] font-bold tracking-wider text-slate-800">
             {movie.tenPhim}

@@ -14,11 +14,11 @@ export default function MovieSelectionCard({ movie, hasNoData }) {
     });
 
   return (
-    <section className="w-90 rounded-xl border bg-linear-to-b from-slate-400 via-slate-300 to-slate-200 px-3 pt-4 pb-3 shadow-sm">
-      <div className="group/outer flex flex-col items-center justify-center gap-4">
-        <div className="flex w-full flex-col items-center gap-2">
-          <MovieIcon className="shrink-0 self-start" />
-          <h1 className="text-center text-2xl font-bold tracking-wide text-slate-800">
+    <section className="w-90 group/outer rounded-xl border bg-linear-to-b from-slate-400 via-slate-300 to-slate-200 px-3 pt-4 pb-3 shadow-sm">
+      <div className=" flex flex-col items-center justify-center gap-4">
+        <div className="flex w-full flex-col gap-2">
+          <MovieIcon className="shrink-0" />
+          <h1 className="text-2xl font-bold tracking-wide text-slate-800 text-center">
             {movie.tenPhim}
           </h1>
         </div>

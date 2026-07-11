@@ -1,8 +1,24 @@
 import { MapPin } from "lucide-react";
+import {useRef, useEffect} from "react"
 
-export default function ShowtimeInforHeader({ diaChi, tenCumRap }) {
+export default function ShowtimeInforHeader({ diaChi, tenCumRap, hasNewShowtime }) {
+
+  const clusterRef= useRef(null);
+   useEffect(() => {
+     if (!hasNewShowtime) return;
+ 
+     clusterRef.current?.scrollIntoView({
+       behavior: "smooth",
+       block: "center",
+     });
+   }, [hasNewShowtime]);
+
+
+
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3"
+       ref = {clusterRef}
+    >
       <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500 shadow-lg shadow-indigo-500/50 transition-transform hover:scale-105">
         <svg
           xmlns="http://www.w3.org/2000/svg"

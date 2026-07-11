@@ -6,11 +6,15 @@ import {
 } from "lucide-react";
 import {formatShowtime} from "../../../utils/format"
 
-export default function ShowtimeInforCard({ maRap, tenRap, ngayChieuGioChieu, thoiLuong, giaVe, index}) {
+
+
+export default function ShowtimeInforCard({ maRap, tenRap, ngayChieuGioChieu, thoiLuong, giaVe}) {
 const {date, time} = formatShowtime(ngayChieuGioChieu);
 
   return (
-    <article className="space-y-5 rounded-xl border border-gray-300 bg-linear-to-br from-slate-800 to-slate-700 p-5 pb-3 text-slate-100 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md hover:ring-1">
+    <article className="space-y-5 rounded-xl border border-gray-300 bg-linear-to-br from-slate-800 to-slate-700 p-5 pb-3 text-slate-100 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md hover:ring-1"
+
+    >
       <div className="flex items-center justify-between">
         <h4 className="text-lg font-semibold text-yellow-500">{tenRap}</h4>
 
