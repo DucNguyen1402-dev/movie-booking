@@ -8,11 +8,13 @@ import AddMovie from "../pages/admin/Movies/AddMovie";
 import ShowtimeManagement from "../pages/admin/Movies/Showtime/ShowtimeManagement";
 import ShowtimeCreation from "../pages/admin/Movies/Showtime/ShowtimeCreation";
 import UsersManagement from "../pages/admin/Users/UsersManagement";
+import AddUsers from "../pages/admin/Users/AddUsers";
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
 import { TrailerProvider } from "@features/admin/movies-management/list/contexts/TrailerContext";
+import UsersLayout from "../layouts/admin/UsersLayout";
 
 export default function AdminRoutes() {
   return (
@@ -50,11 +52,10 @@ export default function AdminRoutes() {
                   element={<ShowtimeCreation />}
                 />
               </Route>
-
-              <Route path="users">
+              <Route path="users" element={<UsersLayout />}>
                 <Route index element={<UsersManagement />} />
+                <Route path ="add" element={<AddUsers />} />
               </Route>
-              
             </Route>
           </Routes>
         </NotificationProvider>

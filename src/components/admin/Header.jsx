@@ -49,6 +49,11 @@ export default function Header() {
       title: "Users Management",
       description: "Quản lý danh mục người dùng",
     },
+     {
+      path: "/admin/users/add",
+      title: "Add user",
+      description: "Thêm người dùng mới vào hệ thống",
+    },
   ];
 
   

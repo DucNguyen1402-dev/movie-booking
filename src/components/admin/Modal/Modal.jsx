@@ -11,7 +11,8 @@ const MODALS = {
   discardMovieChanges: DiscardChangesModal,
   saveMovieChanges: SaveChangesModal,
   showtimeCreation: ShowtimeModal,
-  addingMovie: AddModal
+  addingMovie: AddModal,
+  addingUser: AddModal
 };
 
 export default function Modal() {

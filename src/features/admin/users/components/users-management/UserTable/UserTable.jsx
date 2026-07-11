@@ -1,7 +1,10 @@
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
+import {useUsersContext} from "../../../contexts/UsersContext";
 
-export default function UserTable({ users, isPending }) {
+export default function UserTable() {
+  const { usersStates:{users, isPending} } = useUsersContext();
+
   
   const tableContent = isPending ? (
     <TableSkeleton />

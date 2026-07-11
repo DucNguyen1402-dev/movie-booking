@@ -1,5 +1,5 @@
 import { SquarePen, Trash } from "lucide-react";
-import {userRoleLabel} from "../../constants/user-role-labels"
+import {userRoleLabel} from "../../../constants/user-role-labels"
 
 export default function TableRows({ users }) {
   return (
