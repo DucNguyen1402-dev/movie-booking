@@ -1,49 +1,49 @@
-import {List, Plus} from "lucide-react";
+import { List, Search } from "lucide-react";
+import PlusButton from "@components/admin/PlusButton";
 
-
-export default function usersManagement({users = []}) {
+export default function usersManagement({ users = [] }) {
   return (
-    <div className="space-y-6 bg-slate-900 min-h-screen p-8">
+    <div className="min-h-screen space-y-6 bg-slate-900 p-8">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div className = "flex items-center gap-2 text-slate-300">
-           <List className ="size-6"/>
-          <p>
-           Danh sách người dùng trong hệ thống 
-          </p>
+        <div className="flex items-center gap-2 text-slate-300">
+          <List className="size-6" />
+          <p>Danh sách người dùng trong hệ thống</p>
         </div>
 
-        <button className="rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-green-500 cursor-pointer flex items-center gap-1">
-          <Plus className ="size-6"/> 
-          <span>Thêm người dùng</span>
-        </button>
+        <PlusButton label={"Thêm người dùng"} type={"button"} />
       </div>
 
       {/* Toolbar */}
-      <div className="flex flex-wrap gap-3 rounded-xl border bg-white p-4">
-        <input
-          placeholder="Tìm theo tài khoản hoặc họ tên..."
-          className="h-11 flex-1 rounded-lg border px-4 outline-none focus:border-orange-500"
-        />
+      <div className="grid grid-cols-5 gap-3 rounded-md  bg-slate-800 p-4 text-white">
+        <div className="relative col-span-3">
+          <input
+            placeholder="Tìm theo tài khoản hoặc họ tên..."
+            className="w-full rounded-md border border-slate-700 bg-[#0f172a] py-2.5 pr-10 pl-4 text-slate-100 outline-none placeholder:text-slate-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+          />
+          <div className="absolute top-1/2 right-4 -translate-y-1/2">
+            <Search className="size-5.5 text-slate-300" />
+          </div>
+        </div>
 
-        <select className="h-11 rounded-lg border px-4">
-          <option>Tất cả vai trò</option>
-          <option>Quản trị</option>
-          <option>Khách hàng</option>
+        <select className="rounded-md border border-slate-700 bg-[#0f172a] px-4 text-slate-100 transition-colors duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+          <option value="all">Tất cả vai trò</option>
+          <option value="quanTri">Quản trị</option>
+          <option value="khachHang">Khách hàng</option>
         </select>
 
-        <select className="h-11 rounded-lg border px-4">
-          <option>10 / trang</option>
-          <option>20 / trang</option>
-          <option>50 / trang</option>
+        <select className="rounded-md border border-slate-700 px-4 bg-[#0f172a]  text-slate-100 transition-colors duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+          <option value="10">10 / trang</option>
+          <option value="20">20 / trang</option>
+          <option value="50">50 / trang</option>
         </select>
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-xl border bg-white">
-        <table className="w-full">
-          <thead className="bg-slate-50">
-            <tr className="text-left text-sm font-semibold text-slate-600">
+      <div className="overflow-hidden rounded-md ">
+        <table className="w-full ">
+          <thead className="bg-slate-800 text-slate-100 ">
+            <tr className="text-left text-sm font-semibold ">
               <th className="px-5 py-4">Tài khoản</th>
               <th>Họ tên</th>
               <th>Email</th>
