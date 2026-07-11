@@ -44,7 +44,14 @@ export default function Header() {
       title: "Showtime Creation",
       description: "Tạo mới/thêm lịch chiếu",
     },
+    {
+      path: "/admin/users/",
+      title: "Users Management",
+      description: "Quản lý danh mục người dùng",
+    },
   ];
+
+  
 
   let page = null;
 

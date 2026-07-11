@@ -24,13 +24,13 @@ const SIDEBAR_LINKS = [
     iconColor: "text-red-500",
   },
   {
-    path: "/admin/tickets",
+    path: "/admin/users",
     label: "User management",
     icon: Users,
     iconColor: "text-purple-500",
   },
   {
-    path: "/admin/users",
+    path: "/admin/statistics",
     label: "Statistics",
     icon: ChartColumn,
     iconColor: "text-blue-500",

@@ -1,4 +1,4 @@
-import DeleteModal from "./DeleteModal";
+import Delete from "./Delete/Delete";
 import SaveChangesModal from "./EditModal/SaveMovieChangesModal";
 import DiscardChangesModal from "./EditModal/DiscardMovieChangesModal";
 import ShowtimeModal from "./Showtime/ShowTimeModal"
@@ -7,7 +7,7 @@ import { useModalContext } from "@contexts/admin/ModalContext";
 
 
 const MODALS = {
-  deleteMovie: DeleteModal,
+  deleteMovie: Delete,
   discardMovieChanges: DiscardChangesModal,
   saveMovieChanges: SaveChangesModal,
   showtimeCreation: ShowtimeModal,

@@ -1,8 +1,6 @@
 import {
   Clock3,
-  Trash,
   Ticket,
-  SquarePen,
 } from "lucide-react";
 import {formatShowtime} from "../../../utils/format"
 
@@ -12,7 +10,7 @@ export default function ShowtimeInforCard({ maRap, tenRap, ngayChieuGioChieu, th
 const {date, time} = formatShowtime(ngayChieuGioChieu);
 
   return (
-    <article className="space-y-5 rounded-xl border border-gray-300 bg-linear-to-br from-slate-800 to-slate-700 p-5 pb-3 text-slate-100 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md hover:ring-1"
+    <article className="space-y-5 rounded-xl border border-gray-300 bg-linear-to-br from-slate-800 to-slate-700 p-5 text-slate-100 transition-transform duration-300 hover:-translate-y-2 hover:shadow-md hover:ring-1"
 
     >
       <div className="flex items-center justify-between">
@@ -40,16 +38,6 @@ const {date, time} = formatShowtime(ngayChieuGioChieu);
           <span>Thời lượng:</span>
           <span className="ml-1 font-medium text-slate-200">{thoiLuong} phút</span>
         </div>
-      </div>
-
-      <div className="mt-6 flex justify-end gap-2">
-        <button className="cursor-pointer rounded-lg border-none bg-indigo-600 px-2.5 py-2 transition-colors duration-200 hover:bg-indigo-500">
-          <SquarePen className="size-4 text-indigo-100" />
-        </button>
-
-        <button className="cursor-pointer rounded-lg border-none bg-red-600 px-2.5 py-2 transition-colors duration-200 hover:bg-red-500">
-          <Trash className="size-4 text-red-100" />
-        </button>
       </div>
     </article>
   );

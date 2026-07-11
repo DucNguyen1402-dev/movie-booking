@@ -1,11 +1,17 @@
 import { Link } from "react-router-dom";
-import { Star, TvMinimalPlay, SquarePen, Trash2, Flame, CalendarPlus2 } from "lucide-react";
+import {
+  Star,
+  TvMinimalPlay,
+  SquarePen,
+  Trash2,
+  Flame,
+  CalendarPlus2,
+} from "lucide-react";
 import { formatDate } from "../../utils/format/date";
 import { useMovieItem } from "../../hooks/useMovieItem";
 import { useTrailerContext } from "../../contexts/TrailerContext";
 
 export default function MovieItem({ movie, movieId, highlight }) {
-
   const {
     onDeleteClick,
     onCreateShowTimeClick,
@@ -26,12 +32,9 @@ export default function MovieItem({ movie, movieId, highlight }) {
   }
 
   const trailer = useTrailerContext();
-  
 
   const onOpenTrailerClick = () =>
     trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
-
-
 
   return (
     <tr
@@ -115,9 +118,17 @@ export default function MovieItem({ movie, movieId, highlight }) {
           <button
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-indigo-500/10 hover:text-indigo-400"
             title="Sửa thông tin"
-            onClick = {onEditClick}
+            onClick={onEditClick}
           >
             <SquarePen className="h-4 w-4" />
+          </button>
+
+          <button
+            className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-blue-500/10 hover:text-blue-400"
+            title="Tạo lịch chiếu"
+            onClick={onCreateShowTimeClick}
+          >
+            <CalendarPlus2 className="h-4 w-4" />
           </button>
           <button
             className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-rose-500/10 hover:text-rose-400"
@@ -125,13 +136,6 @@ export default function MovieItem({ movie, movieId, highlight }) {
             onClick={onDeleteClick}
           >
             <Trash2 className="h-4 w-4" />
-          </button>
-           <button
-            className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-blue-500/10 hover:text-blue-400"
-            title="Tạo lịch chiếu"
-            onClick={onCreateShowTimeClick}
-          >
-            <CalendarPlus2 className="h-4 w-4" />
           </button>
         </div>
       </td>

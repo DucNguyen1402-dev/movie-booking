@@ -50,6 +50,8 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const onDeleteClick = () =>
     modal.open({
       type: MODAL_TYPES.DELETE_MOVIE,
+      title: "Bạn có chắc muốn xóa phim này không?",
+      subtitle: "Hành động này không thể hoàn lại.",
       onConfirm: handleDeleteMovie,
     });
 
