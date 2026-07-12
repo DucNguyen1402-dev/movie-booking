@@ -6,7 +6,8 @@ import { useUsersContext } from "../../../contexts/UsersContext";
 
 export default function UserTable() {
   const {
-    usersStates: { users, isPending },
+    usersStates: { isPending },
+    userFilters: { filteredUsers},
   } = useUsersContext();
 
   
@@ -17,7 +18,7 @@ export default function UserTable() {
   const tableContent = isPending ? (
     <TableSkeleton />
   ) : (
-    <TableRows users={users} newAccount = {newAccount} highlight = {highlight}/>
+    <TableRows users={filteredUsers} newAccount = {newAccount} highlight = {highlight}/>
   );
 
   return (
