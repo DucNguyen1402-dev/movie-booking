@@ -15,6 +15,17 @@ export const createUser = async (payload) => {
   return data.content;
 };
 
+
+
+export const deleteUser = async (account) => {
+
+  const { data } = await api.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`);
+
+  return data.content;
+};
+
+
+
 export const getMovies = async () => {
   const response = await api.get("/QuanLyPhim/LayDanhSachPhim", {
     params: {

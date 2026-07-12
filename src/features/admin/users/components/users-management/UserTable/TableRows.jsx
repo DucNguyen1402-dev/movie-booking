@@ -2,8 +2,12 @@ import { SquarePen, Trash } from "lucide-react";
 import { userRoleLabel } from "../../../constants/user-role-labels";
 import { useRef, useEffect } from "react";
 import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
+import {useUserDeletion} from "../../../hooks/useUserDeletion"
 
 export default function TableRows({ users, newAccount, highlight }) {
+
+  const {onDeletionClick} = useUserDeletion();
+  
   const rowRef = useRef(null);
 
   const highlightClass = USER_HIGHLIGHTS[highlight];
@@ -54,7 +58,9 @@ export default function TableRows({ users, newAccount, highlight }) {
                   <SquarePen className="size-4" />
                 </button>
 
-                <button className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-red-500/20 hover:text-red-400">
+                <button className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-red-500/20 hover:text-red-400"
+                 onClick = {() => onDeletionClick(user.taiKhoan)}
+                >
                   <Trash className="size-4" />
                 </button>
               </div>

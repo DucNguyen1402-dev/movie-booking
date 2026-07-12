@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { addMovie } from "@services/admin/api";
 import { createMovieFormData } from "../utils/createMovieFormData";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -14,8 +14,14 @@ import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
 export function useAddMovie() {
   const [imgPreview, setImgPreview] = useState("");
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: addMovie,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["movies"],
+      });
+    },
   });
   const location = useLocation();
   const history = location.state?.history ?? [];
@@ -102,7 +108,6 @@ export function useAddMovie() {
         variant: "error",
         message,
       });
-     
     }
   };
 

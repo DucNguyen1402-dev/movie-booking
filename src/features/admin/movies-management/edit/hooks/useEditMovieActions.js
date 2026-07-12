@@ -6,36 +6,34 @@ import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateMovie } from "@services/admin/api";
 import { useModalContext } from "@contexts/admin/ModalContext";
 
-
-export function useEditMovieActions({
-  editId,
-  editMovie,
-  trigger,
-  getValues,
-}) {
+export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: updateMovie,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["movies"],
+      });
+    },
   });
 
   const { notifActions } = useNotification();
   const { showLoading, hideLoading } = useLoading();
   const modal = useModalContext();
 
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-const handleFileChange = (e) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+    const reader = new FileReader();
 
-  const reader = new FileReader();
-
-  reader.readAsDataURL(file);
-};
-
+    reader.readAsDataURL(file);
+  };
 
   const handleCancelChange = () => {
     modal.close();
@@ -73,7 +71,7 @@ const handleFileChange = (e) => {
     const movie = getValues();
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
-       modal.close();
+      modal.close();
       notifActions.showNotification({
         variant: "warning",
         message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
@@ -119,13 +117,7 @@ const handleFileChange = (e) => {
         message,
       });
     }
-  }, [
-    mutateAsync,
-    editMovie,
-    editId,
-    navigate,
-    notifActions,
-  ]);
+  }, [mutateAsync, editMovie, editId, navigate, notifActions]);
 
   const onSaveClick = async () => {
     const isValid = await trigger();
