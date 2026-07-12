@@ -102,7 +102,7 @@ export function useAddMovie() {
         variant: "error",
         message,
       });
-      console.log(error);
+     
     }
   };
 

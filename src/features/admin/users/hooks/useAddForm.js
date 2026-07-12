@@ -14,6 +14,7 @@ export function useAddForm() {
       email: "",
       soDt: "",
       maLoaiNguoiDung: "KhachHang",
+      maNhom: "GP01"
     },
   });
 

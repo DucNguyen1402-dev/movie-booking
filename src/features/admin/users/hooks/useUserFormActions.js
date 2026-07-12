@@ -1,6 +1,12 @@
+import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
+import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
+import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useModalContext } from "@contexts/admin/ModalContext";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import { useNotification } from "@contexts/admin/NotificationContext";
+import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { createUser } from "@services/admin/api";
 
 export function useUserFormActions({ handleSubmit }) {
   const modal = useModalContext();
@@ -8,6 +14,8 @@ export function useUserFormActions({ handleSubmit }) {
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/users";
+  const { notifActions } = useNotification();
+  const { showLoading, hideLoading } = useLoading();
 
   const handleCancelAddUser = () => {
     modal.close();
@@ -21,11 +29,50 @@ export function useUserFormActions({ handleSubmit }) {
       onConfirm: handleCancelAddUser,
     });
 
-  return {
-    onCancelAddUserClick,
+  const handleAddUser = async (data) => {
+    modal.close();
+    showLoading();
+    const start = new Date();
+    try {
+      const content = await createUser(data);
+
+      ensureMinDuration(start, MIN_LOADING_TIME);
+      hideLoading();
+      navigate(previousPath, {
+        state: {
+          newAccount: content.taiKhoan,
+          highlight: HIGHLIGHT_TYPES.ADD,
+          notification: {
+            variant: "success",
+            message: "Add user successfully",
+          },
+          history,
+        },
+      });
+    } catch (error) {
+      modal.close();
+      hideLoading();
+      notifActions.showNotification({
+        variant: "error",
+        message: error.response?.data?.content,
+      });
+    }
   };
 
+  const onValid = (data) =>
+    modal.open({
+      type: MODAL_TYPES.ADDING_USER,
+      title: "Bạn có chắc chắn muốn tạo người dùng?",
+      subtitle: "Thông tin sẽ được lưu để tạo người dùng mới.",
+      onConfirm: () => handleAddUser(data),
+    });
 
+  const onInvalid = () => modal.close();
 
-  
+  const onAddUserClick = () => handleSubmit(onValid, onInvalid)();
+
+  return {
+    onCancelAddUserClick,
+    onAddUserClick,
+  };
 }

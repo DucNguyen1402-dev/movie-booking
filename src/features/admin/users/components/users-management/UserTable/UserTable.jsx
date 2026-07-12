@@ -1,15 +1,23 @@
+import { useLocation } from "react-router-dom";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
-import {useUsersContext} from "../../../contexts/UsersContext";
+import { useUsersContext } from "../../../contexts/UsersContext";
+
 
 export default function UserTable() {
-  const { usersStates:{users, isPending} } = useUsersContext();
+  const {
+    usersStates: { users, isPending },
+  } = useUsersContext();
 
   
+  const location = useLocation();
+  const { newAccount = "", highlight = "none"} = location?.state ?? {};
+
+
   const tableContent = isPending ? (
     <TableSkeleton />
   ) : (
-    <TableRows users={users} />
+    <TableRows users={users} newAccount = {newAccount} highlight = {highlight}/>
   );
 
   return (
