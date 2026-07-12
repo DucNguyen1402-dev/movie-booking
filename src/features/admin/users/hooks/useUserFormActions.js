@@ -7,8 +7,18 @@ import { useModalContext } from "@contexts/admin/ModalContext";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
 import { createUser } from "@services/admin/api";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export function useUserFormActions({ handleSubmit }) {
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+      });
+    },
+  });
   const modal = useModalContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,10 +44,11 @@ export function useUserFormActions({ handleSubmit }) {
     showLoading();
     const start = new Date();
     try {
-      const content = await createUser(data);
+      const content = await mutateAsync(data);
 
       ensureMinDuration(start, MIN_LOADING_TIME);
       hideLoading();
+
       navigate(previousPath, {
         state: {
           newAccount: content.taiKhoan,
@@ -54,7 +65,9 @@ export function useUserFormActions({ handleSubmit }) {
       hideLoading();
       notifActions.showNotification({
         variant: "error",
-        message: error.response?.data?.content,
+        message:
+          error.response?.data?.content ??
+          "Đã có lỗi xảy ra! vui lòng kiểm tra lại dữ liệu hoặc kết nối mạng",
       });
     }
   };
