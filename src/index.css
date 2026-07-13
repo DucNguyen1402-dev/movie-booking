@@ -1,3 +1,86 @@
+@import "tailwindcss";
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.animate-update-row {
+  animation: updateHightlight 0.8s ease-in-out 4;
+}
+
+@keyframes updateHightlight {
+  50% {
+    background-color: rgb(234 179 8 / 0.18);
+  }
+}
+
+.animate-add-row {
+  animation: addHightlight 0.8s ease-in-out 4;
+}
+
+@keyframes addHightlight {
+  50% {
+    background-color: rgb(34 197 94 / 0.18);
+  }
+}
+
+@theme {
+  --animate-flash: flash 3s ease-in-out 1;
+
+  @keyframes flash {
+    0%,
+    100% {
+      background-color: transparent;
+    }
+
+    12% {
+      background-color: rgb(16 185 129 / 0.3);
+      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
+    }
+
+    24% {
+      background-color: transparent;
+    }
+
+    44% {
+      background-color: rgb(16 185 129 / 0.3); /* emerald-500/15 */
+      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
+    }
+
+    56% {
+      background-color: transparent;
+    }
+
+    76% {
+      bbackground-color: rgb(16 185 129 / 0.3); /* emerald-500/15 */
+      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
+    }
+
+    88% {
+      background-color: transparent;
+    }
+  }
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #334155 inset; 
+  -webkit-text-fill-color: #e2e8f0; 
+  border: 1px solid #475569; 
+  transition: background-color 9999s ease-in-out 0s;
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap"); 
 @import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap");
 @import "tailwindcss";

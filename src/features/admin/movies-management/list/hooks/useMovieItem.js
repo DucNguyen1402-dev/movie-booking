@@ -11,7 +11,14 @@ import { useNotification } from "@contexts/admin/NotificationContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export function useMovieItem({ movie, movieId, highlight }) {
-  const { mutateAsync } = useMutation({ mutationFn: deleteMovie });
+  const { mutateAsync } = useMutation({
+    mutationFn: deleteMovie,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["movies"],
+      });
+    },
+  });
 
   const rowRef = useRef(null);
   const isTargetMovie = movie.maPhim === Number(movieId);
@@ -35,7 +42,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
 
   const onCreateShowTimeClick = () =>
     navigate(`/admin/movies/showtimes/${movie.maPhim}`, {
-       state: {
+      state: {
         history: [...(location.state?.history ?? []), location.pathname],
       },
     });
@@ -61,9 +68,6 @@ export function useMovieItem({ movie, movieId, highlight }) {
       modal.close();
       showLoading();
       await mutateAsync(movie.maPhim);
-      await queryClient.invalidateQueries({
-        queryKey: ["movies"],
-      });
 
       await ensureMinDuration(start, MIN_LOADING_TIME);
       notifActions.showNotification({

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "@components/admin/Sidebar.jsx";
 import Header from "@components/admin/Header.jsx";
-import GlobalUI from "@components/admin/globalUI";
+import GlobalUI from "@components/admin/GlobalUI";
 import { useLogin } from "@hooks/admin/useLogin";
 
 function MainLayout() {

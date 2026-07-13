@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useTrailerContext } from "@features/admin/movies-management/list/contexts/TrailerContext";
 import TrailerModal from "@features/admin/movies-management/list/components/TrailerModal";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
 
 export default function MovieManagement() {

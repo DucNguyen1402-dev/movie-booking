@@ -43,7 +43,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
     >
       <td className="px-6 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
 
-      <td className="flex items-center gap-3 px-6 py-4">
+      <td className="w-120 text-ellipsis overflow-hidden flex items-center gap-3 px-6 py-4">
         <img
           src={movie.hinhAnh}
           alt={movie.tenPhim}
@@ -53,14 +53,15 @@ export default function MovieItem({ movie, movieId, highlight }) {
           }}
         />
         <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-4">
-            <span className="font-semibold text-slate-200 transition-colors group-hover:text-yellow-400">
+          <div className="flex items-center gap-3">
+            <span className="block font-semibold text-slate-200 transition-colors group-hover:text-yellow-400 
+             ">
               {movie.tenPhim}
             </span>
             {movie.hot && (
-              <span className="inline-flex items-center gap-1 rounded-md border border-rose-500/20 bg-rose-500/10 px-2 py-0.5 text-[10px] font-bold tracking-wider text-rose-400 uppercase">
+              <span className="inline-flex self-start items-center gap-1 rounded-md border border-rose-500/20 bg-rose-500/10 px-2 py-0.5 text-[10px] font-bold tracking-wider text-rose-400 uppercase">
                 <span>Hot</span>
-                <Flame className="h-4 w-4 fill-current text-rose-800" />
+                <Flame className="h-3.5 w-3.5  text-rose-800" />
               </span>
             )}
           </div>
@@ -86,21 +87,21 @@ export default function MovieItem({ movie, movieId, highlight }) {
       <td className="px-6 py-4">
         <div className="flex flex-col gap-1.5">
           {movie.dangChieu && (
-            <span className="inline-flex items-center self-start rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400 group-hover:border-emerald-500/50">
+            <span className="inline-flex items-center justify-center self-start rounded-full border border-emerald-500/20 bg-emerald-500/10 w-25 py-2  text-xs font-medium text-emerald-400 group-hover:border-emerald-500/50">
               <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
-              Đang chiếu
+             <span>Đang chiếu</span>
             </span>
           )}
           {movie.sapChieu && (
-            <span className="inline-flex items-center self-start rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-400 group-hover:border-amber-500/50">
+            <span className="inline-flex items-center justify-center self-start rounded-full border border-amber-500/20 bg-amber-500/10 w-25 py-2 text-xs font-medium text-amber-400 group-hover:border-amber-500/50">
               <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-amber-400"></span>
-              Sắp chiếu
+              <span>Sắp chiếu</span>
             </span>
           )}
           {!movie.dangChieu && !movie.sapChieu && (
-            <span className="inline-flex items-center self-start rounded-full border border-slate-500/20 bg-slate-500/10 px-3 py-1 text-xs font-medium text-slate-400 group-hover:border-slate-500/50">
+            <span className="inline-flex items-center justify-center self-start rounded-full border border-slate-500/20 bg-slate-500/10 w-25 py-2 text-xs font-medium text-slate-400 group-hover:border-slate-500/50">
               <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-slate-400"></span>
-              Ngừng chiếu
+             <span>Ngừng chiếu</span>
             </span>
           )}
         </div>
