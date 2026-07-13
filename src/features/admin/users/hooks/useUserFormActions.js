@@ -29,7 +29,7 @@ export function useUserFormActions({ handleSubmit }) {
 
   const handleCancelAddUser = () => {
     modal.close();
-    navigate(previousPath, { state: { history } });
+    navigate(previousPath, { state: { history: history.slice(0, -1), } });
   };
   const onCancelAddUserClick = () =>
     modal.open({

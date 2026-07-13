@@ -3,6 +3,7 @@ import SaveChangesModal from "./EditModal/SaveMovieChangesModal";
 import DiscardChangesModal from "./EditModal/DiscardMovieChangesModal";
 import ShowtimeModal from "./Showtime/ShowTimeModal"
 import AddModal from "./AddModal/AddModal"
+import EditModal from "./EditModal/EditModal"
 import { useModalContext } from "@contexts/admin/ModalContext";
 
 
@@ -13,7 +14,8 @@ const MODALS = {
   showtimeCreation: ShowtimeModal,
   addingMovie: AddModal,
   addingUser: AddModal,
-  deleteUser: Delete
+  deleteUser: Delete,
+  cancleEditUser: EditModal
 };
 
 export default function Modal() {

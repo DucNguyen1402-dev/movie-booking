@@ -7,5 +7,6 @@ export const MODAL_TYPES = {
   SAVE_MOVIE_CHANGES: "saveMovieChanges",
   SHOWTIME_CREATION: "showtimeCreation",
   ADDING_USER: "addingUser",
-  DELETE_USER: "deleteUser"
+  DELETE_USER: "deleteUser",
+  CANCEL_EDIT_USER: 'cancleEditUser'
 };

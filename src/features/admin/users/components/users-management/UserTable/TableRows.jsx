@@ -12,7 +12,7 @@ export default function TableRows({ users, newAccount, highlight }) {
   const history = location.state?.history ?? [];
 
   const onEditClick = (account) =>
-    navigate(`/admin/users/edit/${account}`, { state: { history } });
+    navigate(`/admin/users/edit/${account}`, { state: { history: [...history, location.pathname] } });
 
   const rowRef = useRef(null);
 
