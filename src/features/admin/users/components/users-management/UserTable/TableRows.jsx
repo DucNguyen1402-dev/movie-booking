@@ -5,12 +5,7 @@ import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
 import { useUserDeletion } from "../../../hooks/useUserDeletion";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function TableRows({
-  users,
-  matchedAccount,
-  highlight,
-  setMatchedAccount,
-}) {
+export default function TableRows({ users, highlightAccount, highlight , setHighlightAccount}) {
   const { onDeletionClick } = useUserDeletion();
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,31 +21,20 @@ export default function TableRows({
   const highlightClass = USER_HIGHLIGHTS[highlight];
 
   useEffect(() => {
-    if (!matchedAccount) return;
+    if (!highlightAccount) return;
 
     rowRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "center",
     });
-
-    navigate(".", {
-      replace: true,
-      state: {
-        ...location.state,
-        account: undefined,
-      },
-    });
-     setMatchedAccount(null);
-
-  }, [matchedAccount]);
+ 
+  }, [highlightAccount]);
 
   return (
     <>
       {users.map((user) => {
-        const isMatched = user.taiKhoan === matchedAccount;
-
-     
-
+        const isMatched = user.taiKhoan === highlightAccount;
+  
         return (
           <tr
             key={user.taiKhoan}

@@ -1,33 +1,39 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
 import { useUsersContext } from "../../../contexts/UsersContext";
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 
 export default function UserTable() {
-
-
-
   const {
     usersStates: { isPending },
     userPagination: { paginatedUsers },
   } = useUsersContext();
 
-
   const location = useLocation();
-  const { account = "", highlight = "none" } = location?.state ?? {};
-  const [matchedAccount, setMatchedAccount] = useState(account);
+  const navigate = useNavigate();
+  const { account = "", highlight = "none", history } = location?.state ?? {};
+  const [highlightAccount, setHighlightAccount] = useState(null);
 
+  useEffect(() => {
+    if (!account) return;
+
+    setHighlightAccount(account);
+
+    navigate(".", {
+      replace: true,
+      state: { history },
+    });
+  }, [account, navigate]);
 
   const tableContent = isPending ? (
     <TableSkeleton />
   ) : (
     <TableRows
       users={paginatedUsers}
-      matchAccount={matchedAccount}
-      setMatchedAccount={setMatchedAccount}
+      highlightAccount={highlightAccount}
       highlight={highlight}
+      setHighlightAccount={setHighlightAccount}
     />
   );
 
@@ -35,9 +41,9 @@ export default function UserTable() {
     <table className="w-full table-fixed border border-slate-700 text-sm text-slate-100">
       <thead>
         <tr className="bg-slate-800 text-left font-semibold tracking-wider">
-          <th className="w-70 px-8 py-6 2xl:w-80">TÀI KHOẢN</th>
-          <th className="w-60 2xl:w-70">HỌ & TÊN</th>
-          <th className="w-60 2xl:w-80">EMAIL</th>
+          <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
+          <th className="3xl:w-70 w-60">HỌ & TÊN</th>
+          <th className="3xl:w-80 w-60">EMAIL</th>
           <th>SĐT</th>
           <th>VAI TRÒ</th>
           <th className="text-center">HÀNH ĐỘNG</th>
