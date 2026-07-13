@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSeat } from "@/redux/slices/movie-booking/movieBookingSlice";
+import { selectSeat } from "@/redux/slices/customer/movie-booking/movieBookingSlice";
 
 const SeatItem = ({ seat, rowLetter }) => {
   const dispatch = useDispatch();
