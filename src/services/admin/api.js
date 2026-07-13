@@ -14,6 +14,15 @@ export const createUser = async (payload) => {
   return data.content;
 };
 
+export const updateUser = async (payload) => {
+  const { data } = await api.post(
+    "QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+    payload,
+  );
+
+  return data.content;
+};
+
 export const deleteUser = async (account) => {
   const { data } = await api.delete(
     `QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`,

@@ -20,13 +20,16 @@ export function useEditForm({ user }) {
       matKhau: user.matKhau,
       email: user.email,
       soDT: user.soDT,
+      maNhom: "GP01",
+      maLoaiNguoiDung: user.maLoaiNguoiDung
     });
   }, [user]);
 
+  const {maNhom,maLoaiNguoiDung, ...inputFields } = defaultValues;
   return {
     register,
     handleSubmit,
-    fields: defaultValues,
+    fields: inputFields,
     errors,
   };
 }

@@ -51,13 +51,13 @@ export function useUserFormActions({ handleSubmit }) {
 
       navigate(previousPath, {
         state: {
-          newAccount: content.taiKhoan,
+          account: content.taiKhoan,
           highlight: HIGHLIGHT_TYPES.ADD,
           notification: {
             variant: "success",
             message: "Add user successfully",
           },
-          history,
+          history: history.slice(0, -1),
         },
       });
     } catch (error) {

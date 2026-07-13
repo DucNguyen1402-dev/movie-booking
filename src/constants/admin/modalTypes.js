@@ -8,5 +8,5 @@ export const MODAL_TYPES = {
   SHOWTIME_CREATION: "showtimeCreation",
   ADDING_USER: "addingUser",
   DELETE_USER: "deleteUser",
-  CANCEL_EDIT_USER: 'cancleEditUser'
+  EDIT_USER: 'cancleEditUser'
 };

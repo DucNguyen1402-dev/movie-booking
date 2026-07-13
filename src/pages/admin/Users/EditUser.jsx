@@ -23,7 +23,7 @@ export default function EditUser() {
       user: targetUser,
     });
 
-  const {onCancelEditClick} = useEditActions({handleSubmit})
+  const {onCancelEditClick, onConfirmEditClick} = useEditActions({handleSubmit})
 
 
   return (
@@ -48,7 +48,7 @@ export default function EditUser() {
           <div className="mt-10 flex justify-end gap-4">
             <CancelButton surface="dark" onClick = {onCancelEditClick}>Hủy</CancelButton>
 
-            <SaveButton surface="dark">Lưu thông tin</SaveButton>
+            <SaveButton surface="dark" onClick ={onConfirmEditClick}>Lưu thông tin</SaveButton>
           </div>
         </div>
       </div>

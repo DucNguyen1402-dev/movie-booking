@@ -5,38 +5,57 @@ import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
 import { useUserDeletion } from "../../../hooks/useUserDeletion";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function TableRows({ users, newAccount, highlight }) {
+export default function TableRows({
+  users,
+  matchedAccount,
+  highlight,
+  setMatchedAccount,
+}) {
   const { onDeletionClick } = useUserDeletion();
   const location = useLocation();
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
 
   const onEditClick = (account) =>
-    navigate(`/admin/users/edit/${account}`, { state: { history: [...history, location.pathname] } });
+    navigate(`/admin/users/edit/${account}`, {
+      state: { history: [...history, location.pathname] },
+    });
 
   const rowRef = useRef(null);
 
   const highlightClass = USER_HIGHLIGHTS[highlight];
 
   useEffect(() => {
-    if (!newAccount) return;
+    if (!matchedAccount) return;
 
     rowRef.current?.scrollIntoView({
       behavior: "smooth",
       block: "center",
     });
-  }, [newAccount]);
+
+    navigate(".", {
+      replace: true,
+      state: {
+        ...location.state,
+        account: undefined,
+      },
+    });
+     setMatchedAccount(null);
+
+  }, [matchedAccount]);
 
   return (
     <>
       {users.map((user) => {
-        const isNewAccount = user.taiKhoan === newAccount;
+        const isMatched = user.taiKhoan === matchedAccount;
+
+     
 
         return (
           <tr
             key={user.taiKhoan}
-            className={`border-t border-slate-700 px-5 transition-all hover:bg-slate-700/50 ${isNewAccount ? highlightClass : "duration-300"}`}
-            ref={isNewAccount ? rowRef : null}
+            className={`border-t border-slate-700 px-5 transition-all hover:bg-slate-700/50 ${isMatched ? highlightClass : "duration-300"}`}
+            ref={isMatched ? rowRef : null}
           >
             <td className="px-8 py-4 font-medium break-all">{user.taiKhoan}</td>
 

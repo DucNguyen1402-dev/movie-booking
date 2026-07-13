@@ -1,7 +1,7 @@
 export default function UserProfileHeader({initial, taiKhoan, roleLabel}) {
   return (
     <div className="mb-10 flex flex-col items-center space-y-3">
-      <div className="flex h-24 w-24 items-center justify-center rounded-full bg-slate-600 text-3xl font-bold">
+      <div className="flex h-24 w-24 items-center justify-center rounded-full bg-slate-600 text-4xl font-bold">
         {initial}
       </div>
 
