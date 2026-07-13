@@ -7,7 +7,11 @@ const surfaceSlyles = {
   dark: "bg-slate-700 text-slate-300 border border-slate-600 hover:bg-slate-600 active:bg-slate-600",
 };
 
-export default function CancelButton({ children, surface = "light", ...props }) {
+export default function CancelButton({
+  children,
+  surface = "light",
+  ...props
+}) {
   return (
     <Button className={clsx(surfaceSlyles[surface] ?? styles.light)} {...props}>
       {children}

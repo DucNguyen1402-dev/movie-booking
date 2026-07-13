@@ -1,12 +1,9 @@
 import { useUsers } from "@hooks/admin/useUsers";
 
-
 export function useUsersStates() {
-  const { data: users = [], isPending } = useUsers();
-
+  const { data: users = [] } = useUsers();
 
   return {
     users,
-    isPending,
   };
 }

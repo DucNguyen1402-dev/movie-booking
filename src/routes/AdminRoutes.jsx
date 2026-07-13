@@ -8,7 +8,8 @@ import AddMovie from "../pages/admin/Movies/AddMovie";
 import ShowtimeManagement from "../pages/admin/Movies/Showtime/ShowtimeManagement";
 import ShowtimeCreation from "../pages/admin/Movies/Showtime/ShowtimeCreation";
 import UsersManagement from "../pages/admin/Users/UsersManagement";
-import AddUsers from "../pages/admin/Users/AddUsers";
+import AddUser from "../pages/admin/Users/AddUser";
+import EditUser from "../pages/admin/Users/EditUser";
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
@@ -54,7 +55,8 @@ export default function AdminRoutes() {
               </Route>
               <Route path="users" element={<UsersLayout />}>
                 <Route index element={<UsersManagement />} />
-                <Route path ="add" element={<AddUsers />} />
+                <Route path="add" element={<AddUser />} />
+                <Route path="edit/:account" element={<EditUser />} />
               </Route>
             </Route>
           </Routes>

@@ -55,6 +55,11 @@ export default function Header() {
       title: "Add user",
       description: "Khu vực tạo tài khoản người dùng mới trong hệ thống.",
     },
+     {
+      path: "/admin/users/edit/:account",
+      title: "Edit user",
+      description: "Khu vực thay đổi thông tin người dùng trong hệ thống.",
+    },
   ];
 
   let page = null;

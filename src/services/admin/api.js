@@ -9,22 +9,18 @@ export const getUsers = async () => {
 };
 
 export const createUser = async (payload) => {
-
   const { data } = await api.post("QuanLyNguoiDung/ThemNguoiDung", payload);
 
   return data.content;
 };
 
-
-
 export const deleteUser = async (account) => {
-
-  const { data } = await api.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`);
+  const { data } = await api.delete(
+    `QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`,
+  );
 
   return data.content;
 };
-
-
 
 export const getMovies = async () => {
   const response = await api.get("/QuanLyPhim/LayDanhSachPhim", {
@@ -83,4 +79,3 @@ export const getShowtimeData = async (id) => {
 
   return data.content;
 };
-

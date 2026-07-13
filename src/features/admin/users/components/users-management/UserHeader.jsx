@@ -1,4 +1,4 @@
-import { List, Plus} from "lucide-react";
+import { List} from "lucide-react";
 import {AddButton} from "@components/admin/buttons";
 import { useUsersContext } from "../../contexts/UsersContext";
 
