@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   cancelSeatBooking,
   confirmSeatBooking,
-} from "@/redux/slices/movie-booking/movieBookingSlice";
-import { selectSeletedSeatList, selectTotalBookingPrice } from "@/redux/slices/movie-booking/movieBookingSelectors";
+} from "@/redux/slices/customer/movie-booking/movieBookingSlice";
+import { selectSeletedSeatList, selectTotalBookingPrice } from "@/redux/slices/customer/movie-booking/movieBookingSelectors";
 
 const TicketCheckout = () => {
   const dispatch = useDispatch();
