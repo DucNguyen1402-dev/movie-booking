@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import AddMovieBtn from "@features/admin/movies-management/list/components/addMovieBtn";
+import AddMovieBtn from "@features/admin/movies-management/list/components/AddMovieBtn";
 import SearchBar from "@features/admin/movies-management/list/components/SearchBar";
 import MovieStatusFilter from "@features/admin/movies-management/list/components/MovieStatusFilter";
 import SortSelect from "@features/admin/movies-management/list/components/SortSelect";
