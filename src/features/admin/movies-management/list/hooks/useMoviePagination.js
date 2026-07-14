@@ -12,7 +12,7 @@ export function useMoviePagination({ movies }) {
       ...prev,
       page: 1,
     }));
-  }, [filteredUsers]);
+  }, [movies]);
 
   const startIndex = (pagination.page - 1) * pagination.size;
   const endIndex = pagination.page * pagination.size;

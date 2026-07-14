@@ -2,17 +2,18 @@ import { LockKeyhole, Star } from "lucide-react";
 import { useEditMovie } from "../../contexts/EditContext";
 import { getRateClasses } from "../../config/editConfig";
 import { validationRules } from "@config/admin/validation-rules";
+import DateInput from "@features/admin/shared/components/DateInput/DateInput";
 
 export default function EditFormFields() {
   const {
     editStates,
-    editForm: { register, errors ,watch},
+    editForm: { register, errors ,watch, control},
   } = useEditMovie();
 
   return (
-    <div className="space-y-8 rounded-xl bg-gray-100 p-8 shadow-sm lg:col-span-2">
+    <div className="space-y-8 rounded-xl bg-gray-800 p-8 shadow-sm lg:col-span-2">
       <div className="flex flex-col gap-2.5">
-        <label className="text-sm font-bold tracking-wider text-gray-700">
+        <label className="text-sm font-bold tracking-wider text-slate-200">
           Tên phim
         </label>
         <div className="space-y-2"></div>
@@ -30,7 +31,7 @@ export default function EditFormFields() {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="flex flex-col gap-2.5">
-          <label className="text-sm font-bold tracking-wider text-gray-700">
+          <label className="text-sm font-bold tracking-wider text-slate-200">
             Bí danh (Slug)
           </label>
           <div className="relative">
@@ -43,27 +44,26 @@ export default function EditFormFields() {
             <LockKeyhole className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 text-yellow-600" />
           </div>
         </div>
-        <div className="flex flex-col gap-2.5">
-          <label className="text-sm font-bold tracking-wider text-gray-700">
-            Ngày khởi chiếu
-          </label>
-          <div className="space-y-2">
-            <input
-              type="date"
-              {...register("ngayKhoiChieu", validationRules.ngayKhoiChieu)}
-              className="w-full rounded-md border border-gray-400 px-4 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-            />
-            {errors.ngayKhoiChieu && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                {errors.ngayKhoiChieu.message}
-              </p>
-            )}
-          </div>
-        </div>
+
+        
+         <DateInput
+            control={control}
+            value={watch("ngayKhoiChieu")}
+            name="ngayKhoiChieu"
+            rules={validationRules.ngayKhoiChieu}
+            labels={{
+              placeholder: "Chọn ngày khởi chiếu",
+              form: "Ngày khởi chiếu",
+
+              requied: "Vui lòng chọn ngày khởi chiếu phim",
+            }}
+          />
+        
+    
       </div>
 
       <div className="flex flex-col gap-2.5">
-        <label className="text-sm font-bold tracking-wider text-gray-700">
+        <label className="text-sm font-bold tracking-wider text-slate-200">
           Link Trailer (Youtube)
         </label>
         <div className="space-y-2">
@@ -80,8 +80,10 @@ export default function EditFormFields() {
         </div>
       </div>
 
+
+
       <div className="flex flex-col gap-2.5">
-        <label className="text-sm font-bold tracking-wider text-gray-700">
+        <label className="text-sm font-bold tracking-wider text-slate-200">
           Mô tả phim
         </label>
         <div className="space-y-2">
@@ -106,7 +108,7 @@ export default function EditFormFields() {
             className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500"
           />
 
-          <span className="text-sm font-medium text-gray-700">Đang chiếu</span>
+          <span className="text-sm font-medium text-slate-200">Đang chiếu</span>
         </label>
 
         <label className="flex cursor-pointer items-center space-x-3">
@@ -115,7 +117,7 @@ export default function EditFormFields() {
             {...register("sapChieu")}
             className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500"
           />
-          <span className="text-sm font-medium text-gray-700">Sắp chiếu</span>
+          <span className="text-sm font-medium text-slate-200">Sắp chiếu</span>
         </label>
 
         <label className="flex cursor-pointer items-center space-x-3">
@@ -130,7 +132,7 @@ export default function EditFormFields() {
         </label>
 
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-gray-700">Đánh giá:</span>
+          <span className="text-sm font-medium text-slate-200">Đánh giá:</span>
           <div className="flex items-center gap-2">
             <input
               type="number"

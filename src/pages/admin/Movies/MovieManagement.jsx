@@ -44,7 +44,7 @@ export default function MovieManagement() {
     <>
       <div className="min-h-screen  bg-[#0f172a] px-6 pt-10 pb-8 font-sans text-slate-100">
        
-        <div className="mx-auto max-w-[90%] space-y-8">
+        <div className="mx-auto w-full 3xl:max-w-[90%] space-y-8">
           {/* 1. HEADER & ACTION BAR */}
           <div className="flex items-center justify-end">
             <div className="flex flex-col gap-4" onClick={onAddMovieClick}>
