@@ -10,6 +10,7 @@ import Movies from "@/pages/customer/Movies/Movies";
 import PopcornDrink from "@/pages/customer/PopcornDrink/PopcornDrink";
 import Profile from "@/pages/customer/Profile/Profile";
 import Register from "@/pages/customer/Register/Register";
+import {ProtectedRoute} from "./routes/ProtectRoutes"
 
 export default function App() {
   return (
@@ -43,7 +44,11 @@ export default function App() {
 
       <Route
         path="/admin/*"
-        element={<AdminRoutes />}
+        element={
+          <ProtectedRoute>
+          <AdminRoutes />
+          </ProtectedRoute>
+        }
       />
 
       <Route
