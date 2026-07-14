@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, Ticket, UserRound } from "lucide-react";
+import { LogOut, Ticket, UserRound,UserStar } from "lucide-react";
 import {
   getStoredAccessToken,
   useAccountInfo,
@@ -16,10 +16,16 @@ const Profile = () => {
 
   const bookingHistory = accountInfo?.thongTinDatVe || [];
 
+
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
+
+  const handleRouteToAdmin = () =>{
+     navigate("/admin");
+  }
+
 
   if (!accessToken) {
     return (
@@ -103,14 +109,26 @@ const Profile = () => {
             </h1>
           </div>
 
+         <div className ="flex gap-2">
+           <button
+            type="button"
+            onClick={handleRouteToAdmin}
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-black uppercase text-white transition hover:bg-indigo-500"
+          >
+            <UserStar size={18} />
+            Qua trang admin
+          </button>
+
+          
           <button
             type="button"
             onClick={handleLogout}
             className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black uppercase text-white transition hover:bg-red-500"
           >
             <LogOut size={18} />
-            Đăng xuất
+            đăng xuất
           </button>
+        </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
@@ -155,7 +173,7 @@ const Profile = () => {
                   Loại người dùng
                 </p>
                 <p className="mt-1 font-black">
-                  {accountInfo?.loaiNguoiDung || "Khách hàng"}
+                  {accountInfo?.loaiNguoiDung?.tenLoai || "Khách hàng"}
                 </p>
               </div>
             </div>
@@ -194,7 +212,7 @@ const Profile = () => {
               <div className="space-y-4">
                 {bookingHistory.map((ticket) => (
                   <article
-                    key={ticket.maVe}
+                    key={`${ticket.maVe} - ${ticket.tenPhim}`}
                     className="grid gap-4 rounded-2xl border border-white/10 bg-black/30 p-4 md:grid-cols-[90px_1fr]"
                   >
                     <img
@@ -223,7 +241,7 @@ const Profile = () => {
                       <div className="mt-4 flex flex-wrap gap-2">
                         {ticket.danhSachGhe?.map((seat) => (
                           <span
-                            key={seat.maGhe}
+                            key={`${seat.maGhe} - ${seat.tenGhe}`}
                             className="rounded-full bg-[#f5c518] px-3 py-1 text-xs font-black text-black"
                           >
                             Ghế {seat.tenGhe}
