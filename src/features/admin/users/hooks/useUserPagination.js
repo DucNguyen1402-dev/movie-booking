@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 
-export function useUserPagination({ filteredUsers, users }) {
+export function useUserPagination({ filteredUsers }) {
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
 
   const setSize = (size) =>

@@ -7,6 +7,7 @@ export function useEditForm() {
     reset,
     getValues,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onBlur",
@@ -20,5 +21,6 @@ export function useEditForm() {
     getValues,
     errors,
     watch,
+    setValue
   };
 }

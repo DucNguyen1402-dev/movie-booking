@@ -15,7 +15,7 @@ import { EditProvider } from "@features/admin/movies-management/edit/contexts/Ed
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import { TrailerProvider } from "@features/admin/movies-management/list/contexts/TrailerContext";
+import {MovieProvider} from "@features/admin/movies-management/list/contexts/MovieContext"
 import UsersLayout from "../layouts/admin/UsersLayout";
 
 export default function AdminRoutes() {
@@ -34,9 +34,9 @@ export default function AdminRoutes() {
                 <Route
                   index
                   element={
-                    <TrailerProvider>
+                    <MovieProvider>
                       <MovieManagement />
-                    </TrailerProvider>
+                    </MovieProvider>
                   }
                 />
                 <Route

@@ -9,8 +9,15 @@ import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateMovie } from "@services/admin/api";
 import { useModalContext } from "@contexts/admin/ModalContext";
+import { format } from "date-fns";
 
-export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
+export function useEditMovieActions({
+  editId,
+  editMovie,
+  trigger,
+  getValues,
+  setValue,
+}) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
@@ -25,15 +32,6 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const { notifActions } = useNotification();
   const { showLoading, hideLoading } = useLoading();
   const modal = useModalContext();
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.readAsDataURL(file);
-  };
 
   const handleCancelChange = () => {
     modal.close();
@@ -83,9 +81,23 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     const start = Date.now();
 
     const formData = new FormData();
-    for (const key in movie) {
-      formData.append(key, movie[key]);
-    }
+
+    Object.entries(movie).forEach(([key, value]) => {
+      if (key === "ngayKhoiChieu") {
+        formData.append(key, format(value, "dd/MM/yyyy"));
+        return;
+      }
+
+      if (key === "hinhAnh") {
+        const file = value?.[0];
+        if (file) {
+          formData.append("File", file, file.name);
+        }
+        return;
+      }
+
+      formData.append(key, value);
+    });
 
     try {
       modal.close();
@@ -129,7 +141,6 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   };
 
   return {
-    handleFileChange,
     handleSaveMovie,
     onCancelClick,
     onSaveClick,

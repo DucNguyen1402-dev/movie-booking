@@ -35,15 +35,19 @@ const applyFilter = (movies, keyword, status) =>
 
 export function useProcessedMovies() {
   const { data: movies = [], isPending } = useMovies();
+ 
   const keyword = useSelector(selectKeyword).trim().toLowerCase();
   const status = useSelector(selectStatus);
   const sortType = useSelector(selectSortType);
 
-  const finalMovies = useMemo(() => {
+  const processedMovies = useMemo(() => {
     const filteredMovies = applyFilter(movies, keyword, status);
     const sortFn = sortMapping[sortType];
     return sortFn ? applySort([...filteredMovies], sortFn) : filteredMovies;
   }, [movies, keyword, status, sortType]);
 
-  return { isPending, movies:finalMovies };
+
+  
+
+  return { isPending, movies, processedMovies};
 }

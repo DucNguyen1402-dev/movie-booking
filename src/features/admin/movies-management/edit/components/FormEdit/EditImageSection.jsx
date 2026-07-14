@@ -3,8 +3,8 @@ import { useMemo } from "react";
 
 export default function EditImageSection() {
   const {
-    editActions,
-    editForm: { watch, register },
+  
+    editForm: { watch , register},
   } = useEditMovie();
 
   const file = watch("hinhAnh");
@@ -14,7 +14,7 @@ export default function EditImageSection() {
 
     return typeof file === "string"
       ? file
-      : file?.[0]
+      : file[0]
         ? URL.createObjectURL(file[0])
         : "";
   }, [file]);
@@ -42,9 +42,7 @@ export default function EditImageSection() {
           type="file"
           accept="image/*"
           id="file-upload"
-          {...register("hinhAnh", {
-            onChange: editActions.handleFileChange,
-          })}
+          {...register("hinhAnh")}
           className="hidden"
         />
         <label

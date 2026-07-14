@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   Star,
   TvMinimalPlay,
@@ -9,7 +8,7 @@ import {
 } from "lucide-react";
 import { formatDate } from "../../utils/format/date";
 import { useMovieItem } from "../../hooks/useMovieItem";
-import { useTrailerContext } from "../../contexts/TrailerContext";
+import { useMovieContext } from "../../contexts/MovieContext";
 
 export default function MovieItem({ movie, movieId, highlight }) {
   const {
@@ -31,7 +30,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
     movie.sapChieu = false;
   }
 
-  const trailer = useTrailerContext();
+  const {trailer} = useMovieContext();
 
   const onOpenTrailerClick = () =>
     trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
