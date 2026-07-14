@@ -60,6 +60,11 @@ export default function Header() {
       title: "Edit user",
       description: "Khu vực thay đổi thông tin người dùng trong hệ thống.",
     },
+     {
+      path: "/admin/users/booking-infor/:account",
+      title: "Booking infor",
+      description: "Khu vực xem thông tin đặt vé người dùng.",
+    },
   ];
 
   let page = null;

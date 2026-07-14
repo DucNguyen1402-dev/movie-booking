@@ -19,11 +19,11 @@ export default function EditUser() {
 
   const initial = targetUser?.hoTen?.charAt(0).toUpperCase() ?? "";
 
-  const { register, handleSubmit, fields, errors } = useEditForm({
+  const { register, handleSubmit, fields, errors , initialUser} = useEditForm({
       user: targetUser,
     });
 
-  const {onCancelEditClick, onConfirmEditClick} = useEditActions({handleSubmit})
+  const {onCancelEditClick, onConfirmEditClick} = useEditActions({handleSubmit, initialUser})
 
 
   return (

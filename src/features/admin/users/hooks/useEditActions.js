@@ -9,7 +9,7 @@ import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 
-export function useEditActions({ handleSubmit }) {
+export function useEditActions({ handleSubmit, initialUser }) {
   const navigate = useNavigate();
   const location = useLocation();
   const history = location.state?.history ?? [];
@@ -46,7 +46,21 @@ export function useEditActions({ handleSubmit }) {
 
   const handleConfirmEdit = async (data) => {
     modal.close();
+
     showLoading();
+    const hasFieldChange = Object.keys(initialUser).some(
+      (key) => initialUser[key] !== data[key],
+    );
+
+    if (!hasFieldChange) {
+      hideLoading();
+      notifActions.showNotification({
+        variant: "warning",
+        message:
+          "Không phát hiện dữ liệu thay đổi, vui lòng kiểm tra lại hoặc rời trang.",
+      });
+      return;
+    }
 
     const start = new Date();
 
