@@ -1,18 +1,50 @@
-import { SquarePen, Trash } from "lucide-react";
+import { SquarePen, Trash, CalendarCheck } from "lucide-react";
 import { userRoleLabel } from "../../../constants/user-role-labels";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
 import { useUserDeletion } from "../../../hooks/useUserDeletion";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function TableRows({ users, highlightAccount, highlight , setHighlightAccount}) {
+
+
+export default function TableRows({ users, matchedAccount, highlight }) {
   const { onDeletionClick } = useUserDeletion();
   const location = useLocation();
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
+  const [highlightAccount, setHighlightAccount] = useState(null);
+  
+  useEffect(() => {
+    if (matchedAccount) {
+      setHighlightAccount(matchedAccount);
+      rowRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+
+      const timer = setTimeout(() => {
+        setHighlightAccount(null);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [matchedAccount]);
+
+  useEffect(() => {
+    if (!highlightAccount) return;
+    rowRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [highlightAccount]);
 
   const onEditClick = (account) =>
     navigate(`/admin/users/edit/${account}`, {
+      state: { history: [...history, location.pathname] },
+    });
+
+  const onBookingInforClick = (account) =>
+    navigate(`/admin/users/booking-infor/${account}`, {
       state: { history: [...history, location.pathname] },
     });
 
@@ -20,21 +52,11 @@ export default function TableRows({ users, highlightAccount, highlight , setHigh
 
   const highlightClass = USER_HIGHLIGHTS[highlight];
 
-  useEffect(() => {
-    if (!highlightAccount) return;
-
-    rowRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
- 
-  }, [highlightAccount]);
-
   return (
     <>
       {users.map((user) => {
         const isMatched = user.taiKhoan === highlightAccount;
-  
+
         return (
           <tr
             key={user.taiKhoan}
@@ -64,13 +86,21 @@ export default function TableRows({ users, highlightAccount, highlight , setHigh
             <td>
               <div className="flex justify-center gap-2">
                 <button
+                title = "sửa thông tin"
                   className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-indigo-500/20 hover:text-indigo-400"
                   onClick={() => onEditClick(user.taiKhoan)}
                 >
                   <SquarePen className="size-4" />
                 </button>
-
+                   <button
+                       title = "xem thông tin đặt vé"
+                  className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-yellow-500/20 hover:text-yellow-400"
+                  onClick={() => onBookingInforClick(user.taiKhoan)}
+                >
+                  <CalendarCheck className="size-4" />
+                </button>
                 <button
+                 title = "xóa người dùng"
                   className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-red-500/20 hover:text-red-400"
                   onClick={() => onDeletionClick(user.taiKhoan)}
                 >

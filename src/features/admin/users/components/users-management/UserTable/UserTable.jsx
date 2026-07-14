@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
 import { useUsersContext } from "../../../contexts/UsersContext";
-import { useState, useEffect } from "react";
 
 export default function UserTable() {
   const {
@@ -11,29 +10,15 @@ export default function UserTable() {
   } = useUsersContext();
 
   const location = useLocation();
-  const navigate = useNavigate();
-  const { account = "", highlight = "none", history } = location?.state ?? {};
-  const [highlightAccount, setHighlightAccount] = useState(null);
-
-  useEffect(() => {
-    if (!account) return;
-
-    setHighlightAccount(account);
-
-    navigate(".", {
-      replace: true,
-      state: { history },
-    });
-  }, [account, navigate]);
-
+  const { account = "", highlight = "none" } = location?.state ?? {};
+  
   const tableContent = isPending ? (
     <TableSkeleton />
   ) : (
     <TableRows
       users={paginatedUsers}
-      highlightAccount={highlightAccount}
+      matchedAccount={account}
       highlight={highlight}
-      setHighlightAccount={setHighlightAccount}
     />
   );
 

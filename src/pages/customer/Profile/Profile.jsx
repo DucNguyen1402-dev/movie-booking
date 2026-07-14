@@ -239,9 +239,9 @@ const Profile = () => {
                       </div>
 
                       <div className="mt-4 flex flex-wrap gap-2">
-                        {ticket.danhSachGhe?.map((seat) => (
+                        {ticket.danhSachGhe?.map((seat, index) => (
                           <span
-                            key={`${seat.maGhe} - ${seat.tenGhe}`}
+                            key={`${seat.maGhe} - ${index}`}
                             className="rounded-full bg-[#f5c518] px-3 py-1 text-xs font-black text-black"
                           >
                             Ghế {seat.tenGhe}

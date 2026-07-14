@@ -20,8 +20,20 @@ export const updateUser = async (payload) => {
     payload,
   );
 
+
   return data.content;
 };
+
+
+export const getUserInfor = async (taiKhoan) => {
+  const { data } = await api.post(
+    `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`,
+  );
+
+  return data.content;
+};
+
+
 
 export const deleteUser = async (account) => {
   const { data } = await api.delete(

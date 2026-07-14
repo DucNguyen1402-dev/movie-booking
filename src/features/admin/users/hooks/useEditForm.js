@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function useEditForm({ user }) {
+  const [initialUser, setInitialUser] = useState(null);
+
   const {
     register,
     handleSubmit,
@@ -21,15 +23,22 @@ export function useEditForm({ user }) {
       email: user.email,
       soDT: user.soDT,
       maNhom: "GP01",
-      maLoaiNguoiDung: user.maLoaiNguoiDung
+      maLoaiNguoiDung: user.maLoaiNguoiDung,
     });
+     setInitialUser({
+        hoTen: user.hoTen,
+        email: user.email,
+        soDT: user.soDT,
+        maLoaiNguoiDung: user.maLoaiNguoiDung,
+      });
   }, [user]);
 
-  const {maNhom,maLoaiNguoiDung, ...inputFields } = defaultValues;
+  const { maNhom, maLoaiNguoiDung, ...inputFields } = defaultValues;
   return {
     register,
     handleSubmit,
     fields: inputFields,
     errors,
+    initialUser,
   };
 }
