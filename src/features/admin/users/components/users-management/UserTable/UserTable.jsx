@@ -1,42 +1,39 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
 import EmptyUsers from "./EmptyUsers";
 import { useUsersContext } from "../../../contexts/UsersContext";
 import UserPagination from "../UserPagination";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function UserTable() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [rowState] = useState(() => ({
+    account: location.state?.account ?? "",
+    highlight: location.state?.highlight ?? "",
+  }));
   const {
     usersStates: { isPending },
     userPagination: {
       paginatedUsers,
       pagination,
-      setPage,
       moveToAccountPage,
       skipNextPageReset,
     },
   } = useUsersContext();
 
-  const location = useLocation();
-  const {
-    account = "",
-    highlight = "none",
-    previousPage,
-  } = location?.state ?? {};
-
-  if (account) {
+  if (rowState.account) {
     skipNextPageReset.current = true;
   }
   useEffect(() => {
-    if (!account) return;
-    moveToAccountPage(account);
-  }, [account]);
-
-  // useEffect(() =>{
-  //   if(!previousPage) return;
-  //   setPage(previousPage);
-  // }, [previousPage])
+    if (!rowState.account) return;
+    moveToAccountPage(rowState.account);
+    navigate(location.pathname, {
+      replace: true,
+      state: { history: location.state?.history ?? [] },
+    });
+  }, [rowState.account]);
 
   const isUserListEmpty = paginatedUsers.length === 0;
 
@@ -48,8 +45,8 @@ export default function UserTable() {
     <TableRows
       currentPage={pagination.page}
       users={paginatedUsers}
-      matchedAccount={account}
-      highlight={highlight}
+      matchedAccount={rowState.account}
+      highlight={rowState.highlight}
     />
   );
 

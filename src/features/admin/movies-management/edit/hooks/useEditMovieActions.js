@@ -16,7 +16,6 @@ export function useEditMovieActions({
   editMovie,
   trigger,
   getValues,
-  setValue,
 }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -94,7 +93,7 @@ export function useEditMovieActions({
       if (key === "hinhAnh") {
         const file = value?.[0];
         if (file) {
-          formData.append("File", file, file.name);
+          formData.append("File", file);
         }
         return;
       }
