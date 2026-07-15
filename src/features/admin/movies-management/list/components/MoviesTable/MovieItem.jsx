@@ -10,7 +10,9 @@ import { formatDate } from "../../utils/format/date";
 import { useMovieItem } from "../../hooks/useMovieItem";
 import { useMovieContext } from "../../contexts/MovieContext";
 
+
 export default function MovieItem({ movie, movieId, highlight }) {
+
   const {
     onDeleteClick,
     onCreateShowTimeClick,
@@ -18,6 +20,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
     isTargetMovie,
     highlightAnimation,
     rowRef,
+    onDeleting
   } = useMovieItem({
     movie,
     movieId,
@@ -29,16 +32,18 @@ export default function MovieItem({ movie, movieId, highlight }) {
   if (movie.dangChieu && movie.sapChieu) {
     movie.sapChieu = false;
   }
-
+  
   const {trailer} = useMovieContext();
 
   const onOpenTrailerClick = () =>
     trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
 
+
+
   return (
     <tr
       ref={isTargetMovie ? rowRef : null}
-      className={`group transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"}`}
+      className={`group transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"} ${onDeleting ? "bg-red-950/25 ring-1 ring-inset ring-red-800/50" : ""}`}
     >
       <td className="px-6 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
 

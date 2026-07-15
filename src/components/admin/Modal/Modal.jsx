@@ -1,28 +1,27 @@
 import Delete from "./Delete/Delete";
-import SaveChangesModal from "./EditModal/SaveMovieChangesModal";
-import DiscardChangesModal from "./EditModal/DiscardMovieChangesModal";
 import ShowtimeModal from "./Showtime/ShowTimeModal"
 import AddModal from "./AddModal/AddModal"
 import EditModal from "./EditModal/EditModal"
 import { useModalContext } from "@contexts/admin/ModalContext";
 
-
 const MODALS = {
   deleteMovie: Delete,
-  discardMovieChanges: DiscardChangesModal,
-  saveMovieChanges: SaveChangesModal,
   showtimeCreation: ShowtimeModal,
   addingMovie: AddModal,
   addingUser: AddModal,
   deleteUser: Delete,
-  cancleEditUser: EditModal
+  cancleEditUser: EditModal,
+  editMovie: EditModal
 };
 
 export default function Modal() {
+
   const { modal, close } = useModalContext();
 
-  const onCancel = () => close();
+  const cancelHandler = modal.onCancel ?? close;
+  const onCancel = () => cancelHandler();
   const onConfirm = () => modal.onConfirm();
+
 
   if (!modal.type) return null;
 

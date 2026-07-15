@@ -47,13 +47,14 @@ export default function DateInput({
         <button
           type="button"
           onClick={() => setDayPickerVisible((prev) => !prev)}
-          className="flex w-full cursor-pointer items-center gap-2 rounded-sm border p-2 transition-colors focus:outline-none disabled:cursor-default text-slate-100 border-gray-600 focus:ring-2 focus:ring-blue-500 active:hover:border-blue-500/20"
+          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border p-1.5 transition-colors focus:outline-none disabled:cursor-default  border-gray-600 focus:ring-2 focus:ring-blue-500 active:hover:border-blue-500/20 hover:ring-1 hover:ring-blue-500
+            ${disabled ? "text-gray-500" : "text-gray-400"}`}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"
           disabled={disabled}
         >
           <Calendar className="size-4.5" />
-          <span className={disabled ? "text-gray-200" : "text-gray-300"}>
+          <span >
             {disabled ? labels.disabled : dateLabel}
           </span>
         </button>
@@ -65,9 +66,9 @@ export default function DateInput({
           name={name}
           rules={rules}
         />
-        {errors.name && (
-          <p className="z-20 mt-2 w-full rounded-sm border-l-5 px-2 py-2 text-xs border-red-600 bg-red-950/40 text-red-300">
-            {errors.name.message}
+        {errors[name] && (
+          <p className="z-20 mt-1.5 w-full rounded-sm border-l-5 px-2 py-2 text-xs border-red-600 bg-red-950/40 text-red-300">
+            {errors[name].message}
           </p>
         )}
       </div>

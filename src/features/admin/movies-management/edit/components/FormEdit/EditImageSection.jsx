@@ -20,13 +20,13 @@ export default function EditImageSection() {
   }, [file]);
 
   return (
-    <div className="flex flex-col items-center justify-between rounded-xl bg-white p-6 shadow-sm">
+    <div className="flex flex-col items-center justify-between rounded-xl bg-slate-800 p-6 shadow-sm">
       <div className="flex w-full flex-col items-center gap-5">
-        <label className="mb-3 block text-center text-2xl font-medium tracking-wider text-gray-700">
+        <label className="mb-3 block text-center text-2xl font-medium tracking-wider text-slate-100">
           Hình ảnh poster
         </label>
 
-        <div className="mx-auto mb-4 flex h-64 w-48 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300 bg-gray-50">
+        <div className="mx-auto mb-4 flex h-96 w-72 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-600">
           {preview ? (
             <img
               src={preview}
@@ -34,7 +34,7 @@ export default function EditImageSection() {
               className="h-full w-full object-cover"
             />
           ) : (
-            <span className="text-sm text-gray-400">Chưa có ảnh</span>
+            <span className="text-sm text-gray-100">Chưa có ảnh</span>
           )}
         </div>
 
@@ -47,7 +47,7 @@ export default function EditImageSection() {
         />
         <label
           htmlFor="file-upload"
-          className="inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-300 hover:bg-indigo-600"
+          className="inline-flex cursor-pointer items-center rounded-md  bg-indigo-600 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm transition-colors duration-300 hover:bg-indigo-700"
         >
           Thay đổi hình ảnh
         </label>

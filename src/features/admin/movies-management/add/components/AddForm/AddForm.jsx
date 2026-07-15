@@ -1,7 +1,7 @@
 import { useAddMovie } from "../../hooks/useAddMovie";
 import { validationRules } from "@config/admin/validation-rules";
 import DateInput from "@features/admin/shared/components/DateInput/DateInput";
-import CheckBox from "./CheckBox";
+import CheckBox from "@features/admin/shared/components/CheckBox";
 import { CancelButton, AddButton } from "@components/admin/buttons";
 
 export default function AddForm() {
@@ -113,7 +113,7 @@ export default function AddForm() {
               className="block w-fit text-sm text-slate-200 file:mr-4 file:cursor-pointer file:rounded file:border-2 file:border-indigo-500 file:bg-indigo-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-100 file:transition-colors file:duration-300 hover:file:border-indigo-400"
             />
             {errors.hinhAnh && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+              <p className="z-20 mt-2 w-full rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
                 {errors.hinhAnh.message}
               </p>
             )}

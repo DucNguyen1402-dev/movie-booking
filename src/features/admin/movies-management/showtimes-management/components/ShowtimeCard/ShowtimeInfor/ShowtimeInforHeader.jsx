@@ -24,7 +24,7 @@ export default function ShowtimeInforHeader({ diaChi, tenCumRap, hasNewShowtime 
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="h-4 w-4 text-yellow-300 drop-shadow-[0_0_3px_rgba(253,224,71,0.8)] filter"
+          className="h-4 w-4 text-yellow-400 drop-shadow-[0_0_3px_rgba(253,224,71,0.8)] filter"
         >
           <path
             fillRule="evenodd"
@@ -33,14 +33,14 @@ export default function ShowtimeInforHeader({ diaChi, tenCumRap, hasNewShowtime 
           />
         </svg>
       </div>
-      <h3 className="font-semibold text-slate-700">{tenCumRap}</h3>
-      <div className="h-0.5 w-2 bg-slate-600"></div>
+      <h3 className="font-semibold text-slate-200">{tenCumRap}</h3>
+      <div className="h-0.5 w-2 bg-slate-200"></div>
 
       <a
         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(diaChi)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-sky-600 transition-colors hover:text-sky-700 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+        className="inline-flex items-center gap-1.5 text-sky-400 transition-colors hover:text-sky-700 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
       >
         <div className="flex size-5 items-center justify-center rounded-full bg-blue-500">
           <MapPin className="size-3 text-white" />

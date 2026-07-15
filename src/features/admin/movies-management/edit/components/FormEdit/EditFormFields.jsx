@@ -3,11 +3,11 @@ import { useEditMovie } from "../../contexts/EditContext";
 import { getRateClasses } from "../../config/editConfig";
 import { validationRules } from "@config/admin/validation-rules";
 import DateInput from "@features/admin/shared/components/DateInput/DateInput";
+import CheckBox from "@features/admin/shared/components/CheckBox";
 
 export default function EditFormFields() {
   const {
-    editStates,
-    editForm: { register, errors ,watch, control},
+    editForm: { register, errors, watch, control },
   } = useEditMovie();
 
   return (
@@ -20,16 +20,16 @@ export default function EditFormFields() {
         <input
           type="text"
           {...register("tenPhim", validationRules.tenPhim)}
-          className="w-full rounded-md border border-gray-400 px-4 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+          className="w-full rounded-sm border border-slate-600 bg-slate-700 px-4 py-2 text-slate-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
         />
         {errors.tenPhim && (
-          <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+          <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
             {errors.tenPhim.message}
           </p>
         )}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="flex flex-col gap-2.5">
           <label className="text-sm font-bold tracking-wider text-slate-200">
             Bí danh (Slug)
@@ -37,29 +37,26 @@ export default function EditFormFields() {
           <div className="relative">
             <input
               type="text"
-               {...register("biDanh")}
-              className="w-full rounded-md border border-gray-400 bg-gray-50 px-4 py-2 text-gray-500"
+              {...register("biDanh")}
+              className="w-full rounded-sm border border-gray-600 px-4 py-2 text-gray-100"
               disabled
             />
-            <LockKeyhole className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 text-yellow-600" />
+            <LockKeyhole className="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 text-yellow-400" />
           </div>
         </div>
 
-        
-         <DateInput
-            control={control}
-            value={watch("ngayKhoiChieu")}
-            name="ngayKhoiChieu"
-            rules={validationRules.ngayKhoiChieu}
-            labels={{
-              placeholder: "Chọn ngày khởi chiếu",
-              form: "Ngày khởi chiếu",
+        <DateInput
+          control={control}
+          value={watch("ngayKhoiChieu")}
+          name="ngayKhoiChieu"
+          rules={validationRules.ngayKhoiChieu}
+          labels={{
+            placeholder: "Chọn ngày khởi chiếu",
+            form: "Ngày khởi chiếu",
 
-              requied: "Vui lòng chọn ngày khởi chiếu phim",
-            }}
-          />
-        
-    
+            requied: "Vui lòng chọn ngày khởi chiếu phim",
+          }}
+        />
       </div>
 
       <div className="flex flex-col gap-2.5">
@@ -70,17 +67,15 @@ export default function EditFormFields() {
           <input
             type="text"
             {...register("trailer", validationRules.trailer)}
-            className="w-full rounded-md border border-gray-400 px-4 py-2 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            className="w-full rounded-sm border border-gray-600 px-4 py-2 text-slate-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
           />
           {errors.trailer && (
-            <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+            <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
               {errors.trailer.message}
             </p>
           )}
         </div>
       </div>
-
-
 
       <div className="flex flex-col gap-2.5">
         <label className="text-sm font-bold tracking-wider text-slate-200">
@@ -90,46 +85,20 @@ export default function EditFormFields() {
           <textarea
             rows="4"
             {...register("moTa", validationRules.moTa)}
-            className="w-full rounded-md border border-gray-400 px-4 py-2 text-gray-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            className="w-full rounded-sm border border-gray-600 px-4 py-2 text-[15px] text-gray-100 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:outline-none"
           ></textarea>
           {errors.moTa && (
-            <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+            <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
               {errors.moTa.message}
             </p>
           )}
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 pt-2 md:grid-cols-4">
-        <label className="flex cursor-pointer items-center space-x-3">
-          <input
-            type="checkbox"
-            {...register("dangChieu")}
-            className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500"
-          />
-
-          <span className="text-sm font-medium text-slate-200">Đang chiếu</span>
-        </label>
-
-        <label className="flex cursor-pointer items-center space-x-3">
-          <input
-            type="checkbox"
-            {...register("sapChieu")}
-            className="h-4 w-4 rounded text-blue-600 focus:ring-blue-500"
-          />
-          <span className="text-sm font-medium text-slate-200">Sắp chiếu</span>
-        </label>
-
-        <label className="flex cursor-pointer items-center space-x-3">
-          <input
-            type="checkbox"
-             {...register("hot")}
-            className="h-4 w-4 rounded text-red-600 focus:ring-red-500"
-          />
-          <span className="text-sm font-semibold text-red-600">
-            Phim HOT 🔥
-          </span>
-        </label>
+      <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-4">
+        <CheckBox control={control} name="dangChieu" label="Đang chiếu" />
+        <CheckBox control={control} name="sapChieu" label="Sắp chiếu" />
+        <CheckBox control={control} name="hot" label="Phim hot" />
 
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-slate-200">Đánh giá:</span>
@@ -137,8 +106,7 @@ export default function EditFormFields() {
             <input
               type="number"
               {...register("danhGia", validationRules.danhGia)}
-              className={`w-8 rounded-sm border border-gray-300 px-1 py-px text-center text-white focus:ring-1 focus:outline-none 
-                ${getRateClasses(watch("danhGia"))}`}
+              className={`w-8 rounded-sm border border-gray-300 px-1 py-px text-center text-white focus:ring-1 focus:outline-none ${getRateClasses(watch("danhGia"))}`}
             />
             <Star className="h-4 w-4 fill-current text-yellow-500" />
           </div>
@@ -147,3 +115,7 @@ export default function EditFormFields() {
     </div>
   );
 }
+
+
+
+

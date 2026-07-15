@@ -7,8 +7,10 @@ import { useState } from "react";
 export function useEditMovieState() {
   const { id } = useParams();
   const { data: movies = [] } = useMovies();
+  const movie  = movies.find(movie => movie.id === Number(id)) ?? {};
   return {
     id,
     movies,
+    movie
   };
 }

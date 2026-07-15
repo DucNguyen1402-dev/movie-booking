@@ -23,9 +23,9 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-1.5 text-slate-700">
+    <div className="flex flex-col gap-1.5 ">
       <label
-        className="mb-2 cursor-pointer text-sm font-medium"
+        className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
         htmlFor="show-time"
       >
         Giờ chiếu
@@ -35,14 +35,14 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
         <button
           type="button"
           onClick={() => setTimePickerVisible((prev) => !prev)}
-          className="flex w-full cursor-pointer items-center gap-2 rounded-sm border border-gray-300 p-2 transition-colors focus:ring-1 focus:ring-blue-500 focus:outline-none active:hover:border-gray-400 disabled:cursor-default"
+          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border border-gray-600 p-1.5 transition-colors hover:ring-1 hover:ring-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none active:hover:border-gray-500 disabled:cursor-default ${isTimePickerDisabled ? "text-gray-500" : "text-gray-400"}`}
           aria-expanded={timePickerVisible}
           aria-haspopup="dialog"
           disabled={isTimePickerDisabled}
         >
           <Clock4 className="size-4.5" />
           <span
-            className={isTimePickerDisabled ? "text-gray-400" : "text-gray-500"}
+
           >
             {isTimePickerDisabled ? "Vui lòng chọn rạp chiếu trước" : timeLabel}
           </span>
@@ -62,9 +62,9 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
                 />
 
                 {fieldState.error && (
-                  <p className="absolute z-10 mt-1 w-full rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-                    {fieldState.error.message}
-                  </p>
+                   <p className="absolute top-[115%] left-0 w-full z-10 rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
+                {fieldState.error.message}
+              </p>
                 )}
               </>
             )}

@@ -1,10 +1,10 @@
-const MovieIcon = ({ backgroundColors = ""}) => {
+const MovieIcon = () => {
   // Tạo mảng 4 phần tử để render các lỗ cuộn phim bằng vòng lặp cho gọn
   const dots = Array(3).fill(null);
 
   return (
     <div
-      className={`group/inner relative flex h-8 w-10 items-center justify-center rounded-md border border-slate-700/50   shadow-xl transition-all duration-300 group-hover/outer:scale-105 group-hover/outer:shadow-cyan-500/20 ${backgroundColors ? backgroundColors : "bg-linear-to-br from-red-950/80 via-red-900 to-red-800"}`}
+      className={`group/inner relative flex h-8 w-10 items-center justify-center rounded-md border border-slate-700/50   shadow-xl transition-all duration-300 group-hover/outer:scale-105 group-hover/outer:shadow-cyan-500/20 bg-linear-to-br from-red-800 via-red-700 to-red-600`}
       
     >
       <div className="absolute top-0 bottom-0 left-1.5 flex flex-col justify-around gap-1 py-2">

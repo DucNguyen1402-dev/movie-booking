@@ -3,7 +3,6 @@ import {
   LayoutDashboard,
   Clapperboard,
   Users,
-  Film,
   UserPen,
   SquareArrowRightExit,
 } from "lucide-react";
@@ -46,7 +45,7 @@ export default function Sidebar() {
 
       <div className="flex h-20 items-center border-b border-gray-800 px-6">
         <div className="flex items-center gap-3">
-          <MovieIcon backgroundColors = "bg-linear-to-br from-red-900 via-red-700 to-red-600"/>
+          <MovieIcon/>
 
           <div className="leading-tight">
             <h1 className="text-lg font-bold tracking-wide text-white">

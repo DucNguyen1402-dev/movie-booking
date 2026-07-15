@@ -10,7 +10,9 @@ import {useModalContext} from "@contexts/admin/ModalContext"
 
 export default function GlobalUI() {
   const {modal} = useModalContext();
-  useLockBodyScroll(modal.isOpen);
+ 
+  useLockBodyScroll(modal.type !== null);
+
 
   const loading = useLoading();
   const notif = useNotification();

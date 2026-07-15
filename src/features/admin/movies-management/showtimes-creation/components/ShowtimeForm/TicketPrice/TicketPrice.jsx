@@ -6,13 +6,17 @@ export function formatCurrencyDisplay(value) {
   return Number(value).toLocaleString("vi-VN");
 }
 
-export default function TicketPrice({ control,watch, validationRules, isTicketPriceDisabled }) {
-
+export default function TicketPrice({
+  control,
+  watch,
+  validationRules,
+  isTicketPriceDisabled,
+}) {
   const giaVe = watch("giaVe") ?? null;
   return (
-    <div className="flex flex-col gap-1.5 text-slate-700">
+    <div className="flex flex-col gap-1.5">
       <label
-        className="mb-2 cursor-pointer text-sm font-medium"
+        className={`mb-2 cursor-pointer text-sm font-medium text-slate-200 ${isTicketPriceDisabled ? "text-slate-300" : "text-slate-200"}`}
         htmlFor="ticket-price"
       >
         Giá vé
@@ -37,16 +41,22 @@ export default function TicketPrice({ control,watch, validationRules, isTicketPr
                   const rawValue = e.target.value.replace(/\D/g, "");
                   field.onChange(rawValue);
                 }}
-                disabled ={isTicketPriceDisabled}
-                placeholder={isTicketPriceDisabled ? "Vui lòng chọn rạp chiếu trước": "Nhập giá vé (VND)"}
-                className="w-full rounded-sm border border-slate-300 px-3 py-2 outline-none focus:ring-1 focus:ring-blue-500"
+                disabled={isTicketPriceDisabled}
+                placeholder={
+                  isTicketPriceDisabled
+                    ? "Vui lòng chọn rạp chiếu trước"
+                    : "Nhập giá vé (VND)"
+                }
+                className={`w-full cursor-pointer rounded-sm border border-slate-600 px-3 hover:ring-1 py-1.5 outline-none focus:ring-1 focus:ring-blue-500 hover:ring-blue-500 ${isTicketPriceDisabled ? "text-slate-500" : "text-slate-400"}`}
               />
-             { giaVe && <div className="absolute top-1/2 right-2 -translate-y-1/2">
-                <span className="text-gray-500">VND</span>
-              </div>}
+              {giaVe && (
+                <div className="absolute top-1/2 right-2 -translate-y-1/2">
+                  <span className="text-gray-200">VND</span>
+                </div>
+              )}
             </div>
             {fieldState.error && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+              <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
                 {fieldState.error.message}
               </p>
             )}

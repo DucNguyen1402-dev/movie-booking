@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteMovie } from "@services/admin/api";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { MOVIE_HIGHLIGHTS } from "@config/admin/movieHighlight";
 import { useModalContext } from "@contexts/admin/ModalContext";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
@@ -11,6 +11,7 @@ import { useNotification } from "@contexts/admin/NotificationContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export function useMovieItem({ movie, movieId, highlight }) {
+  const [onDeleting, setOnDeleting] = useState(false);
   const { mutateAsync } = useMutation({
     mutationFn: deleteMovie,
     onSuccess: () => {
@@ -54,15 +55,8 @@ export function useMovieItem({ movie, movieId, highlight }) {
       },
     });
 
-  const onDeleteClick = () =>
-    modal.open({
-      type: MODAL_TYPES.DELETE_MOVIE,
-      title: "Bạn có chắc muốn xóa phim này không?",
-      subtitle: "Hành động này không thể hoàn lại.",
-      onConfirm: handleDeleteMovie,
-    });
-
   const handleDeleteMovie = async () => {
+   
     const start = Date.now();
     try {
       modal.close();
@@ -81,7 +75,21 @@ export function useMovieItem({ movie, movieId, highlight }) {
       });
     } finally {
       hideLoading();
+        setOnDeleting(false); 
     }
+  };
+  const onDeleteClick = () => {
+    setOnDeleting(true); 
+    modal.open({
+      type: MODAL_TYPES.DELETE_MOVIE,
+      title: `Bạn có chắc muốn xóa phim "${movie.tenPhim}"?`,
+      subtitle: "Hành động này không thể hoàn lại.",
+      onConfirm: handleDeleteMovie,
+      onCancel: () => {
+        setOnDeleting(false); 
+        modal.close()
+      },
+    });
   };
 
   return {
@@ -91,5 +99,6 @@ export function useMovieItem({ movie, movieId, highlight }) {
     rowRef,
     onCreateShowTimeClick,
     onEditClick,
+    onDeleting,
   };
 }
