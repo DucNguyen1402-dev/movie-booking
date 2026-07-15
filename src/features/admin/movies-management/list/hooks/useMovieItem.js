@@ -52,11 +52,11 @@ export function useMovieItem({ movie, movieId, highlight }) {
     navigate(`/admin/movies/edit/${movie.maPhim}`, {
       state: {
         history: [...(location.state?.history ?? []), location.pathname],
+        shouldConfirmLeave: true,
       },
     });
 
   const handleDeleteMovie = async () => {
-   
     const start = Date.now();
     try {
       modal.close();
@@ -75,19 +75,19 @@ export function useMovieItem({ movie, movieId, highlight }) {
       });
     } finally {
       hideLoading();
-        setOnDeleting(false); 
+      setOnDeleting(false);
     }
   };
   const onDeleteClick = () => {
-    setOnDeleting(true); 
+    setOnDeleting(true);
     modal.open({
       type: MODAL_TYPES.DELETE_MOVIE,
       title: `Bạn có chắc muốn xóa phim "${movie.tenPhim}"?`,
       subtitle: "Hành động này không thể hoàn lại.",
       onConfirm: handleDeleteMovie,
       onCancel: () => {
-        setOnDeleting(false); 
-        modal.close()
+        setOnDeleting(false);
+        modal.close();
       },
     });
   };

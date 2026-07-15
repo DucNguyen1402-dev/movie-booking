@@ -40,7 +40,7 @@ export default function TableRows({ users, matchedAccount, highlight , currentPa
 
   const onEditClick = (account) =>
     navigate(`/admin/users/edit/${account}`, {
-      state: { history: [...history, location.pathname], previousPage: currentPage },
+      state: { history: [...history, location.pathname] },
     });
 
   const onBookingInforClick = (account) =>

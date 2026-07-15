@@ -35,7 +35,7 @@ const applyFilter = (movies, keyword, status) =>
 
 export function useProcessedMovies() {
   const { data: movies = [], isPending , isFetching} = useMovies();
- 
+  
   const keyword = useSelector(selectKeyword).trim().toLowerCase();
   const status = useSelector(selectStatus);
   const sortType = useSelector(selectSortType);
@@ -46,8 +46,7 @@ export function useProcessedMovies() {
     return sortFn ? applySort([...filteredMovies], sortFn) : filteredMovies;
   }, [movies, keyword, status, sortType]);
 
-
-  
+    
 
   return { isPending, movies, processedMovies, keyword,status , sortType, isFetching};
 }

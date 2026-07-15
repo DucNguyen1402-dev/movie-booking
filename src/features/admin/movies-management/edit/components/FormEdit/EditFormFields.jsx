@@ -4,11 +4,24 @@ import { getRateClasses } from "../../config/editConfig";
 import { validationRules } from "@config/admin/validation-rules";
 import DateInput from "@features/admin/shared/components/DateInput/DateInput";
 import CheckBox from "@features/admin/shared/components/CheckBox";
+import {useEffect} from "react"
 
 export default function EditFormFields() {
   const {
-    editForm: { register, errors, watch, control },
+    editForm: { register, errors, watch, control, isDirty },
   } = useEditMovie();
+
+  useEffect(() => {
+    if (!isDirty) return;
+
+    navigate(".", {
+      replace: true,
+      state: {
+        ...location.state,
+        shouldConfirmLeave: true,
+      },
+    });
+  }, [isDirty]);
 
   return (
     <div className="space-y-8 rounded-xl bg-gray-800 p-8 shadow-sm lg:col-span-2">
@@ -115,7 +128,3 @@ export default function EditFormFields() {
     </div>
   );
 }
-
-
-
-

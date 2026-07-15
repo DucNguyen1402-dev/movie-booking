@@ -10,7 +10,7 @@ export default function MoviesTable() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [rowState] = useState(() => ({
+  const [rowState, setRowState] = useState(() => ({
     movieId: location.state?.movieId ?? null,
     highlight: location.state?.highlight ?? "",
   }));
@@ -26,6 +26,20 @@ export default function MoviesTable() {
   }
 
   useEffect(() => {
+    const keys = ["highlight", "account"];
+
+    const timers = keys
+      .filter((key) => rowState[key])
+      .map((key) =>
+        setTimeout(() => {
+          setRowState((prev) => ({ ...prev, [key]: "" }));
+        }, 3000),
+      );
+
+    return () => timers.forEach(clearTimeout);
+  }, [rowState.highlight, rowState.account]);
+
+  useEffect(() => {
     if (!rowState.movieId || isFetching) return;
 
     moveToMoviePage(rowState.movieId);
@@ -36,7 +50,7 @@ export default function MoviesTable() {
         history: location.state?.history ?? [],
       },
     });
-  }, [rowState.movieId, rowState.highlight, isFetching]);
+  }, [rowState.movieId, isFetching]);
 
   const isEmptyMovieList = paginatedMovieList.length === 0;
 

@@ -14,6 +14,8 @@ export function MovieProvider({ children }) {
   });
   const trailer = useTrailer();
 
+  
+
   const value = {
     isPending,
     isFetching,

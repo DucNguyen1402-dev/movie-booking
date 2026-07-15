@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import MainLayout from "../layouts/admin/MainLayout";
+
 import Dashboard from "../pages/admin/Dashboard/Dashboard";
 import Profile from "../pages/admin/Profiles/Profile";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
@@ -15,8 +15,7 @@ import { EditProvider } from "@features/admin/movies-management/edit/contexts/Ed
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import {MovieProvider} from "@features/admin/movies-management/list/contexts/MovieContext"
-import UsersLayout from "../layouts/admin/UsersLayout";
+import { UsersLayout, MoviesLayout, MainLayout } from "../layouts/admin";
 
 export default function AdminRoutes() {
   return (
@@ -30,15 +29,8 @@ export default function AdminRoutes() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="profile" element={<Profile />} />
 
-              <Route path="movies">
-                <Route
-                  index
-                  element={
-                    <MovieProvider>
-                      <MovieManagement />
-                    </MovieProvider>
-                  }
-                />
+              <Route path="movies" element={<MoviesLayout />}>
+                <Route index element={<MovieManagement />} />
                 <Route
                   path="edit/:id"
                   element={
@@ -54,11 +46,15 @@ export default function AdminRoutes() {
                   element={<ShowtimeCreation />}
                 />
               </Route>
+
               <Route path="users" element={<UsersLayout />}>
                 <Route index element={<UsersManagement />} />
                 <Route path="add" element={<AddUser />} />
                 <Route path="edit/:account" element={<EditUser />} />
-                <Route path="booking-infor/:account" element={<UserBookingInfor />} />
+                <Route
+                  path="booking-infor/:account"
+                  element={<UserBookingInfor />}
+                />
               </Route>
             </Route>
           </Routes>

@@ -10,19 +10,15 @@ export function useMoviePagination({ movies, keyword, status, sortType }) {
     setPagination((prev) => ({ ...prev, page: Number(value) }));
 
   const moveToMoviePage = (id) => {
-    
- 
     const movieIndex = movies.findIndex((movie) => movie.maPhim === Number(id));
-     console.log("id", id)
- console.log("movies", movies)
+    console.log("id", id);
+    console.log("movies", movies);
     if (movieIndex === -1) return;
 
     const moviePage = Math.floor(movieIndex / pagination.size) + 1;
 
     setPagination((prev) => ({ ...prev, page: moviePage }));
   };
-  
-
 
   useEffect(() => {
     if (skipNextPageReset.current) {

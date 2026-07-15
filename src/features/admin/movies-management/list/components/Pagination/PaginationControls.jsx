@@ -3,17 +3,17 @@ import { useMovieContext } from "../../contexts/MovieContext";
 
 export default function PaginationControls() {
   const {
-    movies,
+    processedMovies,
     moviePagination: { pagination, setPage },
   } = useMovieContext();
 
-  const totalMovies = movies.length;
+  const totalMovies = processedMovies.length;
 
   const displayStart =
     totalMovies === 0 ? 0 : (pagination.page - 1) * pagination.size + 1;
   const displayEnd = Math.min(pagination.page * pagination.size, totalMovies);
 
-  const totalPages = Math.ceil(movies.length / pagination.size);
+  const totalPages = Math.ceil(processedMovies.length / pagination.size);
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 

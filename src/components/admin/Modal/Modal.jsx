@@ -2,6 +2,7 @@ import Delete from "./Delete/Delete";
 import ShowtimeModal from "./Showtime/ShowTimeModal"
 import AddModal from "./AddModal/AddModal"
 import EditModal from "./EditModal/EditModal"
+import LeavePageModal from "./LeavePageModal/LeavePageModal"
 import { useModalContext } from "@contexts/admin/ModalContext";
 
 const MODALS = {
@@ -11,7 +12,8 @@ const MODALS = {
   addingUser: AddModal,
   deleteUser: Delete,
   cancleEditUser: EditModal,
-  editMovie: EditModal
+  editMovie: EditModal,
+  leavePage: LeavePageModal
 };
 
 export default function Modal() {

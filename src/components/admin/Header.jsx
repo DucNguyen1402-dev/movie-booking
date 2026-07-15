@@ -1,12 +1,17 @@
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { MoveLeft } from "lucide-react";
+import { useModalContext } from "@contexts/admin/ModalContext";
+import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
 export default function Header() {
   const location = useLocation();
   const history = location.state?.history ?? [];
-  const previous = history.at(-1);
+  const shouldConfirmLeave = location.state?.shouldConfirmLeave ?? false;
+  const previous = history.at(-1) ?? null;
 
-  const isDisabledBack = previous === undefined;
+  const modal = useModalContext();
+
+  const isDisabledBack = previous === null;
 
   const pageConfig = [
     {
@@ -55,12 +60,12 @@ export default function Header() {
       title: "Add user",
       description: "Khu vực tạo tài khoản người dùng mới trong hệ thống.",
     },
-     {
+    {
       path: "/admin/users/edit/:account",
       title: "Edit user",
       description: "Khu vực thay đổi thông tin người dùng trong hệ thống.",
     },
-     {
+    {
       path: "/admin/users/booking-infor/:account",
       title: "Booking infor",
       description: "Khu vực xem thông tin đặt vé người dùng.",
@@ -72,13 +77,33 @@ export default function Header() {
   page = pageConfig.find((item) => matchPath(item.path, location.pathname));
 
   const navigate = useNavigate();
-  const onBackClick = () =>
-    navigate(previous, {
-      state: {
-        history: history.slice(0, -1),
-      },
-    });
 
+  const onBackClick = () => {
+    if (!previous) return;
+
+    const goBack = () => {
+      navigate(previous, {
+        state: {
+          history: history.slice(0, -1),
+        },
+      });
+    };
+
+    if (!shouldConfirmLeave) {
+      goBack();
+      return;
+    }
+
+    modal.open({
+      type: MODAL_TYPES.LEAVE_PAGE,
+      onConfirm: () => {
+        modal.close();
+        goBack();
+      },
+      onCancel: modal.close,
+    });
+  };
+  
   return (
     <header className="sticky top-0 z-20 flex h-28 items-center border-b border-gray-800 bg-[#1e1e1e]/80 px-8 backdrop-blur-md">
       <div className="space-y-3 py-4">

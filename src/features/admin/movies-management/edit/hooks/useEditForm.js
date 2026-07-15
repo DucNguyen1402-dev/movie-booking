@@ -9,7 +9,7 @@ export function useEditForm() {
     watch,
     setValue,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -30,5 +30,6 @@ export function useEditForm() {
     watch,
     setValue,
     control,
+    isDirty
   };
 }

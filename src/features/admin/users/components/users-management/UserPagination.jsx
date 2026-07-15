@@ -3,12 +3,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function UserPagination({}) {
   const {
-    usersStates: { users },
+    userFilters: { filteredUsers },
     userPagination: { setPage, pagination },
   } = useUsersContext();
 
-  const totalPages = Math.ceil(users.length / pagination.size);
-  const totalUsers = users.length;
+  const totalPages = Math.ceil(filteredUsers.length / pagination.size);
+  const totalUsers = filteredUsers.length;
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
@@ -28,7 +28,7 @@ export default function UserPagination({}) {
         <span className="font-medium text-slate-200">
           {displayStart}-{displayEnd}
         </span>{" "}
-        trên <span className="font-medium text-slate-200">{users.length}</span>{" "}
+        trên <span className="font-medium text-slate-200">{filteredUsers.length}</span>{" "}
         người dùng
       </p>
 
