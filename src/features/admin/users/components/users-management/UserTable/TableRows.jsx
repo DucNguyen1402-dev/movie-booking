@@ -7,8 +7,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 
 
-export default function TableRows({ users, matchedAccount, highlight }) {
-  const { onDeletionClick } = useUserDeletion();
+export default function TableRows({ users, matchedAccount, highlight , currentPage}) {
+  const { onDeletionClick , deletingAccount} = useUserDeletion();
   const location = useLocation();
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
@@ -40,7 +40,7 @@ export default function TableRows({ users, matchedAccount, highlight }) {
 
   const onEditClick = (account) =>
     navigate(`/admin/users/edit/${account}`, {
-      state: { history: [...history, location.pathname] },
+      state: { history: [...history, location.pathname], previousPage: currentPage },
     });
 
   const onBookingInforClick = (account) =>
@@ -56,11 +56,12 @@ export default function TableRows({ users, matchedAccount, highlight }) {
     <>
       {users.map((user) => {
         const isMatched = user.taiKhoan === highlightAccount;
+         const isDeleting = user.taiKhoan === deletingAccount;
 
         return (
           <tr
             key={user.taiKhoan}
-            className={`border-t border-slate-700 px-5 transition-all hover:bg-slate-700/50 ${isMatched ? highlightClass : "duration-300"}`}
+            className={`px-5 transition-all hover:bg-slate-700/50 ${isMatched ? highlightClass : "duration-300"} ${isDeleting ? "bg-red-950/20 border border-red-600": "border-t border-slate-700"}`}
             ref={isMatched ? rowRef : null}
           >
             <td className="px-8 py-4 font-medium break-all">{user.taiKhoan}</td>

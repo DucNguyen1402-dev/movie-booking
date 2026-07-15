@@ -34,7 +34,7 @@ export function useUserFormActions({ handleSubmit }) {
   const onCancelAddUserClick = () =>
     modal.open({
       type: MODAL_TYPES.ADDING_USER,
-      title: "Bạn có chắc muốn hủy?",
+      title: "Bạn có chắc muốn hủy ?",
       subtitle: "Thông tin của bạn sẽ không được lưu",
       onConfirm: handleCancelAddUser,
     });
@@ -75,7 +75,7 @@ export function useUserFormActions({ handleSubmit }) {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.ADDING_USER,
-      title: "Bạn có chắc chắn muốn tạo người dùng?",
+      title: "Bạn có chắc chắn muốn tạo người dùng ?",
       subtitle: "Thông tin sẽ được lưu để tạo người dùng mới.",
       onConfirm: () => handleAddUser(data),
     });

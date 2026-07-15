@@ -8,7 +8,7 @@ export default function ShowtimeModal({
     <div className="z-100 flex w-full flex-col gap-3 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90 lg:w-90">
       <h2 className="text-lg font-semibold text-slate-50">{title}</h2>
 
-      <p className="text-sm text-slate-400">{subtitle}</p>
+      <p className="text-sm text-slate-200">{subtitle}</p>
 
       <div className="mt-3 flex justify-end gap-3">
         <button

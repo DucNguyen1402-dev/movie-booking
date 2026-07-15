@@ -13,6 +13,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
   const navigate = useNavigate();
   const location = useLocation();
   const history = location.state?.history ?? [];
+  const previousPage = location.state?.previousPage ?? null;
   const previousPath = history.at(-1) ?? "/admin/users";
 
   const queryClient = useQueryClient();
@@ -77,6 +78,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
             message: "Cập nhật thông tin người dùng thành công.",
           },
           highlight: HIGHLIGHT_TYPES.UPDATE,
+          previousPage
         },
       });
     } catch (error) {
@@ -96,7 +98,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT_USER,
-      title: "Lưu thay đổi?",
+      title: "Lưu thay đổi ?",
       subtitle: "Thông tin của người dùng sẽ được thay đổi trong hệ thống",
       onConfirm: () => handleConfirmEdit(data),
     });

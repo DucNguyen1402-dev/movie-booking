@@ -13,7 +13,8 @@ export function UsersProvider({ children }) {
 
   const userPagination = useUserPagination({
     filteredUsers: userFilters.filteredUsers,
-    users: usersStates.users,
+    keyword: userFilters.filters.keyword,
+    role: userFilters.filters.role,
   });
 
   const value = {
@@ -32,7 +33,7 @@ export function useUsersContext() {
   const context = useContext(usersContext);
 
   if (!context) {
-    throw new Error("useEditMovie must be used within EditProvider");
+    throw new Error("useUsersContext must be used within EditProvider");
   }
   return context;
 }

@@ -6,7 +6,6 @@ import SortSelect from "@features/admin/movies-management/list/components/SortSe
 import MoviesTable from "@features/admin/movies-management/list/components/MoviesTable/MoviesTable";
 import {
   PaginationSelect,
-  PaginationControls,
 } from "@features/admin/movies-management/list/components/Pagination";
 import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
@@ -64,8 +63,6 @@ export default function MovieManagement() {
 
           {/* 3. DATA TABLE */}
           <MoviesTable />
-
-          <PaginationControls />
         </div>
       </div>
 

@@ -1,21 +1,52 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
+import EmptyUsers from "./EmptyUsers";
 import { useUsersContext } from "../../../contexts/UsersContext";
+import UserPagination from "../UserPagination";
+import { useEffect } from "react";
 
 export default function UserTable() {
   const {
     usersStates: { isPending },
-    userPagination: { paginatedUsers },
+    userPagination: {
+      paginatedUsers,
+      pagination,
+      setPage,
+      moveToAccountPage,
+      skipNextPageReset,
+    },
   } = useUsersContext();
 
   const location = useLocation();
-  const { account = "", highlight = "none" } = location?.state ?? {};
-  
+  const {
+    account = "",
+    highlight = "none",
+    previousPage,
+  } = location?.state ?? {};
+
+  if (account) {
+    skipNextPageReset.current = true;
+  }
+  useEffect(() => {
+    if (!account) return;
+    moveToAccountPage(account);
+  }, [account]);
+
+  // useEffect(() =>{
+  //   if(!previousPage) return;
+  //   setPage(previousPage);
+  // }, [previousPage])
+
+  const isUserListEmpty = paginatedUsers.length === 0;
+
   const tableContent = isPending ? (
     <TableSkeleton />
+  ) : isUserListEmpty ? (
+    <EmptyUsers />
   ) : (
     <TableRows
+      currentPage={pagination.page}
       users={paginatedUsers}
       matchedAccount={account}
       highlight={highlight}
@@ -23,19 +54,23 @@ export default function UserTable() {
   );
 
   return (
-    <table className="w-full table-fixed border border-slate-700 text-sm text-slate-100">
-      <thead>
-        <tr className="bg-slate-800 text-left font-semibold tracking-wider">
-          <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
-          <th className="3xl:w-70 w-60">HỌ & TÊN</th>
-          <th className="3xl:w-80 w-60">EMAIL</th>
-          <th>SĐT</th>
-          <th>VAI TRÒ</th>
-          <th className="text-center">HÀNH ĐỘNG</th>
-        </tr>
-      </thead>
+    <div className="space-y-15">
+      <table className="w-full table-fixed border border-slate-700 text-sm text-slate-100">
+        <thead>
+          <tr className="bg-slate-800 text-left font-semibold tracking-wider">
+            <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
+            <th className="3xl:w-70 w-60">HỌ & TÊN</th>
+            <th className="3xl:w-80 w-60">EMAIL</th>
+            <th>SĐT</th>
+            <th>VAI TRÒ</th>
+            <th className="text-center">HÀNH ĐỘNG</th>
+          </tr>
+        </thead>
 
-      <tbody className="bg-slate-800">{tableContent}</tbody>
-    </table>
+        <tbody className="bg-slate-800">{tableContent}</tbody>
+      </table>
+
+      {!isUserListEmpty && <UserPagination />}
+    </div>
   );
 }

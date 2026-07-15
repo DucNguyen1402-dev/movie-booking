@@ -18,6 +18,9 @@ export default function UserPagination({}) {
   const displayEnd = Math.min(pagination.page * pagination.size, totalUsers);
 
   const currentPage = pagination.page;
+
+  const isPrevDisabled = currentPage === 1;
+  const isNextDisabled = currentPage >= totalPages;
   return (
     <div className="flex items-center justify-between text-sm text-slate-400">
       <p className="text-sm text-slate-400">
@@ -31,7 +34,8 @@ export default function UserPagination({}) {
 
       <div className="flex gap-2">
         <button
-          className="cursor-pointer rounded border px-2 py-1 transition-colors duration-300 hover:bg-slate-800"
+          disabled={isPrevDisabled}
+          className={`cursor-pointer rounded border px-2 py-1 transition-colors duration-300 ${isPrevDisabled ? "border-slate-600 " : "border-slate-500 hover:bg-slate-800"}`}
           onClick={() => setPage(pagination.page - 1)}
         >
           <ChevronLeft className="size-5" />
@@ -42,7 +46,7 @@ export default function UserPagination({}) {
           return (
             <button
               key={page}
-              className={`cursor-pointer rounded border border-slate-400 px-3 py-2 transition-colors duration-300 ${isCurrentPage ? "bg-orange-500 text-white" : "hover:bg-orange-500 hover:text-slate-100"}`}
+              className={`cursor-pointer rounded border px-3 py-2 transition-colors duration-300 ${isCurrentPage ? "bg-orange-500 text-white" : "hover:bg-orange-500 hover:text-slate-100"} `}
               onClick={() => setPage(Number(page))}
             >
               {page}
@@ -50,7 +54,8 @@ export default function UserPagination({}) {
           );
         })}
         <button
-          className="cursor-pointer rounded border px-2 py-1 transition-colors duration-300 hover:bg-slate-800"
+          disabled={isNextDisabled}
+          className={`cursor-pointer rounded border px-2 py-1 transition-colors duration-300 ${isNextDisabled ? "border-slate-600" : "border-slate-500 hover:bg-slate-800"} `}
           onClick={() => setPage(pagination.page + 1)}
         >
           <ChevronRight className="size-5" />

@@ -1,9 +1,9 @@
 export default function Delete({ onCancel, onConfirm, title, subtitle }) {
   return (
-    <div className="z-100 flex w-90 flex-col gap-3 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90">
+    <div className="z-100 flex w-90 flex-col gap-4 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90">
   <h2 className="text-xl font-bold tracking-wider text-slate-50">Xác nhận xóa</h2>
   
-  <div className="space-y-2 text-sm text-slate-400">
+  <div className="mt-2 sspace-y-2 text-sm text-slate-200">
     <p>{title}</p>
     <p>{subtitle}</p>
   </div>
