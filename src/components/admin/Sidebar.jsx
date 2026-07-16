@@ -28,12 +28,6 @@ const SIDEBAR_LINKS = [
     icon: Users,
     iconColor: "text-purple-500",
   },
-  {
-    path: "/admin/statistics",
-    label: "Statistics",
-    icon: ChartColumn,
-    iconColor: "text-blue-500",
-  },
 
 ];
 

@@ -67,9 +67,6 @@ export const updateMovie = async (data) => {
   return api.post("/QuanLyPhim/CapNhatPhimUpload", data);
 };
 
-export const login = (data) => {
-  return api.post("/QuanLyNguoiDung/DangNhap", data);
-};
 
 export const addMovie = async (data) => {
   return api.post("/QuanLyPhim/ThemPhimUploadHinh", data);

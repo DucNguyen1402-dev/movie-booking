@@ -1,6 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-
-import Dashboard from "../pages/admin/Dashboard/Dashboard";
+import { Dashboard, RevenueRanking } from "../pages/admin/Dashboard";
 import Profile from "../pages/admin/Profiles/Profile";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
 import EditMovie from "../pages/admin/Movies/EditMovie";
@@ -11,12 +10,16 @@ import UsersManagement from "../pages/admin/Users/UsersManagement";
 import AddUser from "../pages/admin/Users/AddUser";
 import EditUser from "../pages/admin/Users/EditUser";
 import UserBookingInfor from "../pages/admin/Users/UserBookingInfor";
-import Statistics from "../pages/admin/Statistics/Statistics"
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import { UsersLayout, MoviesLayout, MainLayout } from "../layouts/admin";
+import {
+  UsersLayout,
+  MoviesLayout,
+  MainLayout,
+  DashboardLayout,
+} from "../layouts/admin";
 
 export default function AdminRoutes() {
   return (
@@ -27,7 +30,11 @@ export default function AdminRoutes() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
 
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="revenue-ranking" element={<RevenueRanking />} />
+              </Route>
+
               <Route path="profile" element={<Profile />} />
 
               <Route path="movies" element={<MoviesLayout />}>
@@ -57,8 +64,6 @@ export default function AdminRoutes() {
                   element={<UserBookingInfor />}
                 />
               </Route>
-
-              <Route path ="statistics" element = {<Statistics />}/>
             </Route>
           </Routes>
         </NotificationProvider>

@@ -1,1 +1,0 @@
-export {default as TotalConlineTicketsCard} from "./TotalOnlineTicketsCard"

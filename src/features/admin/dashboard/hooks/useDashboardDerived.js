@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { buildDashboardData } from "../mocks/buildDashboardData";
+import { buildDashboardData, buildDashboardRanking } from "../mocks";
 
 export function useDashboardDerived({ movies }) {
   return useMemo(() => {
@@ -7,6 +7,7 @@ export function useDashboardDerived({ movies }) {
     const upcomingMovies = movies.filter((movie) => movie.sapChieu);
 
     const dashboardMovies = buildDashboardData(nowShowingMovies);
+    const dashboardRankings = buildDashboardRanking(dashboardMovies);
     const movieCount = dashboardMovies.length;
 
     const stats = dashboardMovies.reduce(
@@ -48,15 +49,17 @@ export function useDashboardDerived({ movies }) {
     return {
       nowShowingMovies,
       upcomingMovies,
-
+     totalMovies: movies.length,
       totalRevenue: stats.totalRevenue,
       totalTicketSold: stats.totalTicketSold,
       averageRevenue,
       averageTicketsSold,
       averageRating,
 
+      dashboardRankings,
       topRevenueMovie: stats.topRevenueMovie,
       topRevenueMovies,
+      dashboardMovies
     };
   }, [movies]);
 }

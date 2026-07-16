@@ -20,6 +20,12 @@ export default function Header() {
       description: "Khu vực theo dõi tổng quan hoạt động của hệ thống.",
     },
     {
+      path:  "/admin/dashboard/revenue-ranking",
+      title: "Revenue Ranking",
+      description: "Khu vực xem thông tin xếp hạng doanh thu phim",
+    },
+
+    {
       path: "/admin/profile",
       title: "Profile",
       description: "Khu vực quản lý thông tin tài khoản.",
@@ -57,24 +63,21 @@ export default function Header() {
     },
     {
       path: "/admin/users/add",
-      title: "Add user",
+      title: "Add User",
       description: "Khu vực tạo tài khoản người dùng mới trong hệ thống.",
     },
     {
       path: "/admin/users/edit/:account",
-      title: "Edit user",
+      title: "Edit User",
       description: "Khu vực thay đổi thông tin người dùng trong hệ thống.",
     },
     {
       path: "/admin/users/booking-infor/:account",
-      title: "Booking infor",
+      title: "Booking Infor",
       description: "Khu vực xem thông tin đặt vé người dùng.",
     },
-      {
-      path: "/admin/statistics",
-      title: "Statistic Area",
-      description: "Khu vực xem tổng quan doanh thu, vé và các chỉ số hoạt động.",
-    },
+
+  
   ];
 
 
