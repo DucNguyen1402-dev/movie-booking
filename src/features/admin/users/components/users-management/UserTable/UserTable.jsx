@@ -9,12 +9,12 @@ import { useEffect, useState } from "react";
 export default function UserTable() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [rowState] = useState(() => ({
+  const [rowState, setRowState] = useState(() => ({
     account: location.state?.account ?? "",
     highlight: location.state?.highlight ?? "",
   }));
   const {
-    usersStates: { isPending },
+    usersStates: { isPending, isFetching },
     userPagination: {
       paginatedUsers,
       pagination,
@@ -27,13 +27,28 @@ export default function UserTable() {
     skipNextPageReset.current = true;
   }
   useEffect(() => {
-    if (!rowState.account) return;
+    if (!rowState.account || isFetching) return;
+
     moveToAccountPage(rowState.account);
     navigate(location.pathname, {
       replace: true,
       state: { history: location.state?.history ?? [] },
     });
-  }, [rowState.account]);
+  }, [rowState.account, isFetching]);
+
+  useEffect(() => {
+    const keys = ["highlight", "account"];
+
+    const timers = keys
+      .filter((key) => rowState[key])
+      .map((key) =>
+        setTimeout(() => {
+          setRowState((prev) => ({ ...prev, [key]: "" }));
+        }, 3000),
+      );
+
+    return () => timers.forEach(clearTimeout);
+  }, [rowState.highlight, rowState.account]);
 
   const isUserListEmpty = paginatedUsers.length === 0;
 
@@ -51,23 +66,24 @@ export default function UserTable() {
   );
 
   return (
-    <div className="space-y-15">
-      <table className="w-full table-fixed border border-slate-700 text-sm text-slate-100">
-        <thead>
-          <tr className="bg-slate-800 text-left font-semibold tracking-wider">
-            <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
-            <th className="3xl:w-70 w-60">HỌ & TÊN</th>
-            <th className="3xl:w-80 w-60">EMAIL</th>
-            <th>SĐT</th>
-            <th>VAI TRÒ</th>
-            <th className="text-center">HÀNH ĐỘNG</th>
-          </tr>
-        </thead>
-
-        <tbody className="bg-slate-800">{tableContent}</tbody>
-      </table>
-
+    <div className="flex min-h-screen flex-col space-y-10">
       {!isUserListEmpty && <UserPagination />}
+      <main className="flex-1 pb-10">
+        <table className="w-full table-fixed border-t border-slate-700 bg-slate-800 text-sm text-slate-100">
+          <thead>
+            <tr className="text-left font-semibold tracking-wider">
+              <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
+              <th className="3xl:w-70 w-60">HỌ & TÊN</th>
+              <th className="3xl:w-80 w-60">EMAIL</th>
+              <th>SĐT</th>
+              <th>VAI TRÒ</th>
+              <th className="text-center">HÀNH ĐỘNG</th>
+            </tr>
+          </thead>
+
+          <tbody className="text-slate-200">{tableContent}</tbody>
+        </table>
+      </main>
     </div>
   );
 }

@@ -61,23 +61,23 @@ export default function TableRows({ users, matchedAccount, highlight , currentPa
         return (
           <tr
             key={user.taiKhoan}
-            className={`px-5 transition-all hover:bg-slate-700/50 ${isMatched ? highlightClass : "duration-300"} ${isDeleting ? "bg-red-950/20 border border-red-600": "border-t border-slate-700"}`}
+            className={`px-5 group transition-all hover:bg-slate-700/50 ${isMatched ? highlightClass : "duration-300"} ${isDeleting ? "bg-red-950/20 border border-red-600": "border-t border-slate-700"}`}
             ref={isMatched ? rowRef : null}
           >
-            <td className="px-8 py-4 font-medium break-all">{user.taiKhoan}</td>
+            <td className="px-8 py-4 font-medium break-all group-hover:text-slate-50 transition-colors duration-100">{user.taiKhoan}</td>
 
-            <td className="break-all">{user.hoTen}</td>
+            <td className="break-all group-hover:text-slate-50 transition-colors duration-100">{user.hoTen}</td>
 
-            <td className="break-all">{user.email}</td>
+            <td className="break-all group-hover:text-slate-50 transition-colors duration-100">{user.email}</td>
 
-            <td className="break-all">{user.soDT}</td>
+            <td className="break-all group-hover:text-slate-50 transition-colors duration-100">{user.soDT}</td>
 
             <td>
               <span
-                className={`inline-flex w-25 items-center justify-center rounded-full py-2 text-xs font-semibold ${
+                className={`inline-flex w-25 items-center justify-center border rounded-full py-2  text-xs font-semibold transition-colors duration-200${
                   user.maLoaiNguoiDung === "QuanTri"
-                    ? "bg-violet-500/10 text-violet-400"
-                    : "bg-blue-500/10 text-blue-400"
+                    ? "bg-violet-500/10 text-violet-400 border-violet-500/20 group-hover:border-violet-500/80"
+                    : "bg-blue-500/10 text-blue-400 border-blue-500/20 group-hover:border-blue-500/80"
                 } `}
               >
                 {userRoleLabel[user.maLoaiNguoiDung]}

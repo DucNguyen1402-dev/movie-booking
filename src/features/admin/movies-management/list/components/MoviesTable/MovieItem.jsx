@@ -105,7 +105,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
         </div>
       </td>
 
-      <td className="px-4 py-4 text-right">
+      <td className="px-4 py-4">
         <div className="flex items-center justify-end gap-1.5">
           <button
             onClick={onOpenTrailerClick}

@@ -2,23 +2,25 @@ import { LockKeyhole, Star } from "lucide-react";
 import { useEditMovie } from "../../contexts/EditContext";
 import { getRateClasses } from "../../config/editConfig";
 import { validationRules } from "@config/admin/validation-rules";
-import DateInput from "@features/admin/shared/components/DateInput/DateInput";
-import CheckBox from "@features/admin/shared/components/CheckBox";
-import {useEffect} from "react"
+import DateInput from "@components/admin/DateInput/DateInput";
+import CheckBox from "@components/admin/CheckBox";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function EditFormFields() {
   const {
     editForm: { register, errors, watch, control, isDirty },
   } = useEditMovie();
 
-  useEffect(() => {
-    if (!isDirty) return;
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  useEffect(() => {
     navigate(".", {
       replace: true,
       state: {
         ...location.state,
-        shouldConfirmLeave: true,
+        shouldConfirmLeave: isDirty,
       },
     });
   }, [isDirty]);

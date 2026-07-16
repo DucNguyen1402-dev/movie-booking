@@ -35,7 +35,7 @@ export default function UserPagination({}) {
       <div className="flex gap-2">
         <button
           disabled={isPrevDisabled}
-          className={`cursor-pointer rounded border px-2 py-1 transition-colors duration-300 ${isPrevDisabled ? "border-slate-600 " : "border-slate-500 hover:bg-slate-800"}`}
+          className={`cursor-pointer rounded border px-1.5 transition-colors duration-300 ${isPrevDisabled ? "border-slate-600 " : "border-slate-500 hover:bg-slate-800"}`}
           onClick={() => setPage(pagination.page - 1)}
         >
           <ChevronLeft className="size-5" />
@@ -46,7 +46,7 @@ export default function UserPagination({}) {
           return (
             <button
               key={page}
-              className={`cursor-pointer rounded border px-3 py-2 transition-colors duration-300 ${isCurrentPage ? "bg-orange-500 text-white" : "hover:bg-orange-500 hover:text-slate-100"} `}
+              className={`cursor-pointer rounded border px-2.5 py-1.5 transition-colors duration-300 ${isCurrentPage ? "bg-orange-600 text-white" : "hover:bg-orange-500 hover:text-slate-100"} `}
               onClick={() => setPage(Number(page))}
             >
               {page}
@@ -55,7 +55,7 @@ export default function UserPagination({}) {
         })}
         <button
           disabled={isNextDisabled}
-          className={`cursor-pointer rounded border px-2 py-1 transition-colors duration-300 ${isNextDisabled ? "border-slate-600" : "border-slate-500 hover:bg-slate-800"} `}
+          className={`cursor-pointer rounded border px-1.5 transition-colors duration-300 ${isNextDisabled ? "border-slate-600" : "border-slate-500 hover:bg-slate-800"} `}
           onClick={() => setPage(pagination.page + 1)}
         >
           <ChevronRight className="size-5" />

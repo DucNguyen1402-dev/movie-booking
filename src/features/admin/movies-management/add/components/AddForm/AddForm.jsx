@@ -1,10 +1,14 @@
 import { useAddMovie } from "../../hooks/useAddMovie";
 import { validationRules } from "@config/admin/validation-rules";
-import DateInput from "@features/admin/shared/components/DateInput/DateInput";
-import CheckBox from "@features/admin/shared/components/CheckBox";
+import DateInput from "@components/admin/DateInput/DateInput";
+import CheckBox from "@components/admin/CheckBox";
 import { CancelButton, AddButton } from "@components/admin/buttons";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AddForm() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmitEvent,
@@ -14,7 +18,18 @@ export default function AddForm() {
     onCancelClick,
     watch,
     control,
+    isDirty,
   } = useAddMovie();
+
+  useEffect(() => {
+    navigate(".", {
+      replace: true,
+      state: {
+        ...location.state,
+        shouldConfirmLeave: isDirty,
+      },
+    });
+  }, [isDirty]);
 
   return (
     <form onSubmit={handleSubmitEvent}>

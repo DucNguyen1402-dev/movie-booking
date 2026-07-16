@@ -20,20 +20,22 @@ export const updateUser = async (payload) => {
     payload,
   );
 
-
   return data.content;
 };
 
-
-export const getUserInfor = async (taiKhoan) => {
+export const getUserInfor = async (account) => {
   const { data } = await api.post(
-    `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`,
+    `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${account}`,
   );
 
   return data.content;
 };
 
+export const getUserData = async (account) => {
+  const { data } = await api.post(`/QuanLyNguoiDung/ThongTinTaiKhoan`, account);
 
+  return data.content;
+};
 
 export const deleteUser = async (account) => {
   const { data } = await api.delete(

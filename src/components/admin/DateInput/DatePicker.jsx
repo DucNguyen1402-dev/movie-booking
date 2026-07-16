@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 import { DayPicker } from "react-day-picker";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
 import "react-day-picker/style.css";
-import { datePickerStyles } from "../../config/date-picker";
+import { datePickerStyles } from "@config/admin/date-picker";
 
 export const CustomComponents = {
   Chevron: ({ orientation }) => {

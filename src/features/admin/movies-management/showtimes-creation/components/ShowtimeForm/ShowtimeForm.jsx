@@ -7,7 +7,7 @@ import { CancelButton, AddButton } from "@components/admin/buttons";
 import CinemaSystems from "./CinemaSystems/CinemaSystems";
 import CinemaClusters from "./CinemaClusters/CinemaClusters";
 import Theather from "./Theather/Theather";
-import DateInput from "@features/admin/shared/components/DateInput/DateInput";
+import DateInput from "@components/admin/DateInput/DateInput";
 import TicketPrice from "./TicketPrice/TicketPrice";
 import Showtime from "./ShowtimePicker/ShowtimePicker";
 

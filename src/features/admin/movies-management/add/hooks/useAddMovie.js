@@ -33,22 +33,29 @@ export function useAddMovie() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty},
     control,
     watch,
   } = useForm({
+    mode: "onBlur",
     defaultValues: {
+      tenPhim: "",
+      trailer: "",
+      moTa: "",
+      hinhAnh: "",
       maNhom: "GP01",
-      danhGia: 10,
+      danhGia: 0,
       hot: false,
+      ngayKhoiChieu: "",
       dangChieu: false,
       sapChieu: false,
     },
   });
 
+
   const handleCancelClick = () => {
     modal.close();
-    navigate(previousPath, { state: { history } });
+    navigate(previousPath, { state: { history: history.slice(0, -1) } });
   };
 
   const onCancelClick = () =>
@@ -129,5 +136,6 @@ export function useAddMovie() {
     onCancelClick,
     watch,
     control,
+    isDirty,
   };
 }

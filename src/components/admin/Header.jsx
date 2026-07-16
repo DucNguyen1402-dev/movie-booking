@@ -70,7 +70,13 @@ export default function Header() {
       title: "Booking infor",
       description: "Khu vực xem thông tin đặt vé người dùng.",
     },
+      {
+      path: "/admin/statistics",
+      title: "Statistic Area",
+      description: "Khu vực xem tổng quan doanh thu, vé và các chỉ số hoạt động.",
+    },
   ];
+
 
   let page = null;
 
@@ -103,7 +109,7 @@ export default function Header() {
       onCancel: modal.close,
     });
   };
-  
+
   return (
     <header className="sticky top-0 z-20 flex h-28 items-center border-b border-gray-800 bg-[#1e1e1e]/80 px-8 backdrop-blur-md">
       <div className="space-y-3 py-4">
@@ -111,14 +117,16 @@ export default function Header() {
         {page?.description && (
           <p className="mt-1 text-sm text-gray-400">{page?.description}</p>
         )}
-        <button
-          onClick={onBackClick}
-          disabled={isDisabledBack}
-          className="mt-3 flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none active:scale-95"
-          aria-label="Go back"
-        >
-          <MoveLeft className="size-3" />
-        </button>
+        {!isDisabledBack && (
+          <button
+            onClick={onBackClick}
+            disabled={isDisabledBack}
+            className="mt-3 flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700 hover:text-white focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-900 focus:outline-none active:scale-95"
+            aria-label="Go back"
+          >
+            <MoveLeft className="size-3" />
+          </button>
+        )}
       </div>
     </header>
   );

@@ -34,6 +34,7 @@ const SIDEBAR_LINKS = [
     icon: ChartColumn,
     iconColor: "text-blue-500",
   },
+
 ];
 
 export default function Sidebar() {

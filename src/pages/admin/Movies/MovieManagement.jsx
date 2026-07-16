@@ -46,8 +46,8 @@ export default function MovieManagement() {
         <div className="mx-auto w-full 3xl:max-w-[90%] space-y-8">
           {/* 1. HEADER & ACTION BAR */}
           <div className="flex items-center justify-end">
-            <div className="flex flex-col gap-4" onClick={onAddMovieClick}>
-              <AddMovieBtn />
+            <div className="flex flex-col gap-4" >
+              <AddMovieBtn onAddMovieClick={onAddMovieClick}/>
             </div>
           </div>
 

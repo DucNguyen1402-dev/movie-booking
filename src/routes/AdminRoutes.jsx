@@ -11,6 +11,7 @@ import UsersManagement from "../pages/admin/Users/UsersManagement";
 import AddUser from "../pages/admin/Users/AddUser";
 import EditUser from "../pages/admin/Users/EditUser";
 import UserBookingInfor from "../pages/admin/Users/UserBookingInfor";
+import Statistics from "../pages/admin/Statistics/Statistics"
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
@@ -56,6 +57,8 @@ export default function AdminRoutes() {
                   element={<UserBookingInfor />}
                 />
               </Route>
+
+              <Route path ="statistics" element = {<Statistics />}/>
             </Route>
           </Routes>
         </NotificationProvider>
