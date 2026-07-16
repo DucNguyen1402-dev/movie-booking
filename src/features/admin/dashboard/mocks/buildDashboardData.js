@@ -1,5 +1,5 @@
 const generateTicketsSold = (id) => {
-  return ((id * 233 + 17) % 1_000_000) + 100_000;
+  return ((id * 233 + 17) % 3_000_000) + 800_000;
 };
 
 const generateTicketPrice = (id) => {

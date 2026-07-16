@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { buildDashboardData, buildDashboardRanking } from "../mocks";
 
 export function useDashboardDerived({ movies }) {
+
   return useMemo(() => {
     const nowShowingMovies = movies.filter((movie) => movie.dangChieu);
     const upcomingMovies = movies.filter((movie) => movie.sapChieu);
@@ -16,7 +17,10 @@ export function useDashboardDerived({ movies }) {
         acc.totalTicketSold += movie.ticketSold;
         acc.totalRating += movie.danhGia;
 
-        if (!acc.topRevenueMovie || movie.revenue > acc.topRevenueMovie.revenue) {
+        if (
+          !acc.topRevenueMovie ||
+          movie.revenue > acc.topRevenueMovie.revenue
+        ) {
           acc.topRevenueMovie = movie;
         }
 
@@ -30,17 +34,13 @@ export function useDashboardDerived({ movies }) {
       },
     );
 
-    const averageRevenue = movieCount
-      ? stats.totalRevenue / movieCount
-      : 0;
+    const averageRevenue = movieCount ? stats.totalRevenue / movieCount : 0;
 
     const averageTicketsSold = movieCount
       ? stats.totalTicketSold / movieCount
       : 0;
 
-    const averageRating = movieCount
-      ? stats.totalRating / movieCount
-      : 0;
+    const averageRating = movieCount ? stats.totalRating / movieCount : 0;
 
     const topRevenueMovies = [...dashboardMovies]
       .sort((a, b) => b.revenue - a.revenue)
@@ -49,7 +49,8 @@ export function useDashboardDerived({ movies }) {
     return {
       nowShowingMovies,
       upcomingMovies,
-     totalMovies: movies.length,
+      totalMovies: movies.length,
+
       totalRevenue: stats.totalRevenue,
       totalTicketSold: stats.totalTicketSold,
       averageRevenue,
@@ -58,8 +59,9 @@ export function useDashboardDerived({ movies }) {
 
       dashboardRankings,
       topRevenueMovie: stats.topRevenueMovie,
+      topRevenue: stats.topRevenueMovie.revenue,
       topRevenueMovies,
-      dashboardMovies
+      dashboardMovies,
     };
   }, [movies]);
 }
