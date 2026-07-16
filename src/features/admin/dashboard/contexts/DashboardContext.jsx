@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { useDashboardDerived, useDashboardData } from "../hooks";
+import { useDashboardDerived, useDashboardData , useRevenueRankingFilter} from "../hooks";
 
 const dashboardContext = createContext(null);
 
@@ -7,12 +7,13 @@ export function DashboardProvider({ children }) {
   const { isPending, users, movies } = useDashboardData();
 
   const dashboardDerived = useDashboardDerived({ movies });
-
+  
+  const revenueRankingFilter = useRevenueRankingFilter({movies:dashboardDerived.derivedMovies?.dashboard });
   const value = {
-    isPending,
     users,
     movies,
     dashboardDerived,
+    revenueRankingFilter
   };
   return (
     <dashboardContext.Provider value={value}>

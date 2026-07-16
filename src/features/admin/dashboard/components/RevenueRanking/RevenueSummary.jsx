@@ -7,7 +7,7 @@ import {
 
 export default function RevenueSummary() {
   const {
-    dashboardDerived: { totalRevenue, nowShowingMovies },
+    dashboardDerived: { revenue, derivedMovies },
   } = useDashboardContext();
 
   return (
@@ -17,18 +17,28 @@ export default function RevenueSummary() {
           <p className="text-sm text-slate-400">
             Tổng số lượng phim đang chiếu
           </p>
-          <div className="mt-4 flex gap-2">
-            <p className="mt-2 text-4xl font-bold text-slate-100">
-              {nowShowingMovies.length}
+          <div className="mt-4 flex items-center gap-6">
+            <p className="text-6xl font-bold text-slate-100">
+              {derivedMovies.nowShowing.length}
             </p>
-            <div className="flex flex-col gap-2 text-sm">
-              <span>4 phim đạt doanh thu trên 90 tỷ</span>
-              <span>10 phim đạt doanh thu trên 50 tỷ</span>
+            <div className="space-y-2 text-sm text-slate-300">
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full border border-yellow-500/30 bg-yellow-950/40 text-sm text-yellow-400 transition-colors duration-200 group-hover:border-yellow-500/60">
+                  <span>{revenue.over100Quantity}</span>
+                </div>
+                <span>phim đạt doanh thu trên 100 tỷ</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-500/30 bg-zinc-950/40 text-sm text-zinc-400 transition-colors duration-200 group-hover:border-zinc-500/60">
+                  <span>{revenue.over50BQuantity}</span>
+                </div>
+                <span>phim đạt doanh thu trên 100 tỷ</span>
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex size-12 items-center justify-center self-start rounded-lg border border-red-500/20 bg-red-950/30 transition-colors duration-200 group-hover:border-red-500/50">
-          <Film className="size-8 text-red-400" />
+        <div className="flex size-10 items-center justify-center self-start rounded-lg border border-red-500/20 bg-red-950/30 transition-colors duration-200 group-hover:border-red-500/50">
+          <Film className="size-6 text-red-400" />
         </div>
       </div>
 
@@ -37,16 +47,16 @@ export default function RevenueSummary() {
           <p className="text-sm text-slate-400">Tổng doanh thu</p>
           <div className="relative mt-4">
             <p className="text-3xl font-bold text-emerald-400 opacity-100 transition-opacity duration-100 group-hover:opacity-0">
-              {formatCompactCurrency(totalRevenue)}
+              {formatCompactCurrency(revenue.total)}
             </p>
             <p className="absolute inset-0 text-3xl font-bold text-emerald-400 opacity-0 transition-opacity duration-100 group-hover:opacity-100">
-              {formatCurrency(totalRevenue)}
+              {formatCurrency(revenue.total)}
             </p>
           </div>
         </div>
 
-        <div className="flex size-12 items-center justify-center self-start rounded-lg border border-yellow-500/20 bg-yellow-950/30 transition-colors duration-200 group-hover:border-yellow-500/50">
-          <DollarSign className="size-8 text-slate-100" />
+        <div className="flex size-10 items-center justify-center self-start rounded-lg border border-yellow-500/20 bg-yellow-950/30 transition-colors duration-200 group-hover:border-yellow-500/50">
+          <DollarSign className="size-6 text-slate-100" />
         </div>
       </div>
     </div>

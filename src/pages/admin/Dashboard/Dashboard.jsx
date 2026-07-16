@@ -11,19 +11,7 @@ function Dashboard() {
     isPending,
     users,
     movies,
-    dashboardDerived: {
-      nowShowingMovies,
-      upcomingMovies,
-
-      totalRevenue,
-      totalTicketSold,
-      averageRevenue,
-      averageTicketsSold,
-      averageRating,
-
-      topRevenueMovie,
-      topRevenueMovies,
-    },
+    dashboardDerived: { derivedMovies, revenue, tickets, rating, rankings },
   } = useDashboardContext();
 
   return (
@@ -43,19 +31,19 @@ function Dashboard() {
 
         <MetricsSection
           userQuantity={users.length}
-          totalRevenue={totalRevenue}
-          totalTicketSold={totalTicketSold}
-          averageRevenue={averageRevenue}
-          averageTicketsSold={averageTicketsSold}
-          averageRating={averageRating}
+          totalRevenue={revenue.total}
+          totalTicketSold={tickets.total}
+          averageRevenue={revenue.average}
+          averageTicketsSold={tickets.average}
+          averageRating={rating.average}
         />
 
         <MovieStatusCard
-          nowShowingMovies={nowShowingMovies}
-          upcomingMovies={upcomingMovies}
+          nowShowingMovies={derivedMovies.nowShowing}
+          upcomingMovies={derivedMovies.upcoming}
         />
-        <TopRevenueMovieCard topRevenueMovie={topRevenueMovie} />
-        <TopRevenueMovies topRevenueMovies={topRevenueMovies} />
+        <TopRevenueMovieCard topRevenueMovie={revenue.topMovie} />
+        <TopRevenueMovies topRevenueMovies={revenue.topMovies} />
       </div>
     </div>
   );

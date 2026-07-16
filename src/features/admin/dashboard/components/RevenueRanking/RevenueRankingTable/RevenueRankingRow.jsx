@@ -5,47 +5,6 @@ import {
 } from "../../../utils/format";
 import Medal from "@components/admin/Medal";
 
-const REVENUE_STYLES = [
-  {
-    min: 90,
-    classes:
-      "border-yellow-500/20 bg-yellow-950/20 text-yellow-400 group-hover/outer:border-yellow-500/50",
-  },
-  {
-    min: 80,
-    classes:
-      "border-gray-500/20 bg-gray-950/20 text-gray-400 group-hover/outer:border-gray-500/50",
-  },
-  {
-    min: 70,
-    classes:
-      "border-orange-500/20 bg-orange-950/20 text-orange-400 group-hover/outer:border-orange-500/50",
-  },
-];
-
-const BASE_CLASSES = "border";
-
-export const getRevenueClasses = (relativeRevenueRate) => {
-  const style = REVENUE_STYLES.find(({ min }) => relativeRevenueRate >= min);
-
-  return `${BASE_CLASSES} ${
-    style?.classes ??
-    "border-zinc-500/20 bg-zinc-950/30 text-zinc-300 group-hover/outer:border-zinc-500/50"
-  }`;
-};
-
-const getRankIcon = (rank) => {
-  switch (rank) {
-    case 1:
-      return <Medal className="h-5 w-5 fill-yellow-400 text-yellow-400" />;
-    case 2:
-      return <Medal className="h-5 w-5 fill-gray-300 text-gray-300" />;
-    case 3:
-      return <Medal className="h-5 w-5 fill-orange-400 text-orange-400" />;
-    default:
-      return <span className="font-semibold text-zinc-400">#{rank}</span>;
-  }
-};
 
 export default function RevenueRankingRow({
   movie,
@@ -58,7 +17,7 @@ export default function RevenueRankingRow({
         <Medal rank={rank} />
       </td>
 
-      <td className="px-8 py-4">
+      <td className="pl-8 py-4">
         <img
           src={movie.hinhAnh}
           alt={movie.tenPhim}
@@ -66,7 +25,7 @@ export default function RevenueRankingRow({
         />
       </td>
 
-      <td className="px-4">
+      <td className="pl-4">
         <div className="space-y-2">
           <p className="font-medium text-slate-100 group-hover/outer:text-yellow-500">
             {movie.tenPhim}
@@ -82,7 +41,7 @@ export default function RevenueRankingRow({
       <td>
         <div className="group/inner flex items-center justify-center font-semibold">
           <div
-            className={`relative flex min-w-42 items-center justify-center rounded-full border py-1.5 ${getRevenueClasses(relativeRevenueRate)}`}
+            className="relative flex min-w-42 items-center justify-center rounded-full border py-1.5 border-emerald-500/20 bg-emerald-950/30 text-emerald-300 group-hover/outer:border-emerald-500/50"
           >
             <p className="opacity-100 transition-opacity duration-300 group-hover/inner:opacity-0">
               {formatCompactCurrency(movie.revenue)}
@@ -100,7 +59,7 @@ export default function RevenueRankingRow({
         <div className="flex items-center gap-3">
           <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-800/60 ring-1 ring-white/5 backdrop-blur-sm">
             <div
-              className="h-full rounded-full bg-linear-to-r from-emerald-500 to-green-400 shadow-[0_0_8px_rgba(16,185,129,0.3)] transition-all duration-500 ease-out"
+              className="h-full rounded-full bg-linear-to-r from-yellow-500 to-yellow-400 shadow-[0_0_8px_rgba(16,185,129,0.3)] transition-all duration-500 ease-out"
               style={{ width: `${relativeRevenueRate}%` }}
             />
           </div>

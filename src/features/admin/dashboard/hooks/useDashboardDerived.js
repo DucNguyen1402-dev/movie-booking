@@ -8,6 +8,14 @@ export function useDashboardDerived({ movies }) {
     const upcomingMovies = movies.filter((movie) => movie.sapChieu);
 
     const dashboardMovies = buildDashboardData(nowShowingMovies);
+
+    const moviesOver100B = dashboardMovies.filter(
+      (movie) => movie.revenue >= 100_000_000_000,
+    );
+    const moviesOver50B = dashboardMovies.filter(
+      (movie) => movie.revenue >= 50_000_000_000,
+    );
+
     const dashboardRankings = buildDashboardRanking(dashboardMovies);
     const movieCount = dashboardMovies.length;
 
@@ -47,21 +55,33 @@ export function useDashboardDerived({ movies }) {
       .slice(0, 5);
 
     return {
-      nowShowingMovies,
-      upcomingMovies,
-      totalMovies: movies.length,
+      derivedMovies: {
+        nowShowing: nowShowingMovies,
+        upcoming: upcomingMovies,
+        total: movies.length,
+        dashboard: dashboardMovies,
+      },
 
-      totalRevenue: stats.totalRevenue,
-      totalTicketSold: stats.totalTicketSold,
-      averageRevenue,
-      averageTicketsSold,
-      averageRating,
+      revenue: {
+        total: stats.totalRevenue,
+        average: averageRevenue,
+        top: stats.topRevenueMovie.revenue,
+        topMovie: stats.topRevenueMovie,
+        topMovies: topRevenueMovies,
+        over100Quantity: moviesOver100B.length,
+        over50BQuantity: moviesOver50B.length,
+      },
 
-      dashboardRankings,
-      topRevenueMovie: stats.topRevenueMovie,
-      topRevenue: stats.topRevenueMovie.revenue,
-      topRevenueMovies,
-      dashboardMovies,
+      tickets: {
+        total: stats.totalTicketSold,
+        average: averageTicketsSold,
+      },
+
+      rating: {
+        average: averageRating,
+      },
+
+      rankings: dashboardRankings,
     };
   }, [movies]);
 }
