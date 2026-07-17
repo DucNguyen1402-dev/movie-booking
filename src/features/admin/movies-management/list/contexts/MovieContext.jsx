@@ -1,29 +1,47 @@
+import { useMovies } from "@hooks/admin/useMovies";
 import { createContext, useContext } from "react";
-import { useProcessedMovies, useMoviePagination, useTrailer } from "../hooks";
+import { useFilteredMovies, useMoviePagination, useTrailer } from "../hooks";
 
 const movieContext = createContext(null);
 
 export function MovieProvider({ children }) {
-  const { isPending, processedMovies, movies, keyword, status, sortType, isFetching } =
-    useProcessedMovies();
+  const { data: movies = [], isPending, isFetching } = useMovies();
+
+  const {
+    states: { keyword, status, sortType },
+    list,
+    resetSearchKeyword,
+  } = useFilteredMovies({ movies });
+
   const moviePagination = useMoviePagination({
-    movies: processedMovies,
+    movies: list,
     keyword,
     status,
     sortType,
   });
   const trailer = useTrailer();
 
-  
-
   const value = {
-    isPending,
-    isFetching,
-    processedMovies,
-    movies,
+    raw: {
+      movies,
+      isPending,
+      isFetching,
+    },
+
+    processed: {
+      list,
+      state: {
+        keyword,
+      },
+      actions: {
+        resetSearchKeyword,
+      },
+    },
+
     trailer,
-    moviePagination,
+    pagination: moviePagination,
   };
+
   return (
     <movieContext.Provider value={value}>{children}</movieContext.Provider>
   );

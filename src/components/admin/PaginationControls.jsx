@@ -1,25 +1,18 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useMovieContext } from "../../contexts/MovieContext";
 
-export default function PaginationControls() {
+export default function PaginationControls({ controls, label }) {
   const {
-    processedMovies,
-    moviePagination: { pagination, setPage },
-  } = useMovieContext();
-
-  const totalMovies = processedMovies.length;
-
-  const displayStart =
-    totalMovies === 0 ? 0 : (pagination.page - 1) * pagination.size + 1;
-  const displayEnd = Math.min(pagination.page * pagination.size, totalMovies);
-
-  const totalPages = Math.ceil(processedMovies.length / pagination.size);
-
-  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
-
-  const isPrevDisabled = pagination.page === 1;
-  const isNextDisabled = pagination.page >= totalPages;
-
+    currentPage,
+    pages,
+    displayStart,
+    displayEnd,
+    total,
+    isPrevDisabled,
+    isNextDisabled,
+    onPrevClick,
+    onNextClick,
+    onPageClick,
+  } = controls;
   return (
     <div className="flex items-center justify-between px-8 text-sm text-slate-400">
       <p className="text-sm text-slate-400">
@@ -27,26 +20,24 @@ export default function PaginationControls() {
         <span className="font-medium text-slate-200">
           {displayStart}-{displayEnd}
         </span>{" "}
-        trên <span className="font-medium text-slate-200">{totalMovies}</span>{" "}
-        phim
+        trên <span className="font-medium text-slate-200">{total}</span> {label}
       </p>
 
       <div className="flex gap-2">
         <button
           disabled={isPrevDisabled}
           className={`cursor-pointer rounded border px-1.5 transition-colors duration-300 ${isPrevDisabled ? "text-slate-500" : "hover:bg-slate-800"}`}
-          onClick={() => setPage(pagination.page - 1)}
+          onClick={onPrevClick}
         >
           <ChevronLeft className="size-5" />
         </button>
         {pages.map((page) => {
-          const isCurrentPage = pagination.page === page;
-
+          const isCurrentPage = page === currentPage;
           return (
             <button
               key={page}
               className={`cursor-pointer rounded border border-slate-400 px-2.5 py-1.5 transition-colors duration-300 ${isCurrentPage ? "bg-orange-600 text-white" : "hover:bg-orange-500 hover:text-slate-100"}`}
-              onClick={() => setPage(Number(page))}
+              onClick={() => onPageClick(page)}
             >
               {page}
             </button>
@@ -55,7 +46,7 @@ export default function PaginationControls() {
         <button
           disabled={isNextDisabled}
           className={`cursor-pointer rounded border px-1.5 transition-colors duration-300 ${isNextDisabled ? "text-slate-500" : "hover:bg-slate-800"}`}
-          onClick={() => setPage(pagination.page + 1)}
+          onClick={onNextClick}
         >
           <ChevronRight className="size-5" />
         </button>

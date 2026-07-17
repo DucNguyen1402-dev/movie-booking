@@ -34,16 +34,46 @@ export function useMoviePagination({ movies, keyword, status, sortType }) {
   const startIndex = (pagination.page - 1) * pagination.size;
   const endIndex = pagination.page * pagination.size;
 
-  const paginatedMovieList = useMemo(() => {
+  const list = useMemo(() => {
     return movies.slice(startIndex, endIndex);
   }, [startIndex, endIndex, movies]);
 
+  const totalMovies = movies.length;
+  const displayStart =
+    totalMovies === 0 ? 0 : (pagination.page - 1) * pagination.size + 1;
+  const displayEnd = Math.min(pagination.page * pagination.size, totalMovies);
+
+  const totalPages = Math.ceil(movies.length / pagination.size);
+
+  const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
+
+  const isPrevDisabled = pagination.page === 1;
+  const isNextDisabled = pagination.page >= totalPages;
+
+  const onPrevClick = () => setPage(pagination.page - 1);
+  const onNextClick = () => setPage(pagination.page + 1);
+
+  const onPageClick = (page) => setPage(Number(page));
+
   return {
-    paginatedMovieList,
-    setSize,
-    setPage,
-    pagination,
+    totalMovies,
     skipNextPageReset,
     moveToMoviePage,
+    controls: {
+      currentPage: pagination.page,
+      onPrevClick,
+      onNextClick,
+      onPageClick,
+      total: totalMovies,
+      isPrevDisabled,
+      isNextDisabled,
+      pages,
+      displayStart,
+      displayEnd,
+    },
+    list,
+    setSize,
+    setPage,
+    currentSize: pagination.size,
   };
 }

@@ -39,9 +39,9 @@ export default function MovieItem({ movie, movieId, highlight }) {
   return (
     <tr
       ref={isTargetMovie ? rowRef : null}
-      className={`group transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"} ${onDeleting ? "bg-red-950/25 ring-1 ring-red-800/50 ring-inset" : ""}`}
+      className={`border-t border-slate-700/80 group transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"} ${onDeleting ? "bg-red-950/25 ring-1 ring-red-800/50 ring-inset" : ""}`}
     >
-      <td className="px-4 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
+      <td className="pl-8 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
 
       <td className="flex items-center gap-3 overflow-hidden px-6 py-4">
         <img

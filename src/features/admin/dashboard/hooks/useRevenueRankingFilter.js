@@ -9,6 +9,8 @@ export function useRevenueRankingFilter({ movies }) {
     desc: (a, b) => b.revenue - a.revenue,
   };
 
+  const resetSearchFilter = () => setFilter((prev) => ({...prev, keyword: ""}));
+
   const filteredMovies = useMemo(() => {
     const keyword = filter.keyword.trim().toLowerCase();
     const sortMethod = sortMethods[filter.sortDesc ? "desc" : "asc"];
@@ -29,5 +31,6 @@ export function useRevenueRankingFilter({ movies }) {
     onSearchMovie,
     onSortClick,
     filteredMovies,
+    resetSearchFilter
   };
 }

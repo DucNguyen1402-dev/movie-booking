@@ -1,10 +1,11 @@
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useUsersContext } from "../../../contexts/UsersContext";
+import { EmptyStateButton } from "@components/admin/buttons";
+import { EmptyTable } from "@components/admin";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
-import EmptyUsers from "./EmptyUsers";
-import { useUsersContext } from "../../../contexts/UsersContext";
 import UserPagination from "../UserPagination";
-import { useEffect, useState } from "react";
 
 export default function UserTable() {
   const location = useLocation();
@@ -21,6 +22,7 @@ export default function UserTable() {
       moveToAccountPage,
       skipNextPageReset,
     },
+    userFilters: { filters, resetSearchFilter },
   } = useUsersContext();
 
   if (rowState.account) {
@@ -51,27 +53,42 @@ export default function UserTable() {
   }, [rowState.highlight, rowState.account]);
 
   const isUserListEmpty = paginatedUsers.length === 0;
+  const renderTableContent = () => {
+    if (isPending) {
+      return <TableSkeleton />;
+    }
 
-  const tableContent = isPending ? (
-    <TableSkeleton />
-  ) : isUserListEmpty ? (
-    <EmptyUsers />
-  ) : (
-    <TableRows
-      currentPage={pagination.page}
-      users={paginatedUsers}
-      matchedAccount={rowState.account}
-      highlight={rowState.highlight}
-    />
-  );
+    if (isUserListEmpty) {
+      return (
+        <EmptyTable
+          colSpan={6}
+          title="Không tìm thấy user"
+          description={`Không có tên user nào khớp với từ khóa "${filters.keyword}"`}
+        >
+          <EmptyStateButton surface="dark" onClick={resetSearchFilter}>
+            Xóa bộ lọc
+          </EmptyStateButton>
+        </EmptyTable>
+      );
+    }
+
+    return (
+      <TableRows
+        currentPage={pagination.page}
+        users={paginatedUsers}
+        matchedAccount={rowState.account}
+        highlight={rowState.highlight}
+      />
+    );
+  };
 
   return (
-    <div className="flex min-h-screen flex-col space-y-10">
+    <div className="flex  flex-col space-y-10">
       {!isUserListEmpty && <UserPagination />}
-      <main className="flex-1 pb-10">
-        <table className="w-full table-fixed border-t border-slate-700 bg-slate-800 text-sm text-slate-100">
+      <main className="flex-1 pb-10 rounded-lg bg-[#1e293b] overflow-hidden">
+        <table className="w-full table-fixed border-t border-slate-700  text-sm text-slate-100 ">
           <thead>
-            <tr className="text-left font-semibold tracking-wider">
+            <tr className="text-left font-semibold tracking-wider bg-slate-900/80">
               <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
               <th className="3xl:w-70 w-60">HỌ & TÊN</th>
               <th className="3xl:w-80 w-60">EMAIL</th>
@@ -81,7 +98,7 @@ export default function UserTable() {
             </tr>
           </thead>
 
-          <tbody className="text-slate-200">{tableContent}</tbody>
+          <tbody className="text-slate-200">{renderTableContent()}</tbody>
         </table>
       </main>
     </div>

@@ -11,7 +11,7 @@ function Dashboard() {
     isPending,
     users,
     movies,
-    dashboardDerived: { derivedMovies, revenue, tickets, rating, rankings },
+    dashboardDerived: { derivedMovies, revenue, tickets, rating, ranking },
   } = useDashboardContext();
 
   return (
@@ -42,8 +42,8 @@ function Dashboard() {
           nowShowingMovies={derivedMovies.nowShowing}
           upcomingMovies={derivedMovies.upcoming}
         />
-        <TopRevenueMovieCard topRevenueMovie={revenue.topMovie} />
-        <TopRevenueMovies topRevenueMovies={revenue.topMovies} />
+        <TopRevenueMovieCard highestRevenueMovie={ranking.highestRevenueMovie} />
+        <TopRevenueMovies topFiveMoviesRevenue={ranking.topFive} />
       </div>
     </div>
   );

@@ -1,3 +1,3 @@
 export {useMoviePagination} from "./useMoviePagination";
-export {useProcessedMovies} from "./useProcessedMovies"
+export {useFilteredMovies} from "./useFilteredMovies"
 export {useTrailer} from "./useTrailer"

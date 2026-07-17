@@ -1,12 +1,11 @@
 import { useEffect } from "react";
+import {PAGE_SIZE_OPTIONS} from "@config/admin/pagination";
 import AddMovieBtn from "@features/admin/movies-management/list/components/AddMovieBtn";
 import SearchBar from "@features/admin/movies-management/list/components/SearchBar";
 import MovieStatusFilter from "@features/admin/movies-management/list/components/MovieStatusFilter";
 import SortSelect from "@features/admin/movies-management/list/components/SortSelect";
 import MoviesTable from "@features/admin/movies-management/list/components/MoviesTable/MoviesTable";
-import {
-  PaginationSelect,
-} from "@features/admin/movies-management/list/components/Pagination";
+import { Select } from "@components/admin";
 import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
 import { useMovieContext } from "@features/admin/movies-management/list/contexts/MovieContext";
@@ -28,6 +27,7 @@ export default function MovieManagement() {
 
   const {
     trailer: { trailer },
+    pagination: { currentSize, setSize },
   } = useMovieContext();
 
   useLockBodyScroll(trailer.url !== null);
@@ -39,15 +39,16 @@ export default function MovieManagement() {
       },
     });
 
+    
+
   return (
     <>
-      <div className="min-h-screen  bg-[#0f172a] px-6 pt-10 pb-8 font-sans text-slate-100">
-       
-        <div className="mx-auto w-full 3xl:max-w-[90%] space-y-8">
+      <div className="min-h-screen bg-[#0f172a] px-6 pt-10 pb-8 font-sans text-slate-100">
+        <div className="3xl:max-w-[90%] mx-auto w-full space-y-8">
           {/* 1. HEADER & ACTION BAR */}
           <div className="flex items-center justify-end">
-            <div className="flex flex-col gap-4" >
-              <AddMovieBtn onAddMovieClick={onAddMovieClick}/>
+            <div className="flex flex-col gap-4">
+              <AddMovieBtn onAddMovieClick={onAddMovieClick} />
             </div>
           </div>
 
@@ -58,7 +59,11 @@ export default function MovieManagement() {
             </div>
             <MovieStatusFilter />
             <SortSelect />
-            <PaginationSelect />
+            <Select
+              value={currentSize}
+              onChange={(e) => setSize(e.target.value)}
+              options = {PAGE_SIZE_OPTIONS}
+            />
           </div>
 
           {/* 3. DATA TABLE */}

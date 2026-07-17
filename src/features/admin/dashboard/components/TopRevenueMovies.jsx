@@ -2,8 +2,8 @@ import { formatCompactCurrency } from "../utils/format/currency";
 import { Star, Flame, ArrowUpRight } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-export default function TopRevenueMovies({ topRevenueMovies }) {
-  const maxRevenue = topRevenueMovies?.[0]?.revenue || 1;
+export default function TopRevenueMovies({ topFiveMoviesRevenue }) {
+  const maxRevenue = topFiveMoviesRevenue?.[0]?.revenue || 1;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,7 +41,7 @@ export default function TopRevenueMovies({ topRevenueMovies }) {
       </div>
 
       <div className="space-y-3">
-        {topRevenueMovies?.slice(0, 5).map((movie, index) => {
+        {topFiveMoviesRevenue?.slice(0, 5).map((movie, index) => {
           const percentage = Math.round((movie.revenue / maxRevenue) * 100);
 
           return (

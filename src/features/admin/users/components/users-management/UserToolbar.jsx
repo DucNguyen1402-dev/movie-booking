@@ -1,5 +1,7 @@
 import { Search } from "lucide-react";
 import { useUsersContext } from "../../contexts/UsersContext";
+import { PAGE_SIZE_OPTIONS, USER_ROLE_OPTIONS } from "@config/admin";
+import { Select } from "@components/admin";
 
 export default function UserToolbar() {
   const {
@@ -22,25 +24,17 @@ export default function UserToolbar() {
           </div>
         </div>
 
-        <select
+        <Select
           value={filters.role}
           onChange={(e) => onRoleFilter(e.target.value)}
-          className="rounded-md border border-slate-700 bg-[#0f172a] px-4 text-slate-100 transition-colors duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
-        >
-          <option value="all">Tất cả vai trò</option>
-          <option value="QuanTri">Quản trị</option>
-          <option value="KhachHang">Khách hàng</option>
-        </select>
+          options={USER_ROLE_OPTIONS}
+        />
 
-        <select
+        <Select
+          value={pagination.size}
           onChange={(e) => setSize(e.target.value)}
-          value = {pagination.size}
-          className="rounded-md border border-slate-700 bg-[#0f172a] px-4 text-slate-100 transition-colors duration-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
-        >
-          <option value="10">10 / trang</option>
-          <option value="20">20 / trang</option>
-          <option value="50">50 / trang</option>
-        </select>
+          options={PAGE_SIZE_OPTIONS}
+        />
       </div>
     </div>
   );

@@ -10,6 +10,10 @@ export default function RevenueSummary() {
     dashboardDerived: { revenue, derivedMovies },
   } = useDashboardContext();
 
+  const buckets = {
+    over100B: revenue.buckets.over100B.length,
+    over50B: revenue.buckets.over50B.length,
+  };
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <div className="group flex items-center justify-between rounded-xl border border-slate-700 bg-slate-800 px-6 py-5 transition-colors duration-300 hover:border-rose-500/40 hover:ring-2 hover:ring-rose-500/10">
@@ -24,13 +28,13 @@ export default function RevenueSummary() {
             <div className="space-y-2 text-sm text-slate-300">
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border border-yellow-500/30 bg-yellow-950/40 text-sm text-yellow-400 transition-colors duration-200 group-hover:border-yellow-500/60">
-                  <span>{revenue.over100Quantity}</span>
+                  <span>{buckets.over100B}</span>
                 </div>
                 <span>phim đạt doanh thu trên 100 tỷ</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-500/30 bg-zinc-950/40 text-sm text-zinc-400 transition-colors duration-200 group-hover:border-zinc-500/60">
-                  <span>{revenue.over50BQuantity}</span>
+                  <span>{buckets.over50B}</span>
                 </div>
                 <span>phim đạt doanh thu trên 100 tỷ</span>
               </div>
