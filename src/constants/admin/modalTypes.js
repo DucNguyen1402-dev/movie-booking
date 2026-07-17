@@ -8,5 +8,6 @@ export const MODAL_TYPES = {
   ADDING_USER: "addingUser",
   DELETE_USER: "deleteUser",
   EDIT_USER: 'cancleEditUser',
-  LEAVE_PAGE: "leavePage"
+  LEAVE_PAGE: "leavePage",
+  SAVE_PROFILE: "saveProfile"
 };

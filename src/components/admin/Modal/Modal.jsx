@@ -13,7 +13,8 @@ const MODALS = {
   deleteUser: Delete,
   cancleEditUser: EditModal,
   editMovie: EditModal,
-  leavePage: LeavePageModal
+  leavePage: LeavePageModal,
+  saveProfile: EditModal
 };
 
 export default function Modal() {
