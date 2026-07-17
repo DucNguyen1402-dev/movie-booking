@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 
-export function useMoviePagination({ movies, keyword, status, sortType }) {
+export function usePagination({ items, resetDeps }) {
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
   const skipNextPageReset = useRef(false);
 
@@ -8,17 +8,6 @@ export function useMoviePagination({ movies, keyword, status, sortType }) {
     setPagination((prev) => ({ ...prev, size: Number(value), page: 1 }));
   const setPage = (value) =>
     setPagination((prev) => ({ ...prev, page: Number(value) }));
-
-  const moveToMoviePage = (id) => {
-    const movieIndex = movies.findIndex((movie) => movie.maPhim === Number(id));
-    console.log("id", id);
-    console.log("movies", movies);
-    if (movieIndex === -1) return;
-
-    const moviePage = Math.floor(movieIndex / pagination.size) + 1;
-
-    setPagination((prev) => ({ ...prev, page: moviePage }));
-  };
 
   useEffect(() => {
     if (skipNextPageReset.current) {
@@ -29,21 +18,21 @@ export function useMoviePagination({ movies, keyword, status, sortType }) {
       ...prev,
       page: 1,
     }));
-  }, [keyword, status, sortType]);
+  }, [...resetDeps]);
 
   const startIndex = (pagination.page - 1) * pagination.size;
   const endIndex = pagination.page * pagination.size;
 
   const list = useMemo(() => {
-    return movies.slice(startIndex, endIndex);
-  }, [startIndex, endIndex, movies]);
+    return items.slice(startIndex, endIndex);
+  }, [startIndex, endIndex, items]);
 
-  const totalMovies = movies.length;
+  const totalMovies = items.length;
   const displayStart =
     totalMovies === 0 ? 0 : (pagination.page - 1) * pagination.size + 1;
   const displayEnd = Math.min(pagination.page * pagination.size, totalMovies);
 
-  const totalPages = Math.ceil(movies.length / pagination.size);
+  const totalPages = Math.ceil(items.length / pagination.size);
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 
@@ -58,7 +47,6 @@ export function useMoviePagination({ movies, keyword, status, sortType }) {
   return {
     totalMovies,
     skipNextPageReset,
-    moveToMoviePage,
     controls: {
       currentPage: pagination.page,
       onPrevClick,

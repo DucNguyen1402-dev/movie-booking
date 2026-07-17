@@ -6,7 +6,7 @@ import { Select } from "@components/admin";
 export default function UserToolbar() {
   const {
     userFilters: { filters, onSearch, onRoleFilter },
-    userPagination: { setSize, pagination },
+    pagination
   } = useUsersContext();
 
   return (
@@ -31,8 +31,8 @@ export default function UserToolbar() {
         />
 
         <Select
-          value={pagination.size}
-          onChange={(e) => setSize(e.target.value)}
+          value={pagination.currentSize}
+          onChange={(e) => pagination.setSize(e.target.value)}
           options={PAGE_SIZE_OPTIONS}
         />
       </div>

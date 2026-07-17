@@ -2,7 +2,7 @@ import { useContext, createContext } from "react";
 import { useUsersStates } from "../hooks/useUsersStates";
 import { useUsersActions } from "../hooks/useUsersActions";
 import { useUserFilter } from "../hooks/useUserFilter";
-import { useUserPagination } from "../hooks/useUserPagination";
+import { usePagination } from "@hooks/admin";
 
 const usersContext = createContext(null);
 
@@ -11,16 +11,15 @@ export function UsersProvider({ children }) {
   const usersActions = useUsersActions();
   const userFilters = useUserFilter({ users: usersStates.users });
 
-  const userPagination = useUserPagination({
-    filteredUsers: userFilters.filteredUsers,
-    keyword: userFilters.filters.keyword,
-    role: userFilters.filters.role,
+  const pagination = usePagination({
+    items: userFilters.filteredUsers,
+    resetDeps: [userFilters.filters.keyword, userFilters.filters.role],
   });
 
   const value = {
     usersStates,
     userFilters,
-    userPagination,
+    pagination,
     usersActions,
   };
 

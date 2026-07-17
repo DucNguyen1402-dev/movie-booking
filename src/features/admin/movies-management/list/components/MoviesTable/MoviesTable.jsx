@@ -18,7 +18,7 @@ export default function MoviesTable() {
 
   const {
     pagination,
-    raw: { isPending, isFetching },
+    raw: { isPending, isFetching , movies},
     processed: {
       list,
       state: { keyword },
@@ -30,10 +30,21 @@ export default function MoviesTable() {
     pagination.skipNextPageReset.current = true;
   }
 
+
+   const moveToMoviePage = (id) => {
+    const movieIndex = list.findIndex((movie) => movie.maPhim === Number(id));
+    if (movieIndex === -1) return;
+
+    const moviePage = Math.floor(movieIndex / pagination.currentSize) + 1;
+
+    pagination.setPage(moviePage);
+  };
+
+
   useEffect(() => {
     if (!rowState.movieId || isFetching) return;
 
-    pagination.moveToMoviePage(rowState.movieId);
+    moveToMoviePage(rowState.movieId);
 
     navigate(location.pathname, {
       replace: true,

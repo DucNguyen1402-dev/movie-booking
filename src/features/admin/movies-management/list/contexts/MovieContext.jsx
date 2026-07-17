@@ -1,6 +1,7 @@
 import { useMovies } from "@hooks/admin/useMovies";
 import { createContext, useContext } from "react";
-import { useFilteredMovies, useMoviePagination, useTrailer } from "../hooks";
+import { useFilteredMovies, useTrailer } from "../hooks";
+import {usePagination} from "@hooks/admin"
 
 const movieContext = createContext(null);
 
@@ -13,11 +14,9 @@ export function MovieProvider({ children }) {
     resetSearchKeyword,
   } = useFilteredMovies({ movies });
 
-  const moviePagination = useMoviePagination({
-    movies: list,
-    keyword,
-    status,
-    sortType,
+  const moviePagination = usePagination({
+    items: list,
+    resetDeps: [keyword, status, sortType],
   });
   const trailer = useTrailer();
 

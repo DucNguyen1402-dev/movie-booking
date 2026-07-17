@@ -1,33 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUsersContext } from "../../../contexts/UsersContext";
 import { EmptyStateButton } from "@components/admin/buttons";
 import { EmptyTable } from "@components/admin";
 import TableSkeleton from "./TableSkeleton";
 import TableRows from "./TableRows";
-import UserPagination from "../UserPagination";
+import { PaginationControls } from "@components/admin";
 
 export default function UserTable() {
   const location = useLocation();
   const navigate = useNavigate();
+  const rowRef = useRef(null);
   const [rowState, setRowState] = useState(() => ({
     account: location.state?.account ?? "",
     highlight: location.state?.highlight ?? "",
   }));
   const {
     usersStates: { isPending, isFetching },
-    userPagination: {
-      paginatedUsers,
-      pagination,
-      moveToAccountPage,
-      skipNextPageReset,
-    },
-    userFilters: { filters, resetSearchFilter },
+    pagination,
+    userFilters: { filters, resetSearchFilter, filteredUsers },
   } = useUsersContext();
 
   if (rowState.account) {
-    skipNextPageReset.current = true;
+    pagination.skipNextPageReset.current = true;
   }
+
+  const moveToAccountPage = (account) => {
+    const userIndex = filteredUsers.findIndex(
+      (user) => user.taiKhoan === account,
+    );
+
+    if (userIndex === -1) return;
+
+    const targetPage = Math.floor(userIndex / pagination.currentSize) + 1;
+
+    pagination.setPage(targetPage);
+    rowRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  };
+
   useEffect(() => {
     if (!rowState.account || isFetching) return;
 
@@ -52,7 +65,7 @@ export default function UserTable() {
     return () => timers.forEach(clearTimeout);
   }, [rowState.highlight, rowState.account]);
 
-  const isUserListEmpty = paginatedUsers.length === 0;
+  const isUserListEmpty = pagination.list.length === 0;
   const renderTableContent = () => {
     if (isPending) {
       return <TableSkeleton />;
@@ -74,21 +87,23 @@ export default function UserTable() {
 
     return (
       <TableRows
-        currentPage={pagination.page}
-        users={paginatedUsers}
+        users={pagination.list}
         matchedAccount={rowState.account}
+        rowRef={rowRef}
         highlight={rowState.highlight}
       />
     );
   };
 
   return (
-    <div className="flex  flex-col space-y-10">
-      {!isUserListEmpty && <UserPagination />}
-      <main className="flex-1 pb-10 rounded-lg bg-[#1e293b] overflow-hidden">
-        <table className="w-full table-fixed border-t border-slate-700  text-sm text-slate-100 ">
+    <div className="flex flex-col space-y-10">
+      {!isUserListEmpty && (
+        <PaginationControls controls={pagination.controls} label="người dùng" />
+      )}
+      <main className="flex-1 overflow-hidden rounded-lg bg-[#1e293b] pb-10 min-h-screen">
+        <table className="w-full table-fixed border-t border-slate-700 text-sm text-slate-100">
           <thead>
-            <tr className="text-left font-semibold tracking-wider bg-slate-900/80">
+            <tr className="bg-slate-900/80 text-left font-semibold tracking-wider">
               <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
               <th className="3xl:w-70 w-60">HỌ & TÊN</th>
               <th className="3xl:w-80 w-60">EMAIL</th>
