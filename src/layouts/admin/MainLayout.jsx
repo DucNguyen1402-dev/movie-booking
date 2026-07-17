@@ -2,11 +2,8 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "@components/admin/Sidebar.jsx";
 import Header from "@components/admin/Header.jsx";
 import GlobalUI from "@components/admin/GlobalUI";
-import { useLogin } from "@hooks/admin/useLogin";
 
 function MainLayout() {
-  useLogin();
-
   return (
     <div className="flex min-h-screen bg-[#080707] font-sans text-gray-100">
       <Sidebar />

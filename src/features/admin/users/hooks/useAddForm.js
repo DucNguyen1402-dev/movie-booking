@@ -13,7 +13,7 @@ export function useAddForm() {
       hoTen: "",
       email: "",
       soDt: "",
-      maLoaiNguoiDung: "KhachHang",
+      maLoaiNguoiDung: "",
       maNhom: "GP01"
     },
   });

@@ -1,6 +1,6 @@
 import { Trophy, TrendingUp, Ticket } from "lucide-react";
 
-export default function TopRevenueMovieCard({ topRevenueMovie }) {
+export default function TopRevenueMovieCard({ highestRevenueMovie }) {
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-amber-500/10 bg-linear-to-br from-[#141414] to-[#1a1515] p-8 transition-all duration-300 hover:border-amber-500/30 hover:shadow-[0_0_40px_rgba(245,158,11,0.06)]">
 
@@ -32,10 +32,10 @@ export default function TopRevenueMovieCard({ topRevenueMovie }) {
         <div className="flex items-center gap-20">
          <div className ="space-y-2">
            <h3 className="line-clamp-2 min-h-12 text-2xl font-black tracking-tight text-white transition-colors duration-250 group-hover:text-amber-300 lg:text-3xl">
-            {topRevenueMovie?.tenPhim || "Chưa có dữ liệu phim"}
+            {highestRevenueMovie?.tenPhim || "Chưa có dữ liệu phim"}
           </h3>
           <div className =" w-80 overflow-hidden">
-            <img  src= {topRevenueMovie?.hinhAnh} alt ={topRevenueMovie?.tenPhim} className ="object-contain h-full w-full" />
+            <img  src= {highestRevenueMovie?.hinhAnh} alt ={highestRevenueMovie?.tenPhim} className ="object-contain h-full w-full" />
           </div>
          </div>
 
@@ -44,8 +44,8 @@ export default function TopRevenueMovieCard({ topRevenueMovie }) {
               Tổng doanh thu phòng vé
             </p>
             <p className="mt-0.5 bg-linear-to-r from-amber-400 via-orange-400 to-red-500 bg-clip-text font-mono text-3xl font-black tracking-tight text-transparent">
-              {topRevenueMovie?.revenue
-                ? topRevenueMovie.revenue.toLocaleString("vi-VN", {
+              {highestRevenueMovie?.revenue
+                ? highestRevenueMovie.revenue.toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })
@@ -62,7 +62,7 @@ export default function TopRevenueMovieCard({ topRevenueMovie }) {
               <span>Lượng vé ước tính</span>
             </div>
             <p className="font-mono text-lg font-bold text-gray-300 space-x-2">
-              <span>{topRevenueMovie?.ticketSold.toLocaleString("vi-VN")}</span>
+              <span>{highestRevenueMovie?.ticketSold.toLocaleString("vi-VN")}</span>
               <span className="font-sans text-sm font-normal text-gray-500">
                 vé
               </span>

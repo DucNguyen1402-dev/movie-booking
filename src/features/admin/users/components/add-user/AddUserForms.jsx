@@ -6,22 +6,24 @@ import Select from "./SelectForm";
 import FormActions from "./FormActions";
 
 export default function AddUserForms() {
-  const { register, handleSubmit , errors} = useAddForm();
+  const { register, handleSubmit, errors } = useAddForm();
 
-  const { onCancelAddUserClick , onAddUserClick} = useUserFormActions({ handleSubmit });
+  const { onCancelAddUserClick, onAddUserClick } = useUserFormActions({
+    handleSubmit,
+  });
 
   return (
-    <div className="mx-auto max-w-3xl rounded-xl border border-slate-200 bg-gray-50 p-8 shadow-sm">
-      <form className="space-y-6">
+    <div className="relative mx-auto max-w-3xl rounded-xl border border-slate-700 bg-gray-800 p-8 pb-3 shadow-sm">
+      <form className="space-y-8">
         <div className="grid gap-6 md:grid-cols-2">
           <Input
             label="Tài khoản"
             required
             name="taiKhoan"
-      
+
             register={register}
             rules={validationRules.taiKhoan}
-            error = {errors.taiKhoan}
+            error={errors.taiKhoan}
           />
 
           <Input
@@ -32,7 +34,7 @@ export default function AddUserForms() {
             name="matKhau"
             register={register}
             rules={validationRules.matKhau}
-            error = {errors.matKhau}
+            error={errors.matKhau}
           />
 
           <Input
@@ -42,7 +44,7 @@ export default function AddUserForms() {
 
             register={register}
             rules={validationRules.hoTen}
-            error = {errors.hoTen}
+            error={errors.hoTen}
           />
 
           <Input
@@ -52,7 +54,7 @@ export default function AddUserForms() {
             required
             register={register}
             rules={validationRules.email}
-            error = {errors.email}
+            error={errors.email}
           />
 
           <Input
@@ -61,7 +63,7 @@ export default function AddUserForms() {
             name="soDt"
             register={register}
             rules={validationRules.soDt}
-            error = {errors.soDt}
+            error={errors.soDt}
           />
 
           <Select
@@ -73,12 +75,23 @@ export default function AddUserForms() {
               { value: "QuanTri", label: "Quản trị" },
             ]}
             rules={validationRules.maLoaiNguoiDung}
-            error = {errors.maLoaiNguoiDung}
+            error={errors.maLoaiNguoiDung}
           />
         </div>
 
-        <FormActions onCancelClick={onCancelAddUserClick} onAddClick = {onAddUserClick}/>
+      
       </form>
+
+        <div className ="mt-16">
+          <FormActions
+          onCancelClick={onCancelAddUserClick}
+          onAddClick={onAddUserClick}
+        />
+
+        </div>
+        <p className="absolute left-6 bottom-3 text-[12px] text-slate-400 italic">
+          * Vui lòng kiểm tra kỹ lại thông tin trước khi bấm tạo người dùng
+        </p>
     </div>
   );
 }

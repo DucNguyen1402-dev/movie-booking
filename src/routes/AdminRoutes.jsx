@@ -1,6 +1,5 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import MainLayout from "../layouts/admin/MainLayout";
-import Dashboard from "../pages/admin/Dashboard/Dashboard";
+import { Dashboard, RevenueRanking } from "../pages/admin/Dashboard";
 import Profile from "../pages/admin/Profiles/Profile";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
 import EditMovie from "../pages/admin/Movies/EditMovie";
@@ -15,8 +14,12 @@ import { EditProvider } from "@features/admin/movies-management/edit/contexts/Ed
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import { TrailerProvider } from "@features/admin/movies-management/list/contexts/TrailerContext";
-import UsersLayout from "../layouts/admin/UsersLayout";
+import {
+  UsersLayout,
+  MoviesLayout,
+  MainLayout,
+  DashboardLayout,
+} from "../layouts/admin";
 
 export default function AdminRoutes() {
   return (
@@ -27,18 +30,15 @@ export default function AdminRoutes() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
 
-              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="revenue-ranking" element={<RevenueRanking />} />
+              </Route>
+
               <Route path="profile" element={<Profile />} />
 
-              <Route path="movies">
-                <Route
-                  index
-                  element={
-                    <TrailerProvider>
-                      <MovieManagement />
-                    </TrailerProvider>
-                  }
-                />
+              <Route path="movies" element={<MoviesLayout />}>
+                <Route index element={<MovieManagement />} />
                 <Route
                   path="edit/:id"
                   element={
@@ -54,11 +54,15 @@ export default function AdminRoutes() {
                   element={<ShowtimeCreation />}
                 />
               </Route>
+
               <Route path="users" element={<UsersLayout />}>
                 <Route index element={<UsersManagement />} />
                 <Route path="add" element={<AddUser />} />
                 <Route path="edit/:account" element={<EditUser />} />
-                <Route path="booking-infor/:account" element={<UserBookingInfor />} />
+                <Route
+                  path="booking-infor/:account"
+                  element={<UserBookingInfor />}
+                />
               </Route>
             </Route>
           </Routes>

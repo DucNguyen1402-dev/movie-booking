@@ -7,11 +7,19 @@ export function useEditForm() {
     reset,
     getValues,
     watch,
-    formState: { errors },
+    setValue,
+    control,
+    formState: { errors, isDirty },
   } = useForm({
     mode: "onBlur",
-    defaultValues:{}
+    defaultValues: {
+      hot: false,
+      sapChieu: false,
+      dangChieu: false
+    },
   });
+
+ 
 
   return {
     register,
@@ -20,5 +28,8 @@ export function useEditForm() {
     getValues,
     errors,
     watch,
+    setValue,
+    control,
+    isDirty
   };
 }

@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useMovies } from "@hooks/admin/useMovies";
 import {
   selectKeyword,
@@ -6,6 +6,7 @@ import {
   selectSortType,
 } from "../redux/selectors";
 
+import { setKeyword } from "../redux/slice";
 import { useMemo } from "react";
 
 const sortMapping = {
@@ -33,17 +34,24 @@ const applyFilter = (movies, keyword, status) =>
     return matchKeyword && matchStatus;
   });
 
-export function useProcessedMovies() {
-  const { data: movies = [], isPending } = useMovies();
+export function useFilteredMovies({ movies }) {
+  const dispatch = useDispatch();
+
   const keyword = useSelector(selectKeyword).trim().toLowerCase();
   const status = useSelector(selectStatus);
   const sortType = useSelector(selectSortType);
 
-  const finalMovies = useMemo(() => {
-    const filteredMovies = applyFilter(movies, keyword, status);
+  const resetSearchKeyword = () => dispatch(setKeyword(""));
+
+  const list = useMemo(() => {
+    const list = applyFilter(movies, keyword, status);
     const sortFn = sortMapping[sortType];
-    return sortFn ? applySort([...filteredMovies], sortFn) : filteredMovies;
+    return sortFn ? applySort([...list], sortFn) : list;
   }, [movies, keyword, status, sortType]);
 
-  return { isPending, movies:finalMovies };
+  return {
+    list,
+    states: { keyword, status, sortType },
+    resetSearchKeyword,
+  };
 }

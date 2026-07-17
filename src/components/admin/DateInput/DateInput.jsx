@@ -4,7 +4,15 @@ import DatePicker from "./DatePicker";
 import { format } from "date-fns";
 import { useFormState } from "react-hook-form";
 
-export default function DateInput({ control, value, disabled = false, labels , name, rules}) {
+
+export default function DateInput({
+  control,
+  value,
+  disabled = false,
+  labels,
+  name,
+  rules,
+}) {
   const [isDatePickerOpen, setDayPickerVisible] = useState(null);
   const datePickerRef = useRef(null);
   const { errors } = useFormState({ control });
@@ -27,9 +35,9 @@ export default function DateInput({ control, value, disabled = false, labels , n
   }, []);
 
   return (
-    <div className="flex flex-col gap-1.5 text-slate-700">
+    <div className="flex flex-col gap-1.5  ">
       <label
-        className="mb-2 cursor-pointer text-sm font-medium"
+        className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
         htmlFor="show-date"
       >
         {labels.form}
@@ -39,13 +47,14 @@ export default function DateInput({ control, value, disabled = false, labels , n
         <button
           type="button"
           onClick={() => setDayPickerVisible((prev) => !prev)}
-          className="flex w-full cursor-pointer items-center gap-2 rounded-sm border border-gray-300 p-2 transition-colors focus:ring-1 focus:ring-blue-500 focus:outline-none active:hover:border-gray-400 disabled:cursor-default"
+          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border p-1.5 transition-colors focus:outline-none disabled:cursor-default  border-gray-600 focus:ring-2 focus:ring-blue-500 active:hover:border-blue-500/20 hover:ring-1 hover:ring-blue-500
+            ${disabled ? "text-gray-500" : "text-gray-400"}`}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"
           disabled={disabled}
         >
           <Calendar className="size-4.5" />
-          <span className={disabled ? "text-gray-400" : "text-gray-500"}>
+          <span >
             {disabled ? labels.disabled : dateLabel}
           </span>
         </button>
@@ -54,12 +63,12 @@ export default function DateInput({ control, value, disabled = false, labels , n
           isDatePickerOpen={isDatePickerOpen}
           control={control}
           requiredLabel={labels.required}
-          name = {name}
-          rules = {rules}
+          name={name}
+          rules={rules}
         />
-        {errors.ngayChieu && (
-          <p className=" z-20 mt-1 w-full rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
-            {errors.ngayChieu.message}
+        {errors[name] && (
+          <p className="z-20 mt-1.5 w-full rounded-sm border-l-5 px-2 py-2 text-xs border-red-600 bg-red-950/40 text-red-300">
+            {errors[name].message}
           </p>
         )}
       </div>

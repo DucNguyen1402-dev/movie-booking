@@ -3,10 +3,11 @@ import { validationRules } from "../../config/validation-rules";
 import { useShowtimeActions } from "../../hooks/useShowtimeActions";
 import { useCinemaSystems } from "../../hooks/useCinemaSystems";
 import { useCinemaClusters } from "../../hooks/useCinemaClusters";
+import { CancelButton, AddButton } from "@components/admin/buttons";
 import CinemaSystems from "./CinemaSystems/CinemaSystems";
 import CinemaClusters from "./CinemaClusters/CinemaClusters";
 import Theather from "./Theather/Theather";
-import DateInput from "@features/admin/shared/components/DateInput/DateInput";
+import DateInput from "@components/admin/DateInput/DateInput";
 import TicketPrice from "./TicketPrice/TicketPrice";
 import Showtime from "./ShowtimePicker/ShowtimePicker";
 
@@ -36,8 +37,8 @@ export default function ShowtimeForm({ movie }) {
       ?.danhSachRap ?? [];
 
   return (
-    <div className="relative space-y-6 rounded-3xl bg-gray-50 p-8 shadow-sm lg:col-span-2">
-      <h2 className="text-2xl font-bold tracking-wide text-slate-800">
+    <div className="relative space-y-6 rounded-3xl bg-gray-800 p-8 shadow-sm lg:col-span-2">
+      <h2 className="text-2xl font-bold tracking-wide text-slate-100">
         Thông tin lịch chiếu
       </h2>
 
@@ -60,16 +61,15 @@ export default function ShowtimeForm({ movie }) {
           <DateInput
             control={control}
             value={watch("ngayChieu")}
-            name ="ngayChieu"
-            rules ={{required: "Vui lòng nhập ngày chiếu phim"}}
-            disabled = {isDatePickerDisabled}
+            name="ngayChieu"
+            rules={{ required: "Vui lòng nhập ngày chiếu phim" }}
+            disabled={isDatePickerDisabled}
             labels={{
               placeholder: "Chọn ngày chiếu",
               form: "Ngày chiếu",
               disabled: "Vui lòng chọn rạp chiếu trước",
-              requied: "Vui lòng chọn ngày chiếu phim"
+              requied: "Vui lòng chọn ngày chiếu phim",
             }}
-
           />
           <TicketPrice
             control={control}
@@ -85,21 +85,15 @@ export default function ShowtimeForm({ movie }) {
         </form>
 
         <div className="mt-12 flex justify-end gap-3">
-          <button
-            className="cursor-pointer rounded-md bg-rose-500 px-5 py-2 text-sm text-white transition-colors duration-300 hover:bg-rose-600"
-            onClick={onCancelClick}
-          >
+          <CancelButton surface="dark" onClick={onCancelClick}>
             Hủy
-          </button>
+          </CancelButton>
 
-          <button
-            onClick={onConfirmClick}
-            className="cursor-pointer rounded-md bg-blue-600 px-5 py-2 text-sm text-white transition-colors duration-300 hover:bg-blue-700"
-          >
+          <AddButton surface="dark" onClick={onConfirmClick}>
             Tạo lịch chiếu
-          </button>
+          </AddButton>
         </div>
-        <p className="absolute bottom-3 left-3 text-sm text-gray-500 italic">
+        <p className="absolute bottom-3 left-3 text-sm text-gray-300 italic">
           * Vui lòng kiểm tra kỹ thông tin trước khi tạo lịch chiếu.
         </p>
       </div>

@@ -47,3 +47,38 @@ export const validationRules = {
     valueAsNumber: true,
   },
 };
+
+
+export const userValidationRules = {
+  hoTen: {
+    required: "Vui lòng nhập họ tên",
+    minLength: {
+      value: 2,
+      message: "Họ tên phải có ít nhất 2 ký tự",
+    },
+    maxLength: {
+      value: 50,
+      message: "Họ tên không được vượt quá 50 ký tự",
+    },
+    pattern: {
+      value: /^[A-Za-zÀ-ỹ\s]+$/,
+      message: "Họ tên chỉ được chứa chữ cái và khoảng trắng",
+    },
+  },
+
+  email: {
+    required: "Vui lòng nhập email",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message: "Email không hợp lệ",
+    },
+  },
+
+  soDt: {
+    required: "Vui lòng nhập số điện thoại",
+    pattern: {
+      value: /^(0|\+84)(3|5|7|8|9)\d{8}$/,
+      message: "Số điện thoại không hợp lệ",
+    },
+  },
+};

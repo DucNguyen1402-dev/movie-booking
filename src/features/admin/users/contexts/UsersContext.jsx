@@ -2,7 +2,7 @@ import { useContext, createContext } from "react";
 import { useUsersStates } from "../hooks/useUsersStates";
 import { useUsersActions } from "../hooks/useUsersActions";
 import { useUserFilter } from "../hooks/useUserFilter";
-import { useUserPagination } from "../hooks/useUserPagination";
+import { usePagination } from "@hooks/admin";
 
 const usersContext = createContext(null);
 
@@ -11,15 +11,19 @@ export function UsersProvider({ children }) {
   const usersActions = useUsersActions();
   const userFilters = useUserFilter({ users: usersStates.users });
 
-  const userPagination = useUserPagination({
-    filteredUsers: userFilters.filteredUsers,
-    users: usersStates.users,
+  const pagination = usePagination({
+    items: userFilters.filteredUsers,
+    resetDeps: [
+      userFilters.filters.keyword,
+      userFilters.filters.role,
+      userFilters.filteredUsers,
+    ],
   });
 
   const value = {
     usersStates,
     userFilters,
-    userPagination,
+    pagination,
     usersActions,
   };
 
@@ -32,7 +36,7 @@ export function useUsersContext() {
   const context = useContext(usersContext);
 
   if (!context) {
-    throw new Error("useEditMovie must be used within EditProvider");
+    throw new Error("useUsersContext must be used within EditProvider");
   }
   return context;
 }

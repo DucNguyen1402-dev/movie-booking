@@ -15,9 +15,9 @@ export default function CinemaClusters({
   }));
 
   return (
-    <div className="flex flex-col gap-1.5 text-slate-700">
+    <div className="flex flex-col gap-1.5">
       <label
-        className="mb-2 cursor-pointer text-sm font-medium"
+        className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
         htmlFor="cinema-cluster"
       >
         Cụm rạp
@@ -41,14 +41,72 @@ export default function CinemaClusters({
               styles={{
                 control: (base, state) => ({
                   ...base,
-                  backgroundColor: state.isDisabled
-                    ? "#f9fafb"
-                    : base.backgroundColor,
+                  backgroundColor: "#1e293b",
+                  borderColor: state.isFocused ? "#3b82f6" : "#475569",
+                  color: "#f8fafc",
+                  boxShadow: state.isFocused ? "0 0 0 1px #3b82f6" : "none",
+                  "&:hover": {
+                    borderColor: "#3b82f6",
+                  },
                 }),
+
+                menuPortal: (base) => ({
+                  ...base,
+                  zIndex: 9999,
+                }),
+
+                menu: (base) => ({
+                  ...base,
+                  backgroundColor: "#1e293b",
+                  zIndex: 9999,
+                }),
+
+                menuList: (base) => ({
+                  ...base,
+                  backgroundColor: "#1e293b",
+                }),
+
+                option: (base, state) => ({
+                  ...base,
+                  backgroundColor: state.isSelected
+                    ? "#2563eb"
+                    : state.isFocused
+                      ? "#334155"
+                      : "#1e293b",
+                  color: "#f8fafc",
+                  cursor: "pointer",
+                }),
+
+                singleValue: (base) => ({
+                  ...base,
+                  color: "#f8fafc",
+                }),
+
+                input: (base) => ({
+                  ...base,
+                  color: "#f8fafc",
+                }),
+
                 placeholder: (base, state) => ({
                   ...base,
-                 color: state.isDisabled ? "#9ca3af" : base.color
+                  color: state.isDisabled ? "#64748b" : "#94a3b8",
                 }),
+
+                indicatorSeparator: (base) => ({
+                  ...base,
+                  backgroundColor: "#475569",
+                }),
+
+                dropdownIndicator: (base) => ({
+                  ...base,
+                  color: "#94a3b8",
+                  "&:hover": {
+                    color: "#f8fafc",
+                  },
+                }),
+              }}
+              classNames={{
+                menuList: () => "custom-scrollbar",
               }}
               components={{
                 Option: ClusterOption,
@@ -60,7 +118,7 @@ export default function CinemaClusters({
               onChange={(option) => field.onChange(option.value)}
             />
             {fieldState.error && (
-              <p className="rounded-sm border-l-5 border-red-500 bg-red-50 px-2 py-1.5 text-xs text-red-700">
+              <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
                 {fieldState.error.message}
               </p>
             )}

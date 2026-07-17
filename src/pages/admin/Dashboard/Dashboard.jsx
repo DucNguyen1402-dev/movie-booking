@@ -1,30 +1,18 @@
-import { useMovies } from "@hooks/admin/useMovies.js";
-import { useUsers } from "@hooks/admin/useUsers.js";
-import { useDashboardDerived } from "@features/admin/dashboard/hooks/useDashboardDerived";
 import MetricsSection from "@features/admin/dashboard/components/MetricsSection.jsx";
 import TopRevenueMovies from "@features/admin/dashboard/components/TopRevenueMovies.jsx";
 import MovieStatusCard from "@features/admin/dashboard/components/MovieStatusCard.jsx";
 import TopRevenueMovieCard from "@features/admin/dashboard/components/TopRevenueMovieCard.jsx";
-import {FileClock} from "lucide-react"
+import { FileClock } from "lucide-react";
 
- function Dashboard() {
+import { useDashboardContext } from "@features/admin/dashboard/contexts/DashboardContext";
 
-  const { data: movies = [] } = useMovies();
-  const { data: users = {} } = useUsers();
-
+function Dashboard() {
   const {
-    nowShowingMovies,
-    upcomingMovies,
-
-    totalRevenue,
-    totalTicketSold,
-    averageRevenue,
-    averageTicketsSold,
-    averageRating,
-
-    topRevenueMovie,
-    topRevenueMovies,
-  } = useDashboardDerived({ movies });
+    isPending,
+    users,
+    movies,
+    dashboardDerived: { derivedMovies, revenue, tickets, rating, ranking },
+  } = useDashboardContext();
 
   return (
     <div className="flex flex-1 flex-col">
@@ -35,27 +23,27 @@ import {FileClock} from "lucide-react"
         {/* Page Title */}
         <div className="mx-auto w-fit space-y-4 text-center">
           <h1 className="text-3xl font-bold text-white">Tổng quan hệ thống</h1>
-          <p className="mt-1 text-sm text-gray-400 flex items-center gap-2">
-            <FileClock className ="size-6 text-blue-500"/>
+          <p className="mt-1 flex items-center gap-2 text-sm text-gray-400">
+            <FileClock className="size-6 text-blue-500" />
             <span>Cập nhật dữ liệu thời gian thực của rạp phim.</span>
           </p>
         </div>
 
         <MetricsSection
           userQuantity={users.length}
-          totalRevenue={totalRevenue}
-          totalTicketSold={totalTicketSold}
-          averageRevenue={averageRevenue}
-          averageTicketsSold={averageTicketsSold}
-          averageRating={averageRating}
+          totalRevenue={revenue.total}
+          totalTicketSold={tickets.total}
+          averageRevenue={revenue.average}
+          averageTicketsSold={tickets.average}
+          averageRating={rating.average}
         />
 
         <MovieStatusCard
-          nowShowingMovies={nowShowingMovies}
-          upcomingMovies={upcomingMovies}
+          nowShowingMovies={derivedMovies.nowShowing}
+          upcomingMovies={derivedMovies.upcoming}
         />
-        <TopRevenueMovieCard topRevenueMovie={topRevenueMovie} />
-        <TopRevenueMovies topRevenueMovies={topRevenueMovies} />
+        <TopRevenueMovieCard highestRevenueMovie={ranking.highestRevenueMovie} />
+        <TopRevenueMovies topFiveMoviesRevenue={ranking.topFive} />
       </div>
     </div>
   );

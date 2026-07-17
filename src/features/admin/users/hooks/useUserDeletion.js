@@ -4,8 +4,11 @@ import { useNotification } from "@contexts/admin/NotificationContext";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
 import { useModalContext } from "@contexts/admin/ModalContext";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import { useState } from "react";
 
 export function useUserDeletion() {
+  const [deletingAccount, setDeletingAccount] = useState(null);
+
   const queryClient = useQueryClient();
 
   const { mutateAsync } = useMutation({
@@ -40,18 +43,27 @@ export function useUserDeletion() {
         variant: "error",
         message,
       });
+    } finally {
+      setDeletingAccount(null);
     }
   };
 
-  const onDeletionClick = (taiKhoan) =>
+  const onDeletionClick = (taiKhoan) => {
+    setDeletingAccount(taiKhoan);
     modal.open({
       type: MODAL_TYPES.DELETE_USER,
-      title: "Bạn có chắc muốn xóa người dùng này?",
+      title: "Bạn có chắc muốn xóa người dùng này ?",
       subtitle: "Dữ liệu người dùng sẽ bị xóa ra khỏi hệ thống",
       onConfirm: () => handleDeleteUser(taiKhoan),
+      onCancel: () => {
+        setDeletingAccount(null);
+        modal.close();
+      },
     });
+  };
 
   return {
     onDeletionClick,
+    deletingAccount,
   };
 }
