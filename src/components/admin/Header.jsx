@@ -28,7 +28,7 @@ export default function Header() {
     {
       path: "/admin/profile",
       title: "Profile",
-      description: "Khu vực quản lý thông tin tài khoản.",
+      description: "Khu vực quản lý thông tin tài khoản cá nhân.",
     },
     {
       path: "/admin/movies",

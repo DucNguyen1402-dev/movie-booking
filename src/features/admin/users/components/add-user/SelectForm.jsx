@@ -6,7 +6,7 @@ export default function SelectForm({ label, options, name, register, error , rul
         className="cursor-pointer rounded-sm border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-100 outline-none hover:ring-1 hover:ring-blue-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
         {...register(name, rules)}
       >
-        <option value="" defaultValue disabled>
+        <option value="" defaultValue>
           -- Chọn loại người dùng --
         </option>
 

@@ -13,7 +13,11 @@ export function UsersProvider({ children }) {
 
   const pagination = usePagination({
     items: userFilters.filteredUsers,
-    resetDeps: [userFilters.filters.keyword, userFilters.filters.role],
+    resetDeps: [
+      userFilters.filters.keyword,
+      userFilters.filters.role,
+      userFilters.filteredUsers,
+    ],
   });
 
   const value = {

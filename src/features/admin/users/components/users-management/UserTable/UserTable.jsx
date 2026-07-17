@@ -1,16 +1,16 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUsersContext } from "../../../contexts/UsersContext";
 import { EmptyStateButton } from "@components/admin/buttons";
 import { EmptyTable } from "@components/admin";
 import TableSkeleton from "./TableSkeleton";
-import TableRows from "./TableRows";
+import TableRow from "./TableRow";
 import { PaginationControls } from "@components/admin";
 
 export default function UserTable() {
   const location = useLocation();
   const navigate = useNavigate();
-  const rowRef = useRef(null);
+
   const [rowState, setRowState] = useState(() => ({
     account: location.state?.account ?? "",
     highlight: location.state?.highlight ?? "",
@@ -35,10 +35,6 @@ export default function UserTable() {
     const targetPage = Math.floor(userIndex / pagination.currentSize) + 1;
 
     pagination.setPage(targetPage);
-    rowRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
   };
 
   useEffect(() => {
@@ -85,14 +81,15 @@ export default function UserTable() {
       );
     }
 
-    return (
-      <TableRows
-        users={pagination.list}
-        matchedAccount={rowState.account}
-        rowRef={rowRef}
+    return pagination.list.map((user) => (
+      <TableRow
+        key = {user.taiKhoan}
+        user = {user}
+        isMatched={user.taiKhoan === rowState.account}
         highlight={rowState.highlight}
+
       />
-    );
+    ));
   };
 
   return (
@@ -100,8 +97,8 @@ export default function UserTable() {
       {!isUserListEmpty && (
         <PaginationControls controls={pagination.controls} label="người dùng" />
       )}
-      <main className="flex-1 overflow-hidden rounded-lg bg-[#1e293b] pb-10 min-h-screen">
-        <table className="w-full table-fixed border-t border-slate-700 text-sm text-slate-100">
+      <main className="min-h-screen flex-1 overflow-hidden rounded-lg pb-10">
+        <table className="w-full table-fixed border-t border-slate-700 bg-[#1e293b] text-sm text-slate-100">
           <thead>
             <tr className="bg-slate-900/80 text-left font-semibold tracking-wider">
               <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>

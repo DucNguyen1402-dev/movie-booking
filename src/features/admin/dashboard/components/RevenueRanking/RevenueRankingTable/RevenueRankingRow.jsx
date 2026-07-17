@@ -5,19 +5,21 @@ import {
 } from "../../../utils/format";
 import Medal from "@components/admin/Medal";
 
-
 export default function RevenueRankingRow({
   movie,
   rank,
   relativeRevenueRate,
 }) {
+  const medalAnimation =
+    rank === 1 ? "origin-bottom group-hover/outer:animate-medal-shake" : "";
+
   return (
-    <tr className="group/outer border-b border-slate-700 transition-colors duration-300 hover:bg-slate-700/20">
+    <tr className="group/outer relative overflow-hidden border-b border-slate-700 transition-colors duration-300 hover:bg-slate-700/20">
       <td className="px-8 py-4">
-        <Medal rank={rank} />
+        <Medal rank={rank} animate={medalAnimation} />
       </td>
 
-      <td className="pl-8 py-4">
+      <td className="py-4 pl-8">
         <img
           src={movie.hinhAnh}
           alt={movie.tenPhim}
@@ -40,9 +42,7 @@ export default function RevenueRankingRow({
 
       <td>
         <div className="group/inner flex items-center justify-center font-semibold">
-          <div
-            className="relative flex min-w-42 items-center justify-center rounded-full border py-1.5 border-emerald-500/20 bg-emerald-950/30 text-emerald-300 group-hover/outer:border-emerald-500/50"
-          >
+          <div className="relative flex min-w-42 items-center justify-center rounded-full border border-emerald-500/20 bg-emerald-950/30 py-1.5 text-emerald-300 group-hover/outer:border-emerald-500/50">
             <p className="opacity-100 transition-opacity duration-300 group-hover/inner:opacity-0">
               {formatCompactCurrency(movie.revenue)}
             </p>

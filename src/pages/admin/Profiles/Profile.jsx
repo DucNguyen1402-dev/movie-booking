@@ -25,10 +25,7 @@ const Profile = () => {
             <h1 className="text-xl font-semibold tracking-tight text-gray-100">Tài khoản cá nhân</h1>
             <p className="text-xs text-gray-500 mt-1">Quản lý thông tin và hiệu suất làm việc của bạn</p>
           </div>
-          <button className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium border border-gray-300 rounded hover:bg-gray-100 transition">
-            <Settings className="w-3.5 h-3.5" />
-            Cài đặt
-          </button>
+      
         </div>
 
         {/* Main Layout Grid */}

@@ -14,7 +14,7 @@ export default function PaginationControls({ controls, label }) {
     onPageClick,
   } = controls;
   return (
-    <div className="flex items-center justify-between px-8 text-sm text-slate-400">
+    <div className="flex items-center justify-between px-4 text-sm text-slate-400">
       <p className="text-sm text-slate-400">
         Hiển thị{" "}
         <span className="font-medium text-slate-200">

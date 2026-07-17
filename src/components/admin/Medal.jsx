@@ -1,4 +1,4 @@
-const Medal = ({ rank }) => {
+const Medal = ({ rank , animate}) => {
   const getMedalStyle = (num) => {
     switch (num) {
       case 1:
@@ -36,7 +36,7 @@ const Medal = ({ rank }) => {
   const isTop3 = rank === 1 || rank === 2 || rank === 3;
 
   return (
-    <div className="relative inline-flex h-14 w-12 items-center justify-center">
+    <div className={`relative inline-flex h-14 w-12 items-center justify-center ${animate}`}>
       <div
         className={`absolute top-1 z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 shadow-md ${config.bg} ${config.border}`}
       >
