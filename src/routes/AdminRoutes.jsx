@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { Dashboard, RevenueRanking } from "../pages/admin/Dashboard";
-import Profile from "../pages/admin/Profiles/Profile";
+import {Profile, ChangePasswordPage} from "../pages/admin/Profiles";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
 import EditMovie from "../pages/admin/Movies/EditMovie";
 import AddMovie from "../pages/admin/Movies/AddMovie";
@@ -19,6 +19,7 @@ import {
   MoviesLayout,
   MainLayout,
   DashboardLayout,
+  ProfileLayout
 } from "../layouts/admin";
 
 export default function AdminRoutes() {
@@ -35,7 +36,11 @@ export default function AdminRoutes() {
                 <Route path="revenue-ranking" element={<RevenueRanking />} />
               </Route>
 
-              <Route path="profile" element={<Profile />} />
+              <Route path="profile" element={<ProfileLayout />} > 
+                <Route index element={<Profile />} />
+                 <Route path="password" element={<ChangePasswordPage />} />
+              </Route>
+
 
               <Route path="movies" element={<MoviesLayout />}>
                 <Route index element={<MovieManagement />} />

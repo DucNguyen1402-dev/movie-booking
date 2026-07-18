@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 export function useAddForm() {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isDirty },
     handleSubmit,
   } = useForm({
     mode: "onBlur",
@@ -22,5 +22,6 @@ export function useAddForm() {
     register,
     errors,
     handleSubmit,
+    isDirty
   };
 }

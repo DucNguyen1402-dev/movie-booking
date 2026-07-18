@@ -93,7 +93,6 @@ export function useEditActions({ handleSubmit, initialUser }) {
     }
   };
 
-  const onInvalid = () => modal.close();
 
   const onValid = (data) =>
     modal.open({
@@ -103,7 +102,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
       onConfirm: () => handleConfirmEdit(data),
     });
 
-  const onConfirmEditClick = () => handleSubmit(onValid, onInvalid)();
+  const onConfirmEditClick = () => handleSubmit(onValid)();
 
   return {
     onCancelEditClick,

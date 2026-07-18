@@ -1,3 +1,5 @@
+import {useEffect} from "react"
+import {useNavigate, useLocation} from "react-router-dom"
 import { useAddForm } from "../../hooks/useAddForm";
 import { useUserFormActions } from "../../hooks/useUserFormActions";
 import { validationRules } from "../../constants/validationRules";
@@ -5,8 +7,24 @@ import Input from "./InputForm";
 import Select from "./SelectForm";
 import FormActions from "./FormActions";
 
+
+
 export default function AddUserForms() {
-  const { register, handleSubmit, errors } = useAddForm();
+  const { register, handleSubmit, errors, isDirty } = useAddForm();
+
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+   useEffect(() => {
+    navigate(".", {
+      replace: true,
+      state: {
+        ...location.state,
+        shouldConfirmLeave: isDirty,
+      },
+    });
+  }, [isDirty]);
 
   const { onCancelAddUserClick, onAddUserClick } = useUserFormActions({
     handleSubmit,

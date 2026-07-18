@@ -7,6 +7,7 @@ import {
 } from "@/hooks/customer/useAuth";
 import { formatCurrency, formatDateTime } from "@/utils/customer/format";
 
+
 const Profile = () => {
   const navigate = useNavigate();
   const { logout } = useLogout();
@@ -15,7 +16,6 @@ const Profile = () => {
   const { data: accountInfo, isLoading, isError } = useAccountInfo();
 
   const bookingHistory = accountInfo?.thongTinDatVe || [];
-
 
   const handleLogout = () => {
     logout();

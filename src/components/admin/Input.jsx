@@ -8,14 +8,20 @@ export default function Input({
   disabled = false,
   type = "text",
   error,
+  id = null
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-xs font-medium tracking-wider text-slate-200">
+      <label
+        className="text-xs font-medium tracking-wider text-slate-200"
+        htmlFor={id ?? name}
+      >
         {label}
       </label>
       <div className="relative">
         <input
+          id={id ?? name}
+
           type={type}
           disabled={disabled}
           {...register(name, rules)}

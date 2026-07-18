@@ -23,6 +23,18 @@ export const updateUser = async (payload) => {
   return data.content;
 };
 
+
+export const updateProfile = async (payload) => {
+  const { data } = await api.put(
+    "QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+    payload,
+  );
+
+  return data.content;
+};
+
+
+
 export const getUserInfor = async (account) => {
   const { data } = await api.post(
     `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${account}`,

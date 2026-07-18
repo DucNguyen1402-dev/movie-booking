@@ -48,7 +48,6 @@ export const validationRules = {
   },
 };
 
-
 export const userValidationRules = {
   hoTen: {
     required: "Vui lòng nhập họ tên",
@@ -79,6 +78,17 @@ export const userValidationRules = {
     pattern: {
       value: /^(0|\+84)(3|5|7|8|9)\d{8}$/,
       message: "Số điện thoại không hợp lệ",
+    },
+  },
+  matKhau: {
+    required: "Vui lòng nhập mật khẩu.",
+    minLength: {
+      value: 6,
+      message: "Mật khẩu phải có ít nhất 6 ký tự.",
+    },
+    maxLength: {
+      value: 32,
+      message: "Mật khẩu không được vượt quá 32 ký tự.",
     },
   },
 };

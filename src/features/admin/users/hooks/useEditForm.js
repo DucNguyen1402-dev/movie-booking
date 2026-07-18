@@ -7,7 +7,7 @@ export function useEditForm({ user }) {
   const {
     register,
     handleSubmit,
-    formState: { defaultValues, errors },
+    formState: { defaultValues, errors, isDirty },
     reset,
   } = useForm({
     mode: "onBlur",
@@ -40,5 +40,6 @@ export function useEditForm({ user }) {
     fields: inputFields,
     errors,
     initialUser,
+    isDirty
   };
 }

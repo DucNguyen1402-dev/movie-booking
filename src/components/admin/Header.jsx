@@ -20,7 +20,7 @@ export default function Header() {
       description: "Khu vực theo dõi tổng quan hoạt động của hệ thống.",
     },
     {
-      path:  "/admin/dashboard/revenue-ranking",
+      path: "/admin/dashboard/revenue-ranking",
       title: "Revenue Ranking",
       description: "Khu vực xem thông tin xếp hạng doanh thu phim",
     },
@@ -29,6 +29,11 @@ export default function Header() {
       path: "/admin/profile",
       title: "Profile",
       description: "Khu vực quản lý thông tin tài khoản cá nhân.",
+    },
+    {
+      path: "/admin/profile/password",
+      title: "Password Settings",
+      description: "Cập nhật mật khẩu cho tài khoản quản trị.",
     },
     {
       path: "/admin/movies",
@@ -76,10 +81,7 @@ export default function Header() {
       title: "Booking Infor",
       description: "Khu vực xem thông tin đặt vé người dùng.",
     },
-
-  
   ];
-
 
   let page = null;
 

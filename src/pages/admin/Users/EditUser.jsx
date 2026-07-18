@@ -5,7 +5,10 @@ import { CancelButton, SaveButton } from "@components/admin/buttons";
 import UserProfileHeader from "@features/admin/users/components/edit-user/UserProfileHeader";
 import UserEditForm from "@features/admin/users/components/edit-user/UserEditForm";
 import { useEditForm } from "@features/admin/users/hooks/useEditForm";
-import {useEditActions} from "@features/admin/users/hooks/useEditActions";
+import { useEditActions } from "@features/admin/users/hooks/useEditActions";
+import { useEffect } from "react";
+import {useNavigate, useLocation} from "react-router-dom"
+
 
 const roleMapping = {
   QuanTri: "Quản trị viên",
@@ -14,17 +17,34 @@ const roleMapping = {
 
 export default function EditUser() {
   const { account } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  
   const { data: users = [], isPending } = useUsers();
   const targetUser = users.find((user) => user.taiKhoan === account) ?? {};
 
   const initial = targetUser?.hoTen?.charAt(0).toUpperCase() ?? "";
 
-  const { register, handleSubmit, fields, errors , initialUser} = useEditForm({
+  const { register, handleSubmit, fields, errors, initialUser, isDirty } =
+    useEditForm({
       user: targetUser,
     });
 
-  const {onCancelEditClick, onConfirmEditClick} = useEditActions({handleSubmit, initialUser})
+  useEffect(() => {
+    navigate(".", {
+      replace: true,
+      state: {
+        ...location.state,
+        shouldConfirmLeave: isDirty,
+      },
+    });
+  }, [isDirty]);
 
+  const { onCancelEditClick, onConfirmEditClick } = useEditActions({
+    handleSubmit,
+    initialUser,
+  });
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-800 p-8 text-slate-100">
@@ -46,9 +66,13 @@ export default function EditUser() {
           <UserEditForm fields={fields} register={register} errors={errors} />
 
           <div className="mt-10 flex justify-end gap-4">
-            <CancelButton surface="dark" onClick = {onCancelEditClick}>Hủy</CancelButton>
+            <CancelButton surface="dark" onClick={onCancelEditClick}>
+              Hủy
+            </CancelButton>
 
-            <SaveButton surface="dark" onClick ={onConfirmEditClick}>Lưu thông tin</SaveButton>
+            <SaveButton surface="dark" onClick={onConfirmEditClick}>
+              Lưu thông tin
+            </SaveButton>
           </div>
         </div>
       </div>
