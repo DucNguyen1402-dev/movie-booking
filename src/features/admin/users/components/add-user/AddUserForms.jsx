@@ -4,6 +4,7 @@ import { useAddForm } from "../../hooks/useAddForm";
 import { useUserFormActions } from "../../hooks/useUserFormActions";
 import { validationRules } from "../../constants/validationRules";
 import Input from "./InputForm";
+import {PasswordInput} from "@components/admin"
 import Select from "./SelectForm";
 import FormActions from "./FormActions";
 
@@ -44,12 +45,10 @@ export default function AddUserForms() {
             error={errors.taiKhoan}
           />
 
-          <Input
+          <PasswordInput
             label="Mật khẩu"
-            type="password"
-            required
-
             name="matKhau"
+            required
             register={register}
             rules={validationRules.matKhau}
             error={errors.matKhau}

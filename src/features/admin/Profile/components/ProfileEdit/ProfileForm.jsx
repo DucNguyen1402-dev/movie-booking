@@ -45,7 +45,7 @@ export default function ProfileForm() {
         <Input key={field.name} register={register} {...field} />
       ))}
 
-      <div className ="flex justify-end">
+      <div className ="flex justify-end mt-16">
         <SaveButton type="submit">Lưu thông tin</SaveButton>
       </div>
     </form>
