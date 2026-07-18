@@ -27,8 +27,14 @@ export default function Header() {
 
     {
       path: "/admin/profile",
-      title: "Profile",
-      description: "Khu vực quản lý thông tin tài khoản cá nhân.",
+      title: "Hồ sơ quản trị",
+      description:
+        "Xem và quản lý thông tin tài khoản và mật khẩu của quản trị viên.",
+    },
+    {
+      path: "/admin/profile/edit",
+      title: "Profile Edit",
+      description: "Cập nhật thông tin cho tài khoản quản trị.",
     },
     {
       path: "/admin/profile/password",

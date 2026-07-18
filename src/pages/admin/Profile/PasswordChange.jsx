@@ -3,7 +3,7 @@ import {
   PasswordChangeForm,
 } from "@features/admin/profile/components/PasswordChange";
 
-export default function ChangePasswordPage() {
+export default function PasswordChange() {
   return (
     <div className="min-h-screen bg-slate-900 p-4">
       <div className="flex items-center justify-center mt-10">

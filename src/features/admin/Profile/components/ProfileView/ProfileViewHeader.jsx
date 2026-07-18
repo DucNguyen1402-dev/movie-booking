@@ -1,4 +1,4 @@
-export default function ProfileHeader({ name, avatarLetter }) {
+export default function ProfileViewHeader({avatarLetter, name}) {
   return (
     <div className="mb-8 flex flex-col items-center">
       <div className="mb-3 flex h-20 w-20 items-center justify-center rounded-full border border-slate-500/20 bg-slate-950/10 text-4xl font-semibold tracking-wider text-slate-100 select-none">

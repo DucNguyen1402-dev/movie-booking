@@ -1,5 +1,5 @@
 import { PasswordInput } from "@components/admin";
-import { useProfileContext } from "../../contexts";
+import { useProfileContext } from "@features/admin/profile/contexts";
 import { userValidationRules } from "@config/admin";
 import { CancelButton, SaveButton } from "@components/admin/buttons";
 import { useEffect } from "react";

@@ -22,7 +22,6 @@ export function useProfileForm() {
     ennabled: !!currentUser,
   });
 
-  console.log(loginedUser);
 
   const {
     register,
@@ -93,33 +92,12 @@ export function useProfileForm() {
     modal.close();
     showLoading();
 
-    const { matKhau, matKhauHienTai, matKhauMoi, xacNhanMatKhauMoi } =
-      getValues();
-
-    if (matKhau !== matKhauHienTai) {
-      hideLoading();
-      notifActions.showNotification({
-        variant: "error",
-        message: "Mật khẩu hiện tại không chính xác!",
-      });
-      return;
-    }
-
-    if (matKhauMoi !== xacNhanMatKhauMoi) {
-      hideLoading();
-      notifActions.showNotification({
-        variant: "error",
-        message: "Mật khẩu mới không giống nhau",
-      });
-      return;
-    }
-
     try {
       const payload = {
         maNhom: currentUser.maNhom,
         taiKhoan: data.taiKhoan,
         hoTen: data.hoTen,
-        matKhau: matKhauMoi,
+        matKhau: data.matKhau,
         email: data.email,
         soDt: data.soDt,
         maLoaiNguoiDung: loginedUser.maLoaiNguoiDung,
@@ -132,7 +110,7 @@ export function useProfileForm() {
           history: history.slice(0, -1),
           notification: {
             variant: "success",
-            message: "Mật khẩu của bạn đã được thay đổi thành công.",
+            message: "Thông tin của bạn đã được cập nhật thành công",
           },
         },
       });
@@ -224,12 +202,13 @@ export function useProfileForm() {
       type: MODAL_TYPES.SAVE_PROFILE,
       title: "Xác nhận đổi mật khẩu",
       subtitle: "Mật khẩu của bạn sẽ được cập nhật trên hệ thống.",
-      onConfirm: () => handlePasswordChange(data),
+      onConfirm: () => submitPasswordChange(data),
     });
 
   const onValid = (data, action) => {
+      
     switch (action) {
-      case "save":
+      case "changeProfile":
         handleChangeProfile(data);
         break;
 
