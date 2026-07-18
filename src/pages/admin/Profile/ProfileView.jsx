@@ -1,13 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useEffect } from "react";
-import { ProfileSkeleton } from "@features/admin/profile/components/ProfileEdit";
-import { useProfileContext } from "@features/admin/profile/contexts";
-import { getCurrentUser } from "@utils/shared";
+import { ProfileSkeleton } from "@features/admin/Profile/components/ProfileEdit";
+import { useProfileContext } from "@features/admin/Profile/contexts";
 import {
   ProfileViewHeader,
   ProfileViewInfor,
-} from "@features/admin/profile/components/ProfileView";
+} from "@features/admin/Profile/components/ProfileView";
 
 export default function UserProfileView() {
   const {

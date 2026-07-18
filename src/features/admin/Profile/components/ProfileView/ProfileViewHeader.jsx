@@ -1,22 +1,31 @@
 import { useState } from "react";
 import { Pen } from "lucide-react";
 import AvatarSetting from "./AvatarSetting";
-
+import { useUserContext } from "@contexts/admin/";
 
 export default function ProfileViewHeader({ avatarLetter, name }) {
-  const [avatarList, setAvatarList] = useState(false);
+  const [isAvatarSettingOpen, setIsAvatarSettingOpen] = useState(false);
 
-  const onAvatarClick = () => setAvatarList(true);
+  const { storageAvatar } = useUserContext();
+
+  const onAvatarClick = () => setIsAvatarSettingOpen(true);
+  const closeAvatarSetting = () => {
+    setIsAvatarSettingOpen(false);
+  };
 
   return (
     <>
       <div className="mb-8 flex flex-col items-center">
         <div className="group relative">
           <button
-            className="mb-3 flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border border-slate-500/20 bg-slate-950/10 text-4xl font-semibold tracking-wider text-slate-100 transition-colors duration-300 select-none hover:bg-slate-950/20"
+            className="mb-3 flex h-20 w-20 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500/20 bg-slate-950/10 text-4xl font-semibold tracking-wider text-slate-100 transition-colors duration-300 select-none hover:bg-slate-950/20"
             onClick={onAvatarClick}
           >
-            {avatarLetter}
+            {storageAvatar ? (
+              <img src={storageAvatar} className="object-fit h-full w-full" />
+            ) : (
+              avatarLetter
+            )}
             <div className="absolute right-3 bottom-5.5 text-white opacity-0 transition-opacity duration-100 group-hover:opacity-100">
               <Pen className="size-4.5" />
             </div>
@@ -30,10 +39,10 @@ export default function ProfileViewHeader({ avatarLetter, name }) {
           </span>
         </div>
       </div>
-      {avatarList && (
+      {isAvatarSettingOpen && (
         <>
-         <div className="fixed inset-0 bg-black backdrop-blur-[2px] transition-opacity duration-200"></div>
-         <AvatarSetting />
+          <div className="fixed inset-0 z-50 bg-black backdrop-blur-[2px] transition-opacity duration-200"></div>
+          <AvatarSetting onClose={closeAvatarSetting} />
         </>
       )}
     </>

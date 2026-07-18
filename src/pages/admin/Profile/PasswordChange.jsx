@@ -1,7 +1,7 @@
 import {
   PasswordChangeHeader,
   PasswordChangeForm,
-} from "@features/admin/profile/components/PasswordChange";
+} from "@features/admin/Profile/components/PasswordChange";
 
 export default function PasswordChange() {
   return (

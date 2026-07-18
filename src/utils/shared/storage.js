@@ -1,5 +1,3 @@
-// utils/authStorage.ts
-
 const USER_KEY = "user";
 
 export const getCurrentUser = () => {
@@ -7,3 +5,10 @@ export const getCurrentUser = () => {
   return data ? JSON.parse(data) : null;
 };
 
+export const saveCurrentUser = (user) => {
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+};
+
+export const removeCurrentUser = () => {
+  localStorage.removeItem(USER_KEY);
+};

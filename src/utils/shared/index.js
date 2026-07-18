@@ -1,1 +1,1 @@
-export {getCurrentUser} from "./storage"
+export {getCurrentUser, saveCurrentUser} from "./storage"

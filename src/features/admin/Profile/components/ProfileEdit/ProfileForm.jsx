@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { SaveButton } from "@components/admin/buttons";
 import { Input } from "@components/admin";
 import { userValidationRules } from "@config/admin";
-import { useProfileContext } from "../../contexts";
+import { useProfileContext } from "@features/admin/Profile/contexts";
 
 const profileFieldConfigs = [
   { label: "TÀI KHOẢN", name: "taiKhoan", disabled: true },

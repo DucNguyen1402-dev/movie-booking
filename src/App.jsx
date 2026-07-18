@@ -13,6 +13,7 @@ import Register from "@/pages/customer/Register/Register";
 import {ProtectedRoute} from "./routes/ProtectRoutes"
 
 export default function App() {
+  const test = 1;
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

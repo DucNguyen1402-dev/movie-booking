@@ -8,6 +8,7 @@ import {
 import { NavLink, Link } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
 import {getCurrentUser} from "@utils/shared"
+  import { useUserContext } from "@contexts/admin/";
 
 const SIDEBAR_LINKS = [
   {
@@ -32,6 +33,10 @@ const SIDEBAR_LINKS = [
 ];
 
 export default function Sidebar() {
+
+
+  const {  storageAvatar } = useUserContext();
+
   const navLinkClasses = ` group flex items-center space-x-3 px-4 py-2.5 rounded-lg font-medium transition-colors duration-500`;
 
   const user = getCurrentUser();
@@ -94,8 +99,10 @@ export default function Sidebar() {
         <div className="group relative">
           <div className="before:absolute before:bottom-full before:left-0 before:h-4 before:w-full before:bg-transparent before:content-['']"></div>
 
-          <button className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500">
-            {avatarName}
+          
+
+          <button className="flex h-9 w-9 cursor-pointer overflow-hidden items-center justify-center rounded-full bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500">
+            {storageAvatar ? <img src = {storageAvatar}/> : avatarName}
           </button>
           <div className="pointer-events-none absolute bottom-10 left-0 w-50 overflow-hidden rounded-xl border border-gray-700 bg-[#1f1f1f] opacity-0 shadow-2xl transition-opacity duration-500 group-hover:pointer-events-auto group-hover:opacity-100">
             <Link
