@@ -1,30 +1,18 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Dashboard, RevenueRanking } from "../pages/admin/Dashboard";
-import {
-  ProfileEdit,
-  PasswordChange,
-  ProfileView,
-} from "../pages/admin/Profile";
+import MainLayout from "../layouts/admin/MainLayout";
+import Dashboard from "../pages/admin/Dashboard/Dashboard";
+import Profile from "../pages/admin/Profiles/Profile";
 import MovieManagement from "../pages/admin/Movies/MovieManagement";
 import EditMovie from "../pages/admin/Movies/EditMovie";
 import AddMovie from "../pages/admin/Movies/AddMovie";
 import ShowtimeManagement from "../pages/admin/Movies/Showtime/ShowtimeManagement";
 import ShowtimeCreation from "../pages/admin/Movies/Showtime/ShowtimeCreation";
 import UsersManagement from "../pages/admin/Users/UsersManagement";
-import AddUser from "../pages/admin/Users/AddUser";
-import EditUser from "../pages/admin/Users/EditUser";
-import UserBookingInfor from "../pages/admin/Users/UserBookingInfor";
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import {
-  UsersLayout,
-  MoviesLayout,
-  MainLayout,
-  DashboardLayout,
-  ProfileLayout,
-} from "../layouts/admin";
+import { TrailerProvider } from "@features/admin/movies-management/list/contexts/TrailerContext";
 
 export default function AdminRoutes() {
   return (
@@ -35,19 +23,18 @@ export default function AdminRoutes() {
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
 
-              <Route path="dashboard" element={<DashboardLayout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="revenue-ranking" element={<RevenueRanking />} />
-              </Route>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="profile" element={<Profile />} />
 
-              <Route path="profile" element={<ProfileLayout />}>
-                <Route index element={<ProfileView />} />
-                <Route path="edit" element={<ProfileEdit />} />
-                <Route path="password" element={<PasswordChange />} />
-              </Route>
-
-              <Route path="movies" element={<MoviesLayout />}>
-                <Route index element={<MovieManagement />} />
+              <Route path="movies">
+                <Route
+                  index
+                  element={
+                    <TrailerProvider>
+                      <MovieManagement />
+                    </TrailerProvider>
+                  }
+                />
                 <Route
                   path="edit/:id"
                   element={
@@ -64,15 +51,10 @@ export default function AdminRoutes() {
                 />
               </Route>
 
-              <Route path="users" element={<UsersLayout />}>
+              <Route path="users">
                 <Route index element={<UsersManagement />} />
-                <Route path="add" element={<AddUser />} />
-                <Route path="edit/:account" element={<EditUser />} />
-                <Route
-                  path="booking-infor/:account"
-                  element={<UserBookingInfor />}
-                />
               </Route>
+              
             </Route>
           </Routes>
         </NotificationProvider>

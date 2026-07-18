@@ -21,7 +21,6 @@ export function EditProvider({ children }) {
     editMovie: derivedMovie.editMovie,
     trigger: editForm.trigger,
     getValues: editForm.getValues,
-    setValue: editForm.setValue,
   });
 
   useEditMovieEffects({

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { addMovie } from "@services/admin/api";
 import { createMovieFormData } from "../utils/createMovieFormData";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -14,14 +14,8 @@ import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
 export function useAddMovie() {
   const [imgPreview, setImgPreview] = useState("");
-  const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: addMovie,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["movies"],
-      });
-    },
   });
   const location = useLocation();
   const history = location.state?.history ?? [];
@@ -33,29 +27,22 @@ export function useAddMovie() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isDirty},
+    formState: { errors },
     control,
     watch,
   } = useForm({
-    mode: "onBlur",
     defaultValues: {
-      tenPhim: "",
-      trailer: "",
-      moTa: "",
-      hinhAnh: "",
       maNhom: "GP01",
-      danhGia: 0,
+      danhGia: 10,
       hot: false,
-      ngayKhoiChieu: "",
       dangChieu: false,
       sapChieu: false,
     },
   });
 
-
   const handleCancelClick = () => {
     modal.close();
-    navigate(previousPath, { state: { history: history.slice(0, -1) } });
+    navigate(previousPath, { state: { history } });
   };
 
   const onCancelClick = () =>
@@ -115,6 +102,7 @@ export function useAddMovie() {
         variant: "error",
         message,
       });
+      console.log(error);
     }
   };
 
@@ -136,6 +124,5 @@ export function useAddMovie() {
     onCancelClick,
     watch,
     control,
-    isDirty,
   };
 }

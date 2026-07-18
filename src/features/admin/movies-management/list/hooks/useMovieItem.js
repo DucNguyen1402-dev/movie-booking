@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteMovie } from "@services/admin/api";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { MOVIE_HIGHLIGHTS } from "@config/admin/movieHighlight";
 import { useModalContext } from "@contexts/admin/ModalContext";
 import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
@@ -11,15 +11,7 @@ import { useNotification } from "@contexts/admin/NotificationContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export function useMovieItem({ movie, movieId, highlight }) {
-  const [onDeleting, setOnDeleting] = useState(false);
-  const { mutateAsync } = useMutation({
-    mutationFn: deleteMovie,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["movies"],
-      });
-    },
-  });
+  const { mutateAsync } = useMutation({ mutationFn: deleteMovie });
 
   const rowRef = useRef(null);
   const isTargetMovie = movie.maPhim === Number(movieId);
@@ -43,7 +35,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
 
   const onCreateShowTimeClick = () =>
     navigate(`/admin/movies/showtimes/${movie.maPhim}`, {
-      state: {
+       state: {
         history: [...(location.state?.history ?? []), location.pathname],
       },
     });
@@ -52,8 +44,15 @@ export function useMovieItem({ movie, movieId, highlight }) {
     navigate(`/admin/movies/edit/${movie.maPhim}`, {
       state: {
         history: [...(location.state?.history ?? []), location.pathname],
-        shouldConfirmLeave: true,
       },
+    });
+
+  const onDeleteClick = () =>
+    modal.open({
+      type: MODAL_TYPES.DELETE_MOVIE,
+      title: "Bạn có chắc muốn xóa phim này không?",
+      subtitle: "Hành động này không thể hoàn lại.",
+      onConfirm: handleDeleteMovie,
     });
 
   const handleDeleteMovie = async () => {
@@ -62,6 +61,9 @@ export function useMovieItem({ movie, movieId, highlight }) {
       modal.close();
       showLoading();
       await mutateAsync(movie.maPhim);
+      await queryClient.invalidateQueries({
+        queryKey: ["movies"],
+      });
 
       await ensureMinDuration(start, MIN_LOADING_TIME);
       notifActions.showNotification({
@@ -75,21 +77,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
       });
     } finally {
       hideLoading();
-      setOnDeleting(false);
     }
-  };
-  const onDeleteClick = () => {
-    setOnDeleting(true);
-    modal.open({
-      type: MODAL_TYPES.DELETE_MOVIE,
-      title: `Bạn có chắc muốn xóa phim "${movie.tenPhim}"?`,
-      subtitle: "Hành động này không thể hoàn lại.",
-      onConfirm: handleDeleteMovie,
-      onCancel: () => {
-        setOnDeleting(false);
-        modal.close();
-      },
-    });
   };
 
   return {
@@ -99,6 +87,5 @@ export function useMovieItem({ movie, movieId, highlight }) {
     rowRef,
     onCreateShowTimeClick,
     onEditClick,
-    onDeleting,
   };
 }

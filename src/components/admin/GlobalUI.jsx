@@ -10,12 +10,10 @@ import {useModalContext} from "@contexts/admin/ModalContext"
 
 export default function GlobalUI() {
   const {modal} = useModalContext();
+  useLockBodyScroll(modal.isOpen);
+
   const loading = useLoading();
   const notif = useNotification();
-  
-  const shouldLock = modal.type !== null || loading.isVisible;
-  useLockBodyScroll(shouldLock);
-
   return (
     <>
       <AnimatePresence>

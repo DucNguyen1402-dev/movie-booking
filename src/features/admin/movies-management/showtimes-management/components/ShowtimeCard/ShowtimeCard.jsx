@@ -36,7 +36,7 @@ export default function ShowtimeCard({ showtimeInfor, isPending, hasNoData }) {
       const { tenHeThongRap, logo, cumRapChieu } = showtime;
 
       return (
-        <div key = {tenHeThongRap} className="space-y-10 border-b border-dashed border-slate-600 px-8">
+        <div key = {tenHeThongRap} className="space-y-8 border-b border-dashed border-slate-500 px-8">
           <ShowtimeHeader
             tenHeThongRap={tenHeThongRap}
             tongSuatChieu={tongSuatChieu}
@@ -52,7 +52,7 @@ export default function ShowtimeCard({ showtimeInfor, isPending, hasNoData }) {
                   className={`space-y-10 rounded-md ${hasNewShowtime ? "animate-flash" : ""}`}
                 >
                   <div
-                    className={`space-y-10 pb-8 ${isLastCluster ? "" : "border-b border-gray-500"}`}
+                    className={`space-y-10 pb-8 ${isLastCluster ? "" : "border-b border-gray-300"}`}
                   >
                     <ShowtimeInforHeader
                       diaChi={diaChi}
@@ -86,19 +86,20 @@ export default function ShowtimeCard({ showtimeInfor, isPending, hasNoData }) {
               );
             },
           )}
+          ,
         </div>
       );
     })
   );
 
   return (
-    <section className="relative grow space-y-10 rounded-xl border border-slate-700 bg-slate-800 pt-30 pb-8 shadow-sm">
+    <section className="relative grow space-y-10 rounded-xl border bg-gray-50 pt-30 pb-8 shadow-sm">
       {!isPending && !hasNoData && (
-        <div className="absolute top-3 right-3 flex items-center gap-2.5 rounded-xl border border-slate-600 bg-slate-700 p-2 pr-4">
-          <span className="flex h-10 w-10 animate-bounce items-center justify-center rounded-full border border-slate-600/60 bg-linear-to-br from-rose-600 via-rose-500 to-rose-400 px-2 text-lg font-bold text-slate-100 shadow-lg">
+        <div className="absolute top-3 right-3 flex items-center gap-2.5 rounded-xl border border-slate-300 bg-slate-50 p-2 pr-4">
+          <span className="flex h-10 w-10 animate-bounce items-center justify-center rounded-full border border-slate-200/60 bg-linear-to-br from-rose-600 via-rose-500 to-rose-400 px-2 text-lg font-bold text-white shadow-lg">
             {tongSuatChieu}
           </span>
-          <span className="text-sm font-semibold tracking-wide text-slate-100">
+          <span className="text-sm font-semibold tracking-wide text-slate-600">
             suất chiếu
           </span>
         </div>

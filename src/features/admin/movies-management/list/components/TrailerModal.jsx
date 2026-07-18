@@ -1,9 +1,10 @@
+import { useProcessedMovies } from "../hooks/useProcessedMovies";
 import { CircleX } from "lucide-react";
-import { useMovieContext } from "../contexts/MovieContext";
+import { useTrailerContext } from "../contexts/TrailerContext";
 
 export default function TrailerModal() {
-
-  const { trailer: {close, trailer} } = useMovieContext();
+  const movies = useProcessedMovies();
+  const { trailer, close: closeTrailer } = useTrailerContext();
 
   const embedUrl = trailer.url
     ? trailer.url.replace("watch?v=", "embed/")
@@ -23,7 +24,7 @@ export default function TrailerModal() {
 
           <button
             className="cursor-pointer text-2xl text-gray-400 transition-colors duration-300 hover:text-white"
-            onClick={() => close()}
+            onClick={() => closeTrailer()}
           >
             <CircleX />
           </button>

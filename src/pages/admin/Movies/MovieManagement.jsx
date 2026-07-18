@@ -1,14 +1,12 @@
 import { useEffect } from "react";
-import {PAGE_SIZE_OPTIONS} from "@config/admin/pagination";
 import AddMovieBtn from "@features/admin/movies-management/list/components/AddMovieBtn";
 import SearchBar from "@features/admin/movies-management/list/components/SearchBar";
 import MovieStatusFilter from "@features/admin/movies-management/list/components/MovieStatusFilter";
 import SortSelect from "@features/admin/movies-management/list/components/SortSelect";
 import MoviesTable from "@features/admin/movies-management/list/components/MoviesTable/MoviesTable";
-import { Select } from "@components/admin";
 import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
-import { useMovieContext } from "@features/admin/movies-management/list/contexts/MovieContext";
+import { useTrailerContext } from "@features/admin/movies-management/list/contexts/TrailerContext";
 import TrailerModal from "@features/admin/movies-management/list/components/TrailerModal";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,10 +23,7 @@ export default function MovieManagement() {
     }
   }, [location.state]);
 
-  const {
-    trailer: { trailer },
-    pagination: { currentSize, setSize },
-  } = useMovieContext();
+  const { trailer } = useTrailerContext();
 
   useLockBodyScroll(trailer.url !== null);
 
@@ -39,37 +34,24 @@ export default function MovieManagement() {
       },
     });
 
-    
-
   return (
-    <>
-      <div className="min-h-screen bg-[#0f172a] px-6 pt-10 pb-8 font-sans text-slate-100">
-        <div className="3xl:max-w-[90%] mx-auto w-full space-y-8">
-          {/* 1. HEADER & ACTION BAR */}
-          <div className="flex items-center justify-end">
-            <div className="flex flex-col gap-4">
-              <AddMovieBtn onAddMovieClick={onAddMovieClick} />
-            </div>
-          </div>
-
-          {/* 2. FILTER & SEARCH BAR */}
-          <div className="grid grid-cols-1 gap-4 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm sm:grid-cols-6">
-            <div className="col-span-3">
-              <SearchBar />
-            </div>
-            <MovieStatusFilter />
-            <SortSelect />
-            <Select
-              value={currentSize}
-              onChange={(e) => setSize(e.target.value)}
-              options = {PAGE_SIZE_OPTIONS}
-            />
-          </div>
-
-          {/* 3. DATA TABLE */}
-          <MoviesTable />
+    <div className="min-h-screen bg-[#0f172a] p-6 font-sans text-slate-100">
+      {/* 1. HEADER & ACTION BAR */}
+      <div className="flex items-center justify-end">
+        <div className="mb-8 flex flex-col gap-4" onClick={onAddMovieClick}>
+          <AddMovieBtn />
         </div>
       </div>
+
+      {/* 2. FILTER & SEARCH BAR */}
+      <div className="mb-6 grid grid-cols-1 gap-4 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm sm:grid-cols-3">
+        <SearchBar />
+        <MovieStatusFilter />
+        <SortSelect />
+      </div>
+
+      {/* 3. DATA TABLE */}
+      <MoviesTable />
 
       <AnimatePresence>
         {trailer.url !== null && (
@@ -85,6 +67,6 @@ export default function MovieManagement() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

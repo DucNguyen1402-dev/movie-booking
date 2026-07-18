@@ -10,10 +10,13 @@ export const authApi = {
   },
 
   getAccountInfo: () => {
-    return customerClient.post("/QuanLyNguoiDung/ThongTinTaiKhoan");
+    return customerClient.post("/QuanLyNguoiDung/ThongTinTaiKhoan", {});
   },
 
   updateAccountInfo: (data) => {
-    return customerClient.put("/QuanLyNguoiDung/CapNhatThongTinNguoiDung", data);
+    return customerClient.put(
+      "/QuanLyNguoiDung/CapNhatThongTinNguoiDung",
+      data,
+    );
   },
 };

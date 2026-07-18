@@ -3,8 +3,8 @@ import { useMemo } from "react";
 
 export default function EditImageSection() {
   const {
-  
-    editForm: { watch , register},
+    editActions,
+    editForm: { watch, register },
   } = useEditMovie();
 
   const file = watch("hinhAnh");
@@ -14,19 +14,19 @@ export default function EditImageSection() {
 
     return typeof file === "string"
       ? file
-      : file[0]
+      : file?.[0]
         ? URL.createObjectURL(file[0])
         : "";
   }, [file]);
 
   return (
-    <div className="flex flex-col items-center justify-between rounded-xl bg-slate-800 p-6 shadow-sm">
+    <div className="flex flex-col items-center justify-between rounded-xl bg-white p-6 shadow-sm">
       <div className="flex w-full flex-col items-center gap-5">
-        <label className="mb-3 block text-center text-2xl font-medium tracking-wider text-slate-100">
+        <label className="mb-3 block text-center text-2xl font-medium tracking-wider text-gray-700">
           Hình ảnh poster
         </label>
 
-        <div className="mx-auto mb-4 flex h-96 w-72 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-600">
+        <div className="mx-auto mb-4 flex h-64 w-48 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-300 bg-gray-50">
           {preview ? (
             <img
               src={preview}
@@ -34,7 +34,7 @@ export default function EditImageSection() {
               className="h-full w-full object-cover"
             />
           ) : (
-            <span className="text-sm text-gray-100">Chưa có ảnh</span>
+            <span className="text-sm text-gray-400">Chưa có ảnh</span>
           )}
         </div>
 
@@ -42,12 +42,14 @@ export default function EditImageSection() {
           type="file"
           accept="image/*"
           id="file-upload"
-          {...register("hinhAnh")}
+          {...register("hinhAnh", {
+            onChange: editActions.handleFileChange,
+          })}
           className="hidden"
         />
         <label
           htmlFor="file-upload"
-          className="inline-flex cursor-pointer items-center rounded-md  bg-indigo-600 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm transition-colors duration-300 hover:bg-indigo-700"
+          className="inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors duration-300 hover:bg-indigo-600"
         >
           Thay đổi hình ảnh
         </label>

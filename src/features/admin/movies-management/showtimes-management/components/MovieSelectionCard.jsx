@@ -14,11 +14,11 @@ export default function MovieSelectionCard({ movie, hasNoData }) {
     });
 
   return (
-    <section className="w-90 group/outer rounded-xl border border-slate-600 bg-linear-to-b from-slate-800 via-slate-700 to-slate-600 px-3 pt-4 pb-3 shadow-sm">
+    <section className="w-90 group/outer rounded-xl border bg-linear-to-b from-slate-400 via-slate-300 to-slate-200 px-3 pt-4 pb-3 shadow-sm">
       <div className=" flex flex-col items-center justify-center gap-4">
         <div className="flex w-full flex-col gap-2">
-          <MovieIcon className="shrink-0" theme="dark"/>
-          <h1 className="text-2xl font-bold tracking-wide text-slate-100 text-center">
+          <MovieIcon className="shrink-0" />
+          <h1 className="text-2xl font-bold tracking-wide text-slate-800 text-center">
             {movie.tenPhim}
           </h1>
         </div>
@@ -29,7 +29,7 @@ export default function MovieSelectionCard({ movie, hasNoData }) {
         {!hasNoData && (
           <button
             onClick={onShowtimeCreationClick}
-            className="mt-6 flex cursor-pointer items-center gap-1 self-end rounded-md bg-green-600 px-3 py-2.5 text-sm font-medium text-slate-100 transition-colors duration-400 hover:bg-green-700"
+            className="mt-6 flex cursor-pointer items-center gap-1 self-end rounded-md bg-green-600 px-3 py-2.5 text-sm font-medium text-white transition-colors duration-400 hover:bg-green-700"
           >
             <CalendarCog className="size-5 font-bold" />
             <span>Tạo lịch chiếu mới</span>

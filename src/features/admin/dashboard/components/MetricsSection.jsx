@@ -6,7 +6,7 @@ import {
   TrendingUp,
   Ticket,
 } from "lucide-react";
-import { formatCurrency , formatRoundedNumber} from "../utils/format";
+import { formatCurrency , formatRoundedNumber} from "../utils/format/index";
 const createMetricCards = ({
   totalRevenue,
   totalTicketSold,
