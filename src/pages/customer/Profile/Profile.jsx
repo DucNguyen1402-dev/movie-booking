@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, Ticket, UserRound } from "lucide-react";
+import { LogOut, Ticket, UserRound, UserStar } from "lucide-react";
 import {
   getStoredUser,
   getStoredAccessToken,
@@ -22,6 +22,10 @@ const Profile = () => {
   const handleLogout = () => {
     logout();
     navigate("/login");
+  };
+
+  const handleRouteToAdmin = () => {
+    navigate("/admin");
   };
 
   if (!accessToken) {
@@ -111,14 +115,25 @@ const Profile = () => {
             </h1>
           </div>
 
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black text-white uppercase transition hover:bg-red-500"
-          >
-            <LogOut size={18} />
-            Đăng xuất
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={handleRouteToAdmin}
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-black text-white uppercase transition hover:bg-indigo-500"
+            >
+              <UserStar size={18} />
+              Qua trang admin
+            </button>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black text-white uppercase transition hover:bg-red-500"
+            >
+              <LogOut size={18} />
+              đăng xuất
+            </button>
+          </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
