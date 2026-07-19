@@ -9,6 +9,9 @@ import {
 import { formatCurrency, formatRoundedNumber } from "../../utils/format";
 import EmptyMetricCard from "./EmptyMetricCard";
 import MetricCard from "./MetricCard"
+import { useLayoutContext } from "@contexts/admin";
+
+
 const createMetricCards = ({
   totalRevenue,
   totalTicketSold,
@@ -104,9 +107,11 @@ export default function MetricsSection({
     averageTicketsSold,
     averageRating,
   });
+ const { isSidebarOpen } = useLayoutContext();
+
 
   return (
-    <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <section className={`grid grid-cols-1 gap-6 md:grid-cols-2  ${isSidebarOpen ?"lg:grid-cols-3" : "lg:grid-cols-4" }`}>
       {isPending
         ? Array.from({ length: 6 }, (_, index) => (
             <EmptyMetricCard key={index} />

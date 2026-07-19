@@ -6,8 +6,13 @@ import {
   avatar05,
   avatar06,
   avatar07,
+  avatar08,
+  avatar09,
+  avatar10,
+  avatar11,
+  avatar12,
+  avatar13,
 } from "@images/admin";
-
 
 export const avatarList = [
   avatar01,
@@ -17,4 +22,10 @@ export const avatarList = [
   avatar05,
   avatar06,
   avatar07,
+  avatar08,
+  avatar09,
+  avatar10,
+  avatar11,
+  avatar12,
+  avatar13,
 ];

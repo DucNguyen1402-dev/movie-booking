@@ -12,7 +12,6 @@ import MovieIcon from "./MovieIcon";
 import { useUserContext } from "@contexts/admin";
 import { clearAuth } from "@utils/shared";
 import { useLayoutContext } from "@contexts/admin";
-import { SIDEBAR_WIDTH, SIDEBAR_COLLAPSED_WIDTH } from "@constants/admin";
 
 const SIDEBAR_LINKS = [
   {
@@ -22,7 +21,7 @@ const SIDEBAR_LINKS = [
     iconColor: "text-indigo-500",
   },
   {
-    path: "/admin/movies/",
+    path: "/admin/movies",
     label: "Movie management",
     icon: Clapperboard,
     iconColor: "text-red-500",

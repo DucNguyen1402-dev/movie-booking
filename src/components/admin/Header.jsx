@@ -131,7 +131,7 @@ export default function Header() {
   isSidebarOpen
   
   return (
-    <header className={` transition-[padding] duration-300 ease-in-out will-change-transform sticky top-0 z-10 flex h-28 items-center border-b border-gray-800 bg-[#1e1e1e]/80 backdrop-blur-md ${isSidebarOpen ? "pl-8": "pl-20"}`}>
+    <header className={` transition-[padding] duration-300 ease-in-out will-change-transform sticky top-0 z-30 flex h-28 items-center border-b border-gray-800 bg-[#1e1e1e]/80 backdrop-blur-md ${isSidebarOpen ? "pl-8": "lg:pl-20 2xl:pl-10 "}`}>
       <div className="space-y-3 py-4">
         <h1 className="text-2xl font-semibold text-white">{page?.title}</h1>
         {page?.description && (

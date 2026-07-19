@@ -13,7 +13,7 @@ export default function HighestRevenueMovieCard({
 
       <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-linear-to-r from-transparent via-amber-500 to-red-500 transition-all duration-500 group-hover:w-full" />
 
-      <div className="relative z-10 flex h-full flex-col justify-between space-y-8">
+      <div className="relative flex h-full flex-col justify-between space-y-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 px-4 py-2 text-xs font-bold tracking-wider text-amber-400 uppercase">

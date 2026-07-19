@@ -116,7 +116,6 @@ export const useUpdateAccountInfo = () => {
   return useMutation({
     mutationFn: async (data) => {
       const response = await authApi.updateAccountInfo(data);
-   
       return response.data.content;
     },
 

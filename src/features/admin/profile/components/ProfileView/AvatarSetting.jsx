@@ -1,5 +1,6 @@
-import { X } from "lucide-react";
+import { X, ChevronRight, ChevronLeft } from "lucide-react";
 import { useUserContext } from "@contexts/admin";
+import { usePagination } from "@hooks/admin";
 
 export default function AvatarSetting({ onClose }) {
   const { setAvatarIndex, avatarName, avatarList } = useUserContext();
@@ -10,16 +11,24 @@ export default function AvatarSetting({ onClose }) {
   };
 
 
+
+  const pagination = usePagination({
+    items: avatarList,
+    size: 7,
+    resetDeps: avatarList,
+  });
+
+
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center">
-      <div className="relative flex w-150 flex-wrap items-center justify-center gap-5 rounded-md bg-slate-700/80 p-10">
-        <button
+      <div className="relative flex h-80 w-150 flex-wrap items-center justify-center gap-5 overflow-x-auto rounded-md bg-slate-700/80 p-10">
+       {pagination.page !== 1 &&  <button
           onClick={() => onAvatarSeletion(-1)}
           className="flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500 bg-yellow-600 text-4xl text-slate-100 transition-transform duration-300 hover:scale-105"
         >
           {avatarName}
-        </button>
-        {avatarList.map((avatar, index) => (
+        </button>}
+        {pagination.list.map((avatar, index) => (
           <button
             key={index}
             onClick={() => onAvatarSeletion(index)}
@@ -29,6 +38,26 @@ export default function AvatarSetting({ onClose }) {
             <img src={avatar} className="object-fit h-full w-full" />
           </button>
         ))}
+
+        {!pagination.controls.isPrevDisabled  && (
+          <button
+            disabled={pagination.controls.isPrevDisabled}
+            onClick={pagination.controls.onPrevClick}
+            className="absolute top-1/2 left-1 -translate-y-1/2 cursor-pointer text-slate-300 transition-colors duration-300 hover:text-slate-100"
+          >
+            <ChevronLeft className="size-12" />
+          </button>
+        )}
+
+        {!pagination.controls.isNextDisabled && (
+          <button
+            disabled={pagination.controls.isNextDisabled}
+            onClick={pagination.controls.onNextClick}
+            className="absolute top-1/2 right-1 -translate-y-1/2 cursor-pointer text-slate-300 transition-colors duration-300 hover:text-slate-100"
+          >
+            <ChevronRight className="size-12" />
+          </button>
+        )}
 
         <button
           className="absolute top-1.5 right-1.5 cursor-pointer font-bold text-slate-300 transition-colors duration-200 hover:text-slate-200"

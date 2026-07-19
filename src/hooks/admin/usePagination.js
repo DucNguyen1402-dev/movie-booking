@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 
-export function usePagination({ items, resetDeps , enabled}) {
-  const [pagination, setPagination] = useState({ page: 1, size: 10 });
+export function usePagination({ items, resetDeps , enabled, size = 10}) {
+  const [pagination, setPagination] = useState({ page: 1, size });
   const skipNextPageReset = useRef(false);
 
   const setSize = (value) =>
