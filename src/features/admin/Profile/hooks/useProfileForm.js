@@ -23,6 +23,7 @@ export function useProfileForm() {
   });
 
 
+
   const {
     register,
     handleSubmit,
@@ -53,7 +54,7 @@ export function useProfileForm() {
     mutationFn: updateUser,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["users"],
+        queryKey: ["loginedUser"],
       });
     },
   });
@@ -99,10 +100,9 @@ export function useProfileForm() {
         hoTen: data.hoTen,
         matKhau: data.matKhau,
         email: data.email,
-        soDt: data.soDt,
-        maLoaiNguoiDung: loginedUser.maLoaiNguoiDung,
+        soDt: data.soDT,
+        maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
       };
-      console.log(payload);
       await mutateAsync(payload);
       hideLoading();
       navigate(previousPath, {
@@ -160,10 +160,10 @@ export function useProfileForm() {
         hoTen: data.hoTen,
         matKhau: matKhauMoi,
         email: data.email,
-        soDt: data.soDt,
-        maLoaiNguoiDung: loginedUser.maLoaiNguoiDung,
+        soDt: data.soDT,
+        maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
       };
-      console.log(payload);
+
       await mutateAsync(payload);
       hideLoading();
       navigate(previousPath, {
@@ -213,7 +213,7 @@ export function useProfileForm() {
         break;
 
       case "changePassword":
-        submitPasswordChange(data);
+        handleChangePassword(data);
         break;
     }
   };
@@ -237,5 +237,6 @@ export function useProfileForm() {
     onPasswordSubmitEvent,
     isLoading,
     onCancelPasswordChangeClick,
+    loginedUser
   };
 }

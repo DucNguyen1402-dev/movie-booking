@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 
-export function usePagination({ items, resetDeps }) {
+export function usePagination({ items, resetDeps , enabled}) {
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
   const skipNextPageReset = useRef(false);
 
@@ -14,6 +14,7 @@ export function usePagination({ items, resetDeps }) {
       skipNextPageReset.current = false;
       return;
     }
+    if(!enabled) return;
     setPagination((prev) => ({
       ...prev,
       page: 1,

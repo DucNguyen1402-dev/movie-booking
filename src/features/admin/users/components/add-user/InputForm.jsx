@@ -8,7 +8,7 @@ export default function Input({
   error,
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-3">
       <label className="text-sm font-medium text-slate-200">
         {label} {required && <span className="text-red-400">*</span>}
       </label>
@@ -16,7 +16,7 @@ export default function Input({
         type={type}
         name
         required
-        className="rounded-sm border border-slate-600 cursor-pointer hover:ring-1 hover:ring-blue-500 text-slate-100 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+        className="rounded-sm border border-slate-600 bg-slate-900/40 hover:ring-1 hover:ring-blue-500 text-slate-100 px-3 py-2 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
         {...register(name, rules)}
       />
       {error && (

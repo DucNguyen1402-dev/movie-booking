@@ -8,6 +8,7 @@ export default function PasswordInput({
   rules,
   id = null,
   error,
+  required = false
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -17,7 +18,7 @@ export default function PasswordInput({
         htmlFor={id ?? name}
         className="block cursor-pointer text-sm text-slate-200"
       >
-        {label}
+        {label} {required && <span className="text-red-400">*</span>}
       </label>
       <div className="relative">
         <input

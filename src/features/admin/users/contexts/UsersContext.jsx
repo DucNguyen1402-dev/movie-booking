@@ -18,8 +18,10 @@ export function UsersProvider({ children }) {
       userFilters.filters.role,
       userFilters.filteredUsers,
     ],
+    enabled: usersStates.isSucess
   });
 
+  
   const value = {
     usersStates,
     userFilters,
