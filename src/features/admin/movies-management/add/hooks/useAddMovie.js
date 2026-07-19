@@ -37,7 +37,7 @@ export function useAddMovie() {
     control,
     watch,
   } = useForm({
-    mode: "onBlur",
+
     defaultValues: {
       tenPhim: "",
       trailer: "",

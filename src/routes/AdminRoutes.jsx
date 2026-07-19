@@ -47,6 +47,7 @@ export default function AdminRoutes() {
                   <Route path="password" element={<PasswordChange />} />
                 </Route>
 
+
                 <Route path="movies" element={<MoviesLayout />}>
                   <Route index element={<MovieManagement />} />
                   <Route

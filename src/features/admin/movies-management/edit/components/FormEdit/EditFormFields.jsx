@@ -120,7 +120,7 @@ export default function EditFormFields() {
           <div className="flex items-center gap-2">
             <input
               type="number"
-              {...register("danhGia", validationRules.danhGia)}
+              {...register("danhGia")}
               className={`w-8 rounded-sm border border-gray-300 px-1 py-px text-center text-white focus:ring-1 focus:outline-none ${getRateClasses(watch("danhGia"))}`}
             />
             <Star className="h-4 w-4 fill-current text-yellow-500" />

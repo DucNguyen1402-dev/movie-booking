@@ -6,7 +6,8 @@ import {
   TrendingUp,
   Ticket,
 } from "lucide-react";
-import { formatCurrency , formatRoundedNumber} from "../utils/format";
+import { formatCurrency, formatRoundedNumber } from "../utils/format";
+import EmptyMetricCard from "./EmptyMetricCard";
 const createMetricCards = ({
   totalRevenue,
   totalTicketSold,
@@ -86,6 +87,7 @@ const createMetricCards = ({
 ];
 
 export default function MetricsSection({
+  isPending,
   userQuantity,
   totalRevenue,
   totalTicketSold,
@@ -101,36 +103,41 @@ export default function MetricsSection({
     averageTicketsSold,
     averageRating,
   });
+
   return (
     <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-      {METRIC_CARDS.map((metricCard) => (
-        <div
-          key={metricCard.id}
-          className={`flex flex-col justify-between rounded-xl border border-gray-800 bg-[#1e1e1e] p-6 transition-all duration-300 hover:shadow-lg ${metricCard.hoverClasses}`}
-        >
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-medium text-gray-400 uppercase">
-              {metricCard.title}
-            </span>
-
+      {isPending
+        ? Array.from({ length: 6 }, (_, index) => (
+            <EmptyMetricCard key={index} />
+          ))
+        : METRIC_CARDS.map((metricCard) => (
             <div
-              className={`flex h-13 w-13 items-center justify-center rounded-xl ${metricCard.iconBackground}`}
+              key={metricCard.id}
+              className={`flex flex-col justify-between rounded-xl border border-gray-800 bg-[#1e1e1e] p-6 transition-all duration-300 hover:shadow-lg ${metricCard.hoverClasses}`}
             >
-              <metricCard.icon
-                className={`h-7 w-7 ${metricCard.iconClassName}`}
-              />
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-400 uppercase">
+                  {metricCard.title}
+                </span>
+
+                <div
+                  className={`flex h-13 w-13 items-center justify-center rounded-xl ${metricCard.iconBackground}`}
+                >
+                  <metricCard.icon
+                    className={`h-7 w-7 ${metricCard.iconClassName}`}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-5 space-y-2">
+                <h3 className="text-3xl font-bold tracking-tight text-white">
+                  {metricCard.metric}
+                </h3>
+
+                <p className="text-sm text-gray-500">{metricCard.desc}</p>
+              </div>
             </div>
-          </div>
-
-          <div className="mt-5 space-y-2">
-            <h3 className="text-3xl font-bold tracking-tight text-white">
-              {metricCard.metric}
-            </h3>
-
-            <p className="text-sm text-gray-500">{metricCard.desc}</p>
-          </div>
-        </div>
-      ))}
+          ))}
     </section>
   );
 }

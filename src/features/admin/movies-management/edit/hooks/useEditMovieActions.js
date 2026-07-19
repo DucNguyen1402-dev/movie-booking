@@ -53,7 +53,7 @@ export function useEditMovieActions({
   function normalizeMovie(movie) {
     return {
       ...movie,
-      ngayKhoiChieu: movie.ngayKhoiChieu.split("T")[0],
+      ngayKhoiChieu:format(movie.ngayKhoiChieu, "yyyy-MM-dd"),
     };
   }
 

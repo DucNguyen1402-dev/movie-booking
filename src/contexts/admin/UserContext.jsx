@@ -13,22 +13,11 @@ export function UserProvider({ children }) {
   const avatarName = getAvatarInitial(currentUser.hoTen);
 
   useEffect(() => {
-    if (avatarIndex == null) {
-      saveCurrentUser({
-        ...currentUser,
-        avatarIndex: null,
-      });
-      setCurrentUser({
-        ...currentUser,
-        avatarIndex: null,
-      });
-      return;
-    }
+    if (avatarIndex === null) return;
     const newUser = {
       ...currentUser,
       avatarIndex,
     };
-
     saveCurrentUser(newUser);
     setCurrentUser(newUser);
   }, [avatarIndex]);

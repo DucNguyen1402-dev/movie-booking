@@ -14,7 +14,7 @@ export default function AvatarSetting({ onClose }) {
     <div className="fixed inset-0 z-100 flex items-center justify-center">
       <div className="relative flex w-150 flex-wrap items-center justify-center gap-5 rounded-md bg-slate-700/80 p-10">
         <button
-          onClick={() => onAvatarSeletion(null)}
+          onClick={() => onAvatarSeletion(-1)}
           className="flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500 bg-yellow-600 text-4xl text-slate-100 transition-transform duration-300 hover:scale-105"
         >
           {avatarName}

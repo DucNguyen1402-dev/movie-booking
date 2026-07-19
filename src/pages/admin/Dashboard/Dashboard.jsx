@@ -10,7 +10,6 @@ function Dashboard() {
   const {
     isPending,
     users,
-    movies,
     dashboardDerived: { derivedMovies, revenue, tickets, rating, ranking },
   } = useDashboardContext();
 
@@ -30,6 +29,7 @@ function Dashboard() {
         </div>
 
         <MetricsSection
+          isPending={isPending}
           userQuantity={users.length}
           totalRevenue={revenue.total}
           totalTicketSold={tickets.total}
@@ -39,11 +39,18 @@ function Dashboard() {
         />
 
         <MovieStatusCard
+          isPending={isPending}
           nowShowingMovies={derivedMovies.nowShowing}
           upcomingMovies={derivedMovies.upcoming}
         />
-        <TopRevenueMovieCard highestRevenueMovie={ranking.highestRevenueMovie} />
-        <TopRevenueMovies topFiveMoviesRevenue={ranking.topFive} />
+        <TopRevenueMovieCard
+          isPending={isPending}
+          highestRevenueMovie={ranking.highestRevenueMovie}
+        />
+        <TopRevenueMovies
+          isPending={isPending}
+          topFiveMoviesRevenue={ranking.topFive}
+        />
       </div>
     </div>
   );

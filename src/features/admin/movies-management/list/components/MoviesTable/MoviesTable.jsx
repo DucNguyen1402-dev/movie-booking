@@ -18,7 +18,7 @@ export default function MoviesTable() {
 
   const {
     pagination,
-    raw: { isPending, isFetching , movies},
+    raw: { isPending, isFetching },
     processed: {
       list,
       state: { keyword },
