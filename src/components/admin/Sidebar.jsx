@@ -8,7 +8,7 @@ import {
 import { NavLink, Link } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
 import {getCurrentUser} from "@utils/shared"
-  import { useUserContext } from "@contexts/admin/";
+  import { useUserContext } from "@contexts/admin";
 
 const SIDEBAR_LINKS = [
   {
@@ -35,14 +35,13 @@ const SIDEBAR_LINKS = [
 export default function Sidebar() {
 
 
-  const {  storageAvatar } = useUserContext();
+  const {  storageAvatar , avatarName} = useUserContext();
 
   const navLinkClasses = ` group flex items-center space-x-3 px-4 py-2.5 rounded-lg font-medium transition-colors duration-500`;
 
   const user = getCurrentUser();
   
 
-  const avatarName = user.hoTen.trim().split(/\s+/).at(-1)[0].toUpperCase();
 
   return (
     <aside className="group/outer fixed z-10 flex h-full w-64 flex-col border-r border-gray-800 bg-[#1e1e1e]">

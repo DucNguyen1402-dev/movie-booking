@@ -18,7 +18,6 @@ import { EditProvider } from "@features/admin/movies-management/edit/contexts/Ed
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
-import { UserProvider } from "@contexts/admin";
 import {
   UsersLayout,
   MoviesLayout,
@@ -29,7 +28,7 @@ import {
 
 export default function AdminRoutes() {
   return (
-    <UserProvider>
+
       <ModalProvider>
         <LoadingProvider>
           <NotificationProvider>
@@ -83,6 +82,5 @@ export default function AdminRoutes() {
           </NotificationProvider>
         </LoadingProvider>
       </ModalProvider>
-    </UserProvider>
   );
 }

@@ -1,4 +1,4 @@
-import { ProfileForm } from "@features/admin/Profile/components/ProfileEdit";
+import { ProfileForm } from "@features/admin/profile/components/ProfileEdit";
 import { PencilLine } from "lucide-react";
 
 export default function ProfileEdit() {

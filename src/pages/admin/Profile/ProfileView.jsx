@@ -1,12 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useEffect } from "react";
-import { ProfileSkeleton } from "@features/admin/Profile/components/ProfileEdit";
-import { useProfileContext } from "@features/admin/Profile/contexts";
+import { ProfileSkeleton } from "@features/admin/profile/components/ProfileEdit";
+import { useProfileContext } from "@features/admin/profile/contexts";
 import {
   ProfileViewHeader,
   ProfileViewInfor,
-} from "@features/admin/Profile/components/ProfileView";
+} from "@features/admin/profile/components/ProfileView";
 
 export default function UserProfileView() {
   const {
@@ -41,7 +41,6 @@ export default function UserProfileView() {
     { label: "Số điện thoại", value: loginedUser.soDT || "Chưa cập nhật" },
   ];
 
-  const avatarLetter = loginedUser.hoTen.trim().split(/\s+/).at(-1)[0].toUpperCase();
 
   const onUpdateProfileClick = () =>
     navigate("/admin/profile/edit", {
@@ -63,7 +62,6 @@ export default function UserProfileView() {
       <div className="mt-8 flex items-center justify-center">
         <div className="w-full max-w-md rounded-xl border border-slate-700 bg-slate-800 p-6 shadow-xl">
           <ProfileViewHeader
-            avatarLetter={avatarLetter}
             name={loginedUser.hoTen}
           />
           <ProfileViewInfor fields={profileFields} />

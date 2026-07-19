@@ -1,0 +1,1 @@
+export {getAvatarInitial} from "./getAvatarInitial"

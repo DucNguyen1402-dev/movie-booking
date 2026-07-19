@@ -1,49 +1,49 @@
 import { createContext, useContext, useState } from "react";
 import { getCurrentUser, saveCurrentUser } from "@utils/shared";
 import { useEffect } from "react";
-import {
-  avatar01,
-  avatar02,
-  avatar03,
-  avatar04,
-  avatar05,
-  avatar07,
-  avatar08,
-} from "@images/admin";
+import { avatarList } from "@config/admin";
+import { getAvatarInitial } from "@utils/admin";
 
 const userContext = createContext(null);
 
 export function UserProvider({ children }) {
-  const currentUser = getCurrentUser();
+  const [currentUser, setCurrentUser] = useState(getCurrentUser());
+  const [avatarIndex, setAvatarIndex] = useState(null);
 
-  const avatarList = [
-    avatar01,
-    avatar02,
-    avatar03,
-    avatar04,
-    avatar05,
-    avatar07,
-    avatar08,
-  ];
-const [avatarIndex, setAvatarIndex] = useState(null);
+  const avatarName = getAvatarInitial(currentUser.hoTen);
 
   useEffect(() => {
-    if (!avatarIndex) return;
-    saveCurrentUser({
+    if (avatarIndex == null) {
+      saveCurrentUser({
+        ...currentUser,
+        avatarIndex: null,
+      });
+      setCurrentUser({
+        ...currentUser,
+        avatarIndex: null,
+      });
+      return;
+    }
+    const newUser = {
       ...currentUser,
       avatarIndex,
-    });
+    };
+
+    saveCurrentUser(newUser);
+    setCurrentUser(newUser);
   }, [avatarIndex]);
 
-  const storageAvatarIndex= currentUser?.avatarIndex ?? null;
+  const storageAvatarIndex = currentUser?.avatarIndex ?? null;
+  const storageAvatar =
+    storageAvatarIndex !== null ? avatarList[storageAvatarIndex] : null;
 
   const value = {
     currentUser,
     avatarIndex,
     setAvatarIndex,
     avatarList,
-    avatarName: currentUser.hoTen.trim().split(/\s+/).at(-1)[0].toUpperCase(),
-    storageAvatar: storageAvatarIndex ? avatarList[storageAvatarIndex]: null
+    avatarName,
+    storageAvatar,
   };
 
   return <userContext.Provider value={value}>{children}</userContext.Provider>;

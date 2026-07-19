@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import AdminRoutes from "./routes/AdminRoutes";
 import MainLayout from "./layouts/customer/MainLayout";
-
 import Home from "@/pages/customer/Home/Home";
 import Login from "@/pages/customer/Login/Login";
 import MovieBooking from "@/pages/customer/MovieBooking/MovieBooking";
@@ -10,10 +9,10 @@ import Movies from "@/pages/customer/Movies/Movies";
 import PopcornDrink from "@/pages/customer/PopcornDrink/PopcornDrink";
 import Profile from "@/pages/customer/Profile/Profile";
 import Register from "@/pages/customer/Register/Register";
-import {ProtectedRoute} from "./routes/ProtectRoutes"
+import { ProtectedRoute } from "./routes/ProtectRoutes";
+import { UserProvider } from "@contexts/admin";
 
 export default function App() {
-  const test = 1;
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
@@ -21,20 +20,11 @@ export default function App() {
 
         <Route path="movies" element={<Movies />} />
 
-        <Route
-          path="detail/:maPhim"
-          element={<MovieDetail />}
-        />
+        <Route path="detail/:maPhim" element={<MovieDetail />} />
 
-        <Route
-          path="ticketroom/:maLichChieu"
-          element={<MovieBooking />}
-        />
+        <Route path="ticketroom/:maLichChieu" element={<MovieBooking />} />
 
-        <Route
-          path="popcorn-drink"
-          element={<PopcornDrink />}
-        />
+        <Route path="popcorn-drink" element={<PopcornDrink />} />
 
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
@@ -46,16 +36,15 @@ export default function App() {
       <Route
         path="/admin/*"
         element={
-          <ProtectedRoute>
-          <AdminRoutes />
-          </ProtectedRoute>
+          <UserProvider>
+            <ProtectedRoute>
+              <AdminRoutes />
+            </ProtectedRoute>
+          </UserProvider>
         }
       />
 
-      <Route
-        path="*"
-        element={<Navigate to="/" replace />}
-      />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

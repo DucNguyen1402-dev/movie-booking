@@ -1,4 +1,4 @@
-import { ProfileProvider } from "@features/admin/Profile/contexts";
+import { ProfileProvider } from "@features/admin/profile/contexts";
 import { Outlet } from "react-router-dom";
 
 
