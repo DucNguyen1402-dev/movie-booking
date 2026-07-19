@@ -1,7 +1,7 @@
-import MetricsSection from "@features/admin/dashboard/components/MetricsSection.jsx";
-import TopRevenueMovies from "@features/admin/dashboard/components/TopRevenueMovies.jsx";
-import MovieStatusCard from "@features/admin/dashboard/components/MovieStatusCard.jsx";
-import TopRevenueMovieCard from "@features/admin/dashboard/components/TopRevenueMovieCard.jsx";
+import MetricsSection from "@features/admin/dashboard/components/MetricsSection/MetricsSection";
+import TopFiveRevenueMovies from "@features/admin/dashboard/components/TopFiveRevenueMovies/TopFiveRevenueMovies";
+import MovieStatusCard from "@features/admin/dashboard/components/MovieStatusCard/MovieStatusCard";
+import HighestRevenueMovieCard from "@features/admin/dashboard/components/HighestRevenueMovieCard/HighestRevenueMovieCard";
 import { FileClock } from "lucide-react";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts/DashboardContext";
@@ -43,11 +43,11 @@ function Dashboard() {
           nowShowingMovies={derivedMovies.nowShowing}
           upcomingMovies={derivedMovies.upcoming}
         />
-        <TopRevenueMovieCard
+        <HighestRevenueMovieCard
           isPending={isPending}
           highestRevenueMovie={ranking.highestRevenueMovie}
         />
-        <TopRevenueMovies
+        <TopFiveRevenueMovies
           isPending={isPending}
           topFiveMoviesRevenue={ranking.topFive}
         />

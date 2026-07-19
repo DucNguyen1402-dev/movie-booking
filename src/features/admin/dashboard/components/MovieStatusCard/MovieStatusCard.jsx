@@ -1,7 +1,12 @@
-import { Clapperboard, ArrowUpRight  } from "lucide-react";
+import { Clapperboard, ArrowUpRight } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import EmptyMovieStatusCard from "./EmptyMovieStatusCard";
 
-export default function MovieStatusCard({ nowShowingMovies, upcomingMovies }) {
+export default function MovieStatusCard({
+  nowShowingMovies,
+  upcomingMovies,
+  isPending,
+}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -11,7 +16,10 @@ export default function MovieStatusCard({ nowShowingMovies, upcomingMovies }) {
         history: [...(location.state?.history ?? []), location.pathname],
       },
     });
-  return (
+
+  return isPending ? (
+    <EmptyMovieStatusCard />
+  ) : (
     <div className="group relative overflow-hidden rounded-2xl border border-gray-800/80 bg-[#141414] p-8 transition-all duration-300 hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.07)]">
       <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-red-500/10 blur-3xl transition-opacity duration-300 group-hover:bg-red-500/15" />
 

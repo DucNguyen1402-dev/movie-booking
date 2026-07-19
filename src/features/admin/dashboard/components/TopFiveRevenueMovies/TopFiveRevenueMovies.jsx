@@ -1,8 +1,12 @@
-import { formatCompactCurrency } from "../utils/format/currency";
+import { formatCompactCurrency } from "../../utils/format/currency";
 import { Star, Flame, ArrowUpRight } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import TopFiveRevenueMoviesSkeleton from "./TopFiveRevenueMoviesSkeleton";
 
-export default function TopRevenueMovies({ topFiveMoviesRevenue }) {
+export default function TopFiveRevenueMovies({
+  topFiveMoviesRevenue,
+  isPending,
+}) {
   const maxRevenue = topFiveMoviesRevenue?.[0]?.revenue || 1;
 
   const navigate = useNavigate();
@@ -16,7 +20,9 @@ export default function TopRevenueMovies({ topFiveMoviesRevenue }) {
       },
     });
 
-  return (
+  return isPending ? (
+    <TopFiveRevenueMoviesSkeleton />
+  ) : (
     <div className="relative overflow-hidden rounded-2xl border border-gray-800 bg-[#141414] p-8 pb-4 shadow-xl transition-all duration-300 hover:border-gray-700/60">
       <div className="absolute -top-16 -left-16 h-48 w-48 rounded-full bg-yellow-500/5 blur-3xl" />
 
@@ -138,7 +144,7 @@ export default function TopRevenueMovies({ topFiveMoviesRevenue }) {
           onClick={onRevenueRankingClick}
           className="group flex cursor-pointer items-center gap-1.5 rounded-lg border border-white/5 bg-white/2 px-3 py-1.5 text-xs font-medium text-zinc-400 transition-all duration-300 ease-out hover:border-white/10 hover:bg-white/6 hover:text-white active:scale-95"
         >
-         <span>Xem toàn bộ BXH</span>
+          <span>Xem toàn bộ BXH</span>
           <ArrowUpRight className="h-3.5 w-3.5 text-zinc-500 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
         </button>
       </div>

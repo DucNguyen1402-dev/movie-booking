@@ -33,6 +33,7 @@ export function UserProvider({ children }) {
     avatarList,
     avatarName,
     storageAvatar,
+    account: currentUser.taiKhoan
   };
 
   return <userContext.Provider value={value}>{children}</userContext.Provider>;

@@ -36,11 +36,11 @@ export default function App() {
       <Route
         path="/admin/*"
         element={
-          <UserProvider>
-            <ProtectedRoute>
+          <ProtectedRoute>
+            <UserProvider>
               <AdminRoutes />
-            </ProtectedRoute>
-          </UserProvider>
+            </UserProvider>
+          </ProtectedRoute>
         }
       />
 

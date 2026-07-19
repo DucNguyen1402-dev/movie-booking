@@ -5,15 +5,17 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import {store} from "./redux/admin/store";
-
+import { store } from "./redux/admin/store";
+import {FaviconProvider} from "@components/shared";
 
 createRoot(document.getElementById("root")).render(
-  <Provider store = {store}>
+  <Provider store={store}>
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
+      <FaviconProvider />
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+    
     </BrowserRouter>
     ,
   </Provider>,
