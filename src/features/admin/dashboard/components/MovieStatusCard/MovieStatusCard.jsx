@@ -21,7 +21,7 @@ export default function MovieStatusCard({
     <EmptyMovieStatusCard />
   ) : (
     <div className="group relative overflow-hidden rounded-2xl border border-gray-800/80 bg-[#141414] p-8 transition-all duration-300 hover:border-red-500/30 hover:shadow-[0_0_30px_rgba(239,68,68,0.07)]">
-      <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-red-500/10 blur-3xl transition-opacity duration-300 group-hover:bg-red-500/15" />
+      <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-red-500/10 blur-3xl transition-colors duration-300 group-hover:bg-red-500/15" />
 
       <div className="relative z-10 flex h-full flex-col justify-between space-y-6">
         <div className="flex items-start justify-between">

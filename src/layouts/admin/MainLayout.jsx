@@ -3,7 +3,10 @@ import Sidebar from "@components/admin/Sidebar.jsx";
 import Header from "@components/admin/Header.jsx";
 import GlobalUI from "@components/admin/GlobalUI";
 import { useLayoutContext } from "@contexts/admin";
-import {SIDEBAR_CONTENT_OFFSET, SIDEBAR_COLLAPSED_OFFSET } from "@constants/admin";
+import {
+  SIDEBAR_CONTENT_OFFSET,
+  SIDEBAR_COLLAPSED_OFFSET,
+} from "@constants/admin";
 
 function MainLayout() {
   const { isSidebarOpen } = useLayoutContext();

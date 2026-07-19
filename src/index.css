@@ -42,6 +42,10 @@ body {
   }
 }
 
+.max-w-8xl {
+  max-width: 96rem; 
+}
+
 @theme {
   --animate-flash: flash 3s ease-in-out 1;
 

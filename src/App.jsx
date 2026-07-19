@@ -13,6 +13,7 @@ import { ProtectedRoute } from "./routes/ProtectRoutes";
 import { UserProvider } from "@contexts/admin";
 
 export default function App() {
+   
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>

@@ -13,8 +13,13 @@ import TrailerModal from "@features/admin/movies-management/list/components/Trai
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
+import { useLayoutContext } from "@contexts/admin";
+
+
 
 export default function MovieManagement() {
+  const { isSidebarOpen } = useLayoutContext();
+  
   const location = useLocation();
   const navigate = useNavigate();
   const { notifActions } = useNotification();
@@ -44,7 +49,7 @@ export default function MovieManagement() {
   return (
     <>
       <div className="min-h-screen bg-[#0f172a] px-6 pt-10 pb-8 font-sans text-slate-100">
-        <div className="3xl:max-w-[90%] mx-auto w-full space-y-8">
+        <div className={`  mx-auto w-full space-y-8 transition-[max-width] duration-300 ease-in-out ${isSidebarOpen ? "max-w-full 2xl:max-w-360": "max-w-7xl 2xl:max-w-340"}`}>
           {/* 1. HEADER & ACTION BAR */}
           <div className="flex items-center justify-end">
             <div className="flex flex-col gap-4">

@@ -67,7 +67,7 @@ export default function TopFiveRevenueMovies({
                 #{index + 1}
               </span>
 
-              <div className="relative z-10 flex items-center justify-between gap-6">
+              <div className="relative flex items-center justify-between gap-6">
                 <div className="flex min-w-0 items-center gap-4">
                   <span
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg font-mono text-sm font-black shadow-sm ${
@@ -117,7 +117,7 @@ export default function TopFiveRevenueMovies({
                 </div>
               </div>
 
-              <div className="relative z-10 mt-3 h-1 w-full overflow-hidden rounded-full bg-gray-950">
+              <div className="relative mt-3 h-1 w-full overflow-hidden rounded-full bg-gray-950">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${
                     index === 0

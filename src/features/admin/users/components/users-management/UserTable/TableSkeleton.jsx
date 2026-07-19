@@ -4,7 +4,7 @@ export default function TableSkeleton({
   return (
     <>
       {Array.from({ length: rows }).map((_, index) => (
-        <tr key={index} className="border-t">
+        <tr key={index} className="border-t border-slate-700">
           <td className="px-5 py-4">
             <div className="h-4 w-28 animate-pulse rounded bg-slate-700" />
           </td>
