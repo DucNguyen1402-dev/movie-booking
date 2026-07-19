@@ -11,6 +11,7 @@ import Profile from "@/pages/customer/Profile/Profile";
 import Register from "@/pages/customer/Register/Register";
 import { ProtectedRoute } from "./routes/ProtectRoutes";
 import { UserProvider } from "@contexts/admin";
+import PaymentCheckout from "@/pages/customer/PaymentCheckout/PaymentCheckout";
 
 export default function App() {
    
@@ -19,7 +20,7 @@ export default function App() {
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Home />} />
 
-        <Route path="movies" element={<Movies />} />
+         <Route path="movies" element={<Navigate to="/" replace />} />
 
         <Route path="detail/:maPhim" element={<MovieDetail />} />
 
@@ -27,6 +28,8 @@ export default function App() {
 
         <Route path="popcorn-drink" element={<PopcornDrink />} />
 
+  <Route path="payment" element={<PaymentCheckout />} />
+  
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="profile" element={<Profile />} />

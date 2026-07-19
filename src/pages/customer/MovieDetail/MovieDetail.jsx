@@ -9,7 +9,7 @@ import {
   Star,
   Ticket,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMovieShowtime } from "@/hooks/customer/useCinema";
 import {
@@ -55,7 +55,13 @@ const MovieDetail = () => {
 
   const { data: movieDetail, isLoading, error } = useMovieShowtime(maPhim);
 
-  const cinemaSystems = movieDetail?.heThongRapChieu || [];
+  const cinemaSystems = useMemo(
+    () => movieDetail?.heThongRapChieu || [],
+    [movieDetail?.heThongRapChieu],
+  );
+
+  const selectedSystemCode =
+    activeSystem || cinemaSystems[0]?.maHeThongRap || "";
 
   const trailerEmbedUrl = getYoutubeEmbedUrl(movieDetail?.trailer);
 
@@ -65,16 +71,11 @@ const MovieDetail = () => {
 
   const activeCinemaSystem = useMemo(() => {
     return (
-      cinemaSystems.find((system) => system.maHeThongRap === activeSystem) ||
-      cinemaSystems[0]
+      cinemaSystems.find(
+        (system) => system.maHeThongRap === selectedSystemCode,
+      ) || cinemaSystems[0]
     );
-  }, [activeSystem, cinemaSystems]);
-
-  useEffect(() => {
-    if (cinemaSystems.length && !activeSystem) {
-      setActiveSystem(cinemaSystems[0].maHeThongRap);
-    }
-  }, [activeSystem, cinemaSystems]);
+  }, [cinemaSystems, selectedSystemCode]);
 
   const handleBooking = (maLichChieu) => {
     navigate(`/ticketroom/${maLichChieu}`);
@@ -137,7 +138,7 @@ const MovieDetail = () => {
                 className="aspect-[2/3] w-full rounded-3xl object-cover shadow-[0_24px_80px_rgba(0,0,0,0.65)] ring-1 ring-white/15"
               />
 
-              <div className="absolute left-4 top-4 flex gap-2">
+              <div className="absolute top-4 left-4 flex gap-2">
                 <span className="rounded bg-[#f5c518] px-2.5 py-1 text-xs font-black text-black">
                   2D
                 </span>
@@ -158,19 +159,19 @@ const MovieDetail = () => {
                 )}
 
                 {movieDetail.dangChieu && (
-                  <span className="rounded-full border border-[#f5c518] px-4 py-2 text-xs font-black uppercase text-[#f5c518]">
+                  <span className="rounded-full border border-[#f5c518] px-4 py-2 text-xs font-black text-[#f5c518] uppercase">
                     Đang chiếu
                   </span>
                 )}
 
                 {movieDetail.sapChieu && (
-                  <span className="rounded-full border border-white/20 px-4 py-2 text-xs font-black uppercase text-white">
+                  <span className="rounded-full border border-white/20 px-4 py-2 text-xs font-black text-white uppercase">
                     Sắp chiếu
                   </span>
                 )}
               </div>
 
-              <h1 className="max-w-4xl text-4xl font-black leading-tight tracking-tight text-white md:text-6xl">
+              <h1 className="max-w-4xl text-4xl leading-tight font-black tracking-tight text-white md:text-6xl">
                 {movieDetail.tenPhim}
               </h1>
 
@@ -186,7 +187,9 @@ const MovieDetail = () => {
 
                 <div className="flex items-center gap-2">
                   <CalendarDays size={18} className="text-[#f5c518]" />
-                  <span>Khởi chiếu: {formatDate(movieDetail.ngayKhoiChieu)}</span>
+                  <span>
+                    Khởi chiếu: {formatDate(movieDetail.ngayKhoiChieu)}
+                  </span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -199,7 +202,7 @@ const MovieDetail = () => {
                 {firstShowtime ? (
                   <button
                     onClick={() => handleBooking(firstShowtime.maLichChieu)}
-                    className="inline-flex h-12 items-center justify-center rounded-md bg-[#f5c518] px-7 text-sm font-black uppercase text-black shadow-[0_7px_0_#9f7f08] transition hover:-translate-y-0.5 hover:bg-[#ffd84d]"
+                    className="inline-flex h-12 items-center justify-center rounded-md bg-[#f5c518] px-7 text-sm font-black text-black uppercase shadow-[0_7px_0_#9f7f08] transition hover:-translate-y-0.5 hover:bg-[#ffd84d]"
                   >
                     <Ticket size={18} />
                     <span className="ml-2">Đặt vé ngay</span>
@@ -207,7 +210,7 @@ const MovieDetail = () => {
                 ) : (
                   <button
                     disabled
-                    className="inline-flex h-12 cursor-not-allowed items-center justify-center rounded-md bg-zinc-700 px-7 text-sm font-black uppercase text-zinc-400"
+                    className="inline-flex h-12 cursor-not-allowed items-center justify-center rounded-md bg-zinc-700 px-7 text-sm font-black text-zinc-400 uppercase"
                   >
                     Chưa có lịch chiếu
                   </button>
@@ -260,7 +263,7 @@ const MovieDetail = () => {
                   key={system.maHeThongRap}
                   onClick={() => setActiveSystem(system.maHeThongRap)}
                   className={`flex w-full items-center gap-4 rounded-2xl p-4 text-left transition ${
-                    activeSystem === system.maHeThongRap
+                    selectedSystemCode === system.maHeThongRap
                       ? "bg-[#f5c518] text-black"
                       : "text-white hover:bg-white/10"
                   }`}
@@ -276,7 +279,7 @@ const MovieDetail = () => {
 
                     <p
                       className={`mt-1 text-xs font-medium ${
-                        activeSystem === system.maHeThongRap
+                        selectedSystemCode === system.maHeThongRap
                           ? "text-black/70"
                           : "text-zinc-400"
                       }`}
@@ -296,9 +299,9 @@ const MovieDetail = () => {
                 >
                   <div className="grid gap-4 border-b border-white/10 p-5 md:grid-cols-[88px_1fr]">
                     <img
-                      src={cluster.hinhAnh}
-                      alt={cluster.tenCumRap}
-                      className="h-20 w-20 rounded-2xl object-cover"
+                      src={activeCinemaSystem.logo}
+                      alt={`${activeCinemaSystem.tenHeThongRap} - ${cluster.tenCumRap}`}
+                      className="h-20 w-20 rounded-2xl bg-white object-contain p-2"
                     />
 
                     <div>
@@ -317,7 +320,7 @@ const MovieDetail = () => {
                   </div>
 
                   <div className="p-5">
-                    <p className="mb-4 text-sm font-black uppercase tracking-[0.16em] text-[#f5c518]">
+                    <p className="mb-4 text-sm font-black tracking-[0.16em] text-[#f5c518] uppercase">
                       Chọn suất chiếu
                     </p>
 

@@ -1,31 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, Ticket, UserRound,UserStar } from "lucide-react";
+import { LogOut, Ticket, UserRound } from "lucide-react";
 import {
+  getStoredUser,
   getStoredAccessToken,
   useAccountInfo,
   useLogout,
 } from "@/hooks/customer/useAuth";
 import { formatCurrency, formatDateTime } from "@/utils/customer/format";
 
-
 const Profile = () => {
   const navigate = useNavigate();
   const { logout } = useLogout();
   const accessToken = getStoredAccessToken();
+  const storedUser = getStoredUser();
 
   const { data: accountInfo, isLoading, isError } = useAccountInfo();
 
-  const bookingHistory = accountInfo?.thongTinDatVe || [];
+  const profileData = accountInfo || storedUser;
+  const bookingHistory = profileData?.thongTinDatVe || [];
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
-
-  const handleRouteToAdmin = () =>{
-     navigate("/admin");
-  }
-
 
   if (!accessToken) {
     return (
@@ -34,9 +31,7 @@ const Profile = () => {
           <div className="rounded-3xl bg-white p-10 text-center text-[#111827]">
             <UserRound size={54} className="mx-auto text-zinc-500" />
 
-            <h1 className="mt-4 text-3xl font-black">
-              Bạn chưa đăng nhập
-            </h1>
+            <h1 className="mt-4 text-3xl font-black">Bạn chưa đăng nhập</h1>
 
             <p className="mt-2 text-sm text-zinc-500">
               Vui lòng đăng nhập để xem thông tin tài khoản và lịch sử đặt vé.
@@ -45,7 +40,7 @@ const Profile = () => {
             <button
               type="button"
               onClick={() => navigate("/login")}
-              className="mt-6 rounded-xl bg-[#f5c518] px-6 py-3 text-sm font-black uppercase text-black"
+              className="mt-6 rounded-xl bg-[#f5c518] px-6 py-3 text-sm font-black text-black uppercase"
             >
               Đăng nhập ngay
             </button>
@@ -55,7 +50,7 @@ const Profile = () => {
     );
   }
 
-  if (isLoading) {
+  if (isLoading && !storedUser) {
     return (
       <main className="min-h-[calc(100vh-120px)] bg-[#070b1a] py-16 text-white">
         <section className="cine-container">
@@ -69,7 +64,7 @@ const Profile = () => {
     );
   }
 
-  if (isError) {
+  if (isError && !storedUser) {
     return (
       <main className="min-h-[calc(100vh-120px)] bg-[#070b1a] py-16 text-white">
         <section className="cine-container">
@@ -98,9 +93,16 @@ const Profile = () => {
   return (
     <main className="min-h-[calc(100vh-120px)] bg-[#070b1a] py-12 text-white">
       <section className="cine-container">
+        {isError && storedUser && (
+          <div className="mb-6 rounded-2xl border border-amber-400/20 bg-amber-400/10 p-4 text-sm font-semibold text-amber-100">
+            API lịch sử đặt vé tạm thời chưa phản hồi. Thông tin đăng nhập đã
+            lưu vẫn được hiển thị bên dưới.
+          </div>
+        )}
+
         <div className="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.28em] text-[#f5c518]">
+            <p className="text-sm font-black tracking-[0.28em] text-[#f5c518] uppercase">
               Tài khoản cá nhân
             </p>
 
@@ -109,26 +111,14 @@ const Profile = () => {
             </h1>
           </div>
 
-         <div className ="flex gap-2">
-           <button
-            type="button"
-            onClick={handleRouteToAdmin}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-black uppercase text-white transition hover:bg-indigo-500"
-          >
-            <UserStar size={18} />
-            Qua trang admin
-          </button>
-
-          
           <button
             type="button"
             onClick={handleLogout}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black uppercase text-white transition hover:bg-red-500"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black text-white uppercase transition hover:bg-red-500"
           >
             <LogOut size={18} />
-            đăng xuất
+            Đăng xuất
           </button>
-        </div>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
@@ -139,41 +129,42 @@ const Profile = () => {
               </div>
 
               <h2 className="mt-4 text-2xl font-black">
-                {accountInfo?.hoTen || "Người dùng"}
+                {profileData?.hoTen || "Người dùng"}
               </h2>
 
               <p className="mt-1 text-sm font-semibold text-zinc-500">
-                {accountInfo?.email || "Đang cập nhật"}
+                {profileData?.email || "Đang cập nhật"}
               </p>
             </div>
 
             <div className="mt-7 space-y-4">
               <div className="rounded-2xl bg-zinc-100 p-4">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500">
+                <p className="text-xs font-black tracking-[0.16em] text-zinc-500 uppercase">
                   Tài khoản
                 </p>
+
                 <p className="mt-1 font-black">
-                  {accountInfo?.taiKhoan || "Đang cập nhật"}
+                  {profileData?.taiKhoan || "Đang cập nhật"}
                 </p>
               </div>
 
               <div className="rounded-2xl bg-zinc-100 p-4">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500">
+                <p className="text-xs font-black tracking-[0.16em] text-zinc-500 uppercase">
                   Số điện thoại
                 </p>
+
                 <p className="mt-1 font-black">
-                  {accountInfo?.soDT ||
-                    accountInfo?.soDt ||
-                    "Đang cập nhật"}
+                  {profileData?.soDT || profileData?.soDt || "Đang cập nhật"}
                 </p>
               </div>
 
               <div className="rounded-2xl bg-zinc-100 p-4">
-                <p className="text-xs font-black uppercase tracking-[0.16em] text-zinc-500">
+                <p className="text-xs font-black tracking-[0.16em] text-zinc-500 uppercase">
                   Loại người dùng
                 </p>
+
                 <p className="mt-1 font-black">
-                  {accountInfo?.loaiNguoiDung?.tenLoai || "Khách hàng"}
+                  {profileData?.maLoaiNguoiDung || "Khách hàng"}
                 </p>
               </div>
             </div>
@@ -212,7 +203,7 @@ const Profile = () => {
               <div className="space-y-4">
                 {bookingHistory.map((ticket) => (
                   <article
-                    key={`${ticket.maVe} - ${ticket.tenPhim}`}
+                    key={ticket.maVe}
                     className="grid gap-4 rounded-2xl border border-white/10 bg-black/30 p-4 md:grid-cols-[90px_1fr]"
                   >
                     <img
@@ -239,9 +230,9 @@ const Profile = () => {
                       </div>
 
                       <div className="mt-4 flex flex-wrap gap-2">
-                        {ticket.danhSachGhe?.map((seat, index) => (
+                        {ticket.danhSachGhe?.map((seat) => (
                           <span
-                            key={`${seat.maGhe} - ${index}`}
+                            key={seat.maGhe}
                             className="rounded-full bg-[#f5c518] px-3 py-1 text-xs font-black text-black"
                           >
                             Ghế {seat.tenGhe}
