@@ -3,12 +3,13 @@ import { useNotification } from "@contexts/admin/NotificationContext";
 import { useEffect } from "react";
 import { ProfileSkeleton } from "@features/admin/profile/components/ProfileEdit";
 import { useProfileContext } from "@features/admin/profile/contexts";
+
 import {
   ProfileViewHeader,
   ProfileViewInfor,
 } from "@features/admin/profile/components/ProfileView";
 
-export default function UserProfileView() {
+export default function ProfileView() {
   const {
     isLoading,
     profileForm: { loginedUser },

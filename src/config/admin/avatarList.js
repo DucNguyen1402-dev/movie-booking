@@ -4,8 +4,8 @@ import {
   avatar03,
   avatar04,
   avatar05,
+  avatar06,
   avatar07,
-  avatar08,
 } from "@images/admin";
 
 
@@ -15,6 +15,6 @@ export const avatarList = [
   avatar03,
   avatar04,
   avatar05,
+  avatar06,
   avatar07,
-  avatar08,
 ];

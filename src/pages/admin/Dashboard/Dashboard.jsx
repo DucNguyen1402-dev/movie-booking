@@ -1,7 +1,7 @@
-import MetricsSection from "@features/admin/dashboard/components/MetricsSection.jsx";
-import TopRevenueMovies from "@features/admin/dashboard/components/TopRevenueMovies.jsx";
-import MovieStatusCard from "@features/admin/dashboard/components/MovieStatusCard.jsx";
-import TopRevenueMovieCard from "@features/admin/dashboard/components/TopRevenueMovieCard.jsx";
+import MetricsSection from "@features/admin/dashboard/components/MetricsSection/MetricsSection";
+import TopFiveRevenueMovies from "@features/admin/dashboard/components/TopFiveRevenueMovies/TopFiveRevenueMovies";
+import MovieStatusCard from "@features/admin/dashboard/components/MovieStatusCard/MovieStatusCard";
+import HighestRevenueMovieCard from "@features/admin/dashboard/components/HighestRevenueMovieCard/HighestRevenueMovieCard";
 import { FileClock } from "lucide-react";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts/DashboardContext";
@@ -10,7 +10,6 @@ function Dashboard() {
   const {
     isPending,
     users,
-    movies,
     dashboardDerived: { derivedMovies, revenue, tickets, rating, ranking },
   } = useDashboardContext();
 
@@ -30,6 +29,7 @@ function Dashboard() {
         </div>
 
         <MetricsSection
+          isPending={isPending}
           userQuantity={users.length}
           totalRevenue={revenue.total}
           totalTicketSold={tickets.total}
@@ -39,11 +39,18 @@ function Dashboard() {
         />
 
         <MovieStatusCard
+          isPending={isPending}
           nowShowingMovies={derivedMovies.nowShowing}
           upcomingMovies={derivedMovies.upcoming}
         />
-        <TopRevenueMovieCard highestRevenueMovie={ranking.highestRevenueMovie} />
-        <TopRevenueMovies topFiveMoviesRevenue={ranking.topFive} />
+        <HighestRevenueMovieCard
+          isPending={isPending}
+          highestRevenueMovie={ranking.highestRevenueMovie}
+        />
+        <TopFiveRevenueMovies
+          isPending={isPending}
+          topFiveMoviesRevenue={ranking.topFive}
+        />
       </div>
     </div>
   );

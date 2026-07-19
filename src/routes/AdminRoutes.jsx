@@ -18,6 +18,7 @@ import { EditProvider } from "@features/admin/movies-management/edit/contexts/Ed
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
 import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
 import { ModalProvider } from "@contexts/admin/ModalContext";
+import { LayoutProvider } from "@contexts/admin";
 import {
   UsersLayout,
   MoviesLayout,
@@ -28,59 +29,62 @@ import {
 
 export default function AdminRoutes() {
   return (
+    <ModalProvider>
+      <LoadingProvider>
+        <NotificationProvider>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <LayoutProvider>
+                  <MainLayout />
+                </LayoutProvider>
+              }
+            >
+              <Route index element={<Navigate to="dashboard" replace />} />
 
-      <ModalProvider>
-        <LoadingProvider>
-          <NotificationProvider>
-            <Routes>
-              <Route path="/" element={<MainLayout />}>
-                <Route index element={<Navigate to="dashboard" replace />} />
-
-                <Route path="dashboard" element={<DashboardLayout />}>
-                  <Route index element={<Dashboard />} />
-                  <Route path="revenue-ranking" element={<RevenueRanking />} />
-                </Route>
-
-                <Route path="profile" element={<ProfileLayout />}>
-                  <Route index element={<ProfileView />} />
-                  <Route path="edit" element={<ProfileEdit />} />
-                  <Route path="password" element={<PasswordChange />} />
-                </Route>
-
-                <Route path="movies" element={<MoviesLayout />}>
-                  <Route index element={<MovieManagement />} />
-                  <Route
-                    path="edit/:id"
-                    element={
-                      <EditProvider>
-                        <EditMovie />
-                      </EditProvider>
-                    }
-                  />
-                  <Route path="add" element={<AddMovie />} />
-                  <Route
-                    path="showtimes/:id"
-                    element={<ShowtimeManagement />}
-                  />
-                  <Route
-                    path="showtimes/:id/add"
-                    element={<ShowtimeCreation />}
-                  />
-                </Route>
-
-                <Route path="users" element={<UsersLayout />}>
-                  <Route index element={<UsersManagement />} />
-                  <Route path="add" element={<AddUser />} />
-                  <Route path="edit/:account" element={<EditUser />} />
-                  <Route
-                    path="booking-infor/:account"
-                    element={<UserBookingInfor />}
-                  />
-                </Route>
+              <Route path="dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="revenue-ranking" element={<RevenueRanking />} />
               </Route>
-            </Routes>
-          </NotificationProvider>
-        </LoadingProvider>
-      </ModalProvider>
+
+              <Route path="profile" element={<ProfileLayout />}>
+                <Route index element={<ProfileView />} />
+                <Route path="edit" element={<ProfileEdit />} />
+                <Route path="password" element={<PasswordChange />} />
+              </Route>
+
+              <Route path="movies" element={<MoviesLayout />}>
+                <Route index element={<MovieManagement />} />
+                <Route
+                  path="edit/:id"
+                  element={
+                    <EditProvider>
+                      <EditMovie />
+                    </EditProvider>
+                  }
+                />
+                <Route path="add" element={<AddMovie />} />
+                <Route path="showtimes/:id" element={<ShowtimeManagement />} />
+                <Route
+                  path="showtimes/:id/add"
+                  element={<ShowtimeCreation />}
+                />
+              </Route>
+
+              <Route path="users" element={<UsersLayout />}>
+                <Route index element={<UsersManagement />} />
+                <Route path="add" element={<AddUser />} />
+                <Route path="edit/:account" element={<EditUser />} />
+                <Route
+                  path="booking-infor/:account"
+                  element={<UserBookingInfor />}
+                />
+              </Route>
+            </Route>
+          </Routes>
+        </NotificationProvider>
+      </LoadingProvider>
+    </ModalProvider>
   );
 }
