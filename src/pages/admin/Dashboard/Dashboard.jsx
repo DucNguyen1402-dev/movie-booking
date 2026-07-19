@@ -15,7 +15,6 @@ function Dashboard() {
   } = useDashboardContext();
   const { isSidebarOpen } = useLayoutContext();
 
-  console.log(isSidebarOpen)
   return (
     <div
       className={`space-y-8 overflow-y-auto p-8 transition-[max-width] duration-300 ease-in-out ${isSidebarOpen ? "max-w-full 2xl:max-w-360 mx-auto" : "max-w-360 mx-auto"}`}
