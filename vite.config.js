@@ -21,6 +21,7 @@ export default defineConfig({
       "@layouts": path.resolve(__dirname, "./src/layouts"),
       "@pages": path.resolve(__dirname, "./src/pages"),
       "@providers": path.resolve(__dirname, "./src/providers"),
+      "@managers": path.resolve(__dirname, "./src/managers"),
     },
   },
 });

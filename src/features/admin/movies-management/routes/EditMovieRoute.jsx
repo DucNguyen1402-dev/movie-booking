@@ -1,6 +1,5 @@
 import { EditProvider } from "@features/admin/movies-management/edit/contexts/EditContext";
-
-import { EditMovie } from "@pages/admin/Movies";
+import { EditMovie } from "@features/admin/movies-management/pages";
 
 const EditMovieRoute = () => {
   return (

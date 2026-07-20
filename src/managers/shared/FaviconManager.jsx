@@ -11,7 +11,7 @@ const titles = {
   "/admin/profile": "Profile",
 };
 
-export default function FaviconProvider() {
+export default function FaviconManager() {
   const { pathname } = useLocation();
 
   useEffect(() => {
