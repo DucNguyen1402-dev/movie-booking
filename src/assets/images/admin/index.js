@@ -11,6 +11,8 @@ export { default as avatar10 } from "./avatar-10.png";
 export { default as avatar11 } from "./avatar-11.png";
 export { default as avatar12 } from "./avatar-12.png";
 export { default as avatar13 } from "./avatar-13.png";
+export { default as avatar14 } from "./avatar-14.png";
+
 
 
 

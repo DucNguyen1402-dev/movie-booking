@@ -12,6 +12,7 @@ import {
   avatar11,
   avatar12,
   avatar13,
+  avatar14,
 } from "@images/admin";
 
 export const avatarList = [
@@ -28,4 +29,5 @@ export const avatarList = [
   avatar11,
   avatar12,
   avatar13,
+  avatar14,
 ];

@@ -5,33 +5,33 @@ import { usePagination } from "@hooks/admin";
 export default function AvatarSetting({ onClose }) {
   const { setAvatarIndex, avatarName, avatarList } = useUserContext();
 
-  const onAvatarSeletion = (index) => {
-    setAvatarIndex(index);
-    onClose();
-  };
-
-
-
   const pagination = usePagination({
     items: avatarList,
     size: 7,
     resetDeps: avatarList,
   });
 
+  const handleAvatarSelection = (pageIndex) => {
+    const avatarIndex = pagination.pageOffset + pageIndex;
 
+    setAvatarIndex(avatarIndex);
+    onClose();
+  };
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center">
       <div className="relative flex h-80 w-150 flex-wrap items-center justify-center gap-5 overflow-x-auto rounded-md bg-slate-700/80 p-10">
-       {pagination.page !== 1 &&  <button
-          onClick={() => onAvatarSeletion(-1)}
-          className="flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500 bg-yellow-600 text-4xl text-slate-100 transition-transform duration-300 hover:scale-105"
-        >
-          {avatarName}
-        </button>}
+        {pagination.page !== 1 && (
+          <button
+            onClick={() => handleAvatarSelection(-1)}
+            className="flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500 bg-yellow-600 text-4xl text-slate-100 transition-transform duration-300 hover:scale-105"
+          >
+            {avatarName}
+          </button>
+        )}
         {pagination.list.map((avatar, index) => (
           <button
             key={index}
-            onClick={() => onAvatarSeletion(index)}
+            onClick={() => handleAvatarSelection(index)}
 
             className="h-24 w-24 cursor-pointer overflow-hidden rounded-full border border-slate-500 transition-transform duration-300 hover:scale-105"
           >
@@ -39,7 +39,7 @@ export default function AvatarSetting({ onClose }) {
           </button>
         ))}
 
-        {!pagination.controls.isPrevDisabled  && (
+        {!pagination.controls.isPrevDisabled && (
           <button
             disabled={pagination.controls.isPrevDisabled}
             onClick={pagination.controls.onPrevClick}

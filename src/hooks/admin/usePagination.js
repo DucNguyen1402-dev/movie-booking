@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 
-export function usePagination({ items, resetDeps , enabled, size = 10}) {
+export function usePagination({ items, resetDeps, enabled, size = 10 }) {
   const [pagination, setPagination] = useState({ page: 1, size });
   const skipNextPageReset = useRef(false);
 
@@ -14,15 +14,18 @@ export function usePagination({ items, resetDeps , enabled, size = 10}) {
       skipNextPageReset.current = false;
       return;
     }
-    if(!enabled) return;
+    if (!enabled) return;
     setPagination((prev) => ({
       ...prev,
       page: 1,
     }));
   }, [...resetDeps]);
 
+
+
   const startIndex = (pagination.page - 1) * pagination.size;
   const endIndex = pagination.page * pagination.size;
+
 
   const list = useMemo(() => {
     return items.slice(startIndex, endIndex);
@@ -45,6 +48,8 @@ export function usePagination({ items, resetDeps , enabled, size = 10}) {
 
   const onPageClick = (page) => setPage(Number(page));
 
+   const pageOffset = (pagination.page - 1) * pagination.size;
+
   return {
     totalMovies,
     skipNextPageReset,
@@ -64,5 +69,7 @@ export function usePagination({ items, resetDeps , enabled, size = 10}) {
     setSize,
     setPage,
     currentSize: pagination.size,
+    currentPage: pagination.page,
+    pageOffset,
   };
 }
