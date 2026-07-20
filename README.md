@@ -50,9 +50,6 @@ npm install
 npm run dev
 ```
 
-## 📌 Notes
-
-
 
 ## 👥 Team Collaboration
 
