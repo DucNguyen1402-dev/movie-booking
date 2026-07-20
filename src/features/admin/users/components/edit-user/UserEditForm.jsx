@@ -72,12 +72,11 @@ export default function UserEditForm({ fields, register, errors }) {
         <label className="block text-sm text-slate-400">Vai trò</label>
 
         <select
-          value={fields.maLoaiNguoiDung}
           {...register("maLoaiNguoiDung")}
           className="w-full rounded-sm border border-slate-600 bg-slate-700 px-4 py-2 text-slate-200 transition outline-none focus:border-indigo-500/10 focus:ring-1 focus:ring-indigo-500"
         >
-          <option value="QuanTri">Khách hàng</option>
-          <option value="KhachHang">Quản trị viên</option>
+          <option value="QuanTri">Quản trị viên</option>
+          <option value="KhachHang">Khách hàng</option>
         </select>
         {errors["maLoaiNguoiDung"] && (
           <p className="rounded-md border-l-6 border-red-500 bg-red-950/40 px-3 py-1.5 text-sm text-red-300">

@@ -60,7 +60,7 @@ export default function MoviesTable() {
       .map((key) =>
         setTimeout(() => {
           setRowState((prev) => ({ ...prev, [key]: "" }));
-        }, 3000),
+        }, 10000),
       );
 
     return () => timers.forEach(clearTimeout);
