@@ -1,6 +1,8 @@
-# 🚀 Reactjs Capstone: Movie booking & Admin Management
+<h1 align="center">
+  🚀 Reactjs Capstone: Movie Booking & Admin Management
+</h1>
 
-A modern movie booking and admin management system built with React, Vite, and Tailwind CSS. The project features a responsive user interface, movie management, user management, showtime scheduling, and an intuitive admin dashboard.
+<p align="center">A modern movie booking and admin management system built with React, Vite, and Tailwind CSS. The project features a responsive user interface, movie management, user management, showtime scheduling, and an intuitive admin dashboard.</p>
 
 
 <p align="center">🌐 Live Demo:https://movie-booking-three-sooty.vercel.app/</p>
