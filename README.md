@@ -52,17 +52,13 @@ npm install
 npm run dev
 ```
 
-
 ## 👥 Team Collaboration
 
-**Duc Nguyen**
+| Member | Responsibility | Contact |
+|--------|----------------|---------|
+| Hoang Long | User Management | [GitHub](https://github.com/Cuntaplaptrinh24) · <a href="mailto:hoanglongdoan2006@gmail.com">Gmail</a> |
+| Duc Nguyen | Admin Management | [GitHub](https://github.com/DucNguyen1402-dev) · <a href="mailto:hoangduc140220@gmail.com">Gmail</a> |
 
-- [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/DucNguyen1402-dev)
 
-- [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](hoangduc140220@gmail.com)
 
-**Hoang Long**
 
-- [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Cuntaplaptrinh24)
-
-- [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](hoanglongdoan2006@gmail.com)
