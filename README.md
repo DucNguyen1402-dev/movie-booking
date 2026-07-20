@@ -1,16 +1,67 @@
-# React + Vite
+# 🚀 Reactjs Capstone: Movie booking & Admin Management
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern movie booking and admin management system built with React, Vite, and Tailwind CSS. The project features a responsive user interface, movie management, user management, showtime scheduling, and an intuitive admin dashboard.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<p align="center">🌐 Live Demo:https://movie-booking-three-sooty.vercel.app/</p>
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Tech Stack
 
-## Expanding the ESLint configuration
+### Frontend
+- React
+- Vite
+- JavaScript (ES6+)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Styling
+- Tailwind CSS
+- Responsive Web Design
+
+### State Management
+- Redux Toolkit
+- TanStack Query (React Query)
+
+### Routing
+- React Router
+
+### Form Handling
+- React Hook Form
+
+### API
+- Axios
+
+### UI & Icons
+- Radix UI
+- Lucide React
+
+
+## 🛠️ Quick Start
+
+```bash
+git clone "https://github.com/DucNguyen1402-dev/movie-booking.git"
+
+cd movie-booking
+
+npm install
+
+npm run dev
+```
+
+## 📌 Notes
+
+
+
+## 👥 Team Collaboration
+
+**Duc Nguyen**
+
+- [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/DucNguyen1402-dev)
+
+- [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](hoangduc140220@gmail.com)
+
+**Nam Long**
+
+- [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Cuntaplaptrinh24)
+
+- [![Gmail](https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white)](hoanglongdoan2006@gmail.com)
