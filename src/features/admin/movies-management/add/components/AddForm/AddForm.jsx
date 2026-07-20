@@ -31,6 +31,11 @@ export default function AddForm() {
     });
   }, [isDirty]);
 
+  const handleInput = (e) => {
+    e.target.style.height = "auto";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
   return (
     <form onSubmit={handleSubmitEvent}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -79,7 +84,8 @@ export default function AddForm() {
           <textarea
             rows="3"
             {...register("moTa", validationRules.moTa)}
-            className="w-full rounded border border-slate-600 bg-slate-700 px-3 py-2 text-slate-100 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            className="w-full resize-none overflow-hidden rounded border border-slate-600 bg-slate-700 px-3 py-2 text-[15px] text-slate-100 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            onInput={handleInput}
           ></textarea>
           {errors.moTa && (
             <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
