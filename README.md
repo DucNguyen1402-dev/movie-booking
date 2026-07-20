@@ -65,13 +65,17 @@ npm run dev
     <td>Hoang Long</td>
     <td>User Management</td>
     <td>
-      <a href="https://github.com/Cuntaplaptrinh24">
+      <a href="https://github.com/Cuntaplaptrinh24" target="_blank"
+        rel="noopener noreferrer"
+         style="margin-right: 10px;"
+        >
         <img
           src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"
           alt="GitHub"
         />
       </a>
-      <a href="https://mail.google.com/mail/?view=cm&to=hoanglongdoan2006@gmail.com">
+      <a href="https://mail.google.com/mail/?view=cm&to=hoanglongdoan2006@gmail.com" target="_blank"
+        rel="noopener noreferrer">
         <img
           src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white"
           alt="Gmail"
@@ -84,7 +88,9 @@ npm run dev
     <td>Admin Management</td>
     <td>
       <a href="https://github.com/DucNguyen1402-dev"  target="_blank"
-         rel="noopener noreferrer">
+         rel="noopener noreferrer"
+         style="margin-right: 10px;"
+        >
         <img
           src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"
           alt="GitHub"
