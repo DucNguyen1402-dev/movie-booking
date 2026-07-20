@@ -19,7 +19,7 @@ const Profile = () => {
   const profileData = accountInfo || storedUser;
   const bookingHistory = profileData?.thongTinDatVe || [];
 
-  const isAdmin = accountInfo.maLoaiNguoiDung === "QuanTri";
+  const isAdmin = accountInfo?.maLoaiNguoiDung === "QuanTri";
 
   const handleLogout = () => {
     logout();
