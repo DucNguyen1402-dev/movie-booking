@@ -54,11 +54,49 @@ npm run dev
 
 ## 👥 Team Collaboration
 
-| Member | Responsibility | Contact |
-|--------|----------------|---------|
-| Hoang Long | User Management | [GitHub](https://github.com/Cuntaplaptrinh24) · <a href="mailto:hoanglongdoan2006@gmail.com">Gmail</a> |
-| Duc Nguyen | Admin Management | [GitHub](https://github.com/DucNguyen1402-dev) · <a href="mailto:hoangduc140220@gmail.com">Gmail</a> |
 
-
+<table align="center">
+  <tr>
+    <th>Member</th>
+    <th>Responsibility</th>
+    <th>Contact</th>
+  </tr>
+  <tr align="center">
+    <td>Hoang Long</td>
+    <td>User Management</td>
+    <td>
+      <a href="https://github.com/Cuntaplaptrinh24">
+        <img
+          src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"
+          alt="GitHub"
+        />
+      </a>
+      <a href="mailto:hoanglongdoan2006@gmail.com">
+        <img
+          src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white"
+          alt="Gmail"
+        />
+      </a>
+    </td>
+  </tr>
+  <tr align="center">
+    <td>Duc Nguyen</td>
+    <td>Admin Management</td>
+    <td>
+      <a href="https://github.com/DucNguyen1402-dev">
+        <img
+          src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"
+          alt="GitHub"
+        />
+      </a>
+      <a href="mailto:hoangduc140220@gmail.com">
+        <img
+          src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white"
+          alt="Gmail"
+        />
+      </a>
+    </td>
+  </tr>
+</table>
 
 
