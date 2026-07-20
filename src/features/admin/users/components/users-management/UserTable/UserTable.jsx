@@ -55,7 +55,7 @@ export default function UserTable() {
       .map((key) =>
         setTimeout(() => {
           setRowState((prev) => ({ ...prev, [key]: "" }));
-        }, 3000),
+        }, 10000),
       );
 
     return () => timers.forEach(clearTimeout);
