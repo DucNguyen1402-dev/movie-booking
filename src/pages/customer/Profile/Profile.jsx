@@ -19,6 +19,8 @@ const Profile = () => {
   const profileData = accountInfo || storedUser;
   const bookingHistory = profileData?.thongTinDatVe || [];
 
+  const isAdmin = accountInfo.maLoaiNguoiDung === "QuanTri";
+
   const handleLogout = () => {
     logout();
     navigate("/login");
@@ -118,17 +120,8 @@ const Profile = () => {
           <div className="flex gap-2">
             <button
               type="button"
-              onClick={handleRouteToAdmin}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 text-sm font-black text-white uppercase transition hover:bg-indigo-500"
-            >
-              <UserStar size={18} />
-              Qua trang admin
-            </button>
-
-            <button
-              type="button"
               onClick={handleLogout}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black text-white uppercase transition hover:bg-red-500"
+              className="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-xl bg-red-600 px-5 text-sm font-black text-white uppercase transition-colors duration-300 hover:bg-red-500"
             >
               <LogOut size={18} />
               đăng xuất
@@ -137,7 +130,7 @@ const Profile = () => {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
-          <aside className="rounded-3xl bg-white p-7 text-[#111827]">
+          <aside className="rounded-3xl bg-gray-100 p-7 text-[#111827]">
             <div className="text-center">
               <div className="mx-auto grid h-24 w-24 place-items-center rounded-full bg-[#f5c518] text-black">
                 <UserRound size={46} />
@@ -183,6 +176,18 @@ const Profile = () => {
                 </p>
               </div>
             </div>
+            {isAdmin && (
+              <div className="mt-8 flex justify-end">
+                <button
+                  type="button"
+                  onClick={handleRouteToAdmin}
+                  className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-indigo-500 px-4 py-2 text-sm font-black text-white transition-colors duration-300 hover:bg-indigo-600"
+                >
+                  <UserStar size={18} />
+                  Đến trang Admin
+                </button>
+              </div>
+            )}
           </aside>
 
           <section className="rounded-3xl border border-white/10 bg-white/[0.05] p-6">
