@@ -1,8 +1,8 @@
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 import { MoveLeft } from "lucide-react";
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 
 export default function Header() {

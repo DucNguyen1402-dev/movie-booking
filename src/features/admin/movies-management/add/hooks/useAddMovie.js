@@ -6,10 +6,10 @@ import { createMovieFormData } from "../utils/createMovieFormData";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useLoadingContext } from "@contexts/admin/loading";
 import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
 import { useNotification } from "@contexts/admin/NotificationContext";
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
 export function useAddMovie() {
@@ -27,7 +27,7 @@ export function useAddMovie() {
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/movies";
   const navigate = useNavigate();
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
   const { notifActions } = useNotification();
   const modal = useModalContext();
   const {

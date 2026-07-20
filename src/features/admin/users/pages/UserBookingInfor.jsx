@@ -4,14 +4,12 @@ import {
   BookingInfor,
   BookingInforSkeleton,
 } from "@features/admin/users/components/booking-infor";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getUserInfor } from "@services/admin/api";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function UserBookingInfor() {
   const { account } = useParams();
-  const queryClient = useQueryClient();
   const { data: user = {}, isPending } = useQuery({
     queryKey: ["userInfo", account],
     queryFn: () => getUserInfor(account),

@@ -4,7 +4,7 @@ import {
   RevenueSummary,
   RevenueToolbar,
 } from "@features/admin/dashboard/components/RevenueRanking";
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 export default function RevenueRanking() {
   const { isSidebarOpen } = useLayoutContext();

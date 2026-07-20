@@ -10,10 +10,6 @@ export default function TableRow({ user, isMatched, highlight }) {
   const highlightClass = USER_HIGHLIGHTS[highlight];
   const isDeleting = deletingAccount === user.taiKhoan;
 
-  if(user.taiKhoan === "ducnguyen142002"){
-    console.log(user)
-  }
-
   
   return (
     <tr

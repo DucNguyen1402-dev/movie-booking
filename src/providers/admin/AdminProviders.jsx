@@ -1,6 +1,6 @@
 import { NotificationProvider } from "@contexts/admin/NotificationContext";
-import { LoadingProvider } from "@contexts/admin/LoadingSpinnerContext";
-import { ModalProvider } from "@contexts/admin/ModalContext";
+import { LoadingProvider } from "@contexts/admin/loading";
+import { ModalProvider } from "@contexts/admin/modal";
 import { UserProvider } from "@contexts/admin";
 
 const AdminProviders = ({ children }) => {

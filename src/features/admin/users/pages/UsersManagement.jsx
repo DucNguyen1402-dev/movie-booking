@@ -5,7 +5,7 @@ import UserTable from "@features/admin/users/components/users-management/UserTab
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 export default function usersManagement() {
   const { isSidebarOpen } = useLayoutContext();

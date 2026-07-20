@@ -1,6 +1,7 @@
 import { useState } from "react";
+import {modalContext} from "./ModalContext"
 
-export function useModal() {
+export function ModalProvider({ children }) {
   const [modal, setModal] = useState({
     type: null,
     onConfirm: null,
@@ -14,10 +15,14 @@ export function useModal() {
   const close = () =>
     setModal({ type: null, onConfirm: null, title: "", subtitle: "" });
 
-  return {
+  const value = {
     open,
     close,
     modal,
     setModal,
   };
+
+  return (
+    <modalContext.Provider value={value}>{children}</modalContext.Provider>
+  );
 }

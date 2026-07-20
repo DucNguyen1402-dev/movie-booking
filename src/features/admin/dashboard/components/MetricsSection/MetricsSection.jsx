@@ -9,7 +9,7 @@ import {
 import { formatCurrency, formatRoundedNumber } from "../../utils/format";
 import EmptyMetricCard from "./EmptyMetricCard";
 import MetricCard from "./MetricCard"
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 
 const createMetricCards = ({

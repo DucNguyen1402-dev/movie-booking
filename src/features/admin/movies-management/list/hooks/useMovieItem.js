@@ -3,8 +3,8 @@ import { deleteMovie } from "@services/admin/api";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useRef, useEffect, useState } from "react";
 import { MOVIE_HIGHLIGHTS } from "@config/admin/movieHighlight";
-import { useModalContext } from "@contexts/admin/ModalContext";
-import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useModalContext } from "@contexts/admin/modal";
+import { useLoadingContext } from "@contexts/admin/loading";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { useNotification } from "@contexts/admin/NotificationContext";
@@ -27,7 +27,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const queryClient = useQueryClient();
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
   const { notifActions } = useNotification();
   const navigate = useNavigate();
   const location = useLocation();

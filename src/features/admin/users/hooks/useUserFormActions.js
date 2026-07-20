@@ -3,9 +3,9 @@ import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 import { useNotification } from "@contexts/admin/NotificationContext";
-import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useLoadingContext } from "@contexts/admin/loading";
 import { createUser } from "@services/admin/api";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
@@ -25,7 +25,7 @@ export function useUserFormActions({ handleSubmit }) {
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/users";
   const { notifActions } = useNotification();
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
 
   const handleCancelAddUser = () => {
     modal.close();

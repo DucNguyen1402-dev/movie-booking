@@ -3,7 +3,7 @@ import ShowtimeModal from "./Showtime/ShowTimeModal"
 import AddModal from "./AddModal/AddModal"
 import EditModal from "./EditModal/EditModal"
 import LeavePageModal from "./LeavePageModal/LeavePageModal"
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 
 const MODALS = {
   deleteMovie: Delete,

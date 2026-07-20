@@ -2,13 +2,13 @@ import { useCallback } from "react";
 import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useNavigate } from "react-router-dom";
-import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useLoadingContext } from "@contexts/admin/loading";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateMovie } from "@services/admin/api";
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 import { format } from "date-fns";
 
 export function useEditMovieActions({
@@ -30,7 +30,7 @@ export function useEditMovieActions({
 
 
   const { notifActions } = useNotification();
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
   const modal = useModalContext();
 
   const handleCancelChange = () => {

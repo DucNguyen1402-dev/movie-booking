@@ -13,7 +13,7 @@ import TrailerModal from "@features/admin/movies-management/list/components/Trai
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useNotification } from "@contexts/admin/NotificationContext";
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 
 

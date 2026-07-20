@@ -5,7 +5,7 @@ import {
   AddUser,
   EditUser,
   UserBookingInfor,
-} from "@pages/admin/Users";
+} from "@features/admin/users/pages";
 
 export const usersRoutes = (
   <Route path="users" element={<UsersLayout />}>

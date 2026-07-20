@@ -5,7 +5,7 @@ import HighestRevenueMovieCard from "@features/admin/dashboard/components/Highes
 import { FileClock } from "lucide-react";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts/DashboardContext";
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 function Dashboard() {
   const {

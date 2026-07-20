@@ -1,6 +1,6 @@
-import{ createContext, useState, useContext } from 'react';
+import {LoadingContext} from "./LoadingContext"
+import{  useState } from 'react';
 
-const LoadingContext = createContext();
 
 export const LoadingProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,4 +15,3 @@ export const LoadingProvider = ({ children }) => {
   );
 };
 
-export const useLoading = () => useContext(LoadingContext);

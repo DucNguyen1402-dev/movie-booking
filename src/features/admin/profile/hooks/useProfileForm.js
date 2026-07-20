@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useNavigate, useLocation } from "react-router-dom";
 import { updateUser, getUserInfor } from "@services/admin/api";
-import { useModalContext } from "@contexts/admin/ModalContext";
-import { useLoading, useNotification } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin/modal";
+import { useLoadingContext } from "@contexts/admin/loading";
+import {useNotification } from "@contexts/admin";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { getCurrentUser } from "@utils/shared";
 import { useEffect } from "react";
@@ -60,7 +61,7 @@ export function useProfileForm() {
   });
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
   const { notifActions } = useNotification();
 
   const handleCancelPasswordChange = () => {

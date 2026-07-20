@@ -1,7 +1,7 @@
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useLoadingContext } from "@contexts/admin/loading";
 import { useNotification } from "@contexts/admin/NotificationContext";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { updateUser } from "@services/admin/api";
@@ -25,7 +25,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
   });
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
   const { notifActions } = useNotification();
 
   const handleCancelEdit = () => {

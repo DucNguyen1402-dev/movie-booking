@@ -5,12 +5,12 @@ import LoadingSpinner from "@components/admin/LoadingSpinner";
 import Backdrop from "@/components/admin/Backdrop";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useNotification } from "@contexts/admin/NotificationContext";
-import {useLoading} from "@contexts/admin/LoadingSpinnerContext"
-import {useModalContext} from "@contexts/admin/ModalContext"
+import {useLoadingContext} from "@contexts/admin/loading"
+import {useModalContext} from "@contexts/admin/modal"
 
 export default function GlobalUI() {
   const {modal} = useModalContext();
-  const loading = useLoading();
+  const loading = useLoadingContext();
   const notif = useNotification();
   
   const shouldLock = modal.type !== null || loading.isVisible;

@@ -1,4 +1,4 @@
-import { LayoutProvider } from "@contexts/admin";
+import { LayoutProvider } from "@contexts/admin/layout";
 import { MainLayout } from "@layouts/admin";
 
 const MainLayoutRoute = () => {

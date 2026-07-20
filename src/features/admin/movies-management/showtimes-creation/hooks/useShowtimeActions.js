@@ -1,9 +1,9 @@
-import { useModalContext } from "@contexts/admin/ModalContext";
+import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createShowtime } from "@services/admin/api";
 import { format } from "date-fns";
-import { useLoading } from "@contexts/admin/LoadingSpinnerContext";
+import { useLoadingContext } from "@contexts/admin/Loading";
 import { useNotification } from "@contexts/admin/NotificationContext";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
@@ -13,7 +13,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/movies";
 
-  const { showLoading, hideLoading } = useLoading();
+  const { showLoading, hideLoading } = useLoadingContext();
   const { notifActions } = useNotification();
 
   const handleShowtimeCanceling = () => {

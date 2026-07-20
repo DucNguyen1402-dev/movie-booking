@@ -11,7 +11,7 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
 import { useUserContext } from "@contexts/admin";
 import { clearAuth } from "@utils/shared";
-import { useLayoutContext } from "@contexts/admin";
+import { useLayoutContext } from "@contexts/admin/layout";
 
 const SIDEBAR_LINKS = [
   {
