@@ -71,7 +71,7 @@ npm run dev
           alt="GitHub"
         />
       </a>
-      <a href="mailto:hoanglongdoan2006@gmail.com">
+      <a href="hoanglongdoan2006@gmail.com">
         <img
           src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white"
           alt="Gmail"
@@ -89,7 +89,7 @@ npm run dev
           alt="GitHub"
         />
       </a>
-      <a href="mailto:hoangduc140220@gmail.com">
+      <a href="hoangduc140220@gmail.com">
         <img
           src="https://img.shields.io/badge/Gmail-D14836?style=flat-square&logo=gmail&logoColor=white"
           alt="Gmail"
