@@ -96,7 +96,7 @@ export function useAddMovie() {
           highlight: HIGHLIGHT_TYPES.ADD,
           notification: {
             variant: "success",
-            message: "Add successfully",
+            message: "Phim đã được thêm thành công vào hệ thống",
           },
           history,
         },

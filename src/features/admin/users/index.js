@@ -1,0 +1,1 @@
+export {useUsers} from "@features/admin/users/hooks"

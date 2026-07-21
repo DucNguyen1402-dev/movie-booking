@@ -1,5 +1,5 @@
 import { useMovies } from "@features/admin/movies-management";
-import { useUsers } from "@hooks/admin/useUsers.js";
+import { useUsers } from "@features/admin/users";
 
 export function useDashboardData() {
   const { data: movies = [] , isPending: isMoviesPending} = useMovies();

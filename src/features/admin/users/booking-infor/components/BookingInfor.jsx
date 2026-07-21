@@ -3,7 +3,7 @@ import {
   Clock3,
   Armchair,
 } from "lucide-react";
-import {  formatDateTime, formatCurrency}  from "../../utils/format"
+import {  formatDateTime, formatCurrency}  from "@features/admin/users/utils/format"
 
 export default function BookingInfor({bookings}) {
   return (

@@ -1,4 +1,4 @@
-import { useUsers } from "@hooks/admin/useUsers";
+import { useUsers } from "@features/admin/users/hooks";
 
 export function useUsersStates() {
   const { data: users = [], isFetching, isPending, isSucess} = useUsers();

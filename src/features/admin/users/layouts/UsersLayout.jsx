@@ -1,5 +1,6 @@
-import { UsersProvider } from "@features/admin/users/contexts/UsersContext";
+import { UsersProvider } from "@features/admin/users/contexts";
 import {Outlet} from "react-router-dom"
+
 export default function UsersLayout() {
   return (
     <UsersProvider>

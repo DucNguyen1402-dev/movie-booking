@@ -1,10 +1,6 @@
-import { useContext, createContext } from "react";
-import { useUsersStates } from "../hooks/useUsersStates";
-import { useUsersActions } from "../hooks/useUsersActions";
-import { useUserFilter } from "../hooks/useUserFilter";
 import { usePagination } from "@hooks/admin";
-
-const usersContext = createContext(null);
+import { useUsersStates, useUsersActions, useUserFilter } from "./hooks";
+import { usersContext } from "./usersContext";
 
 export function UsersProvider({ children }) {
   const usersStates = useUsersStates();
@@ -18,10 +14,9 @@ export function UsersProvider({ children }) {
       userFilters.filters.role,
       userFilters.filteredUsers,
     ],
-    enabled: usersStates.isSucess
+    enabled: usersStates.isSucess,
   });
 
-  
   const value = {
     usersStates,
     userFilters,
@@ -32,13 +27,4 @@ export function UsersProvider({ children }) {
   return (
     <usersContext.Provider value={value}>{children}</usersContext.Provider>
   );
-}
-
-export function useUsersContext() {
-  const context = useContext(usersContext);
-
-  if (!context) {
-    throw new Error("useUsersContext must be used within EditProvider");
-  }
-  return context;
 }

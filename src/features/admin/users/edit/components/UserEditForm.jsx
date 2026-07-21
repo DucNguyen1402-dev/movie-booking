@@ -1,4 +1,4 @@
-import { validationRules } from "../../constants/validationRules";
+import { validationRules } from "@features/admin/users/config";
 import { LockKeyhole } from "lucide-react";
 
 const Input = ({ name, register, error, label, rules, disabled, ...props }) => (

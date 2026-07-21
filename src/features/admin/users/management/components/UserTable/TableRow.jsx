@@ -1,6 +1,6 @@
 import { SquarePen, Trash, CalendarCheck } from "lucide-react";
-import { userRoleLabel } from "../../../constants/user-role-labels";
-import { useTableRow } from "../../../hooks/useTableRow";
+import {userRoleLabel} from "@features/admin/users/constants"
+import { useTableRow } from "@features/admin/users/management/hooks"
 import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
 
 export default function TableRow({ user, isMatched, highlight }) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useUsersContext } from "../../../contexts/UsersContext";
+import { useUsersContext } from "@features/admin/users/contexts";
 import { EmptyStateButton } from "@components/admin/buttons";
 import { EmptyTable } from "@components/admin";
 import TableSkeleton from "./TableSkeleton";

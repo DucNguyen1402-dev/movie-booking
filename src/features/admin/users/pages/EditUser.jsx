@@ -1,26 +1,20 @@
-import { PencilLine } from "lucide-react";
-import { useParams } from "react-router-dom";
-import { useUsers } from "@hooks/admin/useUsers";
-import { CancelButton, SaveButton } from "@components/admin/buttons";
-import UserProfileHeader from "@features/admin/users/components/edit-user/UserProfileHeader";
-import UserEditForm from "@features/admin/users/components/edit-user/UserEditForm";
-import { useEditForm } from "@features/admin/users/hooks/useEditForm";
-import { useEditActions } from "@features/admin/users/hooks/useEditActions";
 import { useEffect } from "react";
-import {useNavigate, useLocation} from "react-router-dom"
-
-
-const roleMapping = {
-  QuanTri: "Quản trị viên",
-  KhachHang: "Khách hàng",
-};
+import {userRoleLabel} from "@features/admin/users/constants"
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { PencilLine } from "lucide-react";
+import { useUsers } from "@features/admin/users/hooks";
+import { CancelButton, SaveButton } from "@components/admin/buttons";
+import {
+  UserProfileHeader,
+  UserEditForm,
+} from "@features/admin/users/edit/components";
+import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
 
 export default function EditUser() {
   const { account } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  
   const { data: users = [], isPending } = useUsers();
   const targetUser = users.find((user) => user.taiKhoan === account) ?? {};
 
@@ -60,7 +54,7 @@ export default function EditUser() {
           <UserProfileHeader
             initial={initial}
             taiKhoan={targetUser.taiKhoan}
-            roleLabel={roleMapping[targetUser.maLoaiNguoiDung]}
+            roleLabel={userRoleLabel[targetUser.maLoaiNguoiDung]}
           />
 
           <UserEditForm fields={fields} register={register} errors={errors} />

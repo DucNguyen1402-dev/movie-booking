@@ -1,4 +1,4 @@
-import AddUserForms from "@features/admin/users/components/add-user/AddUserForms";
+import {AddUserForms} from "@features/admin/users/add/components";
 import { PencilLine } from "lucide-react";
 
 export default function AddUser() {

@@ -9,7 +9,7 @@ import { useLoadingContext } from "@contexts/admin/loading";
 import { createUser } from "@services/admin/api";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
-export function useUserFormActions({ handleSubmit }) {
+export function useAddActions({ handleSubmit }) {
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
     mutationFn: createUser,

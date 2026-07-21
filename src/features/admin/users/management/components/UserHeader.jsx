@@ -1,6 +1,6 @@
 import { List} from "lucide-react";
 import {AddButton} from "@components/admin/buttons";
-import { useUsersContext } from "../../contexts/UsersContext";
+import { useUsersContext } from "@features/admin/users/contexts";
 
 export default function UserHeader() {
   const { usersActions } = useUsersContext();

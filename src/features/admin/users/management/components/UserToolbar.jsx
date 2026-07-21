@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import { useUsersContext } from "../../contexts/UsersContext";
+import { useUsersContext } from "@features/admin/users/contexts";
 import { PAGE_SIZE_OPTIONS, USER_ROLE_OPTIONS } from "@config/admin";
 import { Select } from "@components/admin";
 

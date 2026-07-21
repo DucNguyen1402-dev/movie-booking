@@ -1,13 +1,5 @@
 import { api } from "./client";
 
-export const getUsers = async () => {
-  const response = await api.get(
-    "QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01",
-  );
-
-  return response.data.content;
-};
-
 export const createUser = async (payload) => {
   const { data } = await api.post("QuanLyNguoiDung/ThemNguoiDung", payload);
 

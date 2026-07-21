@@ -1,8 +1,7 @@
 import {useEffect} from "react"
 import {useNavigate, useLocation} from "react-router-dom"
-import { useAddForm } from "../../hooks/useAddForm";
-import { useUserFormActions } from "../../hooks/useUserFormActions";
-import { validationRules } from "../../constants/validationRules";
+import { useAddForm, useAddActions } from "../hooks";
+import { validationRules } from "@features/admin/users/config";
 import Input from "./InputForm";
 import {PasswordInput} from "@components/admin"
 import Select from "./SelectForm";
@@ -27,7 +26,7 @@ export default function AddUserForms() {
     });
   }, [isDirty]);
 
-  const { onCancelAddUserClick, onAddUserClick } = useUserFormActions({
+  const { onCancelAddUserClick, onAddUserClick } = useAddActions({
     handleSubmit,
   });
 

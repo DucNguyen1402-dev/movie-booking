@@ -3,7 +3,7 @@ import {
   EmptyBooking,
   BookingInfor,
   BookingInforSkeleton,
-} from "@features/admin/users/components/booking-infor";
+} from "@features/admin/users/booking-infor/components";
 import { useQuery } from "@tanstack/react-query";
 import { getUserInfor } from "@services/admin/api";
 import { useParams } from "react-router-dom";
