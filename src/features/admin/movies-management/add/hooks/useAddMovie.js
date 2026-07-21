@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { addMovie } from "@services/admin/api";
+import { addMovie } from "@features/admin/movies-management/add/services/api";
 import { createMovieFormData } from "../utils/createMovieFormData";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
@@ -28,7 +28,7 @@ export function useAddMovie() {
   const previousPath = history.at(-1) ?? "/admin/movies";
   const navigate = useNavigate();
   const { showLoading, hideLoading } = useLoadingContext();
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
   const modal = useModalContext();
   const {
     register,
@@ -111,7 +111,7 @@ export function useAddMovie() {
           : content;
 
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message,
       });

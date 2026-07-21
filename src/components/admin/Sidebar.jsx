@@ -9,7 +9,7 @@ import {
 
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import MovieIcon from "./MovieIcon";
-import { useUserContext } from "@contexts/admin";
+import { useUserContext } from "@contexts/admin/user";
 import { clearAuth } from "@utils/shared";
 import { useLayoutContext } from "@contexts/admin/layout";
 
@@ -110,7 +110,7 @@ export default function Sidebar() {
           <div className="before:absolute before:bottom-full before:left-0 before:h-4 before:w-full before:bg-transparent before:content-['']"></div>
 
           <button className="flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500">
-            {storageAvatar ? <img src={storageAvatar} /> : avatarName}
+            {storageAvatar ? <img src={storageAvatar} alt ="user avatar"/> : avatarName}
           </button>
           <div className="pointer-events-none absolute bottom-10 left-0 w-50 overflow-hidden rounded-xl border border-gray-700 bg-[#1f1f1f] opacity-0 shadow-2xl transition-opacity duration-500 group-hover:pointer-events-auto group-hover:opacity-100">
             <Link

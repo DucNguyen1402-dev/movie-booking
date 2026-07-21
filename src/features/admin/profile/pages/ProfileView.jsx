@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useEffect } from "react";
 import { ProfileSkeleton } from "@features/admin/profile/components/ProfileEdit";
 import { useProfileContext } from "@features/admin/profile/contexts";
@@ -18,14 +18,14 @@ export default function ProfileView() {
   const location = useLocation();
   const history = location.state?.history ?? [];
   const navigate = useNavigate();
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
 
   useEffect(() => {
     const notification = location.state?.notification;
 
     if (!notification) return;
 
-    notifActions.showNotification(notification);
+    notificationActions.show(notification);
 
     const timer = setTimeout(() => {
       navigate(".", { replace: true });

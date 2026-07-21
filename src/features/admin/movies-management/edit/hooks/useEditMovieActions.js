@@ -1,13 +1,13 @@
 import { useCallback } from "react";
 import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useNavigate } from "react-router-dom";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateMovie } from "@services/admin/api";
+import { updateMovie } from "@features/admin/movies-management/edit/services/api";
 import { useModalContext } from "@contexts/admin/modal";
 import { format } from "date-fns";
 
@@ -29,7 +29,7 @@ export function useEditMovieActions({
   });
 
 
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
   const { showLoading, hideLoading } = useLoadingContext();
   const modal = useModalContext();
 
@@ -72,7 +72,7 @@ export function useEditMovieActions({
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
       modal.close();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "warning",
         message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
       });
@@ -119,19 +119,19 @@ export function useEditMovieActions({
       });
     } catch (error) {
       hideLoading();
-      const content = error.response?.data?.content;
+      const content = error.response?.data?.content ?? "Đã có lỗi xảy ra. Vui lòng thử lại sau";
       //Chỗ này có vẻ là do tên phim không thể edit nhưng message trả về hơi bị sai
       // fix tạm
       const message =
         content === "Phim này không thể bị xóa!"
           ? "Phim này không thể chỉnh sửa "
           : content;
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message,
       });
     }
-  }, [mutateAsync, editMovie, editId, navigate, notifActions]);
+  }, [mutateAsync, editMovie, editId, navigate, notificationActions]);
 
   const onSaveClick = async () => {
     const isValid = await trigger();

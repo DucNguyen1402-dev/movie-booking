@@ -1,7 +1,5 @@
-import { useMovies } from "@hooks/admin/useMovies";
+import { useMovies } from "@features/admin/movies-management/hooks";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-
 
 
 export function useEditMovieState() {

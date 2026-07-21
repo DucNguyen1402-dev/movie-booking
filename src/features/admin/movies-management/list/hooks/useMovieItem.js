@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteMovie } from "@services/admin/api";
+import { deleteMovie } from "@features/admin/movies-management/list/services/api";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useRef, useEffect, useState } from "react";
 import { MOVIE_HIGHLIGHTS } from "@config/admin/movieHighlight";
@@ -7,7 +7,7 @@ import { useModalContext } from "@contexts/admin/modal";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export function useMovieItem({ movie, movieId, highlight }) {
@@ -28,7 +28,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
-  const { notifActions } = useNotification();
+  const {  notificationActions } = useNotificationContext();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -64,12 +64,12 @@ export function useMovieItem({ movie, movieId, highlight }) {
       await mutateAsync(movie.maPhim);
 
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "success",
         message: "Xóa phim thành công",
       });
     } catch (error) {
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message: error.response.data?.content,
       });

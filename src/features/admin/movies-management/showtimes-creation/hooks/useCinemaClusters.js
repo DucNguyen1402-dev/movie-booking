@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCinemaClusters } from "@services/admin/api";
+import { getCinemaClusters } from "@features/admin/movies-management/showtimes-creation/services/api";
 
 export function useCinemaClusters(system) {
   return useQuery({

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useMemo } from "react";
-import { useMovies } from "@hooks/admin/useMovies";
+import { useMovies } from "@features/admin/movies-management/hooks";
 import MovieSelectionCard from "@features/admin/movies-management/showtimes-creation/components/MovieSelectionCard";
 import ShowtimeForm from "@features/admin/movies-management/showtimes-creation/components/ShowtimeForm/ShowtimeForm";
 

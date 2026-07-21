@@ -1,7 +1,8 @@
-import { useMovies } from "@hooks/admin/useMovies";
+
 import { createContext, useContext } from "react";
 import { useFilteredMovies, useTrailer } from "../hooks";
 import {usePagination} from "@hooks/admin"
+import {useMovies} from "@features/admin/movies-management/hooks"
 
 const movieContext = createContext(null);
 

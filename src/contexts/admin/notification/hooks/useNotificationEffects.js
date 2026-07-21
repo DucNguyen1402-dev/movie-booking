@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 
-export function useNotificationEffects({ notificationRef , dispatch}) {
+export function useNotificationEffects({ notificationRef, hideNotification }) {
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (notificationRef.current && !notificationRef.current.contains(e.target)) {
-        dispatch({ type: "HIDE_NOTIFICATION" });
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(e.target)
+      ) {
+        hideNotification();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);

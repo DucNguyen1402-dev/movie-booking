@@ -3,19 +3,24 @@ import ShowtimeInforHeader from "./ShowtimeInfor/ShowtimeInforHeader";
 import ShowtimeInforCard from "./ShowtimeInfor/ShowtimeInforCard";
 import ShowtimeInforSkeleton from "./ShowtimeInforSkeleton";
 import EmptyShowtimeState from "./EmptyShowtimeState";
-import { useLocation } from "react-router-dom";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useNotificationContext } from "@contexts/admin/notification";
+import {useConsumeLocationState} from "@hooks/admin"
 import { useEffect } from "react";
 
 export default function ShowtimeCard({ showtimeInfor, isPending, hasNoData }) {
   const location = useLocation();
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
 
   useEffect(() => {
     if (location.state?.notification) {
-      notifActions.showNotification(location.state.notification);
+      notificationActions.show(location.state.notification);
     }
   }, [location.state]);
+
+
+  useConsumeLocationState("notification", 5000);
+
 
   let tongSuatChieu = 0;
 
@@ -36,7 +41,10 @@ export default function ShowtimeCard({ showtimeInfor, isPending, hasNoData }) {
       const { tenHeThongRap, logo, cumRapChieu } = showtime;
 
       return (
-        <div key = {tenHeThongRap} className="space-y-10 border-b border-dashed border-slate-600 px-8">
+        <div
+          key={tenHeThongRap}
+          className="space-y-10 border-b border-dashed border-slate-600 px-8"
+        >
           <ShowtimeHeader
             tenHeThongRap={tenHeThongRap}
             tongSuatChieu={tongSuatChieu}
@@ -49,7 +57,7 @@ export default function ShowtimeCard({ showtimeInfor, isPending, hasNoData }) {
               return (
                 <div
                   key={maCumRap}
-                  className={`space-y-10 rounded-md ${hasNewShowtime ? "animate-flash" : ""}`}
+                  className={`space-y-10 rounded-md p-4 ${hasNewShowtime ? "animate-flash" : ""}`}
                 >
                   <div
                     className={`space-y-10 pb-8 ${isLastCluster ? "" : "border-b border-gray-500"}`}

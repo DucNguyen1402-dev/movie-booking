@@ -2,7 +2,7 @@ import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useLoadingContext } from "@contexts/admin/loading";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { updateUser } from "@services/admin/api";
 import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
@@ -26,7 +26,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
-  const { notifActions } = useNotification();
+  const {  notificationActions } = useNotificationContext();
 
   const handleCancelEdit = () => {
     modal.close();
@@ -55,7 +55,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
 
     if (!hasFieldChange) {
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "warning",
         message:
           "Không phát hiện dữ liệu thay đổi, vui lòng kiểm tra lại hoặc rời trang.",
@@ -86,7 +86,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message,
       });

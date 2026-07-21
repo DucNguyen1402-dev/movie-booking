@@ -4,14 +4,14 @@ import Notification from "@components/admin/Notification";
 import LoadingSpinner from "@components/admin/LoadingSpinner";
 import Backdrop from "@/components/admin/Backdrop";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import {useLoadingContext} from "@contexts/admin/loading"
 import {useModalContext} from "@contexts/admin/modal"
 
 export default function GlobalUI() {
   const {modal} = useModalContext();
   const loading = useLoadingContext();
-  const notif = useNotification();
+  const notification = useNotificationContext();
   
   const shouldLock = modal.type !== null || loading.isVisible;
   useLockBodyScroll(shouldLock);
@@ -34,7 +34,7 @@ export default function GlobalUI() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {notif.isOpen && (
+        {notification.isOpen && (
           <motion.div
             className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
@@ -43,10 +43,10 @@ export default function GlobalUI() {
             transition={{ duration: 0.3 }}
           >
             <Notification
-              notificationRef={notif.notificationRef}
-              styles={notif.styles}
-              Icon={notif.Icon}
-              message={notif.message}
+              notificationRef={notification.notificationRef}
+              styles={notification.ui.styles}
+              Icon={notification.ui.Icon}
+              message={notification.ui.message}
             />
           </motion.div>
         )}

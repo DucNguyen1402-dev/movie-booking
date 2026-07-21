@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pen } from "lucide-react";
 import AvatarSetting from "./AvatarSetting";
-import { useUserContext } from "@contexts/admin";
+import { useUserContext } from "@contexts/admin/user";
 import {useLockBodyScroll} from "@hooks/admin"
 
 export default function ProfileViewHeader({ name }) {

@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useMovies } from "@hooks/admin/useMovies";
 import {
   selectKeyword,
   selectStatus,

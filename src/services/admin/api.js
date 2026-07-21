@@ -24,6 +24,8 @@ export const updateUser = async (payload) => {
 };
 
 
+////////////////////////////////////////////////////////////////////////////////////////////
+
 export const updateProfile = async (payload) => {
   const { data } = await api.put(
     "QuanLyNguoiDung/CapNhatThongTinNguoiDung",
@@ -43,6 +45,7 @@ export const getUserInfor = async (account) => {
   return data.content;
 };
 
+//////////////////////////////////////////////
 export const getUserData = async (account) => {
   const { data } = await api.post(`/QuanLyNguoiDung/ThongTinTaiKhoan`, account);
 
@@ -57,6 +60,10 @@ export const deleteUser = async (account) => {
   return data.content;
 };
 
+
+//////////////////////////////////////////////
+
+
 export const getMovies = async () => {
   const response = await api.get("/QuanLyPhim/LayDanhSachPhim", {
     params: {
@@ -67,47 +74,6 @@ export const getMovies = async () => {
   return response.data.content;
 };
 
-export const deleteMovie = async (id) => {
-  return api.delete("/QuanLyPhim/XoaPhim", {
-    params: {
-      maPhim: id,
-    },
-  });
-};
-
-export const updateMovie = async (data) => {
-  return api.post("/QuanLyPhim/CapNhatPhimUpload", data);
-};
 
 
-export const addMovie = async (data) => {
-  return api.post("/QuanLyPhim/ThemPhimUploadHinh", data);
-};
 
-export const getCinemaSystems = async () => {
-  const { data } = await api.get("QuanLyRap/LayThongTinHeThongRap");
-
-  return data.content;
-};
-
-export const getCinemaClusters = async (system) => {
-  const { data } = await api.get(
-    `QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${system}`,
-  );
-
-  return data.content;
-};
-
-export const createShowtime = async (payload) => {
-  const { data } = await api.post("QuanLyDatVe/TaoLichChieu", payload);
-
-  return data;
-};
-
-export const getShowtimeData = async (id) => {
-  const { data } = await api.get(
-    `QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`,
-  );
-
-  return data.content;
-};

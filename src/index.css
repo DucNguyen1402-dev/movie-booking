@@ -1,10 +1,8 @@
 @import "tailwindcss";
 
-
 @theme {
   --breakpoint-3xl: 120rem;
 }
-
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -43,7 +41,7 @@ body {
 }
 
 .max-w-8xl {
-  max-width: 96rem; 
+  max-width: 96rem;
 }
 
 @theme {
@@ -57,7 +55,6 @@ body {
 
     12% {
       background-color: rgb(16 185 129 / 0.3);
-      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
     }
 
     24% {
@@ -66,7 +63,6 @@ body {
 
     44% {
       background-color: rgb(16 185 129 / 0.3); /* emerald-500/15 */
-      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
     }
 
     56% {
@@ -75,7 +71,6 @@ body {
 
     76% {
       bbackground-color: rgb(16 185 129 / 0.3); /* emerald-500/15 */
-      box-shadow: 0 0 0 6px rgb(16 185 129 / 0.3);
     }
 
     88% {
@@ -88,11 +83,10 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
   -webkit-text-fill-color: #e2e8f0;
-  -webkit-box-shadow: 0 0 0px 1000px #0f172a inset; 
+  -webkit-box-shadow: 0 0 0px 1000px #0f172a inset;
   box-shadow: 0 0 0px 1000px #0f172a inset;
   transition: background-color 9999s ease-in-out 0s;
 }
-
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -112,11 +106,14 @@ body {
   line-height: 1.5;
   font-family: "Be Vietnam Pro", system-ui, sans-serif;
   background:
-    radial-gradient(circle at 25% 20%, rgba(116, 69, 255, 0.35), transparent 32%),
+    radial-gradient(
+      circle at 25% 20%,
+      rgba(116, 69, 255, 0.35),
+      transparent 32%
+    ),
     linear-gradient(135deg, #0b1024 0%, #10183a 45%, #122a64 100%);
   -webkit-font-smoothing: antialiased;
 }
-
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
@@ -135,36 +132,39 @@ body {
   background: #64748b; /* slate-500 */
 }
 
-
-
-
-
 @theme {
   --animate-medal-shake: medalShake 1s ease-in-out;
 }
 
 @keyframes medalShake {
-  0% { transform: rotate(0deg); }
-  15% { transform: rotate(-12deg); }
-  30% { transform: rotate(12deg); }
-  45% { transform: rotate(-10deg); }
-  60% { transform: rotate(8deg); }
-  75% { transform: rotate(-4deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(-12deg);
+  }
+  30% {
+    transform: rotate(12deg);
+  }
+  45% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(8deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
-
-
-
-
 
 button,
 input,
 select {
   font-family: inherit;
 }
-
-
-
 
 @layer components {
   .cine-container {
@@ -173,7 +173,7 @@ select {
 
   .cine-title {
     font-family: "Oswald", system-ui, sans-serif;
-    @apply text-center text-4xl font-bold uppercase tracking-wide text-white md:text-5xl;
+    @apply text-center text-4xl font-bold tracking-wide text-white uppercase md:text-5xl;
     text-shadow: 0 5px 0 rgba(23, 31, 84, 0.65);
   }
 
@@ -182,15 +182,15 @@ select {
   }
 
   .cine-btn-yellow {
-    @apply inline-flex items-center justify-center rounded-md bg-[#ffeb00] px-6 py-3 text-sm font-extrabold uppercase text-[#111827] shadow-[0_8px_0_#b58c00] transition duration-200 hover:-translate-y-0.5 hover:bg-[#fff45c];
+    @apply inline-flex items-center justify-center rounded-md bg-[#ffeb00] px-6 py-3 text-sm font-extrabold text-[#111827] uppercase shadow-[0_8px_0_#b58c00] transition duration-200 hover:-translate-y-0.5 hover:bg-[#fff45c];
   }
 
   .cine-btn-purple {
-    @apply inline-flex items-center justify-center rounded-md bg-[#6f35b5] px-6 py-3 text-sm font-extrabold uppercase text-white shadow-[0_8px_0_#3e1b72] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8244ce];
+    @apply inline-flex items-center justify-center rounded-md bg-[#6f35b5] px-6 py-3 text-sm font-extrabold text-white uppercase shadow-[0_8px_0_#3e1b72] transition duration-200 hover:-translate-y-0.5 hover:bg-[#8244ce];
   }
 
   .cine-btn-outline {
-    @apply inline-flex items-center justify-center rounded-md border border-[#ffeb00] px-6 py-3 text-sm font-extrabold uppercase text-[#ffeb00] transition duration-200 hover:bg-[#ffeb00] hover:text-[#111827];
+    @apply inline-flex items-center justify-center rounded-md border border-[#ffeb00] px-6 py-3 text-sm font-extrabold text-[#ffeb00] uppercase transition duration-200 hover:bg-[#ffeb00] hover:text-[#111827];
   }
 
   .cine-card {
@@ -198,15 +198,14 @@ select {
   }
 
   .cine-input {
-    @apply h-12 rounded-full border border-white/10 bg-white px-5 text-sm font-medium text-slate-700 outline-none transition placeholder:text-slate-400 focus:border-[#6f35b5] focus:ring-4 focus:ring-[#6f35b5]/20;
+    @apply h-12 rounded-full border border-white/10 bg-white px-5 text-sm font-medium text-slate-700 transition outline-none placeholder:text-slate-400 focus:border-[#6f35b5] focus:ring-4 focus:ring-[#6f35b5]/20;
   }
 
   .cine-select {
-    @apply h-12 rounded-md border border-slate-300 bg-white px-4 text-sm font-extrabold text-[#6f35b5] outline-none transition focus:border-[#6f35b5] focus:ring-4 focus:ring-[#6f35b5]/20;
+    @apply h-12 rounded-md border border-slate-300 bg-white px-4 text-sm font-extrabold text-[#6f35b5] transition outline-none focus:border-[#6f35b5] focus:ring-4 focus:ring-[#6f35b5]/20;
   }
 
   .movie-poster {
     @apply aspect-[2/3] w-full rounded-lg object-cover shadow-2xl shadow-black/30 transition duration-300 group-hover:scale-[1.025];
   }
 }
-

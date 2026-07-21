@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCinemaSystems } from "@services/admin/api";
+import { getCinemaSystems } from "@features/admin/movies-management/showtimes-creation/services/api";
 
 export function useCinemaSystems() {
  return useQuery({

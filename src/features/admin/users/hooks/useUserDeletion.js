@@ -1,6 +1,6 @@
 import { deleteUser } from "@services/admin/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
@@ -20,7 +20,7 @@ export function useUserDeletion() {
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
 
   const handleDeleteUser = async (taiKhoan) => {
     modal.close();
@@ -29,7 +29,7 @@ export function useUserDeletion() {
     try {
       await mutateAsync(taiKhoan);
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "success",
         message: "Xóa tài khoản thành công",
       });
@@ -39,7 +39,7 @@ export function useUserDeletion() {
         "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
 
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message,
       });

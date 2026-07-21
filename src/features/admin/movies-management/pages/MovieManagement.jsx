@@ -12,7 +12,7 @@ import { useMovieContext } from "@features/admin/movies-management/list/contexts
 import TrailerModal from "@features/admin/movies-management/list/components/TrailerModal";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useLayoutContext } from "@contexts/admin/layout";
 
 
@@ -22,11 +22,11 @@ export default function MovieManagement() {
   
   const location = useLocation();
   const navigate = useNavigate();
-  const { notifActions } = useNotification();
+  const {  notificationActions } = useNotificationContext();
 
   useEffect(() => {
     if (location.state?.notification) {
-      notifActions.showNotification(location.state.notification);
+      notificationActions.show(location.state.notification);
     }
   }, [location.state]);
 

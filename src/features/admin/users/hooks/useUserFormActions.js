@@ -4,7 +4,7 @@ import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useModalContext } from "@contexts/admin/modal";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { createUser } from "@services/admin/api";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
@@ -24,7 +24,7 @@ export function useUserFormActions({ handleSubmit }) {
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/users";
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
   const { showLoading, hideLoading } = useLoadingContext();
 
   const handleCancelAddUser = () => {
@@ -63,7 +63,7 @@ export function useUserFormActions({ handleSubmit }) {
     } catch (error) {
       modal.close();
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message:
           error.response?.data?.content ??

@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { updateUser, getUserInfor } from "@services/admin/api";
 import { useModalContext } from "@contexts/admin/modal";
 import { useLoadingContext } from "@contexts/admin/loading";
-import {useNotification } from "@contexts/admin";
+import {useNotificationContext } from "@contexts/admin/notification";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { getCurrentUser } from "@utils/shared";
 import { useEffect } from "react";
@@ -62,7 +62,7 @@ export function useProfileForm() {
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
-  const { notifActions } = useNotification();
+  const {  notificationActions } = useNotificationContext();
 
   const handleCancelPasswordChange = () => {
     modal.close();
@@ -122,7 +122,7 @@ export function useProfileForm() {
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message,
       });
@@ -138,7 +138,7 @@ export function useProfileForm() {
 
     if (matKhau !== matKhauHienTai) {
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message: "Mật khẩu hiện tại không chính xác!",
       });
@@ -147,7 +147,7 @@ export function useProfileForm() {
 
     if (matKhauMoi !== xacNhanMatKhauMoi) {
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message: "Mật khẩu mới không giống nhau",
       });
@@ -183,7 +183,7 @@ export function useProfileForm() {
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message,
       });

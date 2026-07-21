@@ -2,7 +2,7 @@ import UserHeader from "@features/admin/users/components/users-management/UserHe
 import UserToolbar from "@features/admin/users/components/users-management/UserToolbar";
 
 import UserTable from "@features/admin/users/components/users-management/UserTable/UserTable";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLayoutContext } from "@contexts/admin/layout";
@@ -11,11 +11,11 @@ export default function usersManagement() {
   const { isSidebarOpen } = useLayoutContext();
 
   const location = useLocation();
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
 
   useEffect(() => {
     if (location.state?.notification) {
-      notifActions.showNotification(location.state.notification);
+      notificationActions.show(location.state.notification);
     }
   }, [location.state]);
 

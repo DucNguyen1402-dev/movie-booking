@@ -1,5 +1,5 @@
 export function useNotificationActions({ dispatch, timeoutRef }) {
-  const showNotification = ({ variant, message }) => {
+  const show = ({ variant, message }) => {
     dispatch({ type: "SHOW_NOTIFICATION", payload: { variant, message } });
 
     clearTimeout(timeoutRef.current);
@@ -9,10 +9,10 @@ export function useNotificationActions({ dispatch, timeoutRef }) {
     }, 2500);
   };
 
-  const hideNotification = () => dispatch({ type: "SHOW_NOTIFICATION" });
+  const hide = () => dispatch({ type: "HIDE_NOTIFICATION" });
 
   return {
-    showNotification,
-    hideNotification,
+    show,
+    hide,
   };
 }

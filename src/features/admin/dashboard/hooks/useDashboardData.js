@@ -1,4 +1,4 @@
-import { useMovies } from "@hooks/admin/useMovies.js";
+import { useMovies } from "@features/admin/movies-management";
 import { useUsers } from "@hooks/admin/useUsers.js";
 
 export function useDashboardData() {

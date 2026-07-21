@@ -1,10 +1,10 @@
 import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useNavigate, useLocation } from "react-router-dom";
-import { createShowtime } from "@services/admin/api";
+import { createShowtime } from "@features/admin/movies-management/showtimes-creation/services/api";
 import { format } from "date-fns";
-import { useLoadingContext } from "@contexts/admin/Loading";
-import { useNotification } from "@contexts/admin/NotificationContext";
+import { useLoadingContext } from "@contexts/admin/loading";
+import { useNotificationContext } from "@contexts/admin/notification";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -14,11 +14,11 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const previousPath = history.at(-1) ?? "/admin/movies";
 
   const { showLoading, hideLoading } = useLoadingContext();
-  const { notifActions } = useNotification();
+  const { notificationActions } = useNotificationContext();
 
   const handleShowtimeCanceling = () => {
     modal.close();
-    navigate(previousPath, {state: {history}});
+    navigate(previousPath, { state: { history } });
   };
 
   const onCancelClick = () =>
@@ -31,7 +31,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const handleShowtimeCreation = async (data) => {
     const { ngayChieu, gioChieu, giaVe, maCumRap } = data;
-  
+
     //Chỗ này backend yêu cầu payload là maRap nhưng giá trị thực phải là maCumRap thì mới tạo lịch được
     const payload = {
       maRap: String(maCumRap),
@@ -47,7 +47,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       hideLoading();
       navigate(previousPath, {
         state: {
-           maCumRap,
+          maCumRap,
           notification: {
             variant: "success",
             message: "Đã tạo lịch chiếu thành công.",
@@ -57,7 +57,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       });
     } catch (error) {
       hideLoading();
-      notifActions.showNotification({
+      notificationActions.show({
         variant: "error",
         message: error.response?.data?.content,
       });
