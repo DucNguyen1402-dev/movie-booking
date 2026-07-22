@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMovieContext } from "../../contexts/MovieContext";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { EmptyStateButton } from "@components/admin/buttons";
 import { EmptyTable } from "@components/admin";
 import MovieItem from "./MovieItem";
@@ -24,7 +24,7 @@ export default function MoviesTable() {
       state: { keyword },
       actions: { resetSearchKeyword },
     },
-  } = useMovieContext();
+  } = useMovieListContext();
 
   if (rowState.movieId) {
     pagination.skipNextPageReset.current = true;

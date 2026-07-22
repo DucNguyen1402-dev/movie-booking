@@ -1,9 +1,9 @@
 import { CircleX } from "lucide-react";
-import { useMovieContext } from "../contexts/MovieContext";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
 export default function TrailerModal() {
 
-  const { trailer: {close, trailer} } = useMovieContext();
+  const { trailer: {close, trailer} } = useMovieListContext();
 
   const embedUrl = trailer.url
     ? trailer.url.replace("watch?v=", "embed/")

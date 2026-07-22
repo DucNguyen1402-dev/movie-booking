@@ -1,8 +1,8 @@
 import { Search } from "lucide-react";
 import {useDispatch} from "react-redux";
-import {setKeyword} from "../redux/slice"
+import {setKeyword} from "../contexts/redux/slice"
 import {useSelector} from "react-redux"
-import {selectKeyword} from "../redux/selectors"
+import {selectKeyword} from "../contexts/redux/selectors"
 
 export default function SearchBar() {
   const dispatch = useDispatch();

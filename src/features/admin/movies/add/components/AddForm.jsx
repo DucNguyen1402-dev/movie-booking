@@ -1,10 +1,13 @@
-import { useAddMovieActions } from "@features/admin/movies/add/hooks";
-import { validationRules } from "@config/admin/validation-rules";
-import DateInput from "@components/admin/DateInput/DateInput";
-import CheckBox from "@components/admin/CheckBox";
-import { CancelButton, AddButton } from "@components/admin/buttons";
-import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAddMovieActions } from "@features/admin/movies/add/hooks";
+import {
+  DateInput,
+  CheckBox,
+  CancelButton,
+  AddButton,
+} from "@components/admin";
+import { useEffect } from "react";
+import { validationRules } from "@config/admin";
 
 export default function AddForm() {
   const navigate = useNavigate();

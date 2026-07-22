@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   Star,
   TvMinimalPlay,
@@ -6,9 +7,8 @@ import {
   Flame,
   CalendarPlus2,
 } from "lucide-react";
-import { format } from "date-fns";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { useMovieItem } from "@features/admin/movies/list/hooks";
-import { useMovieContext } from "@features/admin/movies/list/contexts";
 
 export default function MovieItem({ movie, movieId, highlight }) {
   const {
@@ -31,7 +31,7 @@ export default function MovieItem({ movie, movieId, highlight }) {
     movie.sapChieu = false;
   }
 
-  const { trailer } = useMovieContext();
+  const { trailer } = useMovieListContext();
 
   const onOpenTrailerClick = () =>
     trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
@@ -39,9 +39,9 @@ export default function MovieItem({ movie, movieId, highlight }) {
   return (
     <tr
       ref={isTargetMovie ? rowRef : null}
-      className={`border-t border-slate-700/80 group transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"} ${onDeleting ? "bg-red-950/25 ring-1 ring-red-800/50 ring-inset" : ""}`}
+      className={`group border-t border-slate-700/80 transition-colors hover:bg-slate-700/20 ${isTargetMovie ? highlightAnimation : "duration-300"} ${onDeleting ? "bg-red-950/25 ring-1 ring-red-800/50 ring-inset" : ""}`}
     >
-      <td className="pl-8 py-4 font-mono text-slate-400">#{movie.maPhim}</td>
+      <td className="py-4 pl-8 font-mono text-slate-400">#{movie.maPhim}</td>
 
       <td className="flex items-center gap-3 overflow-hidden px-6 py-4">
         <img
@@ -52,8 +52,8 @@ export default function MovieItem({ movie, movieId, highlight }) {
             e.target.src = "https://via.placeholder.com/48x64";
           }}
         />
-        <div className="flex flex-col gap-1 ">
-          <span className="block text-sm font-semibold text-slate-200 transition-colors group-hover:text-yellow-400 ">
+        <div className="flex flex-col gap-1">
+          <span className="block text-sm font-semibold text-slate-200 transition-colors group-hover:text-yellow-400">
             {movie.tenPhim}
           </span>
 

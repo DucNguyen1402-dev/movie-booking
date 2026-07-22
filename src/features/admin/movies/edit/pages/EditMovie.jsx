@@ -1,5 +1,4 @@
-import EditHeader from "@features/admin/movies/edit/components/EditHeader/EditHeader";
-import FormEdit from "@features/admin/movies/edit/components/FormEdit/FormEdit";
+import {EditHeader, FormEdit} from "@features/admin/movies/edit/components";
 
 export default function EditMovie() {
   

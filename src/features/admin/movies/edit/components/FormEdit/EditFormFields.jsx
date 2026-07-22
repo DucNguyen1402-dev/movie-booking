@@ -1,5 +1,5 @@
 import { LockKeyhole, Star } from "lucide-react";
-import { useEditMovie } from "../../contexts/EditContext";
+import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 import { getRateClasses } from "../../config/editConfig";
 import { validationRules } from "@config/admin/validation-rules";
 import DateInput from "@components/admin/DateInput/DateInput";
@@ -10,7 +10,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 export default function EditFormFields() {
   const {
     editForm: { register, errors, watch, control, isDirty },
-  } = useEditMovie();
+  } = useEditMovieContext();
 
   const navigate = useNavigate();
   const location = useLocation();

@@ -8,7 +8,7 @@ import MoviesTable from "@features/admin/movies/list/components/MoviesTable/Movi
 import { Select } from "@components/admin";
 import Backdrop from "@/components/admin/Backdrop";
 import { AnimatePresence, motion } from "motion/react";
-import { useMovieContext } from "@features/admin/movies/list/contexts/MovieContext";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import TrailerModal from "@features/admin/movies/list/components/TrailerModal";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -33,7 +33,7 @@ export default function MovieList() {
   const {
     trailer: { trailer },
     pagination: { currentSize, setSize },
-  } = useMovieContext();
+  } = useMovieListContext();
 
   useLockBodyScroll(trailer.url !== null);
 

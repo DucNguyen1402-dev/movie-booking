@@ -1,12 +1,9 @@
+import { MovieListContext } from "./MovieListContext";
+import { useFilteredMovies, useTrailer } from "./hooks";
+import { usePagination } from "@hooks/admin";
+import { useMovies } from "@features/admin/movies/hooks";
 
-import { createContext, useContext } from "react";
-import { useFilteredMovies, useTrailer } from "../hooks";
-import {usePagination} from "@hooks/admin"
-import {useMovies} from "@features/admin/movies/hooks"
-
-const movieContext = createContext(null);
-
-export function MovieProvider({ children }) {
+export function MovieListProvider({ children }) {
   const { data: movies = [], isPending, isFetching } = useMovies();
 
   const {
@@ -43,16 +40,8 @@ export function MovieProvider({ children }) {
   };
 
   return (
-    <movieContext.Provider value={value}>{children}</movieContext.Provider>
+    <MovieListContext.Provider value={value}>
+      {children}
+    </MovieListContext.Provider>
   );
-}
-
-export function useMovieContext() {
-  const context = useContext(movieContext);
-
-  if (!context) {
-    throw error("useMovieContext must be used within MovieProvider");
-  }
-
-  return context;
 }

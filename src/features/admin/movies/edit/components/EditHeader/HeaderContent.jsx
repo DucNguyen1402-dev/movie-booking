@@ -1,7 +1,7 @@
-import { useEditMovie } from "../../contexts/EditContext";
+import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 
 export default function HeaderContent({movieId, groupId}) {
-    const { editForm: {watch} } = useEditMovie();
+    const { editForm: {watch} } = useEditMovieContext();
 
   return (
     <div className="mb-6 flex-1 space-y-2">

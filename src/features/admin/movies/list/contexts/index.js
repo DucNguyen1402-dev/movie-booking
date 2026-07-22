@@ -1,1 +1,2 @@
-export {useMovieContext} from "./MovieContext"
+export {useMovieListContext} from "./useMovieListContext"
+export {MovieListProvider} from "./MovieListProvider"

@@ -1,33 +1,32 @@
+// React
 import { useCallback } from "react";
-import { MODAL_TYPES } from "@constants/admin/modalTypes.js";
-import { useNotificationContext } from "@contexts/admin/notification";
+
+// Third-party
 import { useNavigate } from "react-router-dom";
-import { useLoadingContext } from "@contexts/admin/loading";
-import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
-import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateMovie } from "@features/admin/movies/edit/api";
-import { useModalContext } from "@contexts/admin/modal";
 import { format } from "date-fns";
 
-export function useEditMovieActions({
-  editId,
-  editMovie,
-  trigger,
-  getValues,
-}) {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation({
-    mutationFn: updateMovie,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["movies"],
-      });
-    },
-  });
+// Contexts
+import {
+  useNotificationContext,
+  useLoadingContext,
+  useModalContext,
+} from "@contexts/admin";
 
+// Hooks
+import { useUpdateMovie } from "./useUpdateMovie";
+
+// Constants
+import { MODAL_TYPES } from "@constants/admin";
+import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
+
+// Utils
+import { ensureMinDuration } from "@utils/admin";
+import { HIGHLIGHT_TYPES } from "@config/admin";
+
+export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
+  const navigate = useNavigate();
+
+  const { mutateAsync } = useUpdateMovie();
 
   const { notificationActions } = useNotificationContext();
   const { showLoading, hideLoading } = useLoadingContext();
@@ -45,7 +44,7 @@ export function useEditMovieActions({
   const onCancelClick = () =>
     modal.open({
       type: MODAL_TYPES.EDIT_MOVIE,
-      title:"Bạn có chắc muốn hủy?",
+      title: "Bạn có chắc muốn hủy?",
       subtitle: "Mọi thông tin của bạn sẽ không được lưu.",
       onConfirm: handleCancelChange,
     });
@@ -53,7 +52,7 @@ export function useEditMovieActions({
   function normalizeMovie(movie) {
     return {
       ...movie,
-      ngayKhoiChieu:format(movie.ngayKhoiChieu, "yyyy-MM-dd"),
+      ngayKhoiChieu: format(movie.ngayKhoiChieu, "yyyy-MM-dd"),
     };
   }
 
@@ -119,7 +118,9 @@ export function useEditMovieActions({
       });
     } catch (error) {
       hideLoading();
-      const content = error.response?.data?.content ?? "Đã có lỗi xảy ra. Vui lòng thử lại sau";
+      const content =
+        error.response?.data?.content ??
+        "Đã có lỗi xảy ra. Vui lòng thử lại sau";
       //Chỗ này có vẻ là do tên phim không thể edit nhưng message trả về hơi bị sai
       // fix tạm
       const message =
@@ -138,7 +139,7 @@ export function useEditMovieActions({
     if (!isValid) return;
     modal.open({
       type: MODAL_TYPES.EDIT_MOVIE,
-      title:"Bạn có chắc muốn lưu?",
+      title: "Bạn có chắc muốn lưu?",
       subtitle: "Thông tin của người dùng sẽ được thay đổi trên hệ thống.",
       onConfirm: handleSaveMovie,
     });

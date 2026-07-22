@@ -1,11 +1,10 @@
-import { EditProvider } from "@features/admin/movies/edit/contexts/EditContext";
-import { EditMovie } from "@features/admin/movies/edit/pages";
+import { EditMovieProvider, EditMovie } from "@features/admin/movies/edit";
 
 const EditMovieRoute = () => {
   return (
-    <EditProvider>
+    <EditMovieProvider>
       <EditMovie />
-    </EditProvider>
+    </EditMovieProvider>
   );
 };
 

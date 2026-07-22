@@ -1,5 +1,5 @@
-import { setSortType } from "../redux/slice";
-import { selectSortType } from "../redux/selectors";
+import { setSortType } from "../contexts/redux/slice";
+import { selectSortType } from "../contexts/redux/selectors";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SortSelect() {

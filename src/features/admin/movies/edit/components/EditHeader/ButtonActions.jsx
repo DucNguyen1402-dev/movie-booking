@@ -1,7 +1,7 @@
-import { useEditMovie } from "../../contexts/EditContext";
+import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
   
 export default function ActionButtons() {
-  const { editActions } = useEditMovie();
+  const { editActions } = useEditMovieContext();
 
   return (
     <div className="mt-6 flex space-x-3">

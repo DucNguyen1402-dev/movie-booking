@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { filterStatus } from "../redux/slice";
-import { selectStatus } from "../redux/selectors";
+import { filterStatus } from "../contexts/redux/slice";
+import { selectStatus } from "../contexts/redux/selectors";
 
 export default function MovieStatusFilter() {
   const status = useSelector(selectStatus);

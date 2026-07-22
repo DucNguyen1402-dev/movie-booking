@@ -1,34 +1,31 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteMovie } from "@features/admin/movies/list/api";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useRef, useEffect, useState } from "react";
-import { MOVIE_HIGHLIGHTS } from "@config/admin/movieHighlight";
-import { useModalContext } from "@contexts/admin/modal";
-import { useLoadingContext } from "@contexts/admin/loading";
-import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
-import { useNotificationContext } from "@contexts/admin/notification";
+
 import { useNavigate, useLocation } from "react-router-dom";
+
+import {
+  useModalContext,
+  useLoadingContext,
+  useNotificationContext,
+} from "@contexts/admin";
+
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import { MOVIE_HIGHLIGHTS } from "@config/admin";
+
+import { ensureMinDuration } from "@utils/admin";
+import { useDeleteMovie } from "./useDeleteMovie";
+
 
 export function useMovieItem({ movie, movieId, highlight }) {
   const [onDeleting, setOnDeleting] = useState(false);
-  const { mutateAsync } = useMutation({
-    mutationFn: deleteMovie,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["movies"],
-      });
-    },
-  });
+  const { mutateAsync } = useDeleteMovie();
 
   const rowRef = useRef(null);
   const isTargetMovie = movie.maPhim === Number(movieId);
   const highlightAnimation = MOVIE_HIGHLIGHTS[highlight];
-  const queryClient = useQueryClient();
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
-  const {  notificationActions } = useNotificationContext();
+  const { notificationActions } = useNotificationContext();
   const navigate = useNavigate();
   const location = useLocation();
 

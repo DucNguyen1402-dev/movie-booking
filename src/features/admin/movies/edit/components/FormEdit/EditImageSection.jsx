@@ -1,11 +1,12 @@
-import { useEditMovie } from "../../contexts/EditContext";
+import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
+  
 import { useMemo } from "react";
 
 export default function EditImageSection() {
   const {
   
     editForm: { watch , register},
-  } = useEditMovie();
+  } = useEditMovieContext();
 
   const file = watch("hinhAnh");
 
