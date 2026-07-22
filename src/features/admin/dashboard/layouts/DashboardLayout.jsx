@@ -1,4 +1,4 @@
-import { DashboardProvider } from "@features/admin/dashboard/contexts/DashboardContext";
+import { DashboardProvider } from "@features/admin/dashboard/contexts";
 import { Outlet } from "react-router-dom";
 import ScrollToTop from "@components/admin/ScrollToTop";
 
