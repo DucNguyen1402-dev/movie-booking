@@ -1,0 +1,1 @@
+export {useMovies} from "@features/admin/movies/hooks"

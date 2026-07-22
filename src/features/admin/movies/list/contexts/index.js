@@ -1,0 +1,1 @@
+export {useMovieContext} from "./MovieContext"

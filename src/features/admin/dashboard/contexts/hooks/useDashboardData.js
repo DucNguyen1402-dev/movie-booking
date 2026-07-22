@@ -1,4 +1,4 @@
-import { useMovies } from "@features/admin/movies-management";
+import { useMovies } from "@features/admin/movies";
 import { useUsers } from "@features/admin/users";
 
 export function useDashboardData() {

@@ -1,4 +1,4 @@
-import { useProfileForm } from "../hooks";
+import { useProfileForm } from "./hooks";
 import { createContext, useContext } from "react";
 
 const profileContext = createContext(null);
