@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {getUsers} from "@features/admin/users/services/api"
+import { getUsers } from "@features/admin/users/contexts/api";
 
 export function useUsers() {
   return useQuery({

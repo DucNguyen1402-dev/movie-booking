@@ -1,20 +1,16 @@
 import { FolderClock } from "lucide-react";
+import { useUserInfor } from "@features/admin/users/booking-infor/hooks";
 import {
   EmptyBooking,
   BookingInfor,
   BookingInforSkeleton,
 } from "@features/admin/users/booking-infor/components";
-import { useQuery } from "@tanstack/react-query";
-import { getUserInfor } from "@services/admin/api";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom"
 
 export default function UserBookingInfor() {
-  const { account } = useParams();
-  const { data: user = {}, isPending } = useQuery({
-    queryKey: ["userInfo", account],
-    queryFn: () => getUserInfor(account),
-    enabled: !!account,
-  });
+  const {account} = useParams();
+  const { data: user = {}, isPending } = useUserInfor(account);
+
   const bookings = user.thongTinDatVe ?? [];
 
   let content = <BookingInfor bookings={bookings} />;

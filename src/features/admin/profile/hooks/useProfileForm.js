@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useNavigate, useLocation } from "react-router-dom";
-import { updateUser, getUserInfor } from "@services/admin/api";
+import { updateUser } from "@features/admin/users/edit";
+import {useUserInfor} from "@features/admin/users"
 import { useModalContext } from "@contexts/admin/modal";
 import { useLoadingContext } from "@contexts/admin/loading";
 import {useNotificationContext } from "@contexts/admin/notification";
@@ -17,12 +18,7 @@ export function useProfileForm() {
 
   const currentUser = getCurrentUser();
 
-  const { data: loginedUser, isLoading } = useQuery({
-    queryFn: () => getUserInfor(currentUser.taiKhoan),
-    queryKey: ["loginedUser"],
-    ennabled: !!currentUser,
-  });
-
+  const { data: loginedUser, isLoading } =  useUserInfor(currentUser.taiKhoan);
 
 
   const {

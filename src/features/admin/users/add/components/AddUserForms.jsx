@@ -1,22 +1,19 @@
-import {useEffect} from "react"
-import {useNavigate, useLocation} from "react-router-dom"
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAddForm, useAddActions } from "../hooks";
 import { validationRules } from "@features/admin/users/config";
 import Input from "./InputForm";
-import {PasswordInput} from "@components/admin"
+import { PasswordInput } from "@components/admin";
 import Select from "./SelectForm";
 import FormActions from "./FormActions";
 
 
-
 export default function AddUserForms() {
-  const { register, handleSubmit, errors, isDirty } = useAddForm();
-
-
   const navigate = useNavigate();
   const location = useLocation();
+  const { register, handleSubmit, errors, isDirty } = useAddForm();
 
-   useEffect(() => {
+  useEffect(() => {
     navigate(".", {
       replace: true,
       state: {
@@ -94,20 +91,17 @@ export default function AddUserForms() {
             error={errors.maLoaiNguoiDung}
           />
         </div>
-
-      
       </form>
 
-        <div className ="mt-16">
-          <FormActions
+      <div className="mt-16">
+        <FormActions
           onCancelClick={onCancelAddUserClick}
           onAddClick={onAddUserClick}
         />
-
-        </div>
-        <p className="absolute left-6 bottom-3 text-[12px] text-slate-400 italic">
-          * Vui lòng kiểm tra kỹ lại thông tin trước khi bấm tạo người dùng
-        </p>
+      </div>
+      <p className="absolute bottom-3 left-6 text-[12px] text-slate-400 italic">
+        * Vui lòng kiểm tra kỹ lại thông tin trước khi bấm tạo người dùng
+      </p>
     </div>
   );
 }

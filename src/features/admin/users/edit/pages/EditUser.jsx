@@ -1,24 +1,25 @@
 import { useEffect } from "react";
-import {userRoleLabel} from "@features/admin/users/constants"
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
+import { useUsersContext } from "@features/admin/users/contexts";
 import { PencilLine } from "lucide-react";
-import { useUsers } from "@features/admin/users/hooks";
+import { userRoleLabel } from "@features/admin/users/constants";
+import { getAvatarInitial } from "@utils/admin";
 import { CancelButton, SaveButton } from "@components/admin/buttons";
 import {
   UserProfileHeader,
   UserEditForm,
 } from "@features/admin/users/edit/components";
-import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
 
 export default function EditUser() {
   const { account } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { data: users = [], isPending } = useUsers();
+  const {
+    usersStates: { users },
+  } = useUsersContext();
   const targetUser = users.find((user) => user.taiKhoan === account) ?? {};
-
-  const initial = targetUser?.hoTen?.charAt(0).toUpperCase() ?? "";
 
   const { register, handleSubmit, fields, errors, initialUser, isDirty } =
     useEditForm({
@@ -52,7 +53,7 @@ export default function EditUser() {
 
         <div className="rounded-2xl border border-slate-700 bg-slate-800 p-8 shadow-xl">
           <UserProfileHeader
-            initial={initial}
+            initial={getAvatarInitial(targetUser?.hoTen)}
             taiKhoan={targetUser.taiKhoan}
             roleLabel={userRoleLabel[targetUser.maLoaiNguoiDung]}
           />

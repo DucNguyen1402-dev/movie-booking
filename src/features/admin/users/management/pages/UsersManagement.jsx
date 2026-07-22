@@ -8,12 +8,14 @@ import { useNotificationContext } from "@contexts/admin/notification";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLayoutContext } from "@contexts/admin/layout";
+import { useConsumeLocationState } from "@hooks/admin";
 
-export default function usersManagement() {
+export default function UsersManagement() {
   const { isSidebarOpen } = useLayoutContext();
 
   const location = useLocation();
   const { notificationActions } = useNotificationContext();
+  useConsumeLocationState("notification", 10000);
 
   useEffect(() => {
     if (location.state?.notification) {

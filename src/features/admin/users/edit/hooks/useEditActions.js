@@ -3,11 +3,10 @@ import { MODAL_TYPES } from "@constants/admin/modalTypes";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { useNotificationContext } from "@contexts/admin/notification";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { updateUser } from "@services/admin/api";
 import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
 import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
 import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
+import {useUserEdit} from "./useUserEdit"
 
 export function useEditActions({ handleSubmit, initialUser }) {
   const navigate = useNavigate();
@@ -16,13 +15,7 @@ export function useEditActions({ handleSubmit, initialUser }) {
   const previousPage = location.state?.previousPage ?? null;
   const previousPath = history.at(-1) ?? "/admin/users";
 
-  const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation({
-    mutationFn: updateUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries("users");
-    },
-  });
+  const { mutateAsync } = useUserEdit();
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();

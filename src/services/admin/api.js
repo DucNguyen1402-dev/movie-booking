@@ -1,19 +1,7 @@
 import { api } from "./client";
 
-export const createUser = async (payload) => {
-  const { data } = await api.post("QuanLyNguoiDung/ThemNguoiDung", payload);
 
-  return data.content;
-};
 
-export const updateUser = async (payload) => {
-  const { data } = await api.post(
-    "QuanLyNguoiDung/CapNhatThongTinNguoiDung",
-    payload,
-  );
-
-  return data.content;
-};
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,13 +17,6 @@ export const updateProfile = async (payload) => {
 
 
 
-export const getUserInfor = async (account) => {
-  const { data } = await api.post(
-    `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${account}`,
-  );
-
-  return data.content;
-};
 
 //////////////////////////////////////////////
 export const getUserData = async (account) => {
@@ -44,13 +25,6 @@ export const getUserData = async (account) => {
   return data.content;
 };
 
-export const deleteUser = async (account) => {
-  const { data } = await api.delete(
-    `QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${account}`,
-  );
-
-  return data.content;
-};
 
 
 //////////////////////////////////////////////

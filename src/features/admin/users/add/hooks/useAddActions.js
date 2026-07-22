@@ -6,19 +6,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useModalContext } from "@contexts/admin/modal";
 import { useNotificationContext } from "@contexts/admin/notification";
 import { useLoadingContext } from "@contexts/admin/loading";
-import { createUser } from "@services/admin/api";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useUserCreation } from "../hooks";
 
 export function useAddActions({ handleSubmit }) {
-  const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation({
-    mutationFn: createUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["users"],
-      });
-    },
-  });
+  const { mutateAsync } = useUserCreation();
+
   const modal = useModalContext();
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,7 +21,7 @@ export function useAddActions({ handleSubmit }) {
 
   const handleCancelAddUser = () => {
     modal.close();
-    navigate(previousPath, { state: { history: history.slice(0, -1), } });
+    navigate(previousPath, { state: { history: history.slice(0, -1) } });
   };
   const onCancelAddUserClick = () =>
     modal.open({

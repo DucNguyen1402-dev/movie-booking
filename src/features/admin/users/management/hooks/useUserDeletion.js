@@ -1,5 +1,4 @@
-import { deleteUser } from "@services/admin/api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {useDeleteUser} from "./useDeleteUser"
 import { useNotificationContext } from "@contexts/admin/notification";
 import { useLoadingContext } from "@contexts/admin/loading";
 import { useModalContext } from "@contexts/admin/modal";
@@ -9,15 +8,8 @@ import { useState } from "react";
 export function useUserDeletion() {
   const [deletingAccount, setDeletingAccount] = useState(null);
 
-  const queryClient = useQueryClient();
-
-  const { mutateAsync } = useMutation({
-    mutationFn: deleteUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries("users");
-    },
-  });
-
+  const { mutateAsync } = useDeleteUser();
+  
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
