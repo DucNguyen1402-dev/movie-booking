@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
 
 export function useShowtimeForm() {
-   const { control, handleSubmit, register,  formState: { errors }, watch } = useForm({
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors, isDirty },
+    watch,
+  } = useForm({
     mode: "onBlur",
-    defaultValues: {}
-   }
-   );
-
+    defaultValues: {},
+  });
 
   return {
     register,
@@ -14,5 +18,6 @@ export function useShowtimeForm() {
     errors,
     control,
     watch,
+    isDirty
   };
 }

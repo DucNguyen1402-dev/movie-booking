@@ -1,19 +1,17 @@
 import { useRef, useState } from "react";
+import { useLocation,useNavigate } from "react-router-dom";
 
-import { useNavigate, useLocation } from "react-router-dom";
-
-import {
-  useModalContext,
-  useLoadingContext,
-  useNotificationContext,
-} from "@contexts/admin";
-
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 import { MOVIE_HIGHLIGHTS } from "@config/admin";
 
-import { ensureMinDuration } from "@utils/admin";
-
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
 import {useScrollIntoView} from "@hooks/admin"
+import { ensureMinDuration } from "@utils/admin";
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+
 import { useDeleteMovie } from "./useDeleteMovie";
 
 

@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle, TriangleAlert, Info } from "lucide-react";
+import { CheckCircle, Info,TriangleAlert, XCircle } from "lucide-react";
 
 export const notificationIcons = {
   success: CheckCircle,

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import { useUsersContext } from "@features/admin/users/contexts";
-import { EmptyStateButton } from "@components/admin/buttons";
 import { EmptyTable } from "@components/admin";
-import TableSkeleton from "./TableSkeleton";
-import TableRow from "./TableRow";
 import { PaginationControls } from "@components/admin";
+import { EmptyStateButton } from "@components/admin/buttons";
+
+import TableRow from "./TableRow";
+import TableSkeleton from "./TableSkeleton";
 
 export default function UserTable() {
   const location = useLocation();

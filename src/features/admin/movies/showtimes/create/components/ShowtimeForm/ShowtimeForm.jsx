@@ -1,22 +1,26 @@
-import { useShowtimeForm } from "../../hooks/useShowtimeForm";
-import { validationRules } from "../../config/validation-rules";
-import { useShowtimeActions } from "../../hooks/useShowtimeActions";
-import { useCinemaSystems } from "../../hooks/useCinemaSystems";
-import { useCinemaClusters } from "../../hooks/useCinemaClusters";
-import { CancelButton, AddButton } from "@components/admin/buttons";
-import CinemaSystems from "./CinemaSystems/CinemaSystems";
-import CinemaClusters from "./CinemaClusters/CinemaClusters";
-import Theather from "./Theather/Theather";
+import {useSyncLeaveConfirmation} from "@hooks/admin"
+import { AddButton,CancelButton } from "@components/admin/buttons";
 import DateInput from "@components/admin/DateInput/DateInput";
-import TicketPrice from "./TicketPrice/TicketPrice";
+
+import { validationRules } from "../../config/validation-rules";
+import { useCinemaClusters } from "../../hooks/useCinemaClusters";
+import { useCinemaSystems } from "../../hooks/useCinemaSystems";
+import { useShowtimeActions } from "../../hooks/useShowtimeActions";
+import { useShowtimeForm } from "../../hooks/useShowtimeForm";
+import CinemaClusters from "./CinemaClusters/CinemaClusters";
+import CinemaSystems from "./CinemaSystems/CinemaSystems";
 import Showtime from "./ShowtimePicker/ShowtimePicker";
+import Theather from "./Theather/Theather";
+import TicketPrice from "./TicketPrice/TicketPrice";
 
 export default function ShowtimeForm({ movie }) {
-  const { handleSubmit, control, watch } = useShowtimeForm();
+  const { handleSubmit, control, watch, isDirty } = useShowtimeForm();
   const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
     movie,
   });
+
+  useSyncLeaveConfirmation(isDirty);
 
   const { data: cinemaSystems = [] } = useCinemaSystems();
 

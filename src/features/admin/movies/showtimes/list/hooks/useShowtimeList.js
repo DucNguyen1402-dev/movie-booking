@@ -1,8 +1,10 @@
-import { useMovies } from "@features/admin/movies/hooks";
 import { useMemo } from "react";
-import { getShowtimeData } from "@features/admin/movies/showtimes/list/api";
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+
+import { useQuery } from "@tanstack/react-query";
+
+import { useMovies } from "@features/admin/movies/hooks";
+import { getShowtimeData } from "@features/admin/movies/showtimes/list/api";
 
 export function useShowtimeList() {
   const { id } = useParams();

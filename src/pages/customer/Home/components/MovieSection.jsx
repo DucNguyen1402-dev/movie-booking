@@ -1,5 +1,7 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import MovieCard from "./MovieCard";
 
 const MOVIES_PER_SLIDE = 4;

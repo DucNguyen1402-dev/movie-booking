@@ -1,4 +1,4 @@
-import { useRef, useReducer } from "react";
+import { useReducer,useRef } from "react";
 
 const initialState = {
   isOpen: false,

@@ -1,17 +1,19 @@
+import { Link, NavLink, useNavigate } from "react-router-dom";
+
 import {
-  LayoutDashboard,
   Clapperboard,
-  Users,
-  UserPen,
-  SquareArrowRightExit,
+  LayoutDashboard,
   Menu,
+  SquareArrowRightExit,
+  UserPen,
+  Users,
 } from "lucide-react";
 
-import { NavLink, Link, useNavigate } from "react-router-dom";
-import MovieIcon from "./MovieIcon";
+import { useLayoutContext } from "@contexts/admin/layout";
 import { useUserContext } from "@contexts/admin/user";
 import { clearAuth } from "@utils/shared";
-import { useLayoutContext } from "@contexts/admin/layout";
+
+import MovieIcon from "./MovieIcon";
 
 const SIDEBAR_LINKS = [
   {

@@ -1,2 +1,2 @@
 export {default as MovieSelectionCard} from "./MovieSelectionCard"
-export {default as ShowtimeCard} from "./ShowtimeCard/ShowtimeCard"
+export {default as ShowtimeSection} from "./ShowtimeCard/ShowtimeSection"

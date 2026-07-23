@@ -1,5 +1,6 @@
-import Select from "react-select";
 import { Controller } from "react-hook-form";
+import Select from "react-select";
+
 import ClusterOption from "./ClusterOption";
 import ClusterSingleValue from "./ClusterSingleValue";
 

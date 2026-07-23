@@ -1,7 +1,9 @@
-import { CalendarDays, Info, Play, Star, Ticket, X } from "lucide-react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
+
+import { CalendarDays, Info, Play, Star, Ticket, X } from "lucide-react";
+
 import { getYoutubeEmbedUrl } from "@/utils/customer/format";
 
 const getMovieAgeLabel = (movie) => {

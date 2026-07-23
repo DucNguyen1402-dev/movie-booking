@@ -1,10 +1,10 @@
+import { useLayoutContext } from "@contexts/admin/layout";
 import {
-  RevenueRankingTable,
   RevenueHeader,
+  RevenueRankingTable,
   RevenueSummary,
   RevenueToolbar,
 } from "@features/admin/dashboard/revenue-ranking/components";
-import { useLayoutContext } from "@contexts/admin/layout";
 
 export default function RevenueRanking() {
   const { isSidebarOpen } = useLayoutContext();
@@ -12,7 +12,7 @@ export default function RevenueRanking() {
   return (
     <section className="bg-linear-to-br from-slate-900 to-slate-800 px-8 py-10">
       <div
-        className={`space-y-8 ${isSidebarOpen ? "max-w-full mx-8" : "mx-auto lg:max-w-7xl "}`}
+        className={`space-y-8 ${isSidebarOpen ? "mx-8 max-w-full" : "mx-auto lg:max-w-7xl "}`}
       >
         <RevenueHeader />
 

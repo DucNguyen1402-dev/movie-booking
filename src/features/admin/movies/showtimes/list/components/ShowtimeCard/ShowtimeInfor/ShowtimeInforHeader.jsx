@@ -1,5 +1,6 @@
+import {useEffect,useRef} from "react"
+
 import { MapPin } from "lucide-react";
-import {useRef, useEffect} from "react"
 
 export default function ShowtimeInforHeader({ diaChi, tenCumRap, hasNewShowtime }) {
 

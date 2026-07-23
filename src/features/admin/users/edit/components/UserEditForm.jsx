@@ -1,5 +1,6 @@
-import { validationRules } from "@features/admin/users/config";
 import { LockKeyhole } from "lucide-react";
+
+import { validationRules } from "@features/admin/users/config";
 
 const Input = ({ name, register, error, label, rules, disabled, ...props }) => (
   <div className="space-y-3">

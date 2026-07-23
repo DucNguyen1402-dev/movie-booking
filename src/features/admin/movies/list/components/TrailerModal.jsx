@@ -1,5 +1,5 @@
-import { CloseButton } from "@components/admin";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
+import { CloseButton } from "@components/admin";
 
 export default function TrailerModal() {
   const {

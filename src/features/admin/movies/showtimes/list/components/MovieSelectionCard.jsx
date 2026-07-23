@@ -1,9 +1,10 @@
+import { useLocation,useNavigate } from "react-router-dom";
+
 import { CalendarCog } from "lucide-react";
-import MovieIcon from "@components/admin/MovieIcon";
-import { useNavigate, useLocation } from "react-router-dom";
+
+import { AddButton } from "@components/admin";
 
 export default function MovieSelectionCard({ movie, hasNoShowtime }) {
-
   const navigate = useNavigate();
   const location = useLocation();
   const onShowtimeCreationClick = () =>
@@ -14,26 +15,25 @@ export default function MovieSelectionCard({ movie, hasNoShowtime }) {
     });
 
   return (
-    <section className="w-90 group/outer rounded-xl border border-slate-600 bg-linear-to-b from-slate-800 via-slate-700 to-slate-600 px-3 pt-4 pb-3 shadow-sm">
-      <div className=" flex flex-col items-center justify-center gap-4">
-        <div className="flex w-full flex-col gap-2">
-          <MovieIcon className="shrink-0" theme="dark"/>
-          <h1 className="text-2xl font-bold tracking-wide text-slate-100 text-center">
-            {movie.tenPhim}
-          </h1>
-        </div>
-
+    <section className="group/outer w-95 rounded-xl border border-slate-600 bg-linear-to-b from-slate-800 via-slate-700 to-slate-600 px-5 pt-4 pb-3 shadow-sm">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h1 className="text-center text-2xl font-bold tracking-wide text-slate-100">
+          {movie.tenPhim}
+        </h1>
         <div className="flex items-center justify-center overflow-hidden rounded-md">
           <img src={movie.hinhAnh} alt={movie.tenPhim} className="w-80" />
         </div>
+
         {!hasNoShowtime && (
-          <button
-            onClick={onShowtimeCreationClick}
-            className="mt-6 flex cursor-pointer items-center gap-1 self-end rounded-md bg-green-600 px-3 py-2.5 text-sm font-medium text-slate-100 transition-colors duration-400 hover:bg-green-700"
-          >
-            <CalendarCog className="size-5 font-bold" />
-            <span>Tạo lịch chiếu mới</span>
-          </button>
+          <div className="mt-8 self-end">
+            <AddButton
+              onClick={onShowtimeCreationClick}
+              surface="deepDark"
+              Icon={CalendarCog}
+            >
+              Tạo lịch chiếu mới
+            </AddButton>
+          </div>
         )}
       </div>
     </section>

@@ -1,9 +1,10 @@
-import { Film, DollarSign } from "lucide-react";
+import { DollarSign, Film } from "lucide-react";
+
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
 import {
   formatCompactCurrency,
   formatCurrency,
-} from "@features/admin/dashboard/utils/format";
+} from "@features/admin/dashboard/utils";
 
 export default function RevenueSummary() {
   const {

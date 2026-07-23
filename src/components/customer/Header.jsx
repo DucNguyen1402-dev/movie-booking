@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+
 import {
   CircleUserRound,
   House,
@@ -7,6 +8,7 @@ import {
   Star,
   Ticket,
 } from "lucide-react";
+
 import { useCurrentUser } from "@/hooks/customer/useAuth";
 
 export default function Header() {

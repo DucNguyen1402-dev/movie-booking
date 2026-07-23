@@ -1,7 +1,7 @@
 import { usePagination } from "@hooks/admin";
 import { useMovies } from "@features/admin/movies/hooks";
-import { useMovieParams, useTrailer } from "./hooks";
 
+import { useMovieParams, useTrailer } from "./hooks";
 import { MovieListContext } from "./MovieListContext";
 
 export function MovieListProvider({ children }) {

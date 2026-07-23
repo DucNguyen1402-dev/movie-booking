@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -8,7 +10,7 @@ import {
   Sparkles,
   Ticket,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+
 import MovieCard from "@/components/customer/MovieCard";
 import MovieCardSkeleton from "@/components/customer/MovieCardSkeleton";
 import { useMovieList } from "@/hooks/customer/useMovies";

@@ -1,5 +1,7 @@
-import { Clapperboard, ArrowUpRight } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
+
+import { ArrowUpRight,Clapperboard } from "lucide-react";
+
 import EmptyMovieStatusCard from "./EmptyMovieStatusCard";
 
 export default function MovieStatusCard({

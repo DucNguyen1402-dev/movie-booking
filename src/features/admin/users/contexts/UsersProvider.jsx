@@ -1,5 +1,6 @@
 import { usePagination } from "@hooks/admin";
-import { useUsersStates, useUsersActions, useUserFilter } from "./hooks";
+
+import { useUserFilter,useUsersActions, useUsersStates } from "./hooks";
 import { usersContext } from "./usersContext";
 
 export function UsersProvider({ children }) {

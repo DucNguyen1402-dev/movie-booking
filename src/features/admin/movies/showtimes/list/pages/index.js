@@ -1,2 +1,2 @@
 
-export {default as ShowtimeList} from "./List";
+export {default as ShowtimeList} from "./ShowtimeList";

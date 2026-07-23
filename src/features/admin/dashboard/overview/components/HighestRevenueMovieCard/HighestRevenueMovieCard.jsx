@@ -1,4 +1,5 @@
-import { Trophy, TrendingUp, Ticket } from "lucide-react";
+import { Ticket,TrendingUp, Trophy } from "lucide-react";
+
 import HighestRevenueMovieCardSkeleton from "./HighestRevenueMovieCardSkeleton";
 
 export default function HighestRevenueMovieCard({

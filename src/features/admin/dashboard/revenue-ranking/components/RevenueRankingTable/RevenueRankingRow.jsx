@@ -2,8 +2,8 @@ import {
   formatCompactCurrency,
   formatCurrency,
   formatRoundedNumber,
-} from "../../../utils/format";
-import Medal from "@components/admin/Medal";
+} from "@features/admin/dashboard/utils";
+import { Medal } from "@components/admin";
 
 export default function RevenueRankingRow({
   movie,

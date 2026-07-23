@@ -1,6 +1,6 @@
-import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
-  
 import { useMemo } from "react";
+
+import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 
 export default function EditImageSection() {
   const {

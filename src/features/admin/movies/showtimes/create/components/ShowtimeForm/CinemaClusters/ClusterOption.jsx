@@ -1,4 +1,5 @@
 import { components } from "react-select";
+
 import { MapPin } from "lucide-react";
 
 export default function ClusterOption(props) {

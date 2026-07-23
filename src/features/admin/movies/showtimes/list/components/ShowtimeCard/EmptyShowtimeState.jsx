@@ -1,5 +1,6 @@
-import { CalendarX, CalendarCog } from "lucide-react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+import { CalendarCog,CalendarX } from "lucide-react";
 
 export default function EmptyShowtimeState() {
   const { id } = useParams();

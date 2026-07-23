@@ -1,14 +1,16 @@
-import { useForm } from "react-hook-form";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { useNavigate, useLocation } from "react-router-dom";
-import { updateUser } from "@features/admin/users/edit";
-import {useUserInfor} from "@features/admin/users"
-import { useModalContext } from "@contexts/admin/modal";
-import { useLoadingContext } from "@contexts/admin/loading";
-import {useNotificationContext } from "@contexts/admin/notification";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { getCurrentUser } from "@utils/shared";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useLocation,useNavigate } from "react-router-dom";
+
+import { useMutation,useQueryClient } from "@tanstack/react-query";
+
+import { useLoadingContext } from "@contexts/admin/loading";
+import { useModalContext } from "@contexts/admin/modal";
+import {useNotificationContext } from "@contexts/admin/notification";
+import {useUserInfor} from "@features/admin/users"
+import { updateUser } from "@features/admin/users/edit";
+import { getCurrentUser } from "@utils/shared";
+import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
 export function useProfileForm() {
   const location = useLocation();

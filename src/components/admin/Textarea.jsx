@@ -5,9 +5,12 @@ export default function Textarea({
   rules,
   error,
   id = null,
-  rows = "3",
+  rows = "1",
+  textareaRef,
   onInput,
 }) {
+  const descriptionField = register("moTa");
+
   return (
     <div className="flex flex-col gap-3">
       <label
@@ -21,7 +24,11 @@ export default function Textarea({
           onInput={onInput}
           id={id ?? name}
           rows={rows}
-          {...register(name, rules)}
+          {...descriptionField}
+          ref={(e) => {
+            descriptionField.ref(e);
+            textareaRef.current = e;
+          }}
           className="w-full overflow-hidden rounded-md border border-slate-700 bg-slate-900/40 px-3 py-2 text-[15px] text-slate-100 transition-colors duration-200 outline-none hover:border-indigo-500 hover:ring-2 hover:ring-indigo-500/20 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
         />
       </div>

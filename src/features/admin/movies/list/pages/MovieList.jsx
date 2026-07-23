@@ -1,25 +1,21 @@
 import { useEffect } from "react";
-
 import { useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "motion/react";
-
-import { useNotificationContext, useLayoutContext } from "@contexts/admin";
-import { useMovieListContext } from "@features/admin/movies/list/contexts";
-
-import { useConsumeLocationState, useLockBodyScroll } from "@hooks/admin";
 
 import { PAGE_SIZE_OPTIONS } from "@config/admin";
+import { AnimatePresence, motion } from "motion/react";
 
-import { Select, Backdrop } from "@components/admin";
-
+import { useLayoutContext,useNotificationContext } from "@contexts/admin";
+import { useConsumeLocationState, useLockBodyScroll } from "@hooks/admin";
 import {
   AddMovieBtn,
-  SearchBar,
-  MovieStatusFilter,
-  SortSelect,
   MoviesTable,
+  MovieStatusFilter,
+  SearchBar,
+  SortSelect,
   TrailerModal,
 } from "@features/admin/movies/list/components";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
+import { Backdrop,Select } from "@components/admin";
 
 export default function MovieList() {
   const location = useLocation();

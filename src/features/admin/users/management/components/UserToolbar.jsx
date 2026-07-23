@@ -1,6 +1,7 @@
-import { Search } from "lucide-react";
-import { useUsersContext } from "@features/admin/users/contexts";
 import { PAGE_SIZE_OPTIONS, USER_ROLE_OPTIONS } from "@config/admin";
+import { Search } from "lucide-react";
+
+import { useUsersContext } from "@features/admin/users/contexts";
 import { Select } from "@components/admin";
 
 export default function UserToolbar() {

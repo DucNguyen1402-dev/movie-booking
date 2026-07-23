@@ -1,6 +1,6 @@
 import {
-  PasswordChangeHeader,
   PasswordChangeForm,
+  PasswordChangeHeader,
 } from "@features/admin/profile/password-change/components";
 
 export default function PasswordChange() {

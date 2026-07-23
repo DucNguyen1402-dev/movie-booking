@@ -1,5 +1,5 @@
-import HeaderContent from "./HeaderContent";
 import ButtonActions from "./ButtonActions";
+import HeaderContent from "./HeaderContent";
 
 export default function EditHeader() {
   return (

@@ -1,4 +1,4 @@
-import { EditMovieProvider, EditMovie } from "@features/admin/movies/edit";
+import { EditMovie,EditMovieProvider } from "@features/admin/movies/edit";
 
 const EditMovieRoute = () => {
   return (

@@ -1,2 +1,2 @@
-export { api } from "@services/admin/client";
 export {getUserInfor} from "./getUserInfor"
+export { api } from "@services/admin/client";

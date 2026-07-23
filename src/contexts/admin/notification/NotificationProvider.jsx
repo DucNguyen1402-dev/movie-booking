@@ -1,11 +1,12 @@
-import { notificationStyles } from "@config/admin/notification/styles";
 import { notificationIcons } from "@config/admin/notification/icons";
-import { notificationContext } from "./notificationContext";
+import { notificationStyles } from "@config/admin/notification/styles";
+
 import {
   useNotificationActions,
   useNotificationEffects,
   useNotificationStates,
 } from "./hooks";
+import { notificationContext } from "./notificationContext";
 
 export function NotificationProvider({ children }) {
   const { notification, dispatch, notificationRef, timeoutRef } =

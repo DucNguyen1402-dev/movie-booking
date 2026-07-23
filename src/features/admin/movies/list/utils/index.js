@@ -1,1 +1,1 @@
-export {applySort, applyFilter} from "./movieFilters.js"
+export {applyFilter,applySort} from "./movieFilters.js"

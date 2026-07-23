@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef,useState } from "react";
 
 export function usePagination({ items, resetDeps, enabled, size = 10 }) {
   const [pagination, setPagination] = useState({ page: 1, size });

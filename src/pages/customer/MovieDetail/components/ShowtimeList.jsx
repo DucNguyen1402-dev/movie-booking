@@ -1,6 +1,8 @@
-import { MapPin, Ticket } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { MapPin, Ticket } from "lucide-react";
+
 import { formatTime } from "@/utils/customer/format";
 
 const ShowtimeList = ({ showtimeData }) => {

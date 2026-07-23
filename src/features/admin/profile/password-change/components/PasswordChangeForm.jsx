@@ -1,9 +1,11 @@
-import { PasswordInput } from "@components/admin";
-import { useProfileContext } from "@features/admin/profile/contexts";
-import { userValidationRules } from "@config/admin";
-import { CancelButton, SaveButton } from "@components/admin/buttons";
 import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
+
+import { userValidationRules } from "@config/admin";
+
+import { useProfileContext } from "@features/admin/profile/contexts";
+import { PasswordInput } from "@components/admin";
+import { CancelButton, SaveButton } from "@components/admin/buttons";
 
 export default function PasswordChangeForm() {
   const navigate = useNavigate();

@@ -1,11 +1,13 @@
+import {useParams} from "react-router-dom"
+
 import { FolderClock } from "lucide-react";
-import { useUserInfor } from "@features/admin/users/booking-infor/hooks";
+
 import {
-  EmptyBooking,
   BookingInfor,
   BookingInforSkeleton,
+  EmptyBooking,
 } from "@features/admin/users/booking-infor/components";
-import {useParams} from "react-router-dom"
+import { useUserInfor } from "@features/admin/users/booking-infor/hooks";
 
 export default function UserBookingInfor() {
   const {account} = useParams();

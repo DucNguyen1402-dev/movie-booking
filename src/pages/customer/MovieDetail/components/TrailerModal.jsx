@@ -1,4 +1,5 @@
 import { X } from "lucide-react";
+
 import { getYoutubeEmbedUrl } from "@/utils/customer/trailer";
 
 const TrailerModal = ({ trailer, onClose }) => {

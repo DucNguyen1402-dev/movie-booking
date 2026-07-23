@@ -1,9 +1,11 @@
-import {useDeleteUser} from "./useDeleteUser"
-import { useNotificationContext } from "@contexts/admin/notification";
+import { useState } from "react";
+
 import { useLoadingContext } from "@contexts/admin/loading";
 import { useModalContext } from "@contexts/admin/modal";
+import { useNotificationContext } from "@contexts/admin/notification";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useState } from "react";
+
+import {useDeleteUser} from "./useDeleteUser"
 
 export function useUserDeletion() {
   const [deletingAccount, setDeletingAccount] = useState(null);

@@ -1,15 +1,17 @@
 import {
-  Users,
-  TicketPercent,
-  Star,
   CircleDollarSign,
-  TrendingUp,
+  Star,
   Ticket,
+  TicketPercent,
+  TrendingUp,
+  Users,
 } from "lucide-react";
-import { formatCurrency, formatRoundedNumber } from "@features/admin/dashboard/utils/format";
+
+import { useLayoutContext } from "@contexts/admin";
+import { formatCurrency, formatRoundedNumber } from "@features/admin/dashboard/utils";
+
 import EmptyMetricCard from "./EmptyMetricCard";
 import MetricCard from "./MetricCard"
-import { useLayoutContext } from "@contexts/admin/layout";
 
 
 const createMetricCards = ({

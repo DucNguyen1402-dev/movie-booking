@@ -2,6 +2,7 @@ import {
   Clock3,
   Ticket,
 } from "lucide-react";
+
 import {formatShowtime} from "../../../utils/format"
 
 

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+
 import { buildDashboardData } from "@features/admin/dashboard/contexts/mocks";
 
 export function useDashboardDerived({ movies }) {

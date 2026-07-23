@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
 export default function SearchBar() {

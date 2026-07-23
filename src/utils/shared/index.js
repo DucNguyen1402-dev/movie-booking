@@ -1,1 +1,1 @@
-export {getCurrentUser, saveCurrentUser, removeCurrentUser, removeToken, clearAuth} from "./storage"
+export {clearAuth,getCurrentUser, removeCurrentUser, removeToken, saveCurrentUser} from "./storage"

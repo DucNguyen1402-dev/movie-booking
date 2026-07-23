@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
 import { useNotificationContext } from "@contexts/admin/notification";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import {
+  ProfileSkeleton,
   ProfileViewHeader,
-  ProfileViewInfor,
-  ProfileSkeleton
-} from "@features/admin/profile/overview/components";
+  ProfileViewInfor} from "@features/admin/profile/overview/components";
 
 
 export default function ProfileView() {

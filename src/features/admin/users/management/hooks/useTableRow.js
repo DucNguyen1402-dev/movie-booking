@@ -1,6 +1,7 @@
-import { useUserDeletion } from "./useUserDeletion";
-import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useRef } from "react";
+import { useLocation,useNavigate } from "react-router-dom";
+
+import { useUserDeletion } from "./useUserDeletion";
 
 export function useTableRow({ isMatched }) {
   const { onDeletionClick, deletingAccount } = useUserDeletion();

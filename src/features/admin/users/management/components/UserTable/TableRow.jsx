@@ -1,7 +1,8 @@
-import { SquarePen, Trash, CalendarCheck } from "lucide-react";
+import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
+import { CalendarCheck,SquarePen, Trash } from "lucide-react";
+
 import {userRoleLabel} from "@features/admin/users/constants"
 import { useTableRow } from "@features/admin/users/management/hooks"
-import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
 
 export default function TableRow({ user, isMatched, highlight }) {
   const { onDeletionClick, rowRef, onEditClick, onBookingInforClick, deletingAccount } =

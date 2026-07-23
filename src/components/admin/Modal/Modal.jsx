@@ -1,9 +1,10 @@
-import Delete from "./Delete/Delete";
-import ShowtimeModal from "./Showtime/ShowTimeModal"
+import { useModalContext } from "@contexts/admin/modal";
+
 import AddModal from "./AddModal/AddModal"
+import Delete from "./Delete/Delete";
 import EditModal from "./EditModal/EditModal"
 import LeavePageModal from "./LeavePageModal/LeavePageModal"
-import { useModalContext } from "@contexts/admin/modal";
+import ShowtimeModal from "./Showtime/ShowTimeModal"
 
 const MODALS = {
   deleteMovie: Delete,

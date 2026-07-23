@@ -1,8 +1,10 @@
+import { validationRules } from "@config/admin";
+
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
-import { validationRules } from "@config/admin";
-import { DateInput, CancelButton, AddButton , Textarea} from "@components/admin";
-import { InputFields, CheckboxFields, FileImageField } from "./Fields";
+import { AddButton , CancelButton, DateInput, Textarea} from "@components/admin";
+
+import { CheckboxFields, FileImageField,InputFields } from "./Fields";
 
 export default function Form() {
   const {

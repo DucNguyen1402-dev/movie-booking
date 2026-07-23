@@ -1,12 +1,13 @@
 import { format } from "date-fns";
 import {
-  Star,
-  TvMinimalPlay,
-  SquarePen,
-  Trash2,
-  Flame,
   CalendarPlus2,
+  Flame,
+  SquarePen,
+  Star,
+  Trash2,
+  TvMinimalPlay,
 } from "lucide-react";
+
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { useMovieItem } from "@features/admin/movies/list/hooks";
 

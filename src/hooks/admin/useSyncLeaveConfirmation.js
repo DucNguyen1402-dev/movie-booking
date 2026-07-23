@@ -1,5 +1,5 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useLocation,useNavigate } from "react-router-dom";
 
 export function useSyncLeaveConfirmation(isDirty) {
   const navigate = useNavigate();

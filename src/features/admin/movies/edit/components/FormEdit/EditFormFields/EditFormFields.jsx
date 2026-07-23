@@ -1,11 +1,12 @@
-import { useSyncLeaveConfirmation } from "@hooks/admin";
-
-import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
+import { useLayoutEffect,useRef } from "react";
 
 import { validationRules } from "@config/admin";
 
-import { Textarea, DateInput } from "@components/admin";
-import { InputFields, CheckboxFields } from "./FormFields";
+import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
+import { DateInput,Textarea } from "@components/admin";
+
+import { CheckboxFields,InputFields } from "./FormFields";
 
 export default function EditFormFields() {
   const {
@@ -19,6 +20,17 @@ export default function EditFormFields() {
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
 
+  const description = watch("moTa");
+  const textareaRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+
+    el.style.height = "0px";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [description]);
+
   return (
     <div className="space-y-8 rounded-xl bg-gray-800 p-8 pb-60 shadow-sm lg:col-span-2">
       <InputFields errors={errors} register={register} />
@@ -29,10 +41,11 @@ export default function EditFormFields() {
         error={errors.moTa}
         register={register}
         onInput={handleInput}
+        textareaRef ={textareaRef}
       />
 
       <div className="flex items-center justify-between">
-        <div className="w-1/3">
+        <div className="w-2/5">
           <DateInput
             control={control}
             value={watch("ngayKhoiChieu")}

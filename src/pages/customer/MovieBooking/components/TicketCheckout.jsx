@@ -1,10 +1,11 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+
+import { selectSeletedSeatList, selectTotalBookingPrice } from "@/redux/slices/customer/movie-booking/movieBookingSelectors";
 import {
   cancelSeatBooking,
   confirmSeatBooking,
 } from "@/redux/slices/customer/movie-booking/movieBookingSlice";
-import { selectSeletedSeatList, selectTotalBookingPrice } from "@/redux/slices/customer/movie-booking/movieBookingSelectors";
 
 const TicketCheckout = () => {
   const dispatch = useDispatch();

@@ -1,15 +1,17 @@
 import { useEffect } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
-import { useUsersContext } from "@features/admin/users/contexts";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import { PencilLine } from "lucide-react";
+
 import { userRoleLabel } from "@features/admin/users/constants";
-import { getAvatarInitial } from "@utils/admin";
-import { CancelButton, SaveButton } from "@components/admin/buttons";
+import { useUsersContext } from "@features/admin/users/contexts";
 import {
-  UserProfileHeader,
   UserEditForm,
+  UserProfileHeader,
 } from "@features/admin/users/edit/components";
+import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
+import { CancelButton, SaveButton } from "@components/admin/buttons";
+import { getAvatarInitial } from "@utils/admin";
 
 export default function EditUser() {
   const { account } = useParams();

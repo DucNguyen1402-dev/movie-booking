@@ -1,10 +1,11 @@
 import { FileClock } from "lucide-react";
-import { useLayoutContext } from "@contexts/admin/layout";
+
+import { useLayoutContext } from "@contexts/admin";
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
 import {
+  HighestRevenueMovieCard,
   MetricsSection,
   MovieStatusCard,
-  HighestRevenueMovieCard,
   TopFiveRevenueMovies,
 } from "@features/admin/dashboard/overview/components";
 

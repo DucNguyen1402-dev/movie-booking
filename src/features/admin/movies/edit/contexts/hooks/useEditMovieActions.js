@@ -1,26 +1,19 @@
 import { useCallback } from "react";
-
-
 import { useNavigate } from "react-router-dom";
+
+import { HIGHLIGHT_TYPES } from "@config/admin";
 import { format } from "date-fns";
 
-
 import {
-  useNotificationContext,
   useLoadingContext,
   useModalContext,
+  useNotificationContext,
 } from "@contexts/admin";
-
-
-import { useUpdateMovie } from "./useUpdateMovie";
-
-
+import { ensureMinDuration } from "@utils/admin";
 import { MODAL_TYPES } from "@constants/admin";
 import { MIN_LOADING_TIME } from "@constants/admin";
 
-
-import { ensureMinDuration } from "@utils/admin";
-import { HIGHLIGHT_TYPES } from "@config/admin";
+import { useUpdateMovie } from "./useUpdateMovie";
 
 export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const navigate = useNavigate();

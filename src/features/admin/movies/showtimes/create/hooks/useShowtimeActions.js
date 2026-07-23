@@ -1,21 +1,29 @@
-import { useModalContext } from "@contexts/admin/modal";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
-import { useNavigate, useLocation } from "react-router-dom";
-import { createShowtime } from "@features/admin/movies/showtimes/create/api";
+import { useLocation,useNavigate } from "react-router-dom";
+
 import { format } from "date-fns";
-import { useLoadingContext } from "@contexts/admin/loading";
-import { useNotificationContext } from "@contexts/admin/notification";
+
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
+import { createShowtime } from "@features/admin/movies/showtimes/create/api";
+import {ensureMinDuration} from "@utils/admin"
+import { MIN_LOADING_TIME,MODAL_TYPES } from "@constants/admin";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
-  const modal = useModalContext();
   const location = useLocation();
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/movies";
 
+
+  const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
 
+
+  
   const handleShowtimeCanceling = () => {
     modal.close();
     navigate(previousPath, { state: { history } });
@@ -32,6 +40,8 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const handleShowtimeCreation = async (data) => {
     const { ngayChieu, gioChieu, giaVe, maCumRap } = data;
 
+    const start = new Date();
+
     //Chỗ này backend yêu cầu payload là maRap nhưng giá trị thực phải là maCumRap thì mới tạo lịch được
     const payload = {
       maRap: String(maCumRap),
@@ -40,10 +50,12 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       giaVe: Number(giaVe),
     };
 
+
     try {
       modal.close();
       showLoading();
       await createShowtime(payload);
+      await ensureMinDuration(start, MIN_LOADING_TIME)
       hideLoading();
       navigate(previousPath, {
         state: {

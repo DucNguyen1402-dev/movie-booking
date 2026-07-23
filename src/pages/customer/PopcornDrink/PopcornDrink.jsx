@@ -1,14 +1,15 @@
+import { useMemo, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   ChevronRight,
   Minus,
-  Popcorn,
   Plus,
+  Popcorn,
   RotateCcw,
   ShoppingBag,
   Ticket,
 } from "lucide-react";
-import { useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 
 const onlineImages = {
   combo:

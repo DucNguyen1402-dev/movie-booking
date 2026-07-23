@@ -1,1 +1,1 @@
-export {useProfileContext, ProfileProvider} from "./ProfileContext"
+export {ProfileProvider,useProfileContext} from "./ProfileContext"

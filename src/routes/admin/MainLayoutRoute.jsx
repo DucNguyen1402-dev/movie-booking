@@ -1,5 +1,6 @@
-import { LayoutProvider } from "@contexts/admin/layout";
 import { MainLayout } from "@layouts/admin";
+
+import { LayoutProvider } from "@contexts/admin/layout";
 
 const MainLayoutRoute = () => {
   return (

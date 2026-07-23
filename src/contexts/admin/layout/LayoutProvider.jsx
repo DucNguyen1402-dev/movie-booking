@@ -1,5 +1,6 @@
-import { LayoutContext } from "./LayoutContext";
 import { useState } from "react";
+
+import { LayoutContext } from "./LayoutContext";
 
 export function LayoutProvider({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);

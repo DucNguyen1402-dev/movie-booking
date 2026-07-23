@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+
 import { Plus } from "lucide-react";
 
 export default function AddMovieBtn() {

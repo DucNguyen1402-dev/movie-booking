@@ -1,7 +1,9 @@
-import { useState, useEffect, useRef } from "react";
-import { Clock4 } from "lucide-react";
-import TimePicker from "./TimePicker";
+import { useEffect, useRef,useState } from "react";
 import { Controller } from "react-hook-form";
+
+import { Clock4 } from "lucide-react";
+
+import TimePicker from "./TimePicker";
 
 export default function Showtime({ isTimePickerDisabled, watch, control }) {
   const [timePickerVisible, setTimePickerVisible] = useState(false);

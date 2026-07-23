@@ -1,5 +1,6 @@
+import { useMutation,useQueryClient } from "@tanstack/react-query";
+
 import { updateUser } from "@features/admin/users/edit/api";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 
 export function useUserEdit() {

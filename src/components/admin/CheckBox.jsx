@@ -1,6 +1,7 @@
+import { Controller } from "react-hook-form";
+
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
-import { Controller } from "react-hook-form";
 
 export default function CheckBox({ control, name, label }) {
   return (

@@ -1,7 +1,10 @@
-import { useState, useMemo } from "react";
-import { getCurrentUser, saveCurrentUser } from "@utils/shared";
+import { useMemo,useState } from "react";
+
 import { avatarList } from "@config/admin";
+
 import { getAvatarInitial } from "@utils/admin";
+import { getCurrentUser, saveCurrentUser } from "@utils/shared";
+
 import { userContext } from "./userContext";
 
 export function UserProvider({ children }) {

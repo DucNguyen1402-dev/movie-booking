@@ -1,4 +1,5 @@
 import { PenLine } from "lucide-react";
+
 import { AddMovieForm } from "@features/admin/movies/add/components";
 
 export default function AddMovie() {

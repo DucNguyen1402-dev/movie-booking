@@ -1,3 +1,6 @@
+import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -5,8 +8,7 @@ import {
   Star,
   Ticket,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { useMovieList } from "@/hooks/customer/useMovies";
 
 const AUTO_SLIDE_TIME = 5000;

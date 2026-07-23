@@ -1,6 +1,7 @@
-import Button from "./Button";
-import {Trash} from "lucide-react"
 import clsx from "clsx"
+import {Trash} from "lucide-react"
+
+import Button from "./Button";
 
 const surfaceStyles = {
   light: "bg-orange-500 hover:bg-orange-600",

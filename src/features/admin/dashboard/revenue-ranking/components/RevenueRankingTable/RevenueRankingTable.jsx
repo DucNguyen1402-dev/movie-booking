@@ -1,9 +1,9 @@
+import { useDashboardContext } from "@features/admin/dashboard/contexts";
+import { EmptyStateButton, EmptyTable , PaginationControls} from "@components/admin";
+
 import RevenueRankingRow from "./RevenueRankingRow";
 import RevenueRankingSkeleton from "./RevenueRankingSkeleton";
-import { EmptyStateButton } from "@components/admin/buttons";
-import { EmptyTable } from "@components/admin";
-import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { PaginationControls } from "@components/admin";
+
 
 export default function RevenueRankingTable() {
   const {

@@ -1,6 +1,9 @@
-import { formatCompactCurrency } from "@features/admin/dashboard/utils/format";
-import { Star, Flame, ArrowUpRight } from "lucide-react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
+
+import { ArrowUpRight,Flame, Star } from "lucide-react";
+
+import { formatCompactCurrency } from "@features/admin/dashboard/utils";
+
 import TopFiveRevenueMoviesSkeleton from "./TopFiveRevenueMoviesSkeleton";
 
 export default function TopFiveRevenueMovies({
