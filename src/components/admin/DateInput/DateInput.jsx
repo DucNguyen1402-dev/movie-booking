@@ -47,7 +47,7 @@ export default function DateInput({
         <button
           type="button"
           onClick={() => setDayPickerVisible((prev) => !prev)}
-          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border p-1.5 transition-colors focus:outline-none disabled:cursor-default  border-gray-600 focus:ring-2 focus:ring-blue-500 active:hover:border-blue-500/20 hover:ring-1 hover:ring-blue-500
+          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border p-1.5 bg-slate-900/40 transition-colors focus:outline-none disabled:cursor-default  border-gray-600 focus:ring-2 focus:ring-blue-500 active:hover:border-blue-500/20 hover:ring-1 hover:ring-blue-500
             ${disabled ? "text-gray-500" : "text-gray-400"}`}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"

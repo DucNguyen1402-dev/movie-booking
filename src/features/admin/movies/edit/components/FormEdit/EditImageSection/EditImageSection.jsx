@@ -23,11 +23,11 @@ export default function EditImageSection() {
   return (
     <div className="flex flex-col items-center justify-between rounded-xl bg-slate-800 p-6 shadow-sm">
       <div className="flex w-full flex-col items-center gap-5">
-        <label className="mb-3 block text-center text-2xl font-medium tracking-wider text-slate-100">
-          Hình ảnh poster
+        <label className="mb-3 block text-center text-xl font-medium tracking-wider text-slate-100">
+          Poster Preview
         </label>
 
-        <div className="mx-auto mb-4 flex h-96 w-72 items-center justify-center overflow-hidden rounded-lg border-2 border-dashed border-gray-600">
+        <div className="mx-auto mb-4 flex h-80 w-64 items-center justify-center overflow-hidden rounded-md border-2 border-dashed border-gray-500">
           {preview ? (
             <img
               src={preview}

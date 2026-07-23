@@ -208,4 +208,7 @@ select {
   .movie-poster {
     @apply aspect-[2/3] w-full rounded-lg object-cover shadow-2xl shadow-black/30 transition duration-300 group-hover:scale-[1.025];
   }
+  .input-file {
+    @apply block w-fit text-sm text-slate-200 file:mr-4 file:cursor-pointer file:rounded file:border-2 file:border-indigo-500 file:bg-indigo-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-100 file:transition-colors file:duration-300 hover:file:border-indigo-400
+  }
 }

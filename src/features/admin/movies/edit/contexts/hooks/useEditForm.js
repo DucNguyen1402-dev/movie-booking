@@ -15,7 +15,8 @@ export function useEditForm() {
     defaultValues: {
       hot: false,
       sapChieu: false,
-      dangChieu: false
+      dangChieu: false,
+      danhGia: 10
     },
   });
 

@@ -10,6 +10,5 @@ export const EMPTY_MOVIE = {
   danhGia: 0,
   hot: false,
   dangChieu: false,
-
   sapChieu: false,
 };

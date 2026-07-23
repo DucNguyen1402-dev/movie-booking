@@ -1,0 +1,1 @@
+export {getRateClasses} from "./getRateClasses"

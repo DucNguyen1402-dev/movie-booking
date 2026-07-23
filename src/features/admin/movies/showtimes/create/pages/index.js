@@ -1,1 +1,1 @@
-export {default as ShowtimeCreation} from "./ShowtimeCreation";
+export {default as ShowtimeCreation} from "./Create";

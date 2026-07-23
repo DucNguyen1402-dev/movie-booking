@@ -12,7 +12,7 @@ export default function CheckBox({ control, name, label }) {
           <Checkbox.Root
             checked={field.value}
             onCheckedChange={field.onChange}
-            className="flex h-5 w-5 items-center justify-center rounded-sm border border-slate-500 data-[state=checked]:bg-blue-600"
+            className="flex h-5 w-5 items-center justify-center rounded-sm border border-slate-500 bg-slate-900/40 data-[state=checked]:bg-blue-600"
           >
             <Checkbox.Indicator>
               <Check className="h-4 w-4 text-white" />

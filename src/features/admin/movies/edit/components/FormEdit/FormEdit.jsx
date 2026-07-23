@@ -1,5 +1,5 @@
-import EditFormFields from "./EditFormFields";
-import EditImageSection from "./EditImageSection";
+import {EditFormFields} from "./EditFormFields";
+import {EditImageSection} from "./EditImageSection";
 
 
 export default function FormEdit() {

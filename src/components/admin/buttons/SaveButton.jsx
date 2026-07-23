@@ -6,6 +6,7 @@ import clsx from "clsx";
 const surfaceStyles  = {
   light: "bg-blue-500 hover:bg-blue-600",
   dark: "bg-blue-600 hover:bg-blue-500",
+  deepDark: "bg-blue-600 hover:bg-blue-600/80"
 };
 
 export default function SaveButton({
@@ -17,7 +18,7 @@ export default function SaveButton({
   return (
     <Button
       Icon={Icon}
-      className={clsx("text-white", surfaceStyles[surface] ?? colors.light)}
+      className={clsx("text-slate-50", surfaceStyles[surface] ?? colors.light)}
       {...props}
     >
       {children}

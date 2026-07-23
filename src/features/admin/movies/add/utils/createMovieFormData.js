@@ -1,4 +1,4 @@
-import {formatDate} from "./format"
+import { format } from "date-fns";
 
 export const createMovieFormData = (data) => {
   const formData = new FormData();
@@ -10,7 +10,7 @@ export const createMovieFormData = (data) => {
         break;
 
       case "ngayKhoiChieu":
-        formData.append(key, formatDate(value));
+        formData.append(key, format(new Date(value), "dd/MM/yyyy"));
         break;
 
       default:

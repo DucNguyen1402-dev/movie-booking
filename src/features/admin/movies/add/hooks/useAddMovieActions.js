@@ -1,30 +1,48 @@
 import { useState } from "react";
+
+import { useNavigate, useLocation } from "react-router-dom";
+
+import {
+  useLoadingContext,
+  useNotificationContext,
+  useModalContext,
+} from "@contexts/admin";
+
 import { useAddMovie } from "./useAddMovie";
 import { useAddForm } from "./useAddForm";
-import { createMovieFormData } from "../utils/createMovieFormData";
-import { useNavigate, useLocation } from "react-router-dom";
-import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
-import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import { useLoadingContext } from "@contexts/admin/loading";
-import { HIGHLIGHT_TYPES } from "@config/admin/movieHighlight";
-import { useNotificationContext } from "@contexts/admin/notification";
-import { useModalContext } from "@contexts/admin/modal";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
+
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import { HIGHLIGHT_TYPES } from "@config/admin";
+
+import { ensureMinDuration } from "@utils/admin";
+import { createMovieFormData } from "@features/admin/movies/add/utils";
+
 
 export function useAddMovieActions() {
   const [imgPreview, setImgPreview] = useState("");
-  const { mutateAsync } = useAddMovie();
 
   const location = useLocation();
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/movies";
   const navigate = useNavigate();
+
   const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
   const modal = useModalContext();
 
   const { register, handleSubmit, errors, isDirty, control, watch } =
     useAddForm();
+
+  const { mutateAsync } = useAddMovie();
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => setImgPreview(e.target.result);
+    }
+  };
 
   const handleCancelClick = () => {
     modal.close();
@@ -88,15 +106,6 @@ export function useAddMovieActions() {
         variant: "error",
         message,
       });
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => setImgPreview(e.target.result);
     }
   };
 
