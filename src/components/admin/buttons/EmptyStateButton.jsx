@@ -16,7 +16,7 @@ export default function EmptyStateButton({
   return (
     <Button
       Icon={Icon}
-      className={clsx("text-white", surfaceStyles[surface] ?? colors.light)}
+      className={clsx("text-white", surfaceStyles[surface] ?? surfaceStyles.light)}
       {...props}
     >
       {children}

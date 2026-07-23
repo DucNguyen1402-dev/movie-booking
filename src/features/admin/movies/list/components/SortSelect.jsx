@@ -1,13 +1,14 @@
-import { setSortType } from "../contexts/redux/slice";
-import { selectSortType } from "../contexts/redux/selectors";
-import { useDispatch, useSelector } from "react-redux";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
 export default function SortSelect() {
-  const sortType = useSelector(selectSortType);
+  const {
+    processed: {
+      state: { sortType },
+      actions: { setSortType },
+    },
+  } = useMovieListContext();
 
-  const dispatch = useDispatch();
-
-  const onChange = (e) => dispatch(setSortType(e.target.value));
+  const onChange = (e) => setSortType(e.target.value);
 
   return (
     <select
@@ -15,7 +16,7 @@ export default function SortSelect() {
       onChange={onChange}
       className="text-slate-200shadow-sm h-10 rounded-lg border border-slate-700 bg-[#0f172a] px-3 text-sm transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
     >
-      <option value="">Sắp xếp theo</option>
+      <option value="">Sắp xếp mặc định</option>
 
       <optgroup label="Đánh giá">
         <option value="rating-desc">Đánh giá cao nhất</option>

@@ -1,6 +1,10 @@
 import clsx from "clsx";
 
 const sizes = {
+  xs: {
+     button: "px-1.5 py-0.75 text-xs",
+    icon: "size-2",
+  },
   sm: {
     button: "px-3 py-2 text-sm",
     icon: "size-4",

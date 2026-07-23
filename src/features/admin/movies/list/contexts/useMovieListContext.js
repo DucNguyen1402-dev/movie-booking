@@ -6,7 +6,7 @@ export function useMovieListContext() {
   const context = useContext(MovieListContext);
 
   if (!context) {
-    throw error("useMovieContext must be used within MovieProvider");
+    throw error("useMovieListContext must be used within MovieListProvider");
   }
 
   return context;

@@ -1,2 +1,2 @@
-export {useFilteredMovies} from "./useFilteredMovies"
+export {useMovieParams} from "./useMovieParams"
 export {useTrailer} from "./useTrailer"

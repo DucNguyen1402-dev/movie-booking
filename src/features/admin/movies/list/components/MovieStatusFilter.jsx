@@ -1,12 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import { filterStatus } from "../contexts/redux/slice";
-import { selectStatus } from "../contexts/redux/selectors";
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
 export default function MovieStatusFilter() {
-  const status = useSelector(selectStatus);
-  const dispatch = useDispatch();
+  const {
+    processed: {
+      state: { status },
+      actions: { setStatus },
+    },
+  } = useMovieListContext();
 
-  const onSelect = (e) => dispatch(filterStatus(e.target.value));
+  const onSelect = (e) => setStatus(e.target.value);
 
   return (
     <select

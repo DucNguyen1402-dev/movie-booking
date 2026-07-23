@@ -16,7 +16,7 @@ export default function AddButton({
   return (
     <Button
       Icon={Icon}
-      className={clsx("text-white", surfaceStyles[surface] ?? colors.light)}
+      className={clsx("text-white", surfaceStyles[surface] ?? surfaceSlyles.light)}
       {...props}
     >
       {children}

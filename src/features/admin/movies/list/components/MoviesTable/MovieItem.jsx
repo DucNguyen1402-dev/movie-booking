@@ -25,7 +25,8 @@ export default function MovieItem({ movie, movieId, highlight }) {
     highlight,
   });
 
-  //Phim không thể cùng lúc đang chiếu và sắp chiếu
+  // Data có một số phim có state của dangChieu và sapChieu cùng là true
+  // Phim không thể cùng lúc đang chiếu và sắp chiếu
   // không thể sửa backend nên fix tạm
   if (movie.dangChieu && movie.sapChieu) {
     movie.sapChieu = false;

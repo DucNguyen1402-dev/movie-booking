@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 
-
 import { useNotificationContext, useLayoutContext } from "@contexts/admin";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
@@ -22,15 +21,13 @@ import {
   TrailerModal,
 } from "@features/admin/movies/list/components";
 
-
-
 export default function MovieList() {
   const location = useLocation();
 
   const { isSidebarOpen } = useLayoutContext();
   const { notificationActions } = useNotificationContext();
 
-    const {
+  const {
     trailer: { trailer },
     pagination: { currentSize, setSize },
   } = useMovieListContext();
@@ -41,10 +38,8 @@ export default function MovieList() {
     }
   }, [location.state?.notification]);
 
-
   useLockBodyScroll(trailer.url !== null);
   useConsumeLocationState("notification", 10000);
-
 
   return (
     <>
@@ -77,16 +72,18 @@ export default function MovieList() {
 
       <AnimatePresence>
         {trailer.url !== null && (
-          <motion.div
-            className="fixed inset-0 z-80 flex items-center justify-center overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Backdrop />
-            <TrailerModal />
-          </motion.div>
+          <>
+            <Backdrop surface="deepdark" />
+            <motion.div
+              className="fixed inset-0 z-80 flex items-center justify-center overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.1, delay: 0.2, ease: "easeOut" }}
+            >
+              <TrailerModal />
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

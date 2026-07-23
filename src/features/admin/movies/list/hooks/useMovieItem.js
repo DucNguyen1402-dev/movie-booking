@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -12,31 +12,29 @@ import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 import { MOVIE_HIGHLIGHTS } from "@config/admin";
 
 import { ensureMinDuration } from "@utils/admin";
+
+import {useScrollIntoView} from "@hooks/admin"
 import { useDeleteMovie } from "./useDeleteMovie";
 
 
 export function useMovieItem({ movie, movieId, highlight }) {
-  const [onDeleting, setOnDeleting] = useState(false);
-  const { mutateAsync } = useDeleteMovie();
 
+  const [onDeleting, setOnDeleting] = useState(false);
   const rowRef = useRef(null);
-  const isTargetMovie = movie.maPhim === Number(movieId);
-  const highlightAnimation = MOVIE_HIGHLIGHTS[highlight];
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
-  const navigate = useNavigate();
-  const location = useLocation();
+  
+  const { mutateAsync } = useDeleteMovie();
 
-  useEffect(() => {
-    if (!isTargetMovie) return;
+  const isTargetMovie = movie.maPhim === Number(movieId);
+  const highlightAnimation = MOVIE_HIGHLIGHTS[highlight];
 
-    rowRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  }, [isTargetMovie]);
+  useScrollIntoView({ref: rowRef, enabled:isTargetMovie })
 
   const onCreateShowTimeClick = () =>
     navigate(`/admin/movies/showtimes/${movie.maPhim}`, {
@@ -55,6 +53,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
 
   const handleDeleteMovie = async () => {
     const start = Date.now();
+
     try {
       modal.close();
       showLoading();
@@ -66,15 +65,16 @@ export function useMovieItem({ movie, movieId, highlight }) {
         message: "Xóa phim thành công",
       });
     } catch (error) {
+      hideLoading();
       notificationActions.show({
         variant: "error",
         message: error.response.data?.content,
       });
     } finally {
-      hideLoading();
       setOnDeleting(false);
     }
   };
+  
   const onDeleteClick = () => {
     setOnDeleting(true);
     modal.open({

@@ -15,7 +15,7 @@ export default function CancelButton({
   ...props
 }) {
   return (
-    <Button className={clsx(surfaceSlyles[surface] ?? styles.light)} {...props}>
+    <Button className={clsx(surfaceSlyles[surface] ?? surfaceSlyles.light)} {...props}>
       {children}
     </Button>
   );
