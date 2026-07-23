@@ -4,7 +4,6 @@ import { useMemo } from "react";
 
 export default function EditImageSection() {
   const {
-  
     editForm: { watch , register},
   } = useEditMovieContext();
 

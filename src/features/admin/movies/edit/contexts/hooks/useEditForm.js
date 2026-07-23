@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-
+import { EMPTY_MOVIE } from "@features/admin/movies/edit/constants";
 export function useEditForm() {
   const {
     register,
@@ -11,16 +11,8 @@ export function useEditForm() {
     control,
     formState: { errors, isDirty },
   } = useForm({
-    mode: "onBlur",
-    defaultValues: {
-      hot: false,
-      sapChieu: false,
-      dangChieu: false,
-      danhGia: 10
-    },
+    defaultValues: EMPTY_MOVIE,
   });
-
- 
 
   return {
     register,
@@ -31,6 +23,6 @@ export function useEditForm() {
     watch,
     setValue,
     control,
-    isDirty
+    isDirty,
   };
 }

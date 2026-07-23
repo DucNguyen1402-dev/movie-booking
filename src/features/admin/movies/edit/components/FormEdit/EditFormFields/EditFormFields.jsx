@@ -7,7 +7,6 @@ import { validationRules } from "@config/admin";
 import { Textarea, DateInput } from "@components/admin";
 import { InputFields, CheckboxFields } from "./FormFields";
 
-
 export default function EditFormFields() {
   const {
     editForm: { register, errors, watch, control, isDirty },
@@ -21,8 +20,16 @@ export default function EditFormFields() {
   };
 
   return (
-    <div className="space-y-8 rounded-xl bg-gray-800 p-8 shadow-sm lg:col-span-2">
+    <div className="space-y-8 rounded-xl bg-gray-800 p-8 pb-60 shadow-sm lg:col-span-2">
       <InputFields errors={errors} register={register} />
+      <Textarea
+        label="Mô tả phim"
+        name="moTa"
+        rules={validationRules.moTa}
+        error={errors.moTa}
+        register={register}
+        onInput={handleInput}
+      />
 
       <div className="flex items-center justify-between">
         <div className="w-1/3">
@@ -45,17 +52,6 @@ export default function EditFormFields() {
           </label>
           <CheckboxFields control={control} />
         </div>
-      </div>
-
-      <div className="mt-14">
-        <Textarea
-          label="Mô tả phim"
-          name="moTa"
-          rules={validationRules.moTa}
-          error={errors.moTa}
-          register={register}
-          onInput={handleInput}
-        />
       </div>
     </div>
   );
