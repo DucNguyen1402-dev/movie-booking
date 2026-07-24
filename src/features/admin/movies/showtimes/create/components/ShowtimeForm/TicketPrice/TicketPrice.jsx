@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 
-export function formatCurrencyDisplay(value) {
+function formatCurrencyDisplay(value) {
   if (!value) return "";
 
   return Number(value).toLocaleString("vi-VN");
@@ -47,7 +47,7 @@ export default function TicketPrice({
                     ? "Vui lòng chọn rạp chiếu trước"
                     : "Nhập giá vé (VND)"
                 }
-                className={`w-full cursor-pointer rounded-sm border border-slate-600 px-3 hover:ring-1 py-1.5 outline-none focus:ring-1 focus:ring-blue-500 hover:ring-blue-500 ${isTicketPriceDisabled ? "text-slate-500" : "text-slate-400"}`}
+                className={`w-full cursor-pointer rounded-sm border border-slate-600 px-3 py-1.5 outline-none hover:ring-1 hover:ring-blue-500 focus:ring-1 focus:ring-blue-500 ${isTicketPriceDisabled ? "text-slate-500" : "text-slate-400"}`}
               />
               {giaVe && (
                 <div className="absolute top-1/2 right-2 -translate-y-1/2">

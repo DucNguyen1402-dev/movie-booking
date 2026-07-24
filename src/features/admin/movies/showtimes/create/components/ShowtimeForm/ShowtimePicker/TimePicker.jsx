@@ -1,6 +1,11 @@
-import { useEffect, useRef,useState } from "react";
+import { useEffect, useRef } from "react";
 
-export default function TimePicker({ value, onChange, timePickerVisible, timePickerRef }) {
+export default function TimePicker({
+  value,
+  onChange,
+  timePickerVisible,
+  timePickerRef,
+}) {
   const [currentHour, currentMinute] = value ? value.split(":") : ["00", "00"];
   const hours = Array.from({ length: 24 }, (_, i) =>
     String(i).padStart(2, "0"),
@@ -34,8 +39,8 @@ export default function TimePicker({ value, onChange, timePickerVisible, timePic
 
   return (
     <div
-    ref = {timePickerRef}
-      className={`absolute z-20 border border-slate-600 rounded-md top-[102%] left-0 transition-opacity duration-300 ${timePickerVisible ? "" : "pointer-events-none opacity-0"}`}
+      ref={timePickerRef}
+      className={`absolute top-[102%] left-0 z-20 rounded-md border border-slate-600 transition-opacity duration-300 ${timePickerVisible ? "" : "pointer-events-none opacity-0"}`}
     >
       <div className="h-64 space-y-4 overflow-hidden rounded-md bg-slate-800 px-4 py-3 text-white">
         <div className="flex items-center justify-between gap-2 rounded-full bg-slate-900 px-8 py-1 text-lg">

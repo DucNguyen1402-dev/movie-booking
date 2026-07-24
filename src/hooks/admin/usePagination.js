@@ -4,15 +4,18 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
   const [pagination, setPagination] = useState({ page: 1, size });
   const skipNextPageReset = useRef(false);
 
+  const preventNextReset = useCallback(() => {
+    skipNextPageReset.current = true;
+  }, []);
+
   const setSize = useCallback(
-    () => (value) =>
+    (value) =>
       setPagination((prev) => ({ ...prev, size: Number(value), page: 1 })),
     [],
   );
 
   const setPage = useCallback(
-    () => (value) =>
-      setPagination((prev) => ({ ...prev, page: Number(value) })),
+    (value) => setPagination((prev) => ({ ...prev, page: Number(value) })),
     [],
   );
 
@@ -49,14 +52,13 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
   const isPrevDisabled = pagination.page === 1;
   const isNextDisabled = pagination.page >= totalPages;
 
-  const onPrevClick = useCallback(
-    () => () => setPage(pagination.page - 1),
-    [pagination, setPage],
-  );
-  const onNextClick = useCallback(
-    () => () => setPage(pagination.page + 1),
-    [pagination, setPage],
-  );
+  const onPrevClick = useCallback(() => {
+    setPage(pagination.page - 1);
+  }, [pagination.page, setPage]);
+
+  const onNextClick = useCallback(() => {
+    setPage(pagination.page + 1);
+  }, [pagination, setPage]);
 
   const onPageClick = useCallback(
     (page) => {
@@ -74,6 +76,7 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
     () => ({
       totalMovies,
       skipNextPageReset,
+      preventNextReset,
       controls: {
         currentPage: pagination.page,
         onPrevClick,
@@ -109,6 +112,7 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
       setPage,
       setSize,
       totalMovies,
+      preventNextReset,
     ],
   );
 

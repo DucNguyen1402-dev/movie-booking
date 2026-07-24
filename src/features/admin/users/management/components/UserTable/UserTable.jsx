@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useUsersContext } from "@features/admin/users/contexts";
@@ -24,20 +24,23 @@ export default function UserTable() {
   } = useUsersContext();
 
   if (rowState.account) {
-    pagination.skipNextPageReset.current = true;
+    pagination.preventNextReset();
   }
 
-  const moveToAccountPage = (account) => {
-    const userIndex = filteredUsers.findIndex(
-      (user) => user.taiKhoan === account,
-    );
+  const moveToAccountPage = useCallback(
+    () => (account) => {
+      const userIndex = filteredUsers.findIndex(
+        (user) => user.taiKhoan === account,
+      );
 
-    if (userIndex === -1) return;
+      if (userIndex === -1) return;
 
-    const targetPage = Math.floor(userIndex / pagination.currentSize) + 1;
+      const targetPage = Math.floor(userIndex / pagination.currentSize) + 1;
 
-    pagination.setPage(targetPage);
-  };
+      pagination.setPage(targetPage);
+    },
+    [filteredUsers, pagination],
+  );
 
   useEffect(() => {
     if (!rowState.account || isFetching) return;
@@ -47,7 +50,14 @@ export default function UserTable() {
       replace: true,
       state: { history: location.state?.history ?? [] },
     });
-  }, [rowState.account, isFetching]);
+  }, [
+    rowState.account,
+    isFetching,
+    moveToAccountPage,
+    navigate,
+    location.pathname,
+    location.state?.history,
+  ]);
 
   useEffect(() => {
     const keys = ["highlight", "account"];
@@ -61,7 +71,7 @@ export default function UserTable() {
       );
 
     return () => timers.forEach(clearTimeout);
-  }, [rowState.highlight, rowState.account]);
+  }, [rowState.highlight, rowState.account, rowState]);
 
   const isUserListEmpty = pagination.list.length === 0;
   const renderTableContent = () => {
@@ -85,11 +95,10 @@ export default function UserTable() {
 
     return pagination.list.map((user) => (
       <TableRow
-        key = {user.taiKhoan}
-        user = {user}
+        key={user.taiKhoan}
+        user={user}
         isMatched={user.taiKhoan === rowState.account}
         highlight={rowState.highlight}
-
       />
     ));
   };

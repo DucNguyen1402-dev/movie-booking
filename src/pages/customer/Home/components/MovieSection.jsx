@@ -27,11 +27,13 @@ export default function MovieSection({ title, movies = [] }) {
   const currentMovies = moviePages[activePage] || [];
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setActivePage(0);
   }, [movies.length]);
 
   useEffect(() => {
     if (activePage > totalPages - 1) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActivePage(0);
     }
   }, [activePage, totalPages]);
@@ -96,7 +98,7 @@ export default function MovieSection({ title, movies = [] }) {
               <button
                 type="button"
                 onClick={handlePrev}
-                className="absolute left-0 top-[38%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-xl bg-black/60 text-white backdrop-blur transition hover:bg-[#ffeb00] hover:text-black md:hidden"
+                className="absolute top-[38%] left-0 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-xl bg-black/60 text-white backdrop-blur transition hover:bg-[#ffeb00] hover:text-black md:hidden"
                 aria-label="Trang phim trước"
               >
                 <ChevronLeft size={26} />
@@ -105,7 +107,7 @@ export default function MovieSection({ title, movies = [] }) {
               <button
                 type="button"
                 onClick={handleNext}
-                className="absolute right-0 top-[38%] z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-xl bg-black/60 text-white backdrop-blur transition hover:bg-[#ffeb00] hover:text-black md:hidden"
+                className="absolute top-[38%] right-0 z-10 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-xl bg-black/60 text-white backdrop-blur transition hover:bg-[#ffeb00] hover:text-black md:hidden"
                 aria-label="Trang phim tiếp theo"
               >
                 <ChevronRight size={26} />

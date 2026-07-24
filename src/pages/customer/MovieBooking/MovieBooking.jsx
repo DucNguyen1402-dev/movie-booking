@@ -81,7 +81,11 @@ const MovieBooking = () => {
   const bookTicketsMutation = useBookTickets();
 
   const movieInfo = ticketRoom?.thongTinPhim;
-  const seatList = ticketRoom?.danhSachGhe || [];
+
+  const seatList = useMemo(
+    () => ticketRoom?.danhSachGhe || [],
+    [ticketRoom?.danhSachGhe],
+  );
 
   const selectedSeatIds = useMemo(() => {
     return selectedSeats.map((seat) => seat.maGhe);
@@ -96,6 +100,7 @@ const MovieBooking = () => {
   }, [seatList]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedSeats([]);
   }, [maLichChieu]);
 
@@ -220,7 +225,7 @@ const MovieBooking = () => {
                 </div>
 
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.22em] text-[#f5c518]">
+                  <p className="text-xs font-black tracking-[0.22em] text-[#f5c518] uppercase">
                     Phòng vé
                   </p>
 
@@ -261,7 +266,7 @@ const MovieBooking = () => {
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-zinc-500">
+                <p className="text-xs font-bold tracking-[0.18em] text-zinc-500 uppercase">
                   Mã lịch chiếu
                 </p>
                 <p className="mt-1 text-2xl font-black text-[#f5c518]">
@@ -312,16 +317,16 @@ const MovieBooking = () => {
             <div className="mx-auto max-w-6xl">
               <div className="mb-9 text-center">
                 <div className="relative mx-auto h-12 max-w-3xl">
-                  <div className="absolute left-1/2 top-2 h-2 w-[86%] -translate-x-1/2 rounded-full bg-[#f5c518] shadow-[0_20px_55px_rgba(245,197,24,0.35)]" />
-                  <div className="absolute left-1/2 top-1 h-8 w-[72%] -translate-x-1/2 rounded-[50%] border-t border-[#f5c518]/60 blur-[1px]" />
+                  <div className="absolute top-2 left-1/2 h-2 w-[86%] -translate-x-1/2 rounded-full bg-[#f5c518] shadow-[0_20px_55px_rgba(245,197,24,0.35)]" />
+                  <div className="absolute top-1 left-1/2 h-8 w-[72%] -translate-x-1/2 rounded-[50%] border-t border-[#f5c518]/60 blur-[1px]" />
                 </div>
 
-                <p className="-mt-2 text-xs font-black uppercase tracking-[0.34em] text-zinc-500">
+                <p className="-mt-2 text-xs font-black tracking-[0.34em] text-zinc-500 uppercase">
                   Màn hình
                 </p>
               </div>
 
-              <div className="overflow-x-auto pb-5 [scrollbar-color:#f5c518_#1f1f1f]">
+              <div className="[scrollbar-color:#f5c518_#1f1f1f] overflow-x-auto pb-5">
                 <div className="min-w-[790px] space-y-2">
                   {groupedSeats.map((rowSeats, rowIndex) => (
                     <div
@@ -409,7 +414,7 @@ const MovieBooking = () => {
               </div>
 
               <div>
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-[#f5c518]">
+                <p className="text-xs font-black tracking-[0.18em] text-[#f5c518] uppercase">
                   Vé của bạn
                 </p>
 
@@ -421,7 +426,7 @@ const MovieBooking = () => {
 
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl bg-black/30 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">
+                <p className="text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase">
                   Phim
                 </p>
 
@@ -431,7 +436,7 @@ const MovieBooking = () => {
               </div>
 
               <div className="rounded-2xl bg-black/30 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">
+                <p className="text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase">
                   Rạp
                 </p>
 
@@ -445,7 +450,7 @@ const MovieBooking = () => {
               </div>
 
               <div className="rounded-2xl bg-black/30 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">
+                <p className="text-xs font-bold tracking-[0.15em] text-zinc-500 uppercase">
                   Ghế đã chọn
                 </p>
 
@@ -505,7 +510,9 @@ const MovieBooking = () => {
 
               <button
                 onClick={handleBooking}
-                disabled={!selectedSeats.length || bookTicketsMutation.isPending}
+                disabled={
+                  !selectedSeats.length || bookTicketsMutation.isPending
+                }
                 className={`flex h-12 w-full items-center justify-center gap-2 rounded-2xl text-sm font-black uppercase transition ${
                   selectedSeats.length && !bookTicketsMutation.isPending
                     ? "bg-[#e50914] text-white hover:bg-[#ff1f2d]"

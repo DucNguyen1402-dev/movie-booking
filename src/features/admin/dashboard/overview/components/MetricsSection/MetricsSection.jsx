@@ -8,11 +8,13 @@ import {
 } from "lucide-react";
 
 import { useLayoutContext } from "@contexts/admin";
-import { formatCurrency, formatRoundedNumber } from "@features/admin/dashboard/utils";
+import {
+  formatCurrency,
+  formatRoundedNumber,
+} from "@features/admin/dashboard/utils";
 
 import EmptyMetricCard from "./EmptyMetricCard";
-import MetricCard from "./MetricCard"
-
+import MetricCard from "./MetricCard";
 
 const createMetricCards = ({
   totalRevenue,
@@ -39,7 +41,7 @@ const createMetricCards = ({
     id: "tongVeBan",
     title: "Tổng vé đã bán",
     desc: "Tổng số lượng vé của các phim đang chiếu đã bán",
-    metric: totalTicketSold,
+    metric: formatRoundedNumber(totalTicketSold),
     icon: TicketPercent,
     iconClassName: "text-blue-500",
     iconBackground: "bg-blue-500/10",
@@ -109,24 +111,27 @@ export default function MetricsSection({
     averageTicketsSold,
     averageRating,
   });
- const { isSidebarOpen } = useLayoutContext();
-
+  const { isSidebarOpen } = useLayoutContext();
 
   return (
-    <section className={`grid grid-cols-1 gap-6 md:grid-cols-2  ${isSidebarOpen ?"lg:grid-cols-3" : "lg:grid-cols-4" }`}>
+    <section
+      className={`grid grid-cols-1 gap-6 md:grid-cols-2 ${isSidebarOpen ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}
+    >
       {isPending
         ? Array.from({ length: 6 }, (_, index) => (
             <EmptyMetricCard key={index} />
           ))
         : METRIC_CARDS.map((metricCard) => (
-        
-                <MetricCard key={metricCard.id} hoverClasses = {metricCard.hoverClasses} title = {metricCard.title}
-                 iconBackground = {metricCard.iconBackground}
-                 Icon ={metricCard.icon}
-                 iconClassName = {metricCard.iconClassName}
-                 metric ={metricCard.metric}
-                 descs = {metricCard.desc}
-                />
+            <MetricCard
+              key={metricCard.id}
+              hoverClasses={metricCard.hoverClasses}
+              title={metricCard.title}
+              iconBackground={metricCard.iconBackground}
+              Icon={metricCard.icon}
+              iconClassName={metricCard.iconClassName}
+              metric={metricCard.metric}
+              descs={metricCard.desc}
+            />
           ))}
     </section>
   );

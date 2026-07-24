@@ -1,29 +1,16 @@
-import { useEffect } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
-
+import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { validationRules } from "@features/admin/users/config";
 import { PasswordInput } from "@components/admin";
 
-import { useAddActions,useAddForm } from "../hooks";
+import { useAddActions, useAddForm } from "../hooks";
 import FormActions from "./FormActions";
 import Input from "./InputForm";
 import Select from "./SelectForm";
 
-
 export default function AddUserForms() {
-  const navigate = useNavigate();
-  const location = useLocation();
   const { register, handleSubmit, errors, isDirty } = useAddForm();
 
-  useEffect(() => {
-    navigate(".", {
-      replace: true,
-      state: {
-        ...location.state,
-        shouldConfirmLeave: isDirty,
-      },
-    });
-  }, [isDirty]);
+  useSyncLeaveConfirmation(isDirty);
 
   const { onCancelAddUserClick, onAddUserClick } = useAddActions({
     handleSubmit,

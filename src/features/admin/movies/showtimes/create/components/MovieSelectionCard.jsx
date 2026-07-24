@@ -1,4 +1,4 @@
-import { CalendarCheck, Film } from "lucide-react";
+import { CalendarCheck } from "lucide-react";
 
 export default function MovieSelectionCard({ movie }) {
   return (

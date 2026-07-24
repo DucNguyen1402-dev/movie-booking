@@ -25,21 +25,23 @@ export function useEditForm({ user }) {
       maNhom: "GP01",
       maLoaiNguoiDung: user.maLoaiNguoiDung,
     });
-     setInitialUser({
-        hoTen: user.hoTen,
-        email: user.email,
-        soDT: user.soDT,
-        maLoaiNguoiDung: user.maLoaiNguoiDung,
-      });
-  }, [user]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setInitialUser({
+      hoTen: user.hoTen,
+      email: user.email,
+      soDT: user.soDT,
+      maLoaiNguoiDung: user.maLoaiNguoiDung,
+    });
+  }, [reset, user]);
 
   const { maNhom, maLoaiNguoiDung, ...inputFields } = defaultValues;
+
   return {
     register,
     handleSubmit,
     fields: inputFields,
     errors,
     initialUser,
-    isDirty
+    isDirty,
   };
 }

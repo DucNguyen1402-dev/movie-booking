@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { PAGE_SIZE_OPTIONS } from "@config/admin";
 import { AnimatePresence, motion } from "motion/react";
 
-import { useLayoutContext,useNotificationContext } from "@contexts/admin";
+import { useLayoutContext, useNotificationContext } from "@contexts/admin";
 import { useConsumeLocationState, useLockBodyScroll } from "@hooks/admin";
 import {
   AddMovieBtn,
@@ -15,7 +15,7 @@ import {
   TrailerModal,
 } from "@features/admin/movies/list/components";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { Backdrop,Select } from "@components/admin";
+import { Backdrop, Select } from "@components/admin";
 
 export default function MovieList() {
   const location = useLocation();
@@ -32,7 +32,7 @@ export default function MovieList() {
     if (location.state?.notification) {
       notificationActions.show(location.state.notification);
     }
-  }, [location.state?.notification]);
+  }, [location.state?.notification, notificationActions]);
 
   useLockBodyScroll(trailer.url !== null);
   useConsumeLocationState("notification", 10000);

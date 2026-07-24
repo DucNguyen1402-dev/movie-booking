@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import { PencilLine } from "lucide-react";
 
+import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { userRoleLabel } from "@features/admin/users/constants";
 import { useUsersContext } from "@features/admin/users/contexts";
 import {
@@ -15,8 +15,6 @@ import { getAvatarInitial } from "@utils/admin";
 
 export default function EditUser() {
   const { account } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const {
     usersStates: { users },
@@ -28,15 +26,7 @@ export default function EditUser() {
       user: targetUser,
     });
 
-  useEffect(() => {
-    navigate(".", {
-      replace: true,
-      state: {
-        ...location.state,
-        shouldConfirmLeave: isDirty,
-      },
-    });
-  }, [isDirty]);
+  useSyncLeaveConfirmation(isDirty);
 
   const { onCancelEditClick, onConfirmEditClick } = useEditActions({
     handleSubmit,

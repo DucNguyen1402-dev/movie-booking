@@ -22,7 +22,7 @@ export default function ShowtimeSection({
     if (location.state?.notification) {
       notificationActions.show(location.state.notification);
     }
-  }, [location.state]);
+  }, [location.state, notificationActions]);
 
   useConsumeLocationState("notification", 5000);
 

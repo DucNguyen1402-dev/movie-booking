@@ -1,9 +1,12 @@
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { EmptyStateButton, EmptyTable , PaginationControls} from "@components/admin";
+import {
+  EmptyStateButton,
+  EmptyTable,
+  PaginationControls,
+} from "@components/admin";
 
 import RevenueRankingRow from "./RevenueRankingRow";
 import RevenueRankingSkeleton from "./RevenueRankingSkeleton";
-
 
 export default function RevenueRankingTable() {
   const {
@@ -46,7 +49,7 @@ export default function RevenueRankingTable() {
   };
 
   return (
-    <div className ="mt-16 space-y-8">
+    <div className="mt-16 space-y-8">
       <PaginationControls label="phim" controls={pagination.controls} />
       <div className="min-h-screen overflow-hidden rounded-xl border border-slate-700 bg-slate-800">
         <main>

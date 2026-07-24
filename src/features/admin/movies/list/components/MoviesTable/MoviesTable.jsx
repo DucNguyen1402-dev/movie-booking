@@ -29,7 +29,7 @@ export default function MoviesTable() {
   } = useMovieListContext();
 
   if (rowState.movieId) {
-    pagination.skipNextPageReset.current = true;
+    pagination.preventNextReset();
   }
 
   const moveToMoviePage = useCallback(

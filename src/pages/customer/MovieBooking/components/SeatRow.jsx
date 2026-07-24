@@ -1,10 +1,8 @@
-import React from 'react';
-
-import SeatItem from './SeatItem';
+import SeatItem from "./SeatItem";
 
 const SeatRow = ({ seatRow }) => {
   return (
-    <div className="flex items-center justify-start w-full md:w-auto text-white gap-5">
+    <div className="flex w-full items-center justify-start gap-5 text-white md:w-auto">
       {/* Render row label character on the left side */}
       {seatRow.row !== "" ? (
         <span className="firstChar inline-block w-10 text-center font-bold text-yellow-500">
@@ -18,11 +16,7 @@ const SeatRow = ({ seatRow }) => {
       {/* Render the list of seats in this specific row */}
       <div className="flex items-center gap-1">
         {seatRow.seatList.map((seat) => (
-          <SeatItem 
-            key={seat.seatNumber} 
-            seat={seat} 
-            rowLetter={seatRow.row} 
-          />
+          <SeatItem key={seat.seatNumber} seat={seat} rowLetter={seatRow.row} />
         ))}
       </div>
     </div>
@@ -30,6 +24,3 @@ const SeatRow = ({ seatRow }) => {
 };
 
 export default SeatRow;
-
-
-

@@ -8,10 +8,9 @@ export function useScrollIntoView({
     block: "center",
   },
 }) {
-
   useEffect(() => {
     if (!enabled) return;
 
     ref.current?.scrollIntoView(options);
-  }, [enabled, options]);
+  }, [enabled, options, ref]);
 }

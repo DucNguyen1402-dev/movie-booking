@@ -1,7 +1,9 @@
-import React from "react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { selectSeletedSeatList, selectTotalBookingPrice } from "@/redux/slices/customer/movie-booking/movieBookingSelectors";
+import {
+  selectSeletedSeatList,
+  selectTotalBookingPrice,
+} from "@/redux/slices/customer/movie-booking/movieBookingSelectors";
 import {
   cancelSeatBooking,
   confirmSeatBooking,
@@ -18,22 +20,21 @@ const TicketCheckout = () => {
 
   // Calculate total price using reduce accumulator pattern
   const totalBookingPrice = useSelector(selectTotalBookingPrice);
-  
 
   return (
-    <div className="bg-black/60 p-6 w-100 rounded-lg border border-gray-700 backdrop-blur-sm text-white">
-      <h2 className="text-xl font-bold uppercase tracking-wider  mb-4 border-b border-gray-700 pb-2 text-center">
+    <div className="w-100 rounded-lg border border-gray-700 bg-black/60 p-6 text-white backdrop-blur-sm">
+      <h2 className="mb-4 border-b border-gray-700 pb-2 text-center text-xl font-bold tracking-wider uppercase">
         LIST OF SELECTED SEATS
       </h2>
 
       {/* Checkout Table */}
       <div className="overflow-x-auto">
-        <table className="w-full text-left border-collapse">
+        <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="border-b border-gray-600 text-slate-400 text-sm md:text-base">
-              <th className="py-2 px-1">Seat No.</th>
-              <th className="py-2 px-1 text-right">Price (VND)</th>
-              <th className="py-2 px-1 text-center">Cancel</th>
+            <tr className="border-b border-gray-600 text-sm text-slate-400 md:text-base">
+              <th className="px-1 py-2">Seat No.</th>
+              <th className="px-1 py-2 text-right">Price (VND)</th>
+              <th className="px-1 py-2 text-center">Cancel</th>
             </tr>
           </thead>
           <tbody>
@@ -41,7 +42,7 @@ const TicketCheckout = () => {
               <tr>
                 <td
                   colSpan="3"
-                  className="text-center py-8 text-gray-400 text-sm italic"
+                  className="py-8 text-center text-sm text-gray-400 italic"
                 >
                   No seats selected yet. Please pick your seats.
                 </td>
@@ -50,18 +51,20 @@ const TicketCheckout = () => {
               selectedSeatList.map((seat) => (
                 <tr
                   key={seat.seatNumber}
-                  className="border-b border-gray-800 hover:bg-white/5 text-sm md:text-base"
+                  className="border-b border-gray-800 text-sm hover:bg-white/5 md:text-base"
                 >
-                  <td className="py-3 px-1 font-semibold text-orange-400">
+                  <td className="px-1 py-3 font-semibold text-orange-400">
                     {seat.seatNumber}
                   </td>
-                  <td className="py-3 px-1 text-right font-mono text-slate-200">
+                  <td className="px-1 py-3 text-right font-mono text-slate-200">
                     {seat.price.toLocaleString()}
                   </td>
-                  <td className="py-3 px-1 text-center">
+                  <td className="px-1 py-3 text-center">
                     <button
-                      className="text-white font-bold px-3 py-1 bg-red-500 hover:bg-red-600 rounded transition-colors duration-400 cursor-pointer scale-80"
-                      onClick={() => dispatch(cancelSeatBooking(seat.seatNumber))}
+                      className="scale-80 cursor-pointer rounded bg-red-500 px-3 py-1 font-bold text-white transition-colors duration-400 hover:bg-red-600"
+                      onClick={() =>
+                        dispatch(cancelSeatBooking(seat.seatNumber))
+                      }
                     >
                       X
                     </button>
@@ -73,12 +76,12 @@ const TicketCheckout = () => {
           {/* Total Row Footer */}
           {selectedSeatList.length > 0 && (
             <tfoot>
-              <tr className="font-bold border-t border-gray-600">
-                <td className="py-4 px-1 uppercase text-sm md:text-base text-white">
+              <tr className="border-t border-gray-600 font-bold">
+                <td className="px-1 py-4 text-sm text-white uppercase md:text-base">
                   Total Amount:
                 </td>
                 <td></td>
-                <td className="py-4 px-1 text-right text-lg font-mono text-green-400">
+                <td className="px-1 py-4 text-right font-mono text-lg text-green-400">
                   {totalBookingPrice.toLocaleString()}
                 </td>
                 <td></td>
@@ -91,7 +94,7 @@ const TicketCheckout = () => {
       {/* Prompt Checkout CTA (Optional expansion feature) */}
       {selectedSeatList.length > 0 && (
         <button
-          className="w-full mt-6 bg-orange-500 hover:bg-orange-600  font-bold uppercase py-2.5 px-4 rounded shadow-md transition-all duration-400 cursor-pointer text-white"
+          className="mt-6 w-full cursor-pointer rounded bg-orange-500 px-4 py-2.5 font-bold text-white uppercase shadow-md transition-all duration-400 hover:bg-orange-600"
           onClick={handleConfirm}
         >
           Confirm Purchase

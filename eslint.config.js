@@ -57,6 +57,12 @@ export default defineConfig([
         },
       ],
       "simple-import-sort/exports": "error",
+      "no-unused-vars": [
+        "error",
+        {
+          ignoreRestSiblings: true,
+        },
+      ],
     },
   },
 ]);

@@ -21,7 +21,7 @@ export default function UsersManagement() {
     if (location.state?.notification) {
       notificationActions.show(location.state.notification);
     }
-  }, [location.state]);
+  }, [location.state, notificationActions]);
 
   return (
     <div

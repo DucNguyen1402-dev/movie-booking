@@ -31,7 +31,7 @@ const getSlideMovies = (movies = []) => {
 const HeroBannerSkeleton = () => {
   return (
     <section className="bg-[#070b1a]">
-      <div className="cine-container grid min-h-[620px] items-center gap-10 py-12 lg:grid-cols-[1fr_460px]">
+      <div className="cine-container grid min-h-155 items-center gap-10 py-12 lg:grid-cols-[1fr_460px]">
         <div>
           <div className="h-9 w-64 animate-pulse rounded-full bg-white/10" />
           <div className="mt-7 h-20 w-full max-w-2xl animate-pulse rounded-2xl bg-white/10" />
@@ -39,7 +39,7 @@ const HeroBannerSkeleton = () => {
           <div className="mt-8 h-14 w-80 animate-pulse rounded-xl bg-white/10" />
         </div>
 
-        <div className="h-[520px] animate-pulse rounded-[28px] bg-white/10" />
+        <div className="h-130 animate-pulse rounded-[28px] bg-white/10" />
       </div>
     </section>
   );
@@ -70,6 +70,7 @@ const HeroBanner = () => {
 
   useEffect(() => {
     if (activeIndex > slideMovies.length - 1) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveIndex(0);
     }
   }, [activeIndex, slideMovies.length]);
@@ -130,11 +131,11 @@ const HeroBanner = () => {
             Trải nghiệm đặt vé phim trực tuyến
           </div>
 
-          <h1 className="mt-7 text-5xl font-black uppercase leading-[0.98] tracking-[-0.05em] text-white md:text-7xl">
+          <h1 className="mt-7 text-5xl leading-[0.98] font-black tracking-[-0.05em] text-white uppercase md:text-7xl">
             Đặt vé nhanh, chọn ghế đẹp, xem phim cực đã
           </h1>
 
-          <p className="mt-7 max-w-2xl text-lg font-semibold leading-8 text-zinc-300">
+          <p className="mt-7 max-w-2xl text-lg leading-8 font-semibold text-zinc-300">
             Cập nhật phim mới nhất, chọn rạp gần bạn và đặt vé chỉ trong vài
             bước đơn giản.
           </p>
@@ -143,7 +144,7 @@ const HeroBanner = () => {
             <button
               type="button"
               onClick={handleGoToDetail}
-              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-[#f5c518] px-7 text-sm font-black uppercase text-black shadow-[0_6px_0_#a17f05] transition hover:bg-[#ffe45c]"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-xl bg-[#f5c518] px-7 text-sm font-black text-black uppercase shadow-[0_6px_0_#a17f05] transition hover:bg-[#ffe45c]"
             >
               <Ticket size={18} />
               Đặt vé ngay
@@ -180,7 +181,7 @@ const HeroBanner = () => {
           <button
             type="button"
             onClick={handlePrev}
-            className="absolute -left-16 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-xl border border-white/30 bg-black/40 text-white backdrop-blur transition hover:border-[#f5c518] hover:text-[#f5c518] xl:grid"
+            className="absolute top-1/2 -left-16 z-20 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-xl border border-white/30 bg-black/40 text-white backdrop-blur transition hover:border-[#f5c518] hover:text-[#f5c518] xl:grid"
             aria-label="Phim trước"
           >
             <ChevronLeft size={30} />
@@ -189,7 +190,7 @@ const HeroBanner = () => {
           <button
             type="button"
             onClick={handleNext}
-            className="absolute -right-16 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-xl border border-white/30 bg-black/40 text-white backdrop-blur transition hover:border-[#f5c518] hover:text-[#f5c518] xl:grid"
+            className="absolute top-1/2 -right-16 z-20 hidden h-12 w-12 -translate-y-1/2 place-items-center rounded-xl border border-white/30 bg-black/40 text-white backdrop-blur transition hover:border-[#f5c518] hover:text-[#f5c518] xl:grid"
             aria-label="Phim tiếp theo"
           >
             <ChevronRight size={30} />
@@ -203,7 +204,7 @@ const HeroBanner = () => {
               className="h-[520px] w-full object-cover transition duration-500"
             />
 
-            <div className="absolute left-5 top-5 flex items-center gap-2">
+            <div className="absolute top-5 left-5 flex items-center gap-2">
               <span className="rounded-md bg-[#f5c518] px-2.5 py-1 text-xs font-black text-black">
                 2D
               </span>
@@ -216,7 +217,7 @@ const HeroBanner = () => {
             <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/10 bg-black/55 p-5 backdrop-blur-xl">
               <p className="text-sm font-black text-[#f5c518]">Phim nổi bật</p>
 
-              <h2 className="mt-2 line-clamp-2 text-2xl font-black uppercase text-white">
+              <h2 className="mt-2 line-clamp-2 text-2xl font-black text-white uppercase">
                 {activeMovie.tenPhim}
               </h2>
 
