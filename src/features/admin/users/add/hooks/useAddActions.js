@@ -1,24 +1,27 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
+import { HIGHLIGHT_TYPES } from "@config/admin";
 
-import { useLoadingContext } from "@contexts/admin/loading";
-import { useModalContext } from "@contexts/admin/modal";
-import { useNotificationContext } from "@contexts/admin/notification";
-import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
-import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
+import { ensureMinDuration } from "@utils/admin";
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
-import { useUserCreation } from "../hooks";
+import { useUserCreation } from ".";
 
 export function useAddActions({ handleSubmit }) {
-  const { mutateAsync } = useUserCreation();
-
-  const modal = useModalContext();
   const location = useLocation();
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/users";
+
+  const { mutateAsync } = useUserCreation();
+
+  const modal = useModalContext();
+
   const { notificationActions } = useNotificationContext();
   const { showLoading, hideLoading } = useLoadingContext();
 
@@ -40,8 +43,7 @@ export function useAddActions({ handleSubmit }) {
     const start = new Date();
     try {
       const content = await mutateAsync(data);
-
-      ensureMinDuration(start, MIN_LOADING_TIME);
+      await ensureMinDuration(start, MIN_LOADING_TIME);
       hideLoading();
 
       navigate(previousPath, {

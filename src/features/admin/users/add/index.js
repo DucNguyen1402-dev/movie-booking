@@ -1,1 +1,1 @@
-export {default as AddUser} from "@features/admin/users/add/pages/AddUser"
+export { default as AddUser } from "./pages/AddUser";

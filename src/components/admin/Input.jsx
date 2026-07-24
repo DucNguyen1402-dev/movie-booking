@@ -16,6 +16,7 @@ export default function Input({
   id = null,
   className = defaultClasses,
   disabledClassName = disabledClasses,
+  required,
   ...props
 }) {
   const appliedClasses = disabled ? disabledClassName : className;
@@ -26,7 +27,7 @@ export default function Input({
         className="text-sm font-medium tracking-wider text-slate-200"
         htmlFor={id ?? name}
       >
-        {label}
+        {label} {required && <span className="text-red-400">*</span>}
       </label>
       <div className="relative">
         <input

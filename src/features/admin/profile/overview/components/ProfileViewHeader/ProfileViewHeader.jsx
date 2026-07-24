@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import { Pen } from "lucide-react";
 
-import { useUserContext } from "@contexts/admin/user";
-import {useLockBodyScroll} from "@hooks/admin"
+import { useUserContext } from "@contexts/admin";
+import { useLockBodyScroll } from "@hooks/admin";
 
 import AvatarSetting from "./AvatarSetting";
 
@@ -15,9 +15,7 @@ export default function ProfileViewHeader({ name }) {
   useLockBodyScroll(isAvatarSettingOpen);
 
   const onAvatarClick = () => setIsAvatarSettingOpen(true);
-  const closeAvatarSetting = () => {
-    setIsAvatarSettingOpen(false);
-  };
+  const closeAvatarSetting = () => setIsAvatarSettingOpen(false);
 
   return (
     <>
@@ -33,7 +31,7 @@ export default function ProfileViewHeader({ name }) {
               avatarName
             )}
             <div className="absolute right-3 bottom-5.5 opacity-0 transition-opacity duration-100 group-hover:opacity-100">
-              <Pen className="size-4.5 text-slate-100 " />
+              <Pen className="size-4.5 text-slate-100" />
             </div>
           </button>
         </div>

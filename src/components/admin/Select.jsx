@@ -1,9 +1,4 @@
-export default function Select({
-  value,
-  options,
-  onChange,
-  className = "",
-}) {
+export default function Select({ value, options, onChange, className = "" }) {
   return (
     <select
       value={value}

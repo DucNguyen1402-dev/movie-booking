@@ -8,4 +8,5 @@ export { default as Medal } from "./Medal";
 export { default as PaginationControls } from "./PaginationControls";
 export { default as PasswordInput } from "./PasswordInput";
 export { default as Select } from "./Select";
+export { default as SelectForm } from "./SelectForm";
 export { default as Textarea } from "./Textarea";

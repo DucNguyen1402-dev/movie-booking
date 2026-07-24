@@ -2,22 +2,8 @@ import { userValidationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
-import { Input } from "@components/admin";
-import { SaveButton } from "@components/admin/buttons";
-
-const profileFieldConfigs = [
-  { label: "TÀI KHOẢN", name: "taiKhoan", disabled: true },
-  { label: "HỌ VÀ TÊN", name: "hoTen" },
-  { label: "EMAIL", name: "email", type: "email" },
-  { label: "SỐ ĐT", name: "soDT", type: "number" },
-];
-
-const createProfileFields = ({ errors }) =>
-  profileFieldConfigs.map((field) => ({
-    ...field,
-    rules: userValidationRules[field.name],
-    error: errors[field.name],
-  }));
+import { createProfileFields } from "@features/admin/profile/edit/utils";
+import { Input, SaveButton } from "@components/admin";
 
 export default function ProfileForm() {
   const {
@@ -30,7 +16,13 @@ export default function ProfileForm() {
   return (
     <form onSubmit={onSubmitEvent} className="space-y-5">
       {profileFields.map((field) => (
-        <Input key={field.name} register={register} {...field} />
+        <Input
+          key={field.name}
+          register={register}
+          {...field}
+          rules={userValidationRules[field.name]}
+          error={errors[field.name]}
+        />
       ))}
 
       <div className="mt-16 flex justify-end">

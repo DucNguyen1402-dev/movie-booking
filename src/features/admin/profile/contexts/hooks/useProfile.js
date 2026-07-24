@@ -1,15 +1,16 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useLoadingContext } from "@contexts/admin";
-import { useModalContext } from "@contexts/admin";
-import { useNotificationContext } from "@contexts/admin/notification";
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
 import { useUserInfor } from "@features/admin/users";
+import { ensureMinDuration } from "@utils/admin";
 import { getCurrentUser } from "@utils/shared";
-import { MODAL_TYPES } from "@constants/admin";
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
-import { useProfileEffect } from "./useProfileEffect";
-import { useProfileForm } from "./useProfileForm";
-import { useUpdateUser } from "./useUpdateUser";
+import { useProfileEffect, useProfileForm, useUpdateUser } from ".";
 
 export function useProfile() {
   const location = useLocation();
@@ -19,7 +20,9 @@ export function useProfile() {
 
   const currentUser = getCurrentUser();
 
-  const { data: loginedUser, isLoading } = useUserInfor(currentUser.taiKhoan);
+  const { data: loginedUser = [], isLoading } = useUserInfor(
+    currentUser.taiKhoan,
+  );
 
   const { mutateAsync } = useUpdateUser();
 
@@ -61,6 +64,7 @@ export function useProfile() {
   const submitProfileChange = async (data) => {
     modal.close();
     showLoading();
+    const start = new Date();
 
     try {
       const payload = {
@@ -73,7 +77,9 @@ export function useProfile() {
         maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
       };
       await mutateAsync(payload);
+      await ensureMinDuration(start, MIN_LOADING_TIME);
       hideLoading();
+
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
@@ -100,6 +106,7 @@ export function useProfile() {
   const submitPasswordChange = async (data) => {
     modal.close();
     showLoading();
+    const start = new Date();
 
     const { matKhau, matKhauHienTai, matKhauMoi, xacNhanMatKhauMoi } =
       getValues();
@@ -134,6 +141,7 @@ export function useProfile() {
       };
 
       await mutateAsync(payload);
+      await ensureMinDuration(start, MIN_LOADING_TIME);
       hideLoading();
       navigate(previousPath, {
         state: {

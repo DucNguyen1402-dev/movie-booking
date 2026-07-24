@@ -1,4 +1,6 @@
-import { ChevronLeft,ChevronRight, X } from "lucide-react";
+import { useMemo } from "react";
+
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 import { useUserContext } from "@contexts/admin/user";
 import { usePagination } from "@hooks/admin";
@@ -12,12 +14,16 @@ export default function AvatarSetting({ onClose }) {
     resetDeps: [avatarList],
   });
 
-  const handleAvatarSelection = (pageIndex) => {
-    const avatarIndex = pagination.pageOffset + pageIndex;
+  const handleAvatarSelection = useMemo(
+    () => (pageIndex) => {
+      const avatarIndex = pagination.pageOffset + pageIndex;
 
-    setAvatarIndex(avatarIndex);
-    onClose();
-  };
+      setAvatarIndex(avatarIndex);
+      onClose();
+    },
+    [onClose, pagination.pageOffset, setAvatarIndex],
+  );
+
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center">
       <div className="relative flex h-80 w-150 flex-wrap items-center justify-center gap-5 overflow-x-auto rounded-md bg-slate-700/80 p-10">

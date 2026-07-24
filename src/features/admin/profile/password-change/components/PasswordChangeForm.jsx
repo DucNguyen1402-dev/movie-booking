@@ -2,8 +2,13 @@ import { userValidationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
-import { PasswordInput } from "@components/admin";
-import { CancelButton, SaveButton } from "@components/admin/buttons";
+import { CancelButton, PasswordInput, SaveButton } from "@components/admin";
+
+const passwordFieldsConfig = [
+  { label: "Mật khẩu hiện tại", name: "matKhauHienTai" },
+  { label: "Mật khẩu mới", name: "matKhauMoi" },
+  { label: "Xác nhận mật khẩu mới", name: "xacNhanMatKhauMoi" },
+];
 
 export default function PasswordChangeForm() {
   const {
@@ -17,27 +22,15 @@ export default function PasswordChangeForm() {
 
   return (
     <form className="space-y-5" onSubmit={onPasswordSubmitEvent}>
-      <PasswordInput
-        label="Mật khẩu hiện tại"
-        register={register}
-        name="matKhauHienTai"
-        rules={passwordRules}
-        error={errors["matKhauHienTai"]}
-      />
-      <PasswordInput
-        label="Mật khẩu mới"
-        register={register}
-        name="matKhauMoi"
-        rules={passwordRules}
-        error={errors["matKhauMoi"]}
-      />
-      <PasswordInput
-        label="Xác nhận mật khẩu mới"
-        register={register}
-        name="xacNhanMatKhauMoi"
-        rules={passwordRules}
-        error={errors["xacNhanMatKhauMoi"]}
-      />
+      {passwordFieldsConfig.map((field) => (
+        <PasswordInput
+          label={field.label}
+          register={register}
+          name={field.name}
+          rules={passwordRules}
+          error={errors[field.name]}
+        />
+      ))}
 
       <div className="flex justify-end gap-3 pt-8">
         <CancelButton

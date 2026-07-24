@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useNotificationContext } from "@contexts/admin/notification";
+import { useNotificationContext } from "@contexts/admin";
 import { useConsumeLocationState } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import {
@@ -26,17 +26,20 @@ export default function ProfileView() {
     if (!notification) return;
 
     notificationActions.show(notification);
-  }, [location.state?.notification, navigate, notificationActions]);
+  }, [location.state?.notification, notificationActions]);
 
   useConsumeLocationState("notification", 10000);
 
-  if (isLoading) return <ProfileSkeleton />;
+  const profileFields = useMemo(
+    () => [
+      { label: "Tài khoản", value: loginedUser.taiKhoan },
+      { label: "Email", value: loginedUser.email },
+      { label: "Số điện thoại", value: loginedUser.soDT || "Chưa cập nhật" },
+    ],
+    [loginedUser.email, loginedUser.soDT, loginedUser.taiKhoan],
+  );
 
-  const profileFields = [
-    { label: "Tài khoản", value: loginedUser.taiKhoan },
-    { label: "Email", value: loginedUser.email },
-    { label: "Số điện thoại", value: loginedUser.soDT || "Chưa cập nhật" },
-  ];
+  if (isLoading) return <ProfileSkeleton />;
 
   const onUpdateProfileClick = () =>
     navigate("/admin/profile/edit", {

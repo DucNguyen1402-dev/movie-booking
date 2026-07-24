@@ -5,6 +5,7 @@ export function useSyncLeaveConfirmation(isDirty) {
   const navigate = useNavigate();
   const location = useLocation();
   useEffect(() => {
+    if (location.state?.shouldConfirmLeave === isDirty) return;
     navigate(".", {
       replace: true,
       state: {
