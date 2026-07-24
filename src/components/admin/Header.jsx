@@ -6,13 +6,8 @@ import { useLayoutContext } from "@contexts/admin/layout";
 import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
-
 export default function Header() {
-
-   const {
-    isSidebarOpen,
-
-  } = useLayoutContext();
+  const { isSidebarOpen } = useLayoutContext();
   const location = useLocation();
   const history = location.state?.history ?? [];
   const shouldConfirmLeave = location.state?.shouldConfirmLeave ?? false;
@@ -98,9 +93,9 @@ export default function Header() {
     },
   ];
 
-  let page = null;
-
-  page = pageConfig.find((item) => matchPath(item.path, location.pathname));
+  const page = pageConfig.find((item) =>
+    matchPath(item.path, location.pathname),
+  );
 
   const navigate = useNavigate();
 
@@ -130,10 +125,12 @@ export default function Header() {
     });
   };
 
-  isSidebarOpen
-  
+  isSidebarOpen;
+
   return (
-    <header className={` transition-[padding] duration-300 ease-in-out will-change-transform sticky top-0 z-30 flex h-28 items-center border-b border-gray-800 bg-[#1e1e1e]/80 backdrop-blur-md ${isSidebarOpen ? "pl-8": "lg:pl-20 2xl:pl-10 "}`}>
+    <header
+      className={`sticky top-0 z-30 flex h-28 items-center border-b border-gray-800 bg-[#1e1e1e]/80 backdrop-blur-md transition-[padding] duration-300 ease-in-out will-change-transform ${isSidebarOpen ? "pl-8" : "lg:pl-20 2xl:pl-10 "}`}
+    >
       <div className="space-y-3 py-4">
         <h1 className="text-2xl font-semibold text-white">{page?.title}</h1>
         {page?.description && (

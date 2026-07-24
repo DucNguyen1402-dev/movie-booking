@@ -3,11 +3,10 @@ import { Save } from "lucide-react";
 
 import Button from "./Button";
 
-
-const surfaceStyles  = {
+const surfaceStyles = {
   light: "bg-blue-500 hover:bg-blue-600",
   dark: "bg-blue-600 hover:bg-blue-500",
-  deepDark: "bg-blue-600 hover:bg-blue-600/80"
+  deepDark: "bg-blue-600 hover:bg-blue-600/80",
 };
 
 export default function SaveButton({
@@ -19,7 +18,10 @@ export default function SaveButton({
   return (
     <Button
       Icon={Icon}
-      className={clsx("text-slate-50", surfaceStyles[surface] ?? colors.light)}
+      className={clsx(
+        "text-slate-50",
+        surfaceStyles[surface] ?? surfaceStyles.light,
+      )}
       {...props}
     >
       {children}

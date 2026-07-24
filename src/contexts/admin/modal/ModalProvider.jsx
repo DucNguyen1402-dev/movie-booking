@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-import {modalContext} from "./ModalContext"
+import { modalContext } from "./ModalContext";
 
 export function ModalProvider({ children }) {
   const [modal, setModal] = useState({
@@ -11,17 +11,26 @@ export function ModalProvider({ children }) {
     subtitle: "",
   });
 
-  const open = ({ type, onConfirm, title, subtitle, onCancel }) =>
-    setModal({ type, onConfirm, title, subtitle, onCancel });
-  const close = () =>
-    setModal({ type: null, onConfirm: null, title: "", subtitle: "" });
+  const open = useCallback(
+    ({ type, onConfirm, title, subtitle, onCancel }) =>
+      setModal({ type, onConfirm, title, subtitle, onCancel }),
+    [],
+  );
 
-  const value = {
-    open,
-    close,
-    modal,
-    setModal,
-  };
+  const close = useCallback(
+    () => setModal({ type: null, onConfirm: null, title: "", subtitle: "" }),
+    [],
+  );
+
+  const value = useMemo(
+    () => ({
+      open,
+      close,
+      modal,
+      setModal,
+    }),
+    [open, close, modal, setModal],
+  );
 
   return (
     <modalContext.Provider value={value}>{children}</modalContext.Provider>

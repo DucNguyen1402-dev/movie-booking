@@ -6,7 +6,7 @@ import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
 
 import "react-day-picker/style.css";
 
-export const CustomComponents = {
+const CustomComponents = {
   Chevron: ({ orientation }) => {
     const Icon =
       orientation === "left" ? CircleChevronLeft : CircleChevronRight;
@@ -21,12 +21,12 @@ export default function DatePicker({
   isDatePickerOpen,
   control,
   name,
-  rules
+  rules,
 }) {
   return (
     <>
       <Controller
-        name= {name}
+        name={name}
         control={control}
         rules={rules}
         render={({ field }) => (
@@ -45,7 +45,6 @@ export default function DatePicker({
                 classNames={datePickerStyles}
               />
             </div>
-  
           </>
         )}
       />

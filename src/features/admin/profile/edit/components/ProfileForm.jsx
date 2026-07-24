@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
-
 import { userValidationRules } from "@config/admin";
 
+import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import { Input } from "@components/admin";
 import { SaveButton } from "@components/admin/buttons";
@@ -14,7 +12,7 @@ const profileFieldConfigs = [
   { label: "SỐ ĐT", name: "soDT", type: "number" },
 ];
 
-export const createProfileFields = ({ errors }) =>
+const createProfileFields = ({ errors }) =>
   profileFieldConfigs.map((field) => ({
     ...field,
     rules: userValidationRules[field.name],
@@ -23,23 +21,11 @@ export const createProfileFields = ({ errors }) =>
 
 export default function ProfileForm() {
   const {
-    profileForm: { register, errors, onSubmitEvent, isDirty },
+    form: { register, errors, isDirty, onSubmitEvent },
   } = useProfileContext();
   const profileFields = createProfileFields({ errors });
 
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    navigate(".", {
-      replace: true,
-      state: {
-        ...location.state,
-        shouldConfirmLeave: isDirty,
-      },
-    });
-  }, [isDirty]);
+  useSyncLeaveConfirmation(isDirty);
 
   return (
     <form onSubmit={onSubmitEvent} className="space-y-5">
@@ -47,7 +33,7 @@ export default function ProfileForm() {
         <Input key={field.name} register={register} {...field} />
       ))}
 
-      <div className ="flex justify-end mt-16">
+      <div className="mt-16 flex justify-end">
         <SaveButton type="submit">Lưu thông tin</SaveButton>
       </div>
     </form>

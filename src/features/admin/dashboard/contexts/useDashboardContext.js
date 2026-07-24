@@ -6,7 +6,9 @@ export function useDashboardContext() {
   const context = useContext(dashboardContext);
 
   if (!context) {
-    throw error("useDashboardContext must be used within DashboardProvider");
+    throw new Error(
+      "useDashboardContext must be used within DashboardProvider",
+    );
   }
 
   return context;

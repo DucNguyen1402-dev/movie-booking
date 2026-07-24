@@ -8,7 +8,7 @@ import RevenueRankingSkeleton from "./RevenueRankingSkeleton";
 export default function RevenueRankingTable() {
   const {
     dashboardDerived: { ranking },
-    revenueRankingFilter: { filter, resetSearchFilter },
+    revenueRanking: { params, resetSearchParam },
     isPending,
     pagination,
   } = useDashboardContext();
@@ -26,9 +26,9 @@ export default function RevenueRankingTable() {
         <EmptyTable
           colSpan={6}
           title="Không tìm thấy phim"
-          description={`Không có tên phim nào khớp với từ khóa "${filter.keyword}"`}
+          description={`Không có tên phim nào khớp với từ khóa "${params.keyword}"`}
         >
-          <EmptyStateButton surface="dark" onClick={resetSearchFilter}>
+          <EmptyStateButton surface="dark" onClick={resetSearchParam}>
             Xóa bộ lọc
           </EmptyStateButton>
         </EmptyTable>

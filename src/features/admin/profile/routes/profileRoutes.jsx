@@ -1,8 +1,8 @@
 import { Route } from "react-router-dom";
 
-import { ProfileEdit} from "@features/admin/profile/edit";
-import {ProfileLayout} from "@features/admin/profile/layouts";
-import {ProfileView } from "@features/admin/profile/overview";
+import { ProfileEdit } from "@features/admin/profile/edit";
+import { ProfileLayout } from "@features/admin/profile/layouts";
+import { ProfileView } from "@features/admin/profile/overview";
 import { PasswordChange } from "@features/admin/profile/password-change";
 
 export const profileRoutes = (

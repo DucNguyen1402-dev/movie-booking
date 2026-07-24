@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
@@ -32,14 +32,17 @@ export default function MoviesTable() {
     pagination.skipNextPageReset.current = true;
   }
 
-  const moveToMoviePage = (id) => {
-    const movieIndex = list.findIndex((movie) => movie.maPhim === Number(id));
-    if (movieIndex === -1) return;
+  const moveToMoviePage = useCallback(
+    () => (id) => {
+      const movieIndex = list.findIndex((movie) => movie.maPhim === Number(id));
+      if (movieIndex === -1) return;
 
-    const moviePage = Math.floor(movieIndex / pagination.currentSize) + 1;
+      const moviePage = Math.floor(movieIndex / pagination.currentSize) + 1;
 
-    pagination.setPage(moviePage);
-  };
+      pagination.setPage(moviePage);
+    },
+    [list, pagination],
+  );
 
   useEffect(() => {
     if (!rowState.movieId || isFetching) return;
@@ -52,7 +55,15 @@ export default function MoviesTable() {
         history: location.state?.history ?? [],
       },
     });
-  }, [rowState.movieId, isFetching]);
+  }, [
+    rowState.movieId,
+    isFetching,
+    rowState,
+    location.pathname,
+    location.state?.history,
+    navigate,
+    moveToMoviePage,
+  ]);
 
   useEffect(() => {
     if (!rowState.highlight || !rowState.movieId) return;
@@ -66,7 +77,7 @@ export default function MoviesTable() {
       );
 
     return () => timers.forEach(clearTimeout);
-  }, [rowState.highlight, rowState.movieId]);
+  }, [rowState.highlight, rowState.movieId, rowState]);
 
   const isEmptyMovieList = pagination.list.length === 0;
 
@@ -108,7 +119,7 @@ export default function MoviesTable() {
         <table className="w-full table-fixed border-collapse text-left">
           <thead>
             <tr className="bg-slate-900/80 text-sm font-medium tracking-wider text-slate-400 uppercase">
-              <th className="py-8 pl-8 2xl:w-20 3xl:w-30">Mã</th>
+              <th className="3xl:w-30 py-8 pl-8 2xl:w-20">Mã</th>
               <th className="3xl:w-120 px-4 2xl:w-100">Hình ảnh & Tên phim</th>
               <th className="3xl:w-50 px-4 2xl:w-40">Ngày khởi chiếu</th>
               <th className="3xl:w-40 px-4 2xl:w-35">Đánh giá</th>

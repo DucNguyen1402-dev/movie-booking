@@ -1,30 +1,19 @@
-import { useEffect } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
-
 import { userValidationRules } from "@config/admin";
 
+import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import { PasswordInput } from "@components/admin";
 import { CancelButton, SaveButton } from "@components/admin/buttons";
 
 export default function PasswordChangeForm() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
   const {
-    profileForm: { register, errors, onPasswordSubmitEvent, isDirty , onCancelPasswordChangeClick},
+    form: { register, errors, onPasswordSubmitEvent, isDirty },
+    profile: { onCancelPasswordChangeClick },
   } = useProfileContext();
 
   const { matKhau: passwordRules } = userValidationRules;
 
-  useEffect(() => {
-    navigate(".", {
-      state: {
-        ...location.state,
-        shouldConfirmLeave: isDirty,
-      },
-    });
-  }, [isDirty]);
+  useSyncLeaveConfirmation(isDirty);
 
   return (
     <form className="space-y-5" onSubmit={onPasswordSubmitEvent}>
@@ -50,10 +39,10 @@ export default function PasswordChangeForm() {
         error={errors["xacNhanMatKhauMoi"]}
       />
 
-      <div className="flex gap-3 justify-end pt-8">
+      <div className="flex justify-end gap-3 pt-8">
         <CancelButton
           type="button"
-          onClick ={onCancelPasswordChangeClick}
+          onClick={onCancelPasswordChangeClick}
           surface="dark"
         >
           Hủy

@@ -14,5 +14,5 @@ export function useNotificationEffects({ notificationRef, hideNotification }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [hideNotification, notificationRef]);
 }

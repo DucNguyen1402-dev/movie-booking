@@ -1,1 +1,1 @@
-export {default as PasswordChange} from "./pages/PasswordChange"
+export { default as PasswordChange } from "./pages/PasswordChange";

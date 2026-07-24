@@ -6,11 +6,11 @@ import { Select } from "@components/admin";
 
 export default function RevenueToolbar() {
   const {
-    revenueRankingFilter: { onSearchMovie, onSortClick, filter },
+    revenueRanking: { onSearchMovie, onSortClick, params },
     pagination,
   } = useDashboardContext();
 
-  const isDescending = filter.sortDesc;
+  const isDescending = params.sortDesc;
 
   return (
     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -22,7 +22,7 @@ export default function RevenueToolbar() {
           />
           <input
             type="text"
-            value={filter.keyword}
+            value={params.keyword}
             onChange={(e) => onSearchMovie(e.target.value)}
             placeholder="Tìm tên phim..."
             className="w-80 rounded-lg border border-slate-700 py-2.5 pr-4 pl-10 text-sm text-slate-100 transition-colors duration-300 outline-none hover:border-indigo-500 hover:ring-2 hover:ring-indigo-500/20 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"

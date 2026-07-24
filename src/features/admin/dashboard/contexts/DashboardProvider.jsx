@@ -4,7 +4,7 @@ import {dashboardContext} from "./dashboardContext"
 import {
   useDashboardData,
   useDashboardDerived,
-  useRevenueRankingFilter,
+  useRevenueRanking,
 } from "./hooks";
 
 
@@ -14,22 +14,22 @@ export function DashboardProvider({ children }) {
 
   const dashboardDerived = useDashboardDerived({ movies });
 
-  const revenueRankingFilter = useRevenueRankingFilter({
+  const revenueRanking= useRevenueRanking({
     movies: dashboardDerived.derivedMovies?.dashboard,
   });
 
   const pagination = usePagination({
-    items: revenueRankingFilter.filteredMovies,
+    items: revenueRanking.filteredMovies,
     resetDeps: [
-      revenueRankingFilter.filter.keyword,
-      revenueRankingFilter.filter.sortDesc,
+      revenueRanking.params.keyword,
+      revenueRanking.params.sortDesc,
     ],
   });
   const value = {
     users,
     movies,
     dashboardDerived,
-    revenueRankingFilter,
+    revenueRanking,
     pagination,
     isPending
   };

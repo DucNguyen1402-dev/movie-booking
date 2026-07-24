@@ -1,13 +1,20 @@
-import { useEffect, useMemo, useRef,useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export function usePagination({ items, resetDeps, enabled, size = 10 }) {
   const [pagination, setPagination] = useState({ page: 1, size });
   const skipNextPageReset = useRef(false);
 
-  const setSize = (value) =>
-    setPagination((prev) => ({ ...prev, size: Number(value), page: 1 }));
-  const setPage = (value) =>
-    setPagination((prev) => ({ ...prev, page: Number(value) }));
+  const setSize = useCallback(
+    () => (value) =>
+      setPagination((prev) => ({ ...prev, size: Number(value), page: 1 })),
+    [],
+  );
+
+  const setPage = useCallback(
+    () => (value) =>
+      setPagination((prev) => ({ ...prev, page: Number(value) })),
+    [],
+  );
 
   useEffect(() => {
     if (skipNextPageReset.current) {
@@ -15,17 +22,16 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
       return;
     }
     if (!enabled) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPagination((prev) => ({
       ...prev,
       page: 1,
     }));
-  }, [...resetDeps]);
-
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...resetDeps, setPagination, enabled]);
 
   const startIndex = (pagination.page - 1) * pagination.size;
   const endIndex = pagination.page * pagination.size;
-
 
   const list = useMemo(() => {
     return items.slice(startIndex, endIndex);
@@ -43,33 +49,68 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
   const isPrevDisabled = pagination.page === 1;
   const isNextDisabled = pagination.page >= totalPages;
 
-  const onPrevClick = () => setPage(pagination.page - 1);
-  const onNextClick = () => setPage(pagination.page + 1);
+  const onPrevClick = useCallback(
+    () => () => setPage(pagination.page - 1),
+    [pagination, setPage],
+  );
+  const onNextClick = useCallback(
+    () => () => setPage(pagination.page + 1),
+    [pagination, setPage],
+  );
 
-  const onPageClick = (page) => setPage(Number(page));
+  const onPageClick = useCallback(
+    (page) => {
+      setPage(Number(page));
+    },
+    [setPage],
+  );
 
-   const pageOffset = (pagination.page - 1) * pagination.size;
+  const pageOffset = useMemo(
+    () => (pagination.page - 1) * pagination.size,
+    [pagination],
+  );
 
-  return {
-    totalMovies,
-    skipNextPageReset,
-    controls: {
+  const values = useMemo(
+    () => ({
+      totalMovies,
+      skipNextPageReset,
+      controls: {
+        currentPage: pagination.page,
+        onPrevClick,
+        onNextClick,
+        onPageClick,
+        total: totalMovies,
+        isPrevDisabled,
+        isNextDisabled,
+        pages,
+        displayStart,
+        displayEnd,
+      },
+      list,
+      setSize,
+      setPage,
+      currentSize: pagination.size,
       currentPage: pagination.page,
-      onPrevClick,
+      pageOffset,
+    }),
+    [
+      displayEnd,
+      displayStart,
+      isNextDisabled,
+      isPrevDisabled,
+      list,
       onNextClick,
       onPageClick,
-      total: totalMovies,
-      isPrevDisabled,
-      isNextDisabled,
+      onPrevClick,
+      pageOffset,
       pages,
-      displayStart,
-      displayEnd,
-    },
-    list,
-    setSize,
-    setPage,
-    currentSize: pagination.size,
-    currentPage: pagination.page,
-    pageOffset,
-  };
+      pagination.page,
+      pagination.size,
+      setPage,
+      setSize,
+      totalMovies,
+    ],
+  );
+
+  return values;
 }

@@ -1,18 +1,29 @@
+import { useCallback, useMemo } from "react";
+
 export function useNotificationActions({ dispatch, timeoutRef }) {
-  const show = ({ variant, message }) => {
-    dispatch({ type: "SHOW_NOTIFICATION", payload: { variant, message } });
+  const show = useCallback(
+    ({ variant, message }) => {
+      dispatch({ type: "SHOW_NOTIFICATION", payload: { variant, message } });
 
-    clearTimeout(timeoutRef.current);
+      clearTimeout(timeoutRef.current);
 
-    timeoutRef.current = setTimeout(() => {
-      dispatch({ type: "HIDE_NOTIFICATION" });
-    }, 2500);
-  };
+      timeoutRef.current = setTimeout(() => {
+        dispatch({ type: "HIDE_NOTIFICATION" });
+      }, 2500);
+    },
+    [dispatch, timeoutRef],
+  );
 
-  const hide = () => dispatch({ type: "HIDE_NOTIFICATION" });
+  const hide = useCallback(
+    () => dispatch({ type: "HIDE_NOTIFICATION" }),
+    [dispatch],
+  );
 
-  return {
-    show,
-    hide,
-  };
+  return useMemo(
+    () => ({
+      show,
+      hide,
+    }),
+    [show, hide],
+  );
 }

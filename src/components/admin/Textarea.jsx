@@ -9,7 +9,7 @@ export default function Textarea({
   textareaRef,
   onInput,
 }) {
-  const descriptionField = register("moTa");
+  const descriptionField = register("moTa", rules);
 
   return (
     <div className="flex flex-col gap-3">

@@ -1,6 +1,6 @@
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 
-export default function HeaderContent({ movieId, groupId }) {
+export default function HeaderContent() {
   const {
     editForm: { watch },
   } = useEditMovieContext();

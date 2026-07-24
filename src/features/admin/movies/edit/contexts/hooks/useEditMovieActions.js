@@ -124,7 +124,17 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         message,
       });
     }
-  }, [mutateAsync, editMovie, editId, navigate, notificationActions]);
+  }, [
+    getValues,
+    editMovie,
+    modal,
+    notificationActions,
+    showLoading,
+    mutateAsync,
+    hideLoading,
+    navigate,
+    editId,
+  ]);
 
   const onSaveClick = async () => {
     const isValid = await trigger();
