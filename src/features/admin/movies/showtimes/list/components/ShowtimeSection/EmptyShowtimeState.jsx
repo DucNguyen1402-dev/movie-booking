@@ -1,6 +1,6 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { CalendarCog,CalendarX } from "lucide-react";
+import { CalendarCog, CalendarX } from "lucide-react";
 
 export default function EmptyShowtimeState() {
   const { id } = useParams();
@@ -14,7 +14,7 @@ export default function EmptyShowtimeState() {
     });
 
   return (
-    <div className="flex min-h-105 flex-col items-center justify-center rounded-2xl  bg-slate-800 px-6 py-12 text-center">
+    <div className="flex h-full w-full flex-col items-center justify-center rounded-2xl bg-slate-800 px-6 py-12 text-center">
       <div className="mb-6 rounded-full bg-slate-600 p-5">
         <CalendarX className="size-12 text-slate-100" />
       </div>

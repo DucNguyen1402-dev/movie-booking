@@ -1,1 +1,1 @@
-export {default as RevenueRanking} from "./RevenueRanking"
+export { default as MovieRevenueRanking } from "./MovieRevenueRanking";

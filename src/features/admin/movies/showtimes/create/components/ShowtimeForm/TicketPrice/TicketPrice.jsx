@@ -1,10 +1,6 @@
 import { Controller } from "react-hook-form";
 
-function formatCurrencyDisplay(value) {
-  if (!value) return "";
-
-  return Number(value).toLocaleString("vi-VN");
-}
+import { formatCurrencyDisplay } from "@features/admin/movies/showtimes/create/utils";
 
 export default function TicketPrice({
   control,

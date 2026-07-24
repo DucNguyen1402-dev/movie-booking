@@ -1,10 +1,9 @@
 import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 
-import { useQuery } from "@tanstack/react-query";
-
 import { useMovies } from "@features/admin/movies/hooks";
-import { getShowtimeData } from "@features/admin/movies/showtimes/list/api";
+
+import { useShowtimeData } from ".";
 
 export function useShowtimeList() {
   const { id } = useParams();
@@ -23,11 +22,7 @@ export function useShowtimeList() {
     data: showtimeData = [],
     isPending,
     isSuccess,
-  } = useQuery({
-    queryFn: () => getShowtimeData(showtimeMovie?.maPhim),
-    queryKey: ["showtimeData", showtimeMovie],
-    enabled: !!showtimeMovie,
-  });
+  } = useShowtimeData({ movieId: showtimeMovie?.maPhim });
 
   const showtimeInfor = showtimeData.heThongRapChieu ?? [];
   const hasNoShowtime = isSuccess && showtimeInfor.length === 0;
@@ -36,6 +31,6 @@ export function useShowtimeList() {
     showtimeInfor,
     hasNoShowtime,
     showtimeMovie,
-    isPending
+    isPending,
   };
 }

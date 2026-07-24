@@ -1,6 +1,6 @@
 const ShowtimeInforSkeleton = () => {
   return (
-    <div className="mx-auto h-full w-full animate-pulse space-y-10 rounded-xl p-10 shadow-sm">
+    <div className="mx-auto h-full w-full animate-pulse space-y-10 rounded-xl bg-slate-800 p-10 shadow-sm">
       <div className="flex items-center justify-between border-b border-slate-400 pb-6">
         <div className="flex items-center gap-4">
           <div className="h-12 w-12 rounded-full bg-slate-400" />

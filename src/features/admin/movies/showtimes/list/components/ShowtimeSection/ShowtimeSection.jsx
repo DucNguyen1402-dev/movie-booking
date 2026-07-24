@@ -1,14 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useNotificationContext } from "@contexts/admin/notification";
+import { useNotificationContext } from "@contexts/admin";
 import { useConsumeLocationState } from "@hooks/admin";
 
-import EmptyShowtimeState from "./EmptyShowtimeState";
-import ShowtimeHeader from "./ShowtimeHeader";
-import ShowtimeInforCard from "./ShowtimeInfor/ShowtimeInforCard";
-import ShowtimeInforHeader from "./ShowtimeInfor/ShowtimeInforHeader";
-import ShowtimeInforSkeleton from "./ShowtimeInforSkeleton";
+import {
+  EmptyShowtimeState,
+  ShowtimeHeader,
+  ShowtimeInforCard,
+  ShowtimeInforHeader,
+  ShowtimeInforSkeleton,
+} from ".";
 
 export default function ShowtimeSection({
   showtimeInfor,
@@ -26,22 +28,34 @@ export default function ShowtimeSection({
 
   useConsumeLocationState("notification", 5000);
 
-  let tongSuatChieu = 0;
+  const tongSuatChieu = useMemo(() => {
+    let total = 0;
 
-  for (const { cumRapChieu } of showtimeInfor) {
-    for (const { lichChieuPhim } of cumRapChieu) {
-      tongSuatChieu += lichChieuPhim.length;
+    for (const { cumRapChieu } of showtimeInfor) {
+      for (const { lichChieuPhim } of cumRapChieu) {
+        total += lichChieuPhim.length;
+      }
     }
-  }
+
+    return total;
+  }, [showtimeInfor]);
 
   const newShowtimeClusterId = location.state?.maCumRap;
 
   if (hasNoShowtime) {
-    return <EmptyShowtimeState />;
+    return (
+      <div className="grow">
+        <EmptyShowtimeState />;
+      </div>
+    );
   }
 
   if (isPending) {
-    return <ShowtimeInforSkeleton />;
+    return (
+      <div className="grow">
+        <ShowtimeInforSkeleton />
+      </div>
+    );
   }
 
   return (

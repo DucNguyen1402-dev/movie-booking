@@ -1,17 +1,20 @@
-import {useSyncLeaveConfirmation} from "@hooks/admin"
-import { AddButton,CancelButton } from "@components/admin/buttons";
-import DateInput from "@components/admin/DateInput/DateInput";
+import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { validationRules } from "@features/admin/movies/showtimes/create/config";
+import {
+  useCinemaClusters,
+  useCinemaSystems,
+  useShowtimeActions,
+  useShowtimeForm,
+} from "@features/admin/movies/showtimes/create/hooks";
+import { AddButton, CancelButton, DateInput } from "@components/admin";
 
-import { validationRules } from "../../config/validation-rules";
-import { useCinemaClusters } from "../../hooks/useCinemaClusters";
-import { useCinemaSystems } from "../../hooks/useCinemaSystems";
-import { useShowtimeActions } from "../../hooks/useShowtimeActions";
-import { useShowtimeForm } from "../../hooks/useShowtimeForm";
-import CinemaClusters from "./CinemaClusters/CinemaClusters";
-import CinemaSystems from "./CinemaSystems/CinemaSystems";
-import Showtime from "./ShowtimePicker/ShowtimePicker";
-import Theather from "./Theather/Theather";
-import TicketPrice from "./TicketPrice/TicketPrice";
+import {
+  CinemaClusters,
+  CinemaSystems,
+  Showtime,
+  Theather,
+  TicketPrice,
+} from ".";
 
 export default function ShowtimeForm({ movie }) {
   const { handleSubmit, control, watch, isDirty } = useShowtimeForm();
