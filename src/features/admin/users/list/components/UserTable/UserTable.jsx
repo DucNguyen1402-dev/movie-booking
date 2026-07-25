@@ -1,34 +1,37 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useConsumeLocationState } from "@hooks/admin";
 import { useUsersContext } from "@features/admin/users/contexts";
-import { EmptyTable } from "@components/admin";
-import { PaginationControls } from "@components/admin";
-import { EmptyStateButton } from "@components/admin/buttons";
+import {
+  EmptyStateButton,
+  EmptyTable,
+  PaginationControls,
+} from "@components/admin";
 
-import TableRow from "./TableRow";
-import TableSkeleton from "./TableSkeleton";
+import { TableRow, TableSkeleton } from ".";
 
 export default function UserTable() {
+  const hasMoveToPage = useRef(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [rowState, setRowState] = useState(() => ({
-    account: location.state?.account ?? "",
-    highlight: location.state?.highlight ?? "",
-  }));
+  const { account, highlight } = location.state ?? {};
+
+  useConsumeLocationState(["account", "highlight"], 5000);
+
   const {
     usersStates: { isPending, isFetching },
     pagination,
     userFilters: { filters, resetSearchFilter, filteredUsers },
   } = useUsersContext();
 
-  if (rowState.account) {
+  if (account) {
     pagination.preventNextReset();
   }
 
   const moveToAccountPage = useCallback(
-    () => (account) => {
+    (account) => {
       const userIndex = filteredUsers.findIndex(
         (user) => user.taiKhoan === account,
       );
@@ -43,35 +46,17 @@ export default function UserTable() {
   );
 
   useEffect(() => {
-    if (!rowState.account || isFetching) return;
-
-    moveToAccountPage(rowState.account);
-    navigate(location.pathname, {
-      replace: true,
-      state: { history: location.state?.history ?? [] },
-    });
+    if (!account || isFetching || hasMoveToPage.current) return;
+    moveToAccountPage(account);
+    hasMoveToPage.current = true;
   }, [
-    rowState.account,
+    account,
     isFetching,
     moveToAccountPage,
     navigate,
     location.pathname,
     location.state?.history,
   ]);
-
-  useEffect(() => {
-    const keys = ["highlight", "account"];
-
-    const timers = keys
-      .filter((key) => rowState[key])
-      .map((key) =>
-        setTimeout(() => {
-          setRowState((prev) => ({ ...prev, [key]: "" }));
-        }, 10000),
-      );
-
-    return () => timers.forEach(clearTimeout);
-  }, [rowState.highlight, rowState.account, rowState]);
 
   const isUserListEmpty = pagination.list.length === 0;
   const renderTableContent = () => {
@@ -97,8 +82,8 @@ export default function UserTable() {
       <TableRow
         key={user.taiKhoan}
         user={user}
-        isMatched={user.taiKhoan === rowState.account}
-        highlight={rowState.highlight}
+        isMatched={user.taiKhoan === account}
+        highlight={highlight}
       />
     ));
   };

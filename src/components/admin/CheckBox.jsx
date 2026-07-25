@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
 
-export default function CheckBox({ control, name, label }) {
+const CheckBox = ({ control, name, label }) => {
   return (
     <label className="inline-flex cursor-pointer items-center select-none">
       <Controller
@@ -24,4 +24,6 @@ export default function CheckBox({ control, name, label }) {
       <span className="ml-2 text-sm text-slate-200">{label}</span>
     </label>
   );
-}
+};
+
+export default CheckBox;

@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function PaginationControls({ controls, label }) {
+const PaginationControls = ({ controls, label }) => {
   const {
     currentPage,
     pages,
@@ -53,4 +53,6 @@ export default function PaginationControls({ controls, label }) {
       </div>
     </div>
   );
-}
+};
+
+export default PaginationControls;

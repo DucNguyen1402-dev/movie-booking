@@ -1,4 +1,4 @@
-export default function Select({ value, options, onChange, className = "" }) {
+const Select = ({ value, options, onChange, className = "" }) => {
   return (
     <select
       value={value}
@@ -12,4 +12,6 @@ export default function Select({ value, options, onChange, className = "" }) {
       ))}
     </select>
   );
-}
+};
+
+export default Select;

@@ -1,2 +1,2 @@
-export {LoadingProvider} from "./LoadingProvider"
-export {useLoadingContext} from "./useLoadingContext"
+export { default as LoadingProvider } from "./LoadingProvider";
+export { useLoadingContext } from "./useLoadingContext";

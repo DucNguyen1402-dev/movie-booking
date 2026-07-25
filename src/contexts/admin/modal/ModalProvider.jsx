@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import { modalContext } from "./ModalContext";
 
-export function ModalProvider({ children }) {
+const ModalProvider = ({ children }) => {
   const [modal, setModal] = useState({
     type: null,
     onConfirm: null,
@@ -35,4 +35,6 @@ export function ModalProvider({ children }) {
   return (
     <modalContext.Provider value={value}>{children}</modalContext.Provider>
   );
-}
+};
+
+export default ModalProvider;

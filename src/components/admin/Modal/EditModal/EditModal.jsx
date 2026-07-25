@@ -1,4 +1,4 @@
-export default function EditModal({ title, subtitle, onConfirm, onCancel }) {
+const EditModal = ({ title, subtitle, onConfirm, onCancel }) => {
   return (
     <div className="z-100 flex w-90 flex-col gap-3 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90">
       <h2 className="text-lg font-semibold text-slate-50">{title}</h2>
@@ -22,4 +22,6 @@ export default function EditModal({ title, subtitle, onConfirm, onCancel }) {
       </div>
     </div>
   );
-}
+};
+
+export default EditModal;

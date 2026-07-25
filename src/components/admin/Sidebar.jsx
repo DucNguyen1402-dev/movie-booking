@@ -36,7 +36,7 @@ const SIDEBAR_LINKS = [
   },
 ];
 
-export default function Sidebar() {
+const Sidebar = () => {
   const {
     isSidebarOpen,
 
@@ -112,7 +112,11 @@ export default function Sidebar() {
           <div className="before:absolute before:bottom-full before:left-0 before:h-4 before:w-full before:bg-transparent before:content-['']"></div>
 
           <button className="flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500">
-            {storageAvatar ? <img src={storageAvatar} alt ="user avatar"/> : avatarName}
+            {storageAvatar ? (
+              <img src={storageAvatar} alt="user avatar" />
+            ) : (
+              avatarName
+            )}
           </button>
           <div className="pointer-events-none absolute bottom-10 left-0 w-50 overflow-hidden rounded-xl border border-gray-700 bg-[#1f1f1f] opacity-0 shadow-2xl transition-opacity duration-500 group-hover:pointer-events-auto group-hover:opacity-100">
             <Link
@@ -148,7 +152,7 @@ export default function Sidebar() {
         <Menu className="size-5.5" />
       </button>
       <nav
-        className={`absolute top-20 right-1 z-20 mt-5 transition-opacity duration-300 ease-in-out space-y-6 py-6 ${isSidebarOpen ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"}`}
+        className={`absolute top-20 right-1 z-20 mt-5 space-y-6 py-6 transition-opacity duration-300 ease-in-out ${isSidebarOpen ? "pointer-events-none opacity-0" : "pointer-events-auto opacity-100"}`}
       >
         {SIDEBAR_LINKS.map((link) => (
           <NavLink
@@ -178,4 +182,6 @@ export default function Sidebar() {
       </nav>
     </aside>
   );
-}
+};
+
+export default Sidebar;

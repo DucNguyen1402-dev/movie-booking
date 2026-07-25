@@ -1,5 +1,7 @@
-import { useEffect, useRef } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { useScrollIntoView } from "@hooks/admin";
 
 import { useUserDeletion } from "./useUserDeletion";
 
@@ -8,14 +10,7 @@ export function useTableRow({ isMatched }) {
 
   const rowRef = useRef(null);
 
-  useEffect(() => {
-    if (!isMatched) return;
-
-    rowRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  }, [isMatched]);
+  useScrollIntoView({ enabled: isMatched, ref: rowRef });
 
   const location = useLocation();
   const navigate = useNavigate();

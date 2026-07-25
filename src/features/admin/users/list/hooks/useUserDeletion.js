@@ -1,17 +1,19 @@
 import { useState } from "react";
 
-import { useLoadingContext } from "@contexts/admin/loading";
-import { useModalContext } from "@contexts/admin/modal";
-import { useNotificationContext } from "@contexts/admin/notification";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
+import { MODAL_TYPES } from "@constants/admin";
 
-import {useDeleteUser} from "./useDeleteUser"
+import { useDeleteUser } from "./useDeleteUser";
 
 export function useUserDeletion() {
   const [deletingAccount, setDeletingAccount] = useState(null);
 
   const { mutateAsync } = useDeleteUser();
-  
+
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
@@ -25,7 +27,7 @@ export function useUserDeletion() {
       hideLoading();
       notificationActions.show({
         variant: "success",
-        message: "Xóa tài khoản thành công",
+        message: "Xóa tài khoản thành công.",
       });
     } catch (error) {
       const message =

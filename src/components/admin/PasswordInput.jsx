@@ -2,15 +2,15 @@ import { useState } from "react";
 
 import { Eye, EyeOff } from "lucide-react";
 
-export default function PasswordInput({
+const PasswordInput = ({
   register,
   label,
   name,
   rules,
   id = null,
   error,
-  required = false
-}) {
+  required = false,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -31,7 +31,7 @@ export default function PasswordInput({
         />
         <button
           onClick={() => setShowPassword((prev) => !prev)}
-          type ="button"
+          type="button"
           className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
         >
           {showPassword ? (
@@ -48,4 +48,6 @@ export default function PasswordInput({
       )}
     </div>
   );
-}
+};
+
+export default PasswordInput;

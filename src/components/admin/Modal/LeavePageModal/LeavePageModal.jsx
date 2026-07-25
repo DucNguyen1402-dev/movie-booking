@@ -1,9 +1,13 @@
-export default function LeavePageModal({ onConfirm, onCancel }) {
+const LeavePageModal = ({ onConfirm, onCancel }) => {
   return (
     <div className="z-100 flex w-90 flex-col gap-3 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90">
-      <h2 className="text-lg font-semibold text-slate-50">Bạn có chắc muốn rời trang? </h2>
+      <h2 className="text-lg font-semibold text-slate-50">
+        Bạn có chắc muốn rời trang?{" "}
+      </h2>
 
-      <p className="text-sm text-slate-200">"Những thay đổi chưa lưu sẽ bị mất.</p>
+      <p className="text-sm text-slate-200">
+        "Những thay đổi chưa lưu sẽ bị mất.
+      </p>
 
       <div className="mt-3 flex justify-end gap-3">
         <button
@@ -22,4 +26,6 @@ export default function LeavePageModal({ onConfirm, onCancel }) {
       </div>
     </div>
   );
-}
+};
+
+export default LeavePageModal;

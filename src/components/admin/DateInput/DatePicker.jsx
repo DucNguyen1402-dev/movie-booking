@@ -16,13 +16,13 @@ const CustomComponents = {
   },
 };
 
-export default function DatePicker({
+const DatePicker = ({
   datePickerRef,
   isDatePickerOpen,
   control,
   name,
   rules,
-}) {
+}) => {
   return (
     <>
       <Controller
@@ -50,4 +50,6 @@ export default function DatePicker({
       />
     </>
   );
-}
+};
+
+export default DatePicker;

@@ -1,4 +1,4 @@
-export default function Textarea({
+const Textarea = ({
   label,
   register,
   name,
@@ -8,7 +8,7 @@ export default function Textarea({
   rows = "1",
   textareaRef,
   onInput,
-}) {
+}) => {
   const descriptionField = register("moTa", rules);
 
   return (
@@ -39,4 +39,6 @@ export default function Textarea({
       )}
     </div>
   );
-}
+};
+
+export default Textarea;

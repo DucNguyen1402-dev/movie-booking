@@ -1,31 +1,23 @@
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { HIGHLIGHT_TYPES } from "@config/admin/userHighlights";
+import { HIGHLIGHT_TYPES } from "@config/admin";
 
-import { useLoadingContext } from "@contexts/admin/loading";
-import { useModalContext } from "@contexts/admin/modal";
-import { useNotificationContext } from "@contexts/admin/notification";
-import { ensureMinDuration } from "@utils/admin/ensureMinDuration";
-import { MIN_LOADING_TIME } from "@constants/admin/loadingSpinner";
-import { MODAL_TYPES } from "@constants/admin/modalTypes";
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
+import { ensureMinDuration } from "@utils/admin";
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
-import {useUserEdit} from "./useUserEdit"
+import { useUserEdit } from "./useUserEdit";
 
-export function useEditActions({ handleSubmit, initialUser }) {
+export function useEditActions({ handleSubmit, initialUser, isDirty }) {
   const navigate = useNavigate();
   const location = useLocation();
   const history = location.state?.history ?? [];
-  const previousPage = location.state?.previousPage ?? null;
   const previousPath = history.at(-1) ?? "/admin/users";
-
-  const { mutateAsync } = useUserEdit();
-
-  const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoadingContext();
-  const {  notificationActions } = useNotificationContext();
-
-  const handleCancelEdit = () => {
-    modal.close();
+  const navigateBack = () => {
     navigate(previousPath, {
       state: {
         history: history.slice(0, -1),
@@ -33,13 +25,27 @@ export function useEditActions({ handleSubmit, initialUser }) {
     });
   };
 
-  const onCancelEditClick = () =>
+  const modal = useModalContext();
+  const { showLoading, hideLoading } = useLoadingContext();
+  const { notificationActions } = useNotificationContext();
+  const { mutateAsync } = useUserEdit();
+
+  const onCancelEditClick = () => {
+    if (!isDirty) {
+      navigateBack();
+      return;
+    }
+
     modal.open({
       type: MODAL_TYPES.EDIT_USER,
-      title: "Hủy thay đổi ?",
-      subtitle: "Mọi thông tin của bạn sẽ không được lưu",
-      onConfirm: handleCancelEdit,
+      title: "Hủy thay đổi?",
+      subtitle: "Mọi thông tin của bạn sẽ không được lưu.",
+      onConfirm: () => {
+        modal.close();
+        navigateBack();
+      },
     });
+  };
 
   const handleConfirmEdit = async (data) => {
     modal.close();
@@ -74,7 +80,6 @@ export function useEditActions({ handleSubmit, initialUser }) {
             message: "Cập nhật thông tin người dùng thành công.",
           },
           highlight: HIGHLIGHT_TYPES.UPDATE,
-          previousPage
         },
       });
     } catch (error) {
@@ -88,7 +93,6 @@ export function useEditActions({ handleSubmit, initialUser }) {
       });
     }
   };
-
 
   const onValid = (data) =>
     modal.open({

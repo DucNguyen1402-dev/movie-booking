@@ -6,7 +6,7 @@ import { useLayoutContext } from "@contexts/admin/layout";
 import { useModalContext } from "@contexts/admin/modal";
 import { MODAL_TYPES } from "@constants/admin/modalTypes";
 
-export default function Header() {
+const Header = () => {
   const { isSidebarOpen } = useLayoutContext();
   const location = useLocation();
   const history = location.state?.history ?? [];
@@ -149,4 +149,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

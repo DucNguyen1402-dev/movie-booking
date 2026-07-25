@@ -1,4 +1,4 @@
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 import { FolderClock } from "lucide-react";
 
@@ -9,19 +9,21 @@ import {
 } from "@features/admin/users/booking-infor/components";
 import { useUserInfor } from "@features/admin/users/booking-infor/hooks";
 
-export default function UserBookingInfor() {
-  const {account} = useParams();
+export default function UserBookingInforPage() {
+  const { account } = useParams();
   const { data: user = {}, isPending } = useUserInfor(account);
 
   const bookings = user.thongTinDatVe ?? [];
 
-  let content = <BookingInfor bookings={bookings} />;
-
-  if (isPending) {
-    content = <BookingInforSkeleton />;
-  } else if (bookings.length === 0) {
-    content = <EmptyBooking />;
-  }
+  const renderBookingInforContent = ({ bookings, isPending }) => {
+    if (isPending) {
+      return <BookingInforSkeleton />;
+    }
+    if (bookings.length === 0) {
+      return <EmptyBooking />;
+    }
+    return <BookingInfor bookings={bookings} />;
+  };
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-900 to-slate-800">
@@ -32,7 +34,7 @@ export default function UserBookingInfor() {
             Lịch sử các vé mà người dùng đã đặt.
           </h2>
         </div>
-        {content}
+        {renderBookingInforContent({ bookings, isPending })}
       </div>
     </div>
   );

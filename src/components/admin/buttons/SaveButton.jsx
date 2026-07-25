@@ -9,12 +9,7 @@ const surfaceStyles = {
   deepDark: "bg-blue-600 hover:bg-blue-600/80",
 };
 
-export default function SaveButton({
-  children,
-  Icon = Save,
-  surface = "light",
-  ...props
-}) {
+const SaveButton = ({ children, Icon = Save, surface = "light", ...props }) => {
   return (
     <Button
       Icon={Icon}
@@ -27,4 +22,6 @@ export default function SaveButton({
       {children}
     </Button>
   );
-}
+};
+
+export default SaveButton;

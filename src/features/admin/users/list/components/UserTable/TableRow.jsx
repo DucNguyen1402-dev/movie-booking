@@ -1,17 +1,26 @@
-import { USER_HIGHLIGHTS } from "@config/admin/userHighlights";
-import { CalendarCheck,SquarePen, Trash } from "lucide-react";
+import { USER_HIGHLIGHTS } from "@config/admin";
+import { CalendarCheck, SquarePen, Trash } from "lucide-react";
 
-import {userRoleLabel} from "@features/admin/users/constants"
-import { useTableRow } from "@features/admin/users/management/hooks"
+import { userRoleMapping } from "@features/admin/users/constants";
+import { useTableRow } from "@features/admin/users/list/hooks";
 
 export default function TableRow({ user, isMatched, highlight }) {
-  const { onDeletionClick, rowRef, onEditClick, onBookingInforClick, deletingAccount } =
-    useTableRow({ isMatched });
+  const {
+    onDeletionClick,
+    rowRef,
+    onEditClick,
+    onBookingInforClick,
+    deletingAccount,
+  } = useTableRow({ isMatched });
 
   const highlightClass = USER_HIGHLIGHTS[highlight];
   const isDeleting = deletingAccount === user.taiKhoan;
 
-  
+  const {
+    label,
+    variants: { table: tableRoleClasses },
+  } = userRoleMapping[user.maLoaiNguoiDung];
+
   return (
     <tr
       key={user.taiKhoan}
@@ -37,12 +46,10 @@ export default function TableRow({ user, isMatched, highlight }) {
       <td>
         <span
           className={`inline-flex w-25 items-center justify-center rounded-full border py-2 text-xs font-semibold transition-colors duration-200${
-            user.maLoaiNguoiDung === "QuanTri"
-              ? "border-violet-500/20 bg-violet-500/10 text-violet-400 group-hover:border-violet-500/80"
-              : "border-blue-500/20 bg-blue-500/10 text-blue-400 group-hover:border-blue-500/80"
+            tableRoleClasses
           } `}
         >
-          {userRoleLabel[user.maLoaiNguoiDung]}
+          {label}
         </span>
       </td>
 

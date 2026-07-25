@@ -1,4 +1,4 @@
-export default function AddModal({ onCancel, onConfirm, title, subtitle }) {
+const AddModal = ({ onCancel, onConfirm, title, subtitle }) => {
   return (
     <div className="z-100 flex w-full flex-col gap-3 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90 lg:w-90">
       <h2 className="text-xl font-semibold text-slate-50">{title}</h2>
@@ -22,4 +22,6 @@ export default function AddModal({ onCancel, onConfirm, title, subtitle }) {
       </div>
     </div>
   );
-}
+};
+
+export default AddModal;

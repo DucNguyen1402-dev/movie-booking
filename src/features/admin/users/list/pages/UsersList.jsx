@@ -1,27 +1,27 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useLayoutContext } from "@contexts/admin/layout";
-import { useNotificationContext } from "@contexts/admin/notification";
+import { useLayoutContext, useNotificationContext } from "@contexts/admin";
 import { useConsumeLocationState } from "@hooks/admin";
 import {
   UserHeader,
   UserTable,
   UserToolbar,
-} from "@features/admin/users/management/components";
+} from "@features/admin/users/list/components";
 
-export default function UsersManagement() {
+export default function UsersList() {
   const { isSidebarOpen } = useLayoutContext();
 
   const location = useLocation();
   const { notificationActions } = useNotificationContext();
-  useConsumeLocationState("notification", 10000);
 
   useEffect(() => {
     if (location.state?.notification) {
       notificationActions.show(location.state.notification);
     }
   }, [location.state, notificationActions]);
+
+  useConsumeLocationState("notification", 10000);
 
   return (
     <div

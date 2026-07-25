@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 const sizes = {
   xs: {
-     button: "px-1.5 py-0.75 text-xs",
+    button: "px-1.5 py-0.75 text-xs",
     icon: "size-2",
   },
   sm: {
@@ -19,7 +19,7 @@ const sizes = {
   },
 };
 
-export default function Button({
+const Button = ({
   children,
   Icon,
   size = "md",
@@ -27,7 +27,7 @@ export default function Button({
   fullWidth = false,
   className = "",
   ...props
-}) {
+}) => {
   const currentSize = sizes[size];
 
   return (
@@ -54,4 +54,5 @@ export default function Button({
       <span>{children}</span>
     </button>
   );
-}
+};
+export default Button;

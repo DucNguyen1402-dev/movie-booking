@@ -1,12 +1,8 @@
-import {
-  Armchair,
-  Calendar,
-  Clock3,
-} from "lucide-react";
+import { Armchair, Calendar, Clock3 } from "lucide-react";
 
-import {  formatCurrency,formatDateTime}  from "@features/admin/users/utils/format"
+import { formatCurrency, formatDateTime } from "@features/admin/users/utils";
 
-export default function BookingInfor({bookings}) {
+export default function BookingInfor({ bookings }) {
   return (
     <div className="space-y-8">
       {bookings.map((booking) => {

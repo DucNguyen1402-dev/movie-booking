@@ -5,7 +5,7 @@ const baseClasses =
 const defaultClasses = `${baseClasses} bg-slate-900/40 hover:border-indigo-500 hover:ring-2 hover:ring-indigo-500/20 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/2`;
 const disabledClasses = `${baseClasses} bg-slate-900/60`;
 
-export default function Input({
+const Input = ({
   label,
   register,
   name,
@@ -18,7 +18,7 @@ export default function Input({
   disabledClassName = disabledClasses,
   required,
   ...props
-}) {
+}) => {
   const appliedClasses = disabled ? disabledClassName : className;
 
   return (
@@ -51,4 +51,6 @@ export default function Input({
       )}
     </div>
   );
-}
+};
+
+export default Input;

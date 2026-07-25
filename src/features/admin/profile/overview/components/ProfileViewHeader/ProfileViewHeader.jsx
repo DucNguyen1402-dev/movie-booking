@@ -38,7 +38,7 @@ export default function ProfileViewHeader({ name }) {
 
         <div className="flex flex-col items-center justify-center gap-3">
           <h2 className="text-xl font-medium text-slate-100">{name}</h2>
-          <span className="rounded-md bg-[#2D2D2D] px-4 py-1 font-mono text-xs tracking-wider text-yellow-400">
+          <span className="rounded-md border border-violet-500/40 bg-violet-950/30 px-4 py-1 font-mono text-xs tracking-wider text-violet-300">
             QUẢN TRỊ VIÊN
           </span>
         </div>

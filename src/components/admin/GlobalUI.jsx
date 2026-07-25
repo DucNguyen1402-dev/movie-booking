@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 
-import {useLoadingContext} from "@contexts/admin/loading"
-import {useModalContext} from "@contexts/admin/modal"
+import { useLoadingContext } from "@contexts/admin/loading";
+import { useModalContext } from "@contexts/admin/modal";
 import { useNotificationContext } from "@contexts/admin/notification";
 import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
 import LoadingSpinner from "@components/admin/LoadingSpinner";
@@ -10,11 +10,11 @@ import Notification from "@components/admin/Notification";
 import Backdrop from "@/components/admin/Backdrop";
 import Modal from "@/components/admin/Modal/Modal";
 
-export default function GlobalUI() {
-  const {modal} = useModalContext();
+const GlobalUI = () => {
+  const { modal } = useModalContext();
   const loading = useLoadingContext();
   const notification = useNotificationContext();
-  
+
   const shouldLock = modal.type !== null || loading.isVisible;
   useLockBodyScroll(shouldLock);
 
@@ -69,4 +69,6 @@ export default function GlobalUI() {
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default GlobalUI;

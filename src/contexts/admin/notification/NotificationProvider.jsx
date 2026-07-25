@@ -8,7 +8,7 @@ import {
 } from "./hooks";
 import { notificationContext } from "./notificationContext";
 
-export function NotificationProvider({ children }) {
+const NotificationProvider = ({ children }) => {
   const { notification, dispatch, notificationRef, timeoutRef } =
     useNotificationStates();
 
@@ -38,5 +38,6 @@ export function NotificationProvider({ children }) {
       {children}
     </notificationContext.Provider>
   );
-}
+};
 
+export default NotificationProvider;

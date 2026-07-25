@@ -1,16 +1,16 @@
 import { SearchX } from "lucide-react";
 
-export default function EmptyTable({
+const EmptyTable = ({
   title,
   description,
   colSpan,
   icon: Icon = SearchX,
   children,
-}) {
+}) => {
   return (
     <tr>
       <td colSpan={colSpan}>
-        <div className="flex flex-col items-center justify-center gap-6 py-24 border-t border-slate-700">
+        <div className="flex flex-col items-center justify-center gap-6 border-t border-slate-700 py-24">
           <div className="flex size-24 items-center justify-center rounded-full bg-slate-700/30">
             <Icon className="size-14 text-slate-400" />
           </div>
@@ -30,4 +30,6 @@ export default function EmptyTable({
       </td>
     </tr>
   );
-}
+};
+
+export default EmptyTable;

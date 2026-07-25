@@ -1,1 +1,1 @@
-export {userRoleLabel} from "./userRoleLabel"
+export { userRoleMapping } from "./userRoleMapping";

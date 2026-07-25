@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { LayoutContext } from "./LayoutContext";
 
-export function LayoutProvider({ children }) {
+const LayoutProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
@@ -19,4 +19,6 @@ export function LayoutProvider({ children }) {
       {children}
     </LayoutContext.Provider>
   );
-}
+};
+
+export default LayoutProvider;
