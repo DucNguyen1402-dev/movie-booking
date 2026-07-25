@@ -9,7 +9,7 @@ import { EmptyStateButton } from "@components/admin/buttons";
 import MovieItem from "./MovieItem";
 import MovieTableSkeleton from "./MovieTableSkeleton";
 
-export default function MoviesTable() {
+const MoviesTable = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -132,4 +132,6 @@ export default function MoviesTable() {
       </div>
     </div>
   );
-}
+};
+
+export default MoviesTable;

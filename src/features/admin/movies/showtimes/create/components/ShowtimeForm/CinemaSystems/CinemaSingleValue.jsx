@@ -1,6 +1,6 @@
 import { components } from "react-select";
 
-export function CinemaSingleValue(props) {
+const CinemaSingleValue = (props) => {
   return (
     <components.SingleValue {...props}>
       <div className="flex items-center gap-3">
@@ -14,4 +14,6 @@ export function CinemaSingleValue(props) {
       </div>
     </components.SingleValue>
   );
-}
+};
+
+export default CinemaSingleValue;

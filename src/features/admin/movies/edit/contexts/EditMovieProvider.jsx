@@ -1,4 +1,4 @@
-import {EditMovieContext} from "./EditMovieContext.js"
+import { EditMovieContext } from "./EditMovieContext.js";
 import {
   useDerivedEditMovie,
   useEditForm,
@@ -7,8 +7,7 @@ import {
   useEditMovieState,
 } from "./hooks";
 
-
-export function EditMovieProvider({ children }) {
+const EditMovieProvider = ({ children }) => {
   const editStates = useEditMovieState();
 
   const derivedMovie = useDerivedEditMovie({
@@ -36,5 +35,11 @@ export function EditMovieProvider({ children }) {
     editForm,
   };
 
-  return <EditMovieContext.Provider value={value}>{children}</EditMovieContext.Provider>;
-}
+  return (
+    <EditMovieContext.Provider value={value}>
+      {children}
+    </EditMovieContext.Provider>
+  );
+};
+
+export default EditMovieProvider;

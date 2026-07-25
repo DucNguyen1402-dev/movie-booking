@@ -1,4 +1,4 @@
-import { Navigate,Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { AdminProviders } from "@providers/admin";
 
@@ -9,7 +9,7 @@ import { usersRoutes } from "@features/admin/users/routes/usersRoutes";
 
 import MainLayoutRoute from "./MainLayoutRoute";
 
-export default function AdminRoutes() {
+const AdminRoutes = () => {
   return (
     <AdminProviders>
       <Routes>
@@ -23,4 +23,6 @@ export default function AdminRoutes() {
       </Routes>
     </AdminProviders>
   );
-}
+};
+
+export default AdminRoutes;

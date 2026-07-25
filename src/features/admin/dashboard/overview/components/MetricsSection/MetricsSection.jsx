@@ -94,7 +94,7 @@ const createMetricCards = ({
   },
 ];
 
-export default function MetricsSection({
+const MetricsSection = ({
   isPending,
   userQuantity,
   totalRevenue,
@@ -102,7 +102,7 @@ export default function MetricsSection({
   averageRevenue,
   averageTicketsSold,
   averageRating,
-}) {
+}) => {
   const METRIC_CARDS = createMetricCards({
     totalRevenue,
     totalTicketSold,
@@ -135,4 +135,6 @@ export default function MetricsSection({
           ))}
     </section>
   );
-}
+};
+
+export default MetricsSection;

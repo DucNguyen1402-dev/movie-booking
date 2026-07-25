@@ -10,7 +10,7 @@ import {
   ProfileViewInfor,
 } from "@features/admin/profile/overview/components";
 
-export default function ProfileView() {
+const ProfileView = () => {
   const location = useLocation();
   const history = location.state?.history ?? [];
   const navigate = useNavigate();
@@ -83,4 +83,6 @@ export default function ProfileView() {
       </div>
     </div>
   );
-}
+};
+
+export default ProfileView;

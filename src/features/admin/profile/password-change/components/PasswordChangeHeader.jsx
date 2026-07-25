@@ -1,4 +1,4 @@
-export default function PasswordChangeHeader() {
+const PasswordChangeHeader = () => {
   return (
     <div className="space-y-3 text-center">
       <h2 className="text-[26px] font-semibold text-slate-100">Đổi mật khẩu</h2>
@@ -8,4 +8,6 @@ export default function PasswordChangeHeader() {
       </p>
     </div>
   );
-}
+};
+
+export default PasswordChangeHeader;

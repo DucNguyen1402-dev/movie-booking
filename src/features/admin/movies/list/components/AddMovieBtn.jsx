@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { Plus } from "lucide-react";
 
-export default function AddMovieBtn() {
+const AddMovieBtn = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,4 +22,6 @@ export default function AddMovieBtn() {
       Thêm phim mới
     </button>
   );
-}
+};
+
+export default AddMovieBtn;

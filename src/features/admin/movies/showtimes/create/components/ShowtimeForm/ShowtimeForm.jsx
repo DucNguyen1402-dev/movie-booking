@@ -16,7 +16,7 @@ import {
   TicketPrice,
 } from ".";
 
-export default function ShowtimeForm({ movie }) {
+const ShowtimeForm = ({ movie }) => {
   const { handleSubmit, control, watch, isDirty } = useShowtimeForm();
   const { onCancelClick, onConfirmClick } = useShowtimeActions({
     handleSubmit,
@@ -106,4 +106,6 @@ export default function ShowtimeForm({ movie }) {
       </div>
     </div>
   );
-}
+};
+
+export default ShowtimeForm;

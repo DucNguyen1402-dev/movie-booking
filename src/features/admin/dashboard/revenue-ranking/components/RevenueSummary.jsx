@@ -6,7 +6,7 @@ import {
   formatCurrency,
 } from "@features/admin/dashboard/utils";
 
-export default function RevenueSummary() {
+const RevenueSummary = () => {
   const {
     dashboardDerived: { revenue, derivedMovies },
   } = useDashboardContext();
@@ -66,4 +66,6 @@ export default function RevenueSummary() {
       </div>
     </div>
   );
-}
+};
+
+export default RevenueSummary;

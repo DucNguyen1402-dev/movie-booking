@@ -1,6 +1,6 @@
 import { components } from "react-select";
 
-export function CinemaOption(props) {
+const CinemaOption = (props) => {
   return (
     <components.Option {...props}>
       <div className="flex items-center gap-3">
@@ -14,4 +14,6 @@ export function CinemaOption(props) {
       </div>
     </components.Option>
   );
-}
+};
+
+export default CinemaOption;

@@ -1,4 +1,4 @@
-export default function TopFiveRevenueMoviesSkeleton() {
+const TopFiveRevenueMoviesSkeleton = () => {
   return (
     <div className="relative animate-pulse overflow-hidden rounded-2xl border border-gray-800 bg-[#141414] p-8 pb-4 shadow-xl">
       <div className="absolute -top-16 -left-16 h-48 w-48 rounded-full bg-yellow-500/5 blur-3xl" />
@@ -74,4 +74,6 @@ export default function TopFiveRevenueMoviesSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default TopFiveRevenueMoviesSkeleton;

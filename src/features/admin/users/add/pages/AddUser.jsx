@@ -1,8 +1,7 @@
 import { PencilLine } from "lucide-react";
 
-import {AddUserForms} from "@features/admin/users/add/components";
-
-export default function AddUser() {
+import { AddUserForms } from "@features/admin/users/add/components";
+const AddUser = () => {
   return (
     <div className="min-h-screen w-full space-y-8 bg-linear-to-br from-slate-900 via-slate-800 to-slate-700 pt-8">
       <div className="flex items-center justify-center gap-3 text-slate-200">
@@ -15,4 +14,6 @@ export default function AddUser() {
       <AddUserForms />
     </div>
   );
-}
+};
+
+export default AddUser;

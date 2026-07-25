@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-export default function MoviesLayout() {
+const MoviesLayout = () => {
   return <Outlet />;
-}
+};
+
+export default MoviesLayout;

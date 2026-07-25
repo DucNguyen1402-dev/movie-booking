@@ -1,15 +1,12 @@
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { ArrowUpRight,Flame, Star } from "lucide-react";
+import { ArrowUpRight, Flame, Star } from "lucide-react";
 
 import { formatCompactCurrency } from "@features/admin/dashboard/utils";
 
 import TopFiveRevenueMoviesSkeleton from "./TopFiveRevenueMoviesSkeleton";
 
-export default function TopFiveRevenueMovies({
-  topFiveMoviesRevenue,
-  isPending,
-}) {
+const TopFiveRevenueMovies = ({ topFiveMoviesRevenue, isPending }) => {
   const maxRevenue = topFiveMoviesRevenue?.[0]?.revenue || 1;
 
   const navigate = useNavigate();
@@ -153,4 +150,6 @@ export default function TopFiveRevenueMovies({
       </div>
     </div>
   );
-}
+};
+
+export default TopFiveRevenueMovies;

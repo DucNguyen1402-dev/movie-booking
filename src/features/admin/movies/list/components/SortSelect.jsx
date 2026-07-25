@@ -1,6 +1,6 @@
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
-export default function SortSelect() {
+const SortSelect = () => {
   const {
     processed: {
       state: { sortType },
@@ -34,4 +34,6 @@ export default function SortSelect() {
       </optgroup>
     </select>
   );
-}
+};
+
+export default SortSelect;

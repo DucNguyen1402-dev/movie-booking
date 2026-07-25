@@ -4,7 +4,7 @@ import {
 } from "@features/admin/movies/showtimes/list/components";
 import { useShowtimeList } from "@features/admin/movies/showtimes/list/hooks";
 
-export default function ShowtimeList() {
+const ShowtimeList = () => {
   const { showtimeInfor, hasNoShowtime, showtimeMovie, isPending } =
     useShowtimeList();
 
@@ -26,4 +26,6 @@ export default function ShowtimeList() {
       </div>
     </div>
   );
-}
+};
+
+export default ShowtimeList;

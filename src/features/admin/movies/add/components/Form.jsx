@@ -2,11 +2,16 @@ import { validationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
-import { AddButton , CancelButton, DateInput, Textarea} from "@components/admin";
+import {
+  AddButton,
+  CancelButton,
+  DateInput,
+  Textarea,
+} from "@components/admin";
 
-import { CheckboxFields, FileImageField,InputFields } from "./Fields";
+import { CheckboxFields, FileImageField, InputFields } from "./Fields";
 
-export default function Form() {
+const Form = () => {
   const {
     register,
     handleSubmitEvent,
@@ -86,4 +91,6 @@ export default function Form() {
       </div>
     </form>
   );
-}
+};
+
+export default Form;

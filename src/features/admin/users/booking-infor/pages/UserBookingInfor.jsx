@@ -9,7 +9,7 @@ import {
 } from "@features/admin/users/booking-infor/components";
 import { useUserInfor } from "@features/admin/users/booking-infor/hooks";
 
-export default function UserBookingInforPage() {
+const UserBookingInforPage = () => {
   const { account } = useParams();
   const { data: user = {}, isPending } = useUserInfor(account);
 
@@ -38,4 +38,6 @@ export default function UserBookingInforPage() {
       </div>
     </div>
   );
-}
+};
+
+export default UserBookingInforPage;

@@ -9,7 +9,7 @@ import {
   UserToolbar,
 } from "@features/admin/users/list/components";
 
-export default function UsersList() {
+const UsersList = () => {
   const { isSidebarOpen } = useLayoutContext();
 
   const location = useLocation();
@@ -40,4 +40,6 @@ export default function UsersList() {
       </div>
     </div>
   );
-}
+};
+
+export default UsersList;

@@ -17,7 +17,7 @@ import {
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { Backdrop, Select } from "@components/admin";
 
-export default function MovieList() {
+const MovieList = () => {
   const location = useLocation();
 
   const { isSidebarOpen } = useLayoutContext();
@@ -84,4 +84,6 @@ export default function MovieList() {
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default MovieList;

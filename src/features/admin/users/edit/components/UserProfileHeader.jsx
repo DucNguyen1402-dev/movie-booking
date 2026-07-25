@@ -1,6 +1,6 @@
 import { userRoleMapping } from "@features/admin/users/constants";
 
-export default function UserProfileHeader({ initial, taiKhoan, role }) {
+const UserProfileHeader = ({ initial, taiKhoan, role }) => {
   const {
     label,
     variants: { profile: profileClasses },
@@ -20,4 +20,6 @@ export default function UserProfileHeader({ initial, taiKhoan, role }) {
       </p>
     </div>
   );
-}
+};
+
+export default UserProfileHeader;

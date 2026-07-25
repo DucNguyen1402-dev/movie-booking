@@ -5,8 +5,7 @@ const checkboxFields = [
   { label: "Đang chiếu", name: "dangChieu" },
   { label: "Sắp chiếu", name: "sapChieu" },
 ];
-
-export default function CheckboxFields({ control }) {
+const CheckboxFields = ({ control }) => {
   return checkboxFields.map((field) => (
     <CheckBox
       key={field.name}
@@ -15,4 +14,6 @@ export default function CheckboxFields({ control }) {
       label={field.label}
     />
   ));
-}
+};
+
+export default CheckboxFields;

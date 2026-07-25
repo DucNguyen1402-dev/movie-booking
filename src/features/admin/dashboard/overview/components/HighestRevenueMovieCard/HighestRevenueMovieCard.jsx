@@ -1,11 +1,8 @@
-import { Ticket,TrendingUp, Trophy } from "lucide-react";
+import { Ticket, TrendingUp, Trophy } from "lucide-react";
 
 import HighestRevenueMovieCardSkeleton from "./HighestRevenueMovieCardSkeleton";
 
-export default function HighestRevenueMovieCard({
-  highestRevenueMovie,
-  isPending,
-}) {
+const HighestRevenueMovieCard = ({ highestRevenueMovie, isPending }) => {
   return isPending ? (
     <HighestRevenueMovieCardSkeleton />
   ) : (
@@ -96,4 +93,6 @@ export default function HighestRevenueMovieCard({
       </div>
     </div>
   );
-}
+};
+
+export default HighestRevenueMovieCard;

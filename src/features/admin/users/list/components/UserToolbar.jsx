@@ -4,10 +4,10 @@ import { Search } from "lucide-react";
 import { useUsersContext } from "@features/admin/users/contexts";
 import { Select } from "@components/admin";
 
-export default function UserToolbar() {
+const UserToolbar = () => {
   const {
     userFilters: { filters, onSearch, onRoleFilter },
-    pagination
+    pagination,
   } = useUsersContext();
 
   return (
@@ -39,4 +39,6 @@ export default function UserToolbar() {
       </div>
     </div>
   );
-}
+};
+
+export default UserToolbar;

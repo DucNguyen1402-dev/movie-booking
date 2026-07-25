@@ -1,11 +1,11 @@
-import { useEffect, useRef,useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Controller } from "react-hook-form";
 
 import { Clock4 } from "lucide-react";
 
 import TimePicker from "./TimePicker";
 
-export default function Showtime({ isTimePickerDisabled, watch, control }) {
+const Showtime = ({ isTimePickerDisabled, watch, control }) => {
   const [timePickerVisible, setTimePickerVisible] = useState(false);
   const timePickerRef = useRef(null);
 
@@ -25,7 +25,7 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
   }, []);
 
   return (
-    <div className="flex flex-col gap-1.5 ">
+    <div className="flex flex-col gap-1.5">
       <label
         className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
         htmlFor="show-time"
@@ -43,9 +43,7 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
           disabled={isTimePickerDisabled}
         >
           <Clock4 className="size-4.5" />
-          <span
-
-          >
+          <span>
             {isTimePickerDisabled ? "Vui lòng chọn rạp chiếu trước" : timeLabel}
           </span>
         </button>
@@ -64,9 +62,9 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
                 />
 
                 {fieldState.error && (
-                   <p className="absolute top-[115%] left-0 w-full z-10 rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
-                {fieldState.error.message}
-              </p>
+                  <p className="absolute top-[115%] left-0 z-10 w-full rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
+                    {fieldState.error.message}
+                  </p>
                 )}
               </>
             )}
@@ -75,4 +73,6 @@ export default function Showtime({ isTimePickerDisabled, watch, control }) {
       </div>
     </div>
   );
-}
+};
+
+export default Showtime;

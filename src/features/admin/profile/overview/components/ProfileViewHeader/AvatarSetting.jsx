@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useUserContext } from "@contexts/admin/user";
 import { usePagination } from "@hooks/admin";
 
-export default function AvatarSetting({ onClose }) {
+const AvatarSetting = ({ onClose }) => {
   const { setAvatarIndex, avatarName, avatarList } = useUserContext();
 
   const pagination = usePagination({
@@ -75,4 +75,6 @@ export default function AvatarSetting({ onClose }) {
       </div>
     </div>
   );
-}
+};
+
+export default AvatarSetting;

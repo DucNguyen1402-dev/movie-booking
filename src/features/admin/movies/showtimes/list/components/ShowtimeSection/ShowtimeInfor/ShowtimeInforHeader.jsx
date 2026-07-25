@@ -1,26 +1,21 @@
-import {useEffect,useRef} from "react"
+import { useEffect, useRef } from "react";
 
 import { MapPin } from "lucide-react";
 
-export default function ShowtimeInforHeader({ diaChi, tenCumRap, hasNewShowtime }) {
+const ShowtimeInforHeader = ({ diaChi, tenCumRap, hasNewShowtime }) => {
+  const clusterRef = useRef(null);
+  useEffect(() => {
+    if (!hasNewShowtime) return;
 
-  const clusterRef= useRef(null);
-   useEffect(() => {
-     if (!hasNewShowtime) return;
- 
-     clusterRef.current?.scrollIntoView({
-       behavior: "smooth",
-       block: "center",
-     });
-   }, [hasNewShowtime]);
-
-
+    clusterRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+  }, [hasNewShowtime]);
 
   return (
-    <div className="flex items-center gap-3"
-       ref = {clusterRef}
-    >
-      <div className="shrink-0 flex h-8 w-8 items-center justify-center rounded-md bg-indigo-500 shadow-lg shadow-indigo-500/50 transition-transform hover:scale-105">
+    <div className="flex items-center gap-3" ref={clusterRef}>
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-indigo-500 shadow-lg shadow-indigo-500/50 transition-transform hover:scale-105">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -50,4 +45,6 @@ export default function ShowtimeInforHeader({ diaChi, tenCumRap, hasNewShowtime 
       </a>
     </div>
   );
-}
+};
+
+export default ShowtimeInforHeader;

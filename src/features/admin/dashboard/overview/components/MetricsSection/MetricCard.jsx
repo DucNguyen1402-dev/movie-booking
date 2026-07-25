@@ -1,7 +1,14 @@
-export default function MetricCard({hoverClasses, title, iconBackground, iconClassName, Icon, metric, descs}) {
+const MetricCard = ({
+  hoverClasses,
+  title,
+  iconBackground,
+  iconClassName,
+  Icon,
+  metric,
+  descs,
+}) => {
   return (
     <div
-  
       className={`flex flex-col justify-between rounded-xl border border-gray-800 bg-[#1e1e1e] p-6 transition-all duration-300 hover:shadow-lg ${hoverClasses}`}
     >
       <div className="flex items-center justify-between">
@@ -25,4 +32,6 @@ export default function MetricCard({hoverClasses, title, iconBackground, iconCla
       </div>
     </div>
   );
-}
+};
+
+export default MetricCard;

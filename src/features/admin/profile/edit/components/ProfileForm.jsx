@@ -5,7 +5,7 @@ import { useProfileContext } from "@features/admin/profile/contexts";
 import { createProfileFields } from "@features/admin/profile/edit/utils";
 import { Input, SaveButton } from "@components/admin";
 
-export default function ProfileForm() {
+const ProfileForm = () => {
   const {
     form: { register, errors, isDirty, onSubmitEvent },
   } = useProfileContext();
@@ -30,4 +30,6 @@ export default function ProfileForm() {
       </div>
     </form>
   );
-}
+};
+
+export default ProfileForm;

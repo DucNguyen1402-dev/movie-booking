@@ -5,11 +5,7 @@ import {
 } from "@features/admin/dashboard/utils";
 import { Medal } from "@components/admin";
 
-export default function RevenueRankingRow({
-  movie,
-  rank,
-  relativeRevenueRate,
-}) {
+const RevenueRankingRow = ({ movie, rank, relativeRevenueRate }) => {
   const medalAnimation =
     rank === 1 ? "origin-bottom group-hover/outer:animate-medal-shake" : "";
 
@@ -71,4 +67,6 @@ export default function RevenueRankingRow({
       </td>
     </tr>
   );
-}
+};
+
+export default RevenueRankingRow;

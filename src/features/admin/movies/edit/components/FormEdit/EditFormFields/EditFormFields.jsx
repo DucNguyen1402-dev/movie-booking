@@ -1,14 +1,14 @@
-import { useLayoutEffect,useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import { validationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
-import { DateInput,Textarea } from "@components/admin";
+import { DateInput, Textarea } from "@components/admin";
 
-import { CheckboxFields,InputFields } from "./FormFields";
+import { CheckboxFields, InputFields } from "./FormFields";
 
-export default function EditFormFields() {
+const EditFormFields = () => {
   const {
     editForm: { register, errors, watch, control, isDirty },
   } = useEditMovieContext();
@@ -41,7 +41,7 @@ export default function EditFormFields() {
         error={errors.moTa}
         register={register}
         onInput={handleInput}
-        textareaRef ={textareaRef}
+        textareaRef={textareaRef}
       />
 
       <div className="flex items-center justify-between">
@@ -68,4 +68,6 @@ export default function EditFormFields() {
       </div>
     </div>
   );
-}
+};
+
+export default EditFormFields;

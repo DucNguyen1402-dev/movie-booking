@@ -1,4 +1,4 @@
-export default function ProfileViewInfor({ fields }) {
+const ProfileViewInfor = ({ fields }) => {
   return (
     <div className="mt-10 space-y-5">
       {fields.map((field) => (
@@ -13,4 +13,6 @@ export default function ProfileViewInfor({ fields }) {
       ))}
     </div>
   );
-}
+};
+
+export default ProfileViewInfor;

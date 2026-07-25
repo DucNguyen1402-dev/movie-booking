@@ -1,4 +1,4 @@
-export default function ShowtimeHeader({ tenHeThongRap, logo }) {
+const ShowtimeHeader = ({ tenHeThongRap, logo }) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex w-full items-center justify-between text-slate-100">
@@ -13,4 +13,6 @@ export default function ShowtimeHeader({ tenHeThongRap, logo }) {
       </div>
     </div>
   );
-}
+};
+
+export default ShowtimeHeader;

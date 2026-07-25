@@ -1,4 +1,4 @@
-export default function EmptyMetricCard() {
+const EmptyMetricCard = () => {
   return (
     <div className="w-full max-w-sm animate-pulse rounded-xl border border-gray-700 bg-[#1e1e1e] p-4 shadow-sm">
       <div className="mb-4 w-full rounded-lg bg-gray-700"></div>
@@ -20,4 +20,6 @@ export default function EmptyMetricCard() {
       </div>
     </div>
   );
-}
+};
+
+export default EmptyMetricCard;

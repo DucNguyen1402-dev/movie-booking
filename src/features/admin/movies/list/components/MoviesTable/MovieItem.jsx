@@ -11,7 +11,7 @@ import {
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { useMovieItem } from "@features/admin/movies/list/hooks";
 
-export default function MovieItem({ movie, movieId, highlight }) {
+const MovieItem = ({ movie, movieId, highlight }) => {
   const {
     onDeleteClick,
     onCreateShowTimeClick,
@@ -134,4 +134,6 @@ export default function MovieItem({ movie, movieId, highlight }) {
       </td>
     </tr>
   );
-}
+};
+
+export default MovieItem;

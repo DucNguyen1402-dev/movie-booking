@@ -1,6 +1,6 @@
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 
-export default function HeaderContent() {
+const HeaderContent = () => {
   const {
     editForm: { watch },
   } = useEditMovieContext();
@@ -15,4 +15,6 @@ export default function HeaderContent() {
       </p>
     </div>
   );
-}
+};
+
+export default HeaderContent;

@@ -11,7 +11,7 @@ const titles = {
   "/admin/profile": "Profile",
 };
 
-export default function FaviconManager() {
+const FaviconManager = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function FaviconManager() {
     const title = titles[pathname]
       ? `${titles[pathname]} | Movie Admin`
       : "Movie Admin";
-    document.title = pathname.startsWith("/admin") ? title : "Cinema booking"
+    document.title = pathname.startsWith("/admin") ? title : "Cinema booking";
 
     favicon.rel = "icon";
     favicon.href = pathname.startsWith("/admin") ? adminIcon : userIcon;
@@ -31,4 +31,6 @@ export default function FaviconManager() {
   }, [pathname]);
 
   return null;
-}
+};
+
+export default FaviconManager;

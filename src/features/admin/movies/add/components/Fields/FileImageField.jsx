@@ -1,11 +1,6 @@
 import { Input } from "@components/admin";
 
-export default function FileImageField({
-  handleFileChange,
-  error,
-  register,
-  imgPreview,
-}) {
+const FileImageField = ({ handleFileChange, error, register, imgPreview }) => {
   return (
     <div className="flex justify-between rounded-sm border border-gray-600 px-5 py-3">
       <div className="flex flex-col gap-4">
@@ -39,4 +34,6 @@ export default function FileImageField({
       )}
     </div>
   );
-}
+};
+
+export default FileImageField;

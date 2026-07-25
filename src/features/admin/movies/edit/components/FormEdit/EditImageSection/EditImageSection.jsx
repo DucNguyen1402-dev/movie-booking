@@ -2,9 +2,9 @@ import { useMemo } from "react";
 
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 
-export default function EditImageSection() {
+const EditImageSection = () => {
   const {
-    editForm: { watch , register},
+    editForm: { watch, register },
   } = useEditMovieContext();
 
   const file = watch("hinhAnh");
@@ -47,11 +47,13 @@ export default function EditImageSection() {
         />
         <label
           htmlFor="file-upload"
-          className="inline-flex cursor-pointer items-center rounded-md  bg-indigo-600 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm transition-colors duration-300 hover:bg-indigo-700"
+          className="inline-flex cursor-pointer items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm transition-colors duration-300 hover:bg-indigo-700"
         >
           Thay đổi hình ảnh
         </label>
       </div>
     </div>
   );
-}
+};
+
+export default EditImageSection;

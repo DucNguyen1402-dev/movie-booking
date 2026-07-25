@@ -1,14 +1,10 @@
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { ArrowUpRight,Clapperboard } from "lucide-react";
+import { ArrowUpRight, Clapperboard } from "lucide-react";
 
 import EmptyMovieStatusCard from "./EmptyMovieStatusCard";
 
-export default function MovieStatusCard({
-  nowShowingMovies,
-  upcomingMovies,
-  isPending,
-}) {
+const MovieStatusCard = ({ nowShowingMovies, upcomingMovies, isPending }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -93,4 +89,6 @@ export default function MovieStatusCard({
       </div>
     </div>
   );
-}
+};
+
+export default MovieStatusCard;

@@ -1,9 +1,9 @@
 import { usePagination } from "@hooks/admin";
 
-import { useUserFilter,useUsersActions, useUsersStates } from "./hooks";
+import { useUserFilter, useUsersActions, useUsersStates } from "./hooks";
 import { usersContext } from "./usersContext";
 
-export function UsersProvider({ children }) {
+const UsersProvider = ({ children }) => {
   const usersStates = useUsersStates();
   const usersActions = useUsersActions();
   const userFilters = useUserFilter({ users: usersStates.users });
@@ -28,4 +28,6 @@ export function UsersProvider({ children }) {
   return (
     <usersContext.Provider value={value}>{children}</usersContext.Provider>
   );
-}
+};
+
+export default UsersProvider;

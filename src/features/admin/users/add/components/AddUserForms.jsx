@@ -5,7 +5,7 @@ import { validationRules } from "@features/admin/users/config";
 import { Input, PasswordInput, SelectForm } from "@components/admin";
 
 import { FormActions } from ".";
-export default function AddUserForms() {
+const AddUserForms = () => {
   const { register, handleSubmit, errors, isDirty } = useAddForm();
 
   const { onCancelAddUserClick, onAddUserClick } = useAddActions({
@@ -59,4 +59,6 @@ export default function AddUserForms() {
       </p>
     </div>
   );
-}
+};
+
+export default AddUserForms;

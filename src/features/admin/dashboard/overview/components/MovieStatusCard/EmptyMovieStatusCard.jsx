@@ -1,4 +1,4 @@
-export default function EmptyMovieStatusCard() {
+const EmptyMovieStatusCard = () => {
   return (
     <div className="relative animate-pulse overflow-hidden rounded-2xl border border-gray-800/80 bg-[#141414] p-8">
       <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-red-500/5 blur-3xl" />
@@ -45,4 +45,6 @@ export default function EmptyMovieStatusCard() {
       </div>
     </div>
   );
-}
+};
+
+export default EmptyMovieStatusCard;

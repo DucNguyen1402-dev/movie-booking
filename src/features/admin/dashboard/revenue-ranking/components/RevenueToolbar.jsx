@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUp, Search } from "lucide-react";
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
 import { Select } from "@components/admin";
 
-export default function RevenueToolbar() {
+const RevenueToolbar = () => {
   const {
     revenueRanking: { onSearchMovie, onSortClick, params },
     pagination,
@@ -48,4 +48,6 @@ export default function RevenueToolbar() {
       </button>
     </div>
   );
-}
+};
+
+export default RevenueToolbar;

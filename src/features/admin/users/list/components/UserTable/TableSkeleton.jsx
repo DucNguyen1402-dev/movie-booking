@@ -1,6 +1,4 @@
-export default function TableSkeleton({
-  rows = 10,
-}) {
+const TableSkeleton = ({ rows = 10 }) => {
   return (
     <>
       {Array.from({ length: rows }).map((_, index) => (
@@ -35,4 +33,6 @@ export default function TableSkeleton({
       ))}
     </>
   );
-}
+};
+
+export default TableSkeleton;

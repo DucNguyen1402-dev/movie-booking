@@ -2,12 +2,12 @@ import { Controller } from "react-hook-form";
 
 import { formatCurrencyDisplay } from "@features/admin/movies/showtimes/create/utils";
 
-export default function TicketPrice({
+const TicketPrice = ({
   control,
   watch,
   validationRules,
   isTicketPriceDisabled,
-}) {
+}) => {
   const giaVe = watch("giaVe") ?? null;
   return (
     <div className="flex flex-col gap-1.5">
@@ -61,4 +61,6 @@ export default function TicketPrice({
       />
     </div>
   );
-}
+};
+
+export default TicketPrice;

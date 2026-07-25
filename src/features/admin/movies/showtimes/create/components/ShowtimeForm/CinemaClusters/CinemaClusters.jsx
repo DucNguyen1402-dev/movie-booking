@@ -4,11 +4,7 @@ import Select from "react-select";
 import ClusterOption from "./ClusterOption";
 import ClusterSingleValue from "./ClusterSingleValue";
 
-export default function CinemaClusters({
-  cinemaClusters,
-  control,
-  isClusterDisabled,
-}) {
+const CinemaClusters = ({ cinemaClusters, control, isClusterDisabled }) => {
   const options = cinemaClusters.map((cluster) => ({
     value: cluster.maCumRap,
     label: cluster.tenCumRap,
@@ -128,4 +124,6 @@ export default function CinemaClusters({
       />
     </div>
   );
-}
+};
+
+export default CinemaClusters;

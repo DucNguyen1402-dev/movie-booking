@@ -7,7 +7,7 @@ import {
   ShowtimeForm,
 } from "@features/admin/movies/showtimes/create/components";
 
-export default function ShowtimeCreation() {
+const Create = () => {
   const { id } = useParams();
 
   const { data: movies = [] } = useMovies();
@@ -33,4 +33,6 @@ export default function ShowtimeCreation() {
       </div>
     </div>
   );
-}
+};
+
+export default Create;

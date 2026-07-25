@@ -1,6 +1,6 @@
 import { components } from "react-select";
 
-export default function TheaterOption(props) {
+const TheaterOption = (props) => {
   return (
     <components.Option {...props}>
       <div>
@@ -8,4 +8,6 @@ export default function TheaterOption(props) {
       </div>
     </components.Option>
   );
-}
+};
+
+export default TheaterOption;

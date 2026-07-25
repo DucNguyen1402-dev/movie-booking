@@ -6,7 +6,7 @@ import {
   RevenueToolbar,
 } from "@features/admin/dashboard/revenue-ranking/components";
 
-export default function RevenueRanking() {
+const RevenueRanking = () => {
   const { isSidebarOpen } = useLayoutContext();
 
   return (
@@ -26,4 +26,6 @@ export default function RevenueRanking() {
       </div>
     </section>
   );
-}
+};
+
+export default RevenueRanking;

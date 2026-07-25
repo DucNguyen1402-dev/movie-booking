@@ -4,7 +4,7 @@ import { useMovies } from "@features/admin/movies/hooks";
 import { useMovieParams, useTrailer } from "./hooks";
 import { MovieListContext } from "./MovieListContext";
 
-export function MovieListProvider({ children }) {
+const MovieListProvider = ({ children }) => {
   const { data: movies = [], isPending, isFetching } = useMovies();
 
   // Data có một số phim có state của dangChieu và sapChieu cùng là true
@@ -60,4 +60,6 @@ export function MovieListProvider({ children }) {
       {children}
     </MovieListContext.Provider>
   );
-}
+};
+
+export default MovieListProvider;

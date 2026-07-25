@@ -1,4 +1,4 @@
-export default function HighestRevenueMovieCardSkeleton() {
+const HighestRevenueMovieCardSkeleton = () => {
   return (
     <div className="relative animate-pulse overflow-hidden rounded-2xl border border-amber-500/10 bg-linear-to-br from-[#141414] to-[#1a1515] p-8">
       <div className="absolute -top-12 -right-12 h-52 w-52 rounded-full bg-linear-to-br from-amber-500/5 to-red-500/0 blur-3xl" />
@@ -57,4 +57,6 @@ export default function HighestRevenueMovieCardSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default HighestRevenueMovieCardSkeleton;

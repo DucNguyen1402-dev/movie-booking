@@ -1,7 +1,7 @@
 import ButtonActions from "./ButtonActions";
 import HeaderContent from "./HeaderContent";
 
-export default function EditHeader() {
+const EditHeader = () => {
   return (
     <header className="flex items-center justify-between">
       <HeaderContent />
@@ -9,4 +9,6 @@ export default function EditHeader() {
       <ButtonActions />
     </header>
   );
-}
+};
+
+export default EditHeader;

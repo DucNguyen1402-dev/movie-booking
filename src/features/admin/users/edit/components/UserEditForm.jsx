@@ -2,7 +2,7 @@ import { validationRules } from "@features/admin/users/config";
 import { editUserFields } from "@features/admin/users/edit/config";
 import { Input, PasswordInput, SelectForm } from "@components/admin";
 
-export default function UserEditForm({ register, errors }) {
+const UserEditForm = ({ register, errors }) => {
   return (
     <form className="flex flex-col gap-8">
       {editUserFields.map((field) => {
@@ -35,4 +35,6 @@ export default function UserEditForm({ register, errors }) {
       />
     </form>
   );
-}
+};
+
+export default UserEditForm;

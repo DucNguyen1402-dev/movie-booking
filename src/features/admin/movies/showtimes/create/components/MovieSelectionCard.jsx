@@ -1,6 +1,6 @@
 import { CalendarCheck } from "lucide-react";
 
-export default function MovieSelectionCard({ movie }) {
+const MovieSelectionCard = ({ movie }) => {
   return (
     <div className="group relative space-y-4 rounded-2xl bg-linear-to-br from-slate-800 to-slate-700 pt-6 pb-12 shadow-sm">
       <div className="flex justify-center">
@@ -30,4 +30,6 @@ export default function MovieSelectionCard({ movie }) {
       </div>
     </div>
   );
-}
+};
+
+export default MovieSelectionCard;

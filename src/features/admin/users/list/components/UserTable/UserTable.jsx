@@ -11,7 +11,7 @@ import {
 
 import { TableRow, TableSkeleton } from ".";
 
-export default function UserTable() {
+const UserTable = () => {
   const hasMoveToPage = useRef(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -111,4 +111,6 @@ export default function UserTable() {
       </main>
     </div>
   );
-}
+};
+
+export default UserTable;

@@ -3,8 +3,7 @@ import { CalendarCheck, SquarePen, Trash } from "lucide-react";
 
 import { userRoleMapping } from "@features/admin/users/constants";
 import { useTableRow } from "@features/admin/users/list/hooks";
-
-export default function TableRow({ user, isMatched, highlight }) {
+const TableRow = ({ user, isMatched, highlight }) => {
   const {
     onDeletionClick,
     rowRef,
@@ -80,4 +79,6 @@ export default function TableRow({ user, isMatched, highlight }) {
       </td>
     </tr>
   );
-}
+};
+
+export default TableRow;

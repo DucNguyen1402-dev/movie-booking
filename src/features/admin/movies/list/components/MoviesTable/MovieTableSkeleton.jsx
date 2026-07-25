@@ -1,4 +1,4 @@
-export default function MovieTableSkeleton() {
+const MovieTableSkeleton = () => {
   return (
     <>
       {[...Array(5)].map((_, index) => (
@@ -44,4 +44,6 @@ export default function MovieTableSkeleton() {
       ))}
     </>
   );
-}
+};
+
+export default MovieTableSkeleton;

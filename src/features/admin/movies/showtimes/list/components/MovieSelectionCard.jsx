@@ -1,10 +1,10 @@
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { CalendarCog } from "lucide-react";
 
 import { AddButton } from "@components/admin";
 
-export default function MovieSelectionCard({ movie, hasNoShowtime }) {
+const MovieSelectionCard = ({ movie, hasNoShowtime }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const onShowtimeCreationClick = () =>
@@ -38,4 +38,6 @@ export default function MovieSelectionCard({ movie, hasNoShowtime }) {
       </div>
     </section>
   );
-}
+};
+
+export default MovieSelectionCard;

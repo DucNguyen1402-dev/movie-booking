@@ -12,7 +12,7 @@ import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
 import { CancelButton, SaveButton } from "@components/admin";
 import { getAvatarInitial } from "@utils/admin";
 
-export default function EditUser() {
+const EditUser = () => {
   const { account } = useParams();
 
   const {
@@ -64,4 +64,6 @@ export default function EditUser() {
       </div>
     </div>
   );
-}
+};
+
+export default EditUser;

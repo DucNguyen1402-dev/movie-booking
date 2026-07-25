@@ -1,4 +1,4 @@
-export default function BookingInforSkeleton() {
+const BookingInforSkeleton = () => {
   return (
     <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-slate-700 bg-slate-800 p-6">
       <div className="grid gap-8 lg:grid-cols-[220px_1fr]">
@@ -37,4 +37,6 @@ export default function BookingInforSkeleton() {
       </div>
     </div>
   );
-}
+};
+
+export default BookingInforSkeleton;

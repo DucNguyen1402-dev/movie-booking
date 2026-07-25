@@ -6,9 +6,9 @@ const checkboxFields = [
   { label: "sắp chiếu", name: "sapChieu" },
 ];
 
-export default function CheckboxField({ control }) {
+const CheckboxField = ({ control }) => {
   return (
-    <div className ="flex items-center gap-10">
+    <div className="flex items-center gap-10">
       {checkboxFields.map((field) => (
         <CheckBox
           key={field.name}
@@ -19,4 +19,6 @@ export default function CheckboxField({ control }) {
       ))}
     </div>
   );
-}
+};
+
+export default CheckboxField;

@@ -2,13 +2,13 @@ import { Clock3, Ticket } from "lucide-react";
 
 import { formatShowtime } from "@features/admin/movies/showtimes/list/utils";
 
-export default function ShowtimeInforCard({
+const ShowtimeInforCard = ({
   maRap,
   tenRap,
   ngayChieuGioChieu,
   thoiLuong,
   giaVe,
-}) {
+}) => {
   const { date, time } = formatShowtime(ngayChieuGioChieu);
 
   return (
@@ -50,4 +50,6 @@ export default function ShowtimeInforCard({
       </div>
     </article>
   );
-}
+};
+
+export default ShowtimeInforCard;

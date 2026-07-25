@@ -1,2 +1,2 @@
-export {UsersProvider} from "./UsersProvider"
-export {useUsersContext} from "./useUsersContext"
+export { default as UsersProvider } from "./UsersProvider";
+export { useUsersContext } from "./useUsersContext";

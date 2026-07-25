@@ -20,7 +20,7 @@ const inputFields = [
   },
 ];
 
-export default function InputFields({ errors, register }) {
+const InputFields = ({ errors, register }) => {
   return (
     <div className="flex flex-col gap-8">
       {inputFields.map((field) => (
@@ -36,4 +36,6 @@ export default function InputFields({ errors, register }) {
       ))}
     </div>
   );
-}
+};
+
+export default InputFields;

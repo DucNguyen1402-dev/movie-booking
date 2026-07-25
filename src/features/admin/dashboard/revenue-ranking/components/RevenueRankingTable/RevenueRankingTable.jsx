@@ -8,7 +8,7 @@ import {
 import RevenueRankingRow from "./RevenueRankingRow";
 import RevenueRankingSkeleton from "./RevenueRankingSkeleton";
 
-export default function RevenueRankingTable() {
+const RevenueRankingTable = () => {
   const {
     dashboardDerived: { ranking },
     revenueRanking: { params, resetSearchParam },
@@ -71,4 +71,6 @@ export default function RevenueRankingTable() {
       </div>
     </div>
   );
-}
+};
+
+export default RevenueRankingTable;

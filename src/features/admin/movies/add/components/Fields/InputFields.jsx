@@ -13,7 +13,7 @@ const inputFields = [
   },
 ];
 
-export default function InputFields({ errors, register }) {
+const InputFields = ({ errors, register }) => {
   return inputFields.map((field) => (
     <Input
       key={field.name}
@@ -24,4 +24,6 @@ export default function InputFields({ errors, register }) {
       register={register}
     />
   ));
-}
+};
+
+export default InputFields;

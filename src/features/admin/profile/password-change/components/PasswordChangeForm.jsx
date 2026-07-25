@@ -10,7 +10,7 @@ const passwordFieldsConfig = [
   { label: "Xác nhận mật khẩu mới", name: "xacNhanMatKhauMoi" },
 ];
 
-export default function PasswordChangeForm() {
+const PasswordChangeForm = () => {
   const {
     form: { register, errors, onPasswordSubmitEvent, isDirty },
     profile: { onCancelPasswordChangeClick },
@@ -46,4 +46,6 @@ export default function PasswordChangeForm() {
       </div>
     </form>
   );
-}
+};
+
+export default PasswordChangeForm;

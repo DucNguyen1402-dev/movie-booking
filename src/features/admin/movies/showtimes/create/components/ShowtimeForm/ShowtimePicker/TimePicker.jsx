@@ -1,11 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function TimePicker({
-  value,
-  onChange,
-  timePickerVisible,
-  timePickerRef,
-}) {
+const TimePicker = ({ value, onChange, timePickerVisible, timePickerRef }) => {
   const [currentHour, currentMinute] = value ? value.split(":") : ["00", "00"];
   const hours = Array.from({ length: 24 }, (_, i) =>
     String(i).padStart(2, "0"),
@@ -90,4 +85,6 @@ export default function TimePicker({
       </div>
     </div>
   );
-}
+};
+
+export default TimePicker;

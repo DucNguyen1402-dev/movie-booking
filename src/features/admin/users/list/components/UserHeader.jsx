@@ -1,9 +1,9 @@
-import { List} from "lucide-react";
+import { List } from "lucide-react";
 
 import { useUsersContext } from "@features/admin/users/contexts";
-import {AddButton} from "@components/admin/buttons";
+import { AddButton } from "@components/admin/buttons";
 
-export default function UserHeader() {
+const UserHeader = () => {
   const { usersActions } = useUsersContext();
 
   return (
@@ -16,11 +16,12 @@ export default function UserHeader() {
       <AddButton
         size="md"
         onClick={() => usersActions.onAddUserClick()}
-        surface ="dark"
+        surface="dark"
       >
-       
         Thêm Người dùng
       </AddButton>
     </div>
   );
-}
+};
+
+export default UserHeader;

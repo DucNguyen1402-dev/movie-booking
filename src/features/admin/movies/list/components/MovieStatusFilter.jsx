@@ -1,6 +1,6 @@
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
-export default function MovieStatusFilter() {
+const MovieStatusFilter = () => {
   const {
     processed: {
       state: { status },
@@ -21,4 +21,6 @@ export default function MovieStatusFilter() {
       <option value="sapChieu">Sắp chiếu</option>
     </select>
   );
-}
+};
+
+export default MovieStatusFilter;

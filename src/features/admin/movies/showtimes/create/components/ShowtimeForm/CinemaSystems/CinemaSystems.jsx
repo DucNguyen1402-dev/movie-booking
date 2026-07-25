@@ -1,10 +1,10 @@
 import { Controller } from "react-hook-form";
 import Select from "react-select";
 
-import { CinemaOption } from "./CinemaOption";
-import { CinemaSingleValue } from "./CinemaSingleValue";
+import CinemaOption from "./CinemaOption";
+import CinemaSingleValue from "./CinemaSingleValue";
 
-export default function CinemaSystems({ cinemaSystems, control }) {
+const CinemaSystems = ({ cinemaSystems, control }) => {
   const options = cinemaSystems.map((system) => ({
     value: system.maHeThongRap,
     label: system.tenHeThongRap,
@@ -12,7 +12,7 @@ export default function CinemaSystems({ cinemaSystems, control }) {
   }));
 
   return (
-    <div className="flex flex-col gap-1.5 ">
+    <div className="flex flex-col gap-1.5">
       <label
         className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
         htmlFor="cinema-system"
@@ -36,7 +36,7 @@ export default function CinemaSystems({ cinemaSystems, control }) {
                 Option: CinemaOption,
                 SingleValue: CinemaSingleValue,
               }}
-               styles={{
+              styles={{
                 control: (base, state) => ({
                   ...base,
                   backgroundColor: "#1e293b",
@@ -110,7 +110,6 @@ export default function CinemaSystems({ cinemaSystems, control }) {
                 options.find((option) => option.value === field.value) ?? null
               }
               onChange={(option) => field.onChange(option.value)}
-          
             />
 
             {fieldState.error && (
@@ -123,4 +122,6 @@ export default function CinemaSystems({ cinemaSystems, control }) {
       />
     </div>
   );
-}
+};
+
+export default CinemaSystems;

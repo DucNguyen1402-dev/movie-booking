@@ -1,6 +1,6 @@
 import { components } from "react-select";
 
-export default function TheaterSingleValue(props) {
+const TheaterSingleValue = (props) => {
   return (
     <components.SingleValue {...props}>
       <div>
@@ -8,4 +8,6 @@ export default function TheaterSingleValue(props) {
       </div>
     </components.SingleValue>
   );
-}
+};
+
+export default TheaterSingleValue;

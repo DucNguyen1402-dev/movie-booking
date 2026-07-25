@@ -7,7 +7,7 @@ import {
   useRevenueRanking,
 } from "./hooks";
 
-export function DashboardProvider({ children }) {
+const DashboardProvider = ({ children }) => {
   const { isPending, users, movies } = useDashboardData();
 
   const dashboardDerived = useDashboardDerived({ movies });
@@ -34,4 +34,6 @@ export function DashboardProvider({ children }) {
       {children}
     </dashboardContext.Provider>
   );
-}
+};
+
+export default DashboardProvider;

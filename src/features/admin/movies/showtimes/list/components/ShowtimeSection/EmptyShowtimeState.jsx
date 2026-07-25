@@ -2,7 +2,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { CalendarCog, CalendarX } from "lucide-react";
 
-export default function EmptyShowtimeState() {
+const EmptyShowtimeState = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -37,4 +37,6 @@ export default function EmptyShowtimeState() {
       </button>
     </div>
   );
-}
+};
+
+export default EmptyShowtimeState;

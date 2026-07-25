@@ -1,9 +1,11 @@
-import { MovieList,MovieListProvider } from "@features/admin/movies/list";
+import { MovieList, MovieListProvider } from "@features/admin/movies/list";
 
-export default function MovieListRoute() {
+const MovieListRoute = () => {
   return (
     <MovieListProvider>
       <MovieList />
     </MovieListProvider>
   );
-}
+};
+
+export default MovieListRoute;

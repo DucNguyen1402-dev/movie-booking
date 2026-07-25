@@ -2,8 +2,7 @@ import { Search } from "lucide-react";
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 
-export default function SearchBar() {
- 
+const SearchBar = () => {
   const {
     processed: {
       state: { keyword },
@@ -24,4 +23,6 @@ export default function SearchBar() {
       <Search className="absolute top-3 left-3.5 h-4 w-4 text-slate-500" />
     </div>
   );
-}
+};
+
+export default SearchBar;

@@ -7,7 +7,7 @@ import { useLockBodyScroll } from "@hooks/admin";
 
 import AvatarSetting from "./AvatarSetting";
 
-export default function ProfileViewHeader({ name }) {
+const ProfileViewHeader = ({ name }) => {
   const [isAvatarSettingOpen, setIsAvatarSettingOpen] = useState(false);
 
   const { storageAvatar, avatarName } = useUserContext();
@@ -51,4 +51,6 @@ export default function ProfileViewHeader({ name }) {
       )}
     </>
   );
-}
+};
+
+export default ProfileViewHeader;

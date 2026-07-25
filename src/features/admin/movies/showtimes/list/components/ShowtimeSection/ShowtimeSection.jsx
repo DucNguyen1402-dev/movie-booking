@@ -12,11 +12,7 @@ import {
   ShowtimeInforSkeleton,
 } from ".";
 
-export default function ShowtimeSection({
-  showtimeInfor,
-  isPending,
-  hasNoShowtime,
-}) {
+const ShowtimeSection = ({ showtimeInfor, isPending, hasNoShowtime }) => {
   const location = useLocation();
   const { notificationActions } = useNotificationContext();
 
@@ -135,4 +131,6 @@ export default function ShowtimeSection({
       })}
     </section>
   );
-}
+};
+
+export default ShowtimeSection;

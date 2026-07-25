@@ -1,7 +1,7 @@
 import { useProfile } from "./hooks";
 import { ProfileContext } from "./ProfileContext";
 
-export function ProfileProvider({ children }) {
+const ProfileProvider = ({ children }) => {
   const { form, profile } = useProfile();
 
   const value = {
@@ -11,4 +11,6 @@ export function ProfileProvider({ children }) {
   return (
     <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>
   );
-}
+};
+
+export default ProfileProvider;
