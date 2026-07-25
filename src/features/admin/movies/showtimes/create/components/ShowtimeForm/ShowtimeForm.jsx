@@ -6,7 +6,8 @@ import {
   useShowtimeActions,
   useShowtimeForm,
 } from "@features/admin/movies/showtimes/create/hooks";
-import { AddButton, CancelButton, DateInput } from "@components/admin";
+import { AddButton, CancelButton } from "@components/admin/ui/buttons";
+import { DateInput } from "@components/admin/ui/form";
 
 import {
   CinemaClusters,

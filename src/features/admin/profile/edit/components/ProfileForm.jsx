@@ -3,7 +3,8 @@ import { userValidationRules } from "@config/admin";
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import { createProfileFields } from "@features/admin/profile/edit/utils";
-import { Input, SaveButton } from "@components/admin";
+import { SaveButton } from "@components/admin/ui/buttons";
+import { Input } from "@components/admin/ui/form";
 
 const ProfileForm = () => {
   const {

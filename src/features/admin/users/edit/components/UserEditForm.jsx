@@ -1,6 +1,6 @@
 import { validationRules } from "@features/admin/users/config";
 import { editUserFields } from "@features/admin/users/edit/config";
-import { Input, PasswordInput, SelectForm } from "@components/admin";
+import { Input, PasswordInput, SelectForm } from "@components/admin/ui/form";
 
 const UserEditForm = ({ register, errors }) => {
   return (

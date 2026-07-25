@@ -2,9 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { EmptyTable } from "@components/admin";
-import { PaginationControls } from "@components/admin";
-import { EmptyStateButton } from "@components/admin/buttons";
+import { EmptyTable, PaginationControls } from "@components/admin/common";
+import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import MovieItem from "./MovieItem";
 import MovieTableSkeleton from "./MovieTableSkeleton";

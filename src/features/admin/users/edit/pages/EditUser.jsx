@@ -9,7 +9,7 @@ import {
   UserProfileHeader,
 } from "@features/admin/users/edit/components";
 import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
-import { CancelButton, SaveButton } from "@components/admin";
+import { CancelButton, SaveButton } from "@components/admin/ui/buttons";
 import { getAvatarInitial } from "@utils/admin";
 
 const EditUser = () => {

@@ -1,11 +1,6 @@
-export { default as Backdrop } from "./Backdrop";
-export * from "./buttons";
-export { default as CheckBox } from "./CheckBox";
+export { default as Checkbox } from "./Checkbox";
 export { default as DateInput } from "./DateInput/DateInput";
-export { default as EmptyTable } from "./EmptyTable";
 export { default as Input } from "./Input";
-export { default as Medal } from "./Medal";
-export { default as PaginationControls } from "./PaginationControls";
 export { default as PasswordInput } from "./PasswordInput";
 export { default as Select } from "./Select";
 export { default as SelectForm } from "./SelectForm";

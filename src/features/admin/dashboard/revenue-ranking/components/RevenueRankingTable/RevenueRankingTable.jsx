@@ -1,9 +1,6 @@
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import {
-  EmptyStateButton,
-  EmptyTable,
-  PaginationControls,
-} from "@components/admin";
+import { EmptyTable, PaginationControls } from "@components/admin/common";
+import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import RevenueRankingRow from "./RevenueRankingRow";
 import RevenueRankingSkeleton from "./RevenueRankingSkeleton";

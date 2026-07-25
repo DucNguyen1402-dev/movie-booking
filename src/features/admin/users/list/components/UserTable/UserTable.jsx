@@ -3,11 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useConsumeLocationState } from "@hooks/admin";
 import { useUsersContext } from "@features/admin/users/contexts";
-import {
-  EmptyStateButton,
-  EmptyTable,
-  PaginationControls,
-} from "@components/admin";
+import { EmptyTable, PaginationControls } from "@components/admin/common";
+import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import { TableRow, TableSkeleton } from ".";
 

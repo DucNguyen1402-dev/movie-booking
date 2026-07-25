@@ -1,4 +1,4 @@
-import CheckBox from "@components/admin/CheckBox";
+import { Checkbox } from "@components/admin/ui/form";
 
 const checkboxFields = [
   { label: "Hot", name: "hot" },
@@ -10,7 +10,7 @@ const CheckboxField = ({ control }) => {
   return (
     <div className="flex items-center gap-10">
       {checkboxFields.map((field) => (
-        <CheckBox
+        <Checkbox
           key={field.name}
           name={field.name}
           control={control}

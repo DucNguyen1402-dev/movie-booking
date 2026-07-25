@@ -1,4 +1,4 @@
-import { AddButton, CancelButton } from "@components/admin/buttons";
+import { AddButton, CancelButton } from "@components/admin/ui/buttons";
 
 const FormActions = ({ onCancelClick, onAddClick }) => {
   return (

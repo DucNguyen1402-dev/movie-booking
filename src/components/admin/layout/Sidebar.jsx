@@ -9,11 +9,9 @@ import {
   Users,
 } from "lucide-react";
 
-import { useLayoutContext } from "@contexts/admin/layout";
-import { useUserContext } from "@contexts/admin/user";
+import { useLayoutContext, useUserContext } from "@contexts/admin";
+import { MovieIcon } from "@components/admin/ui";
 import { clearAuth } from "@utils/shared";
-
-import MovieIcon from "./MovieIcon";
 
 const SIDEBAR_LINKS = [
   {

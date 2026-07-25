@@ -2,7 +2,7 @@ import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { addUserFields } from "@features/admin/users/add/config";
 import { useAddActions, useAddForm } from "@features/admin/users/add/hooks";
 import { validationRules } from "@features/admin/users/config";
-import { Input, PasswordInput, SelectForm } from "@components/admin";
+import { Input, PasswordInput, SelectForm } from "@components/admin/ui/form";
 
 import { FormActions } from ".";
 const AddUserForms = () => {

@@ -4,7 +4,7 @@ import { validationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
-import { DateInput, Textarea } from "@components/admin";
+import { DateInput, Textarea } from "@components/admin/ui/form";
 
 import { CheckboxFields, InputFields } from "./FormFields";
 

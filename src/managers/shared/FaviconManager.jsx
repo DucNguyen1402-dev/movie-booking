@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import adminIcon from "@/assets/icons/admin/adminIcon.png";
-import userIcon from "@/assets/icons/customer/userIcon.png";
+import { adminIcon } from "@assets/icons/admin";
+import { userIcon } from "@assets/icons/customer";
 
 const titles = {
   "/admin/dashboard": "Dashboard",

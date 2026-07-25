@@ -1,14 +1,13 @@
 import { AnimatePresence, motion } from "motion/react";
 
-import { useLoadingContext } from "@contexts/admin/loading";
-import { useModalContext } from "@contexts/admin/modal";
-import { useNotificationContext } from "@contexts/admin/notification";
-import { useLockBodyScroll } from "@hooks/admin/useLockBodyScroll";
-import LoadingSpinner from "@components/admin/LoadingSpinner";
-import Notification from "@components/admin/Notification";
-
-import Backdrop from "@/components/admin/Backdrop";
-import Modal from "@/components/admin/Modal/Modal";
+import {
+  useLoadingContext,
+  useModalContext,
+  useNotificationContext,
+} from "@contexts/admin";
+import { useLockBodyScroll } from "@hooks/admin";
+import { Modal } from "@components/admin/common";
+import { Backdrop, LoadingSpinner, Notification } from "@components/admin/ui";
 
 const GlobalUI = () => {
   const { modal } = useModalContext();

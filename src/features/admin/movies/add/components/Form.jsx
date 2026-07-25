@@ -2,12 +2,8 @@ import { validationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
-import {
-  AddButton,
-  CancelButton,
-  DateInput,
-  Textarea,
-} from "@components/admin";
+import { AddButton, CancelButton } from "@components/admin/ui/buttons";
+import { DateInput, Textarea } from "@components/admin/ui/form";
 
 import { CheckboxFields, FileImageField, InputFields } from "./Fields";
 

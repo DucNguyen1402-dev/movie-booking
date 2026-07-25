@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { CalendarCog } from "lucide-react";
 
-import { AddButton } from "@components/admin";
+import { AddButton } from "@components/admin/ui/buttons";
 
 const MovieSelectionCard = ({ movie, hasNoShowtime }) => {
   const navigate = useNavigate();

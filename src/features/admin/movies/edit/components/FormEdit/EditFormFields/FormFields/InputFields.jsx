@@ -1,6 +1,6 @@
 import { validationRules } from "@config/admin";
 
-import { Input } from "@components/admin";
+import { Input } from "@components/admin/ui/form";
 
 const inputFields = [
   {

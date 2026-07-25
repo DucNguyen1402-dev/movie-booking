@@ -2,7 +2,7 @@ import { PAGE_SIZE_OPTIONS } from "@config/admin";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { Select } from "@components/admin";
+import { Select } from "@components/admin/ui/form";
 
 const RevenueToolbar = () => {
   const {

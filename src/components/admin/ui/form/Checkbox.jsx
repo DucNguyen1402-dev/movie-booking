@@ -1,24 +1,24 @@
 import { Controller } from "react-hook-form";
 
-import * as Checkbox from "@radix-ui/react-checkbox";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check } from "lucide-react";
 
-const CheckBox = ({ control, name, label }) => {
+const Checkbox = ({ control, name, label }) => {
   return (
     <label className="inline-flex cursor-pointer items-center select-none">
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
-          <Checkbox.Root
+          <CheckboxPrimitive.Root
             checked={field.value}
             onCheckedChange={field.onChange}
             className="flex h-5 w-5 items-center justify-center rounded-sm border border-slate-500 bg-slate-900/40 data-[state=checked]:bg-blue-600"
           >
-            <Checkbox.Indicator>
+            <CheckboxPrimitive.Indicator>
               <Check className="h-4 w-4 text-white" />
-            </Checkbox.Indicator>
-          </Checkbox.Root>
+            </CheckboxPrimitive.Indicator>
+          </CheckboxPrimitive.Root>
         )}
       />
       <span className="ml-2 text-sm text-slate-200">{label}</span>
@@ -26,4 +26,4 @@ const CheckBox = ({ control, name, label }) => {
   );
 };
 
-export default CheckBox;
+export default Checkbox;

@@ -1,4 +1,4 @@
-import { CheckBox } from "@components/admin";
+import { Checkbox } from "@components/admin/ui/form";
 
 const checkboxFields = [
   { label: "Hot", name: "hot" },
@@ -7,7 +7,7 @@ const checkboxFields = [
 ];
 const CheckboxFields = ({ control }) => {
   return checkboxFields.map((field) => (
-    <CheckBox
+    <Checkbox
       key={field.name}
       name={field.name}
       control={control}

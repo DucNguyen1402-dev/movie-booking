@@ -15,7 +15,8 @@ import {
   TrailerModal,
 } from "@features/admin/movies/list/components";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { Backdrop, Select } from "@components/admin";
+import { Backdrop } from "@components/admin/ui";
+import { Select } from "@components/admin/ui/form";
 
 const MovieList = () => {
   const location = useLocation();

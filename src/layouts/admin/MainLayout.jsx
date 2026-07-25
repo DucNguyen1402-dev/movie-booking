@@ -1,9 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-import { useLayoutContext } from "@contexts/admin/layout";
-import GlobalUI from "@components/admin/GlobalUI";
-import Header from "@components/admin/Header.jsx";
-import Sidebar from "@components/admin/Sidebar.jsx";
+import { useLayoutContext } from "@contexts/admin";
+import { GlobalUI, Header, Sidebar } from "@components/admin/layout";
 import {
   SIDEBAR_COLLAPSED_OFFSET,
   SIDEBAR_CONTENT_OFFSET,

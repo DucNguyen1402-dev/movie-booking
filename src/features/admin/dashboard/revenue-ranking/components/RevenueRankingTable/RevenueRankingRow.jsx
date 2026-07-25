@@ -3,7 +3,7 @@ import {
   formatCurrency,
   formatRoundedNumber,
 } from "@features/admin/dashboard/utils";
-import { Medal } from "@components/admin";
+import { Medal } from "@components/admin/ui";
 
 const RevenueRankingRow = ({ movie, rank, relativeRevenueRate }) => {
   const medalAnimation =
