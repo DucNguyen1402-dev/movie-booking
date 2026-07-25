@@ -1,4 +1,4 @@
-import { useMemo,useState } from "react";
+import { useMemo, useState } from "react";
 
 const applyFilters = (users, { keyword, role }) => {
   const search = keyword.trim().toLowerCase();
@@ -26,9 +26,11 @@ export function useUserFilter({ users }) {
     [users, filters],
   );
 
-  const onSearch = (keyword) => setFilters((prev) => ({ ...prev, keyword }));
+  const onSearch = (value) =>
+    setFilters((prev) => ({ ...prev, keyword: value }));
 
-  const onRoleFilter = (role) => setFilters((prev) => ({ ...prev, role }));
+  const onRoleFilter = (value) =>
+    setFilters((prev) => ({ ...prev, role: value }));
 
   const resetSearchFilter = () =>
     setFilters((prev) => ({ ...prev, keyword: "" }));

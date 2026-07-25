@@ -1,4 +1,6 @@
-const Delete = ({ onCancel, onConfirm, title, subtitle }) => {
+import { ConfirmButton } from "@components/admin/ui/buttons";
+
+const Delete = ({ onCancel, onConfirm, title, subtitle, loading }) => {
   return (
     <div className="z-100 flex w-90 flex-col gap-4 rounded-xl border border-slate-700/60 bg-slate-800 p-6 text-slate-100 shadow-2xl shadow-black/90">
       <h2 className="text-xl font-bold tracking-wider text-slate-50">
@@ -17,12 +19,13 @@ const Delete = ({ onCancel, onConfirm, title, subtitle }) => {
         >
           Hủy
         </button>
-        <button
+        <ConfirmButton
           className="grow cursor-pointer rounded-md border-none bg-rose-600 py-1.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-rose-700 active:bg-rose-800"
           onClick={onConfirm}
+          loading={loading}
         >
           Xác nhận
-        </button>
+        </ConfirmButton>
       </div>
     </div>
   );

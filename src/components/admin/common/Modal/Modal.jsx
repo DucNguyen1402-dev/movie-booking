@@ -19,11 +19,10 @@ const MODALS = {
 };
 
 const Modal = () => {
-  const { modal, close } = useModalContext();
+  const { modal, close, handleConfirmAction } = useModalContext();
 
   const cancelHandler = modal.onCancel ?? close;
   const onCancel = () => cancelHandler();
-  const onConfirm = () => modal.onConfirm();
 
   if (!modal.type) return null;
 
@@ -32,9 +31,10 @@ const Modal = () => {
   return (
     <Component
       onCancel={onCancel}
-      onConfirm={onConfirm}
+      onConfirm={handleConfirmAction}
       title={modal.title}
       subtitle={modal.subtitle}
+      loading={modal.loading}
     />
   );
 };

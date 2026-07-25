@@ -15,7 +15,7 @@ const UsersProvider = ({ children }) => {
       userFilters.filters.role,
       userFilters.filteredUsers,
     ],
-    enabled: usersStates.isSucess,
+    enabled: usersStates.isSuccess,
   });
 
   const value = {

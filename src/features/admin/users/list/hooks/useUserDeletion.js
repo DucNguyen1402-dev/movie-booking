@@ -1,10 +1,8 @@
 import { useState } from "react";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { ensureMinDuration } from "@utils/admin";
+import { MIN_LOADING_TIME } from "@constants/admin";
 import { MODAL_TYPES } from "@constants/admin";
 
 import { useDeleteUser } from "./useDeleteUser";
@@ -15,26 +13,23 @@ export function useUserDeletion() {
   const { mutateAsync } = useDeleteUser();
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
 
   const handleDeleteUser = async (taiKhoan) => {
-    modal.close();
-    showLoading();
-
+    const start = Date.now();
     try {
       await mutateAsync(taiKhoan);
-      hideLoading();
+      await ensureMinDuration(start, MIN_LOADING_TIME);
+      modal.close();
       notificationActions.show({
         variant: "success",
         message: "Xóa tài khoản thành công.",
       });
     } catch (error) {
+      modal.close();
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
-
-      hideLoading();
       notificationActions.show({
         variant: "error",
         message,

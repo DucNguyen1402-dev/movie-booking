@@ -1,22 +1,16 @@
 import { useRef, useState } from "react";
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { MOVIE_HIGHLIGHTS } from "@config/admin";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
-import {useScrollIntoView} from "@hooks/admin"
+import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useScrollIntoView } from "@hooks/admin";
 import { ensureMinDuration } from "@utils/admin";
 import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
 import { useDeleteMovie } from "./useDeleteMovie";
 
-
 export function useMovieItem({ movie, movieId, highlight }) {
-
   const [onDeleting, setOnDeleting] = useState(false);
   const rowRef = useRef(null);
 
@@ -24,15 +18,14 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const location = useLocation();
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
-  
+
   const { mutateAsync } = useDeleteMovie();
 
   const isTargetMovie = movie.maPhim === Number(movieId);
   const highlightAnimation = MOVIE_HIGHLIGHTS[highlight];
 
-  useScrollIntoView({ref: rowRef, enabled:isTargetMovie })
+  useScrollIntoView({ ref: rowRef, enabled: isTargetMovie });
 
   const onCreateShowTimeClick = () =>
     navigate(`/admin/movies/showtimes/${movie.maPhim}`, {
@@ -53,17 +46,15 @@ export function useMovieItem({ movie, movieId, highlight }) {
     const start = Date.now();
 
     try {
-      modal.close();
-      showLoading();
       await mutateAsync(movie.maPhim);
-
       await ensureMinDuration(start, MIN_LOADING_TIME);
+      modal.close();
       notificationActions.show({
         variant: "success",
         message: "Xóa phim thành công",
       });
     } catch (error) {
-      hideLoading();
+      modal.close();
       notificationActions.show({
         variant: "error",
         message: error.response.data?.content,
@@ -72,7 +63,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
       setOnDeleting(false);
     }
   };
-  
+
   const onDeleteClick = () => {
     setOnDeleting(true);
     modal.open({
