@@ -48,8 +48,7 @@ export function useProfile() {
     if (isDirty) {
       modal.open({
         type: MODAL_TYPES.UNSAVED_CHANGES,
-        title: "Hủy các thay đổi?",
-        subtitle: "Những thay đổi chưa lưu sẽ bị mất.",
+        entity: "password",
         onConfirm: handleCancelPasswordChange,
       });
       return;
@@ -168,16 +167,14 @@ export function useProfile() {
   const handleChangeProfile = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT,
-      title: "Xác nhận lưu thay đổi.",
-      subtitle: "Thông tin tài khoản của bạn sẽ được cập nhật trên hệ thống.",
+      entity: "profile",
       onConfirm: () => submitProfileChange(data),
     });
 
   const handleChangePassword = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT,
-      title: "Xác nhận đổi mật khẩu",
-      subtitle: "Mật khẩu của bạn sẽ được cập nhật trên hệ thống.",
+      entity: "password",
       onConfirm: () => submitPasswordChange(data),
     });
 

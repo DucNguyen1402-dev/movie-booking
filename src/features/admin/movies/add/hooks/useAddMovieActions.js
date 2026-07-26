@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { HIGHLIGHT_TYPES } from "@config/admin";
+import {
+  createAddModalContent,
+  createUnsavedChangesModalContent,
+} from "@helpers/modal";
 
 import {
   useLoadingContext,
@@ -10,7 +14,7 @@ import {
 } from "@contexts/admin";
 import { createMovieFormData } from "@features/admin/movies/add/utils";
 import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import { ENTITIES, MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
 import { useAddForm } from "./useAddForm";
 import { useAddMovie } from "./useAddMovie";
@@ -49,17 +53,15 @@ export function useAddMovieActions() {
   const onCancelClick = () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      title: "Bạn có chắc muốn hủy?",
-      subtitle: "Mọi thông tin sẽ không được lưu lại.",
       onConfirm: handleCancelClick,
+      ...createUnsavedChangesModalContent(ENTITIES.movie),
     });
 
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.ADD,
-      title: "Bạn có chắc muốn tạo phim?",
-      subtitle: "Hệ thống sẽ tạo phim mới với thông tin bạn đã nhập.",
       onConfirm: () => onSubmit(data),
+      ...createAddModalContent(ENTITIES.movie),
     });
 
   const handleSubmitEvent = (e) => {

@@ -39,8 +39,7 @@ export function useUserDeletion() {
     setDeletingAccount(taiKhoan);
     modal.open({
       type: MODAL_TYPES.DELETE,
-      title: "Bạn có chắc muốn xóa người dùng này ?",
-      subtitle: "Dữ liệu người dùng sẽ bị xóa ra khỏi hệ thống",
+      entity: "user",
       onConfirm: () => handleDeleteUser(taiKhoan),
       onCancel: () => {
         setDeletingAccount(null);

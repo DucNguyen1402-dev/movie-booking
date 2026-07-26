@@ -7,8 +7,9 @@ const ModalProvider = ({ children }) => {
     type: null,
     onConfirm: null,
     onCancel: null,
-    title: "",
-    subtitle: "",
+    defaultTitle: "Xác nhận?",
+    defaultSubtitle: "",
+    content: null,
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,8 +17,8 @@ const ModalProvider = ({ children }) => {
   const stopLoading = () => setIsLoading(false);
 
   const open = useCallback(
-    ({ type, onConfirm, title, subtitle, onCancel }) =>
-      setModal({ type, onConfirm, title, subtitle, onCancel }),
+    ({ type, onConfirm, title, subtitle, onCancel, content }) =>
+      setModal({ type, onConfirm, title, subtitle, onCancel, content }),
     [],
   );
 
@@ -29,6 +30,7 @@ const ModalProvider = ({ children }) => {
       subtitle: "",
       loading: false,
       onCancel: null,
+      entity: null,
     });
     stopLoading();
   }, []);

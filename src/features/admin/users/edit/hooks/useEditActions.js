@@ -38,8 +38,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
 
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      title: "Hủy thay đổi?",
-      subtitle: "Mọi thông tin của bạn sẽ không được lưu.",
+      entity: "user",
       onConfirm: () => {
         modal.close();
         navigateBack();
@@ -97,8 +96,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT,
-      title: "Lưu thay đổi ?",
-      subtitle: "Thông tin của người dùng sẽ được thay đổi trong hệ thống",
+      entity: "user",
       onConfirm: () => handleConfirmEdit(data),
     });
 

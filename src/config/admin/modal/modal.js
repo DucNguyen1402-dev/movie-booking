@@ -4,21 +4,22 @@ import {
   EditModal,
   UnsavedChangesModal,
 } from "@components/admin/common/Modal";
+import { MODAL_TYPES } from "@constants/admin";
 
 export const MODAL_CONFIG = {
-  delete: {
-    Component: DeleteModal,
+  [MODAL_TYPES.ADD]: {
+    Component: AddModal,
     loading: true,
   },
-  add: {
-    Component: AddModal,
+  [MODAL_TYPES.DELETE]: {
+    Component: DeleteModal,
     loading: false,
   },
-  edit: {
+  [MODAL_TYPES.EDIT]: {
     Component: EditModal,
     loading: false,
   },
-  unsavedChanges: {
+  [MODAL_TYPES.UNSAVED_CHANGES]: {
     Component: UnsavedChangesModal,
     loading: false,
   },

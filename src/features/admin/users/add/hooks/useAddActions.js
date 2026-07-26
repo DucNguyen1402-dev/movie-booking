@@ -32,8 +32,7 @@ export function useAddActions({ handleSubmit }) {
   const onCancelAddUserClick = () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      title: "Bạn có chắc muốn hủy ?",
-      subtitle: "Thông tin của bạn sẽ không được lưu",
+      entity: "user",
       onConfirm: handleCancelAddUser,
     });
 
@@ -72,8 +71,7 @@ export function useAddActions({ handleSubmit }) {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.ADD,
-      title: "Bạn có chắc chắn muốn tạo người dùng ?",
-      subtitle: "Thông tin sẽ được lưu để tạo người dùng mới.",
+      entity: "user",
       onConfirm: () => handleAddUser(data),
     });
 

@@ -29,8 +29,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const onCancelClick = () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      title: "Hủy tạo lịch chiếu?",
-      subtitle: "Mọi thông tin bạn đã nhập sẽ không được lưu.",
+      entity: "showtime",
       onConfirm: handleShowtimeCanceling,
     });
 
@@ -75,8 +74,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const onValid = (data) => {
     modal.open({
       type: MODAL_TYPES.ADD,
-      title: "Xác nhận tạo lịch chiếu?",
-      subtitle: "Bạn có chắc muốn tạo lịch chiếu này?",
+      entity: "showtime",
       onConfirm: () =>
         handleShowtimeCreation({
           ...data,

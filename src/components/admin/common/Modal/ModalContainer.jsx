@@ -9,6 +9,8 @@ const ModalContainer = () => {
 
   const { Component, loading } = MODAL_CONFIG[modal.type];
 
+  const { title, subtitle } = modal.content ?? {};
+
   const onConfirmClick = () => {
     if (!modal.onConfirm) return;
 
@@ -23,8 +25,8 @@ const ModalContainer = () => {
     <Component
       onCancel={modal.onCancel ?? close}
       onConfirm={onConfirmClick}
-      title={modal.title}
-      subtitle={modal.subtitle}
+      title={title || modal.defaultTitle}
+      subtitle={subtitle || modal.defaultSubtitle}
       loading={isLoading}
     />
   );

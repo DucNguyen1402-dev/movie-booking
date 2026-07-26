@@ -7,7 +7,7 @@ import {
 } from "@contexts/admin";
 import { useLockBodyScroll } from "@hooks/admin";
 import { ModalContainer } from "@components/admin/common";
-import { Backdrop, LoadingSpinner, Notification } from "@components/admin/ui";
+import { Backdrop, Loading, Notification } from "@components/admin/ui";
 
 const GlobalUI = () => {
   const { modal } = useModalContext();
@@ -22,6 +22,7 @@ const GlobalUI = () => {
       <AnimatePresence>
         {modal.type !== null && (
           <motion.div
+            key="modal"
             className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -32,11 +33,10 @@ const GlobalUI = () => {
             <ModalContainer />
           </motion.div>
         )}
-      </AnimatePresence>
 
-      <AnimatePresence>
         {notification.isOpen && (
           <motion.div
+            key="notification"
             className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -51,18 +51,17 @@ const GlobalUI = () => {
             />
           </motion.div>
         )}
-      </AnimatePresence>
-
-      <AnimatePresence>
         {loading.isVisible && (
           <motion.div
+            key="loading"
             className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <LoadingSpinner />
+            <Backdrop />
+            <Loading />
           </motion.div>
         )}
       </AnimatePresence>

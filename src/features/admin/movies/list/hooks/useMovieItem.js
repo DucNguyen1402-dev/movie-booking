@@ -64,8 +64,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
     setOnDeleting(true);
     modal.open({
       type: MODAL_TYPES.DELETE,
-      title: `Bạn có chắc muốn xóa phim "${movie.tenPhim}"?`,
-      subtitle: "Hành động này không thể hoàn lại.",
+      entity: "movie",
       onConfirm: handleDeleteMovie,
       onCancel: () => {
         setOnDeleting(false);
