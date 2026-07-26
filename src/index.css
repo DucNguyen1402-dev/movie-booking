@@ -62,7 +62,7 @@ body {
     }
 
     44% {
-      background-color: rgb(16 185 129 / 0.3); 
+      background-color: rgb(16 185 129 / 0.3);
     }
 
     56% {
@@ -70,7 +70,7 @@ body {
     }
 
     76% {
-      bbackground-color: rgb(16 185 129 / 0.3); 
+      bbackground-color: rgb(16 185 129 / 0.3);
     }
 
     88% {
@@ -209,6 +209,17 @@ select {
     @apply aspect-[2/3] w-full rounded-lg object-cover shadow-2xl shadow-black/30 transition duration-300 group-hover:scale-[1.025];
   }
   .input-file {
-    @apply block w-fit text-sm text-slate-200 file:mr-4 file:cursor-pointer file:rounded file:border-2 file:border-indigo-500 file:bg-indigo-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-100 file:transition-colors file:duration-300 hover:file:border-indigo-400
+    @apply block w-fit text-sm text-slate-200 file:mr-4 file:cursor-pointer file:rounded file:border-2 file:border-indigo-500 file:bg-indigo-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-100 file:transition-colors file:duration-300 hover:file:border-indigo-400;
+  }
+  .input {
+    @apply w-full rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-100 transition-colors duration-200 outline-none;
+  }
+
+  .input-default {
+    @apply bg-slate-900/40 hover:border-indigo-500 hover:ring-2 hover:ring-indigo-500/20 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20;
+  }
+
+  .input-disabled {
+    @apply bg-slate-900/60;
   }
 }

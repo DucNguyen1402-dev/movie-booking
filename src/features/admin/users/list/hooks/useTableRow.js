@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useScrollIntoView } from "@hooks/admin";
@@ -14,17 +14,26 @@ export function useTableRow({ isMatched }) {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const history = location.state?.history ?? [];
+  const history = useMemo(
+    () => location.state?.history ?? [],
+    [location.state?.history],
+  );
 
-  const onEditClick = (account) =>
-    navigate(`/admin/users/edit/${account}`, {
-      state: { history: [...history, location.pathname] },
-    });
+  const onEditClick = useMemo(
+    () => (account) =>
+      navigate(`/admin/users/edit/${account}`, {
+        state: { history: [...history, location.pathname] },
+      }),
+    [history, location.pathname, navigate],
+  );
 
-  const onBookingInforClick = (account) =>
-    navigate(`/admin/users/booking-infor/${account}`, {
-      state: { history: [...history, location.pathname] },
-    });
+  const onBookingInforClick = useMemo(
+    () => (account) =>
+      navigate(`/admin/users/booking-infor/${account}`, {
+        state: { history: [...history, location.pathname] },
+      }),
+    [history, location.pathname, navigate],
+  );
 
   return {
     onDeletionClick,

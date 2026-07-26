@@ -16,7 +16,7 @@ const UserHeader = () => {
       <AddButton
         size="md"
         onClick={() => usersActions.onAddUserClick()}
-        surface="dark"
+        surface="deepDark"
       >
         Thêm Người dùng
       </AddButton>

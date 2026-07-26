@@ -1,6 +1,10 @@
-import clsx from "clsx";
+import { cn } from "@utils/shared";
 
 const sizes = {
+  none: {
+    button: "",
+    icon: "",
+  },
   xs: {
     button: "px-1.5 py-0.75 text-xs",
     icon: "size-2",
@@ -33,10 +37,11 @@ const Button = ({
   return (
     <button
       disabled={loading || props.disabled}
-      className={clsx(
+      className={cn(
         "inline-flex items-center justify-center gap-2",
-        "rounded-md font-medium",
         "transition-colors duration-300",
+        "rounded-md",
+        "select-none",
         "cursor-pointer",
         "disabled:cursor-not-allowed disabled:opacity-50",
         currentSize.button,

@@ -1,8 +1,12 @@
+import { useMemo } from "react";
+
 import { USER_HIGHLIGHTS } from "@config/admin";
 import { CalendarCheck, SquarePen, Trash } from "lucide-react";
 
 import { userRoleMapping } from "@features/admin/users/constants";
 import { useTableRow } from "@features/admin/users/list/hooks";
+import { Button } from "@components/admin/ui";
+
 const TableRow = ({ user, isMatched, highlight }) => {
   const {
     onDeletionClick,
@@ -19,6 +23,33 @@ const TableRow = ({ user, isMatched, highlight }) => {
     label,
     variants: { table: tableRoleClasses },
   } = userRoleMapping[user.maLoaiNguoiDung];
+
+  const actionButtonsConfig = useMemo(
+    () => [
+      {
+        key: "edit",
+        title: "sửa thông tin",
+        className: "hover:bg-indigo-500/20 hover:text-indigo-400",
+        Icon: SquarePen,
+        onClick: () => onEditClick(user.taiKhoan),
+      },
+      {
+        key: "bookingInfor",
+        title: "xem thông tin đặt vé",
+        className: "hover:bg-yellow-500/20 hover:text-yellow-400",
+        Icon: CalendarCheck,
+        onClick: () => onBookingInforClick(user.taiKhoan),
+      },
+      {
+        key: "delete",
+        title: "xóa người dùng",
+        className: "hover:bg-red-500/20 hover:text-red-400",
+        Icon: Trash,
+        onClick: () => onDeletionClick(user.taiKhoan),
+      },
+    ],
+    [onBookingInforClick, onDeletionClick, onEditClick, user.taiKhoan],
+  );
 
   return (
     <tr
@@ -54,27 +85,17 @@ const TableRow = ({ user, isMatched, highlight }) => {
 
       <td>
         <div className="flex justify-center gap-2">
-          <button
-            title="sửa thông tin"
-            className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-indigo-500/20 hover:text-indigo-400"
-            onClick={() => onEditClick(user.taiKhoan)}
-          >
-            <SquarePen className="size-4" />
-          </button>
-          <button
-            title="xem thông tin đặt vé"
-            className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-yellow-500/20 hover:text-yellow-400"
-            onClick={() => onBookingInforClick(user.taiKhoan)}
-          >
-            <CalendarCheck className="size-4" />
-          </button>
-          <button
-            title="xóa người dùng"
-            className="cursor-pointer rounded-md p-2 transition-colors duration-300 hover:bg-red-500/20 hover:text-red-400"
-            onClick={() => onDeletionClick(user.taiKhoan)}
-          >
-            <Trash className="size-4" />
-          </button>
+          {actionButtonsConfig.map((actionButton) => (
+            <Button
+              key={actionButton.key}
+              title={actionButton.title}
+              className={` ${actionButton.className}`}
+              onClick={actionButton.onClick}
+              size="sm"
+            >
+              <actionButton.Icon className="size-4" />
+            </Button>
+          ))}
         </div>
       </td>
     </tr>

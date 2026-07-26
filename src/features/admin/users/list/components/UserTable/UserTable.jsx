@@ -88,7 +88,7 @@ const UserTable = () => {
         <table className="w-full table-fixed border-t border-slate-700 bg-[#1e293b] text-sm text-slate-100">
           <thead>
             <tr className="bg-slate-900/80 text-left font-semibold tracking-wider">
-              <th className="3xl:w-80 w-70 px-8 py-6">TÀI KHOẢN</th>
+              <th className="3xl:w-80 w-60 px-8 py-6">TÀI KHOẢN</th>
               <th className="3xl:w-70 w-60">HỌ & TÊN</th>
               <th className="3xl:w-80 w-60">EMAIL</th>
               <th>SĐT</th>

@@ -66,7 +66,8 @@ const ProfileView = () => {
           <div className="mt-12 space-y-5">
             <Button
               onClick={onUpdateProfileClick}
-              className="w-full bg-blue-600 text-slate-200 hover:bg-blue-700"
+              className="bg-blue-600 font-medium text-slate-200 hover:bg-blue-700"
+              fullWidth={true}
             >
               Cập nhật thông tin
             </Button>
@@ -75,6 +76,7 @@ const ProfileView = () => {
               <Button
                 className="text-slate-400 hover:bg-red-950/10 hover:text-rose-700"
                 onClick={onChangePasswordClick}
+                size="sm"
               >
                 <span className="text-sm">Đổi mật khẩu</span>
               </Button>
