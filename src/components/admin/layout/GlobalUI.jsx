@@ -6,7 +6,7 @@ import {
   useNotificationContext,
 } from "@contexts/admin";
 import { useLockBodyScroll } from "@hooks/admin";
-import { Modal } from "@components/admin/common";
+import { ModalContainer } from "@components/admin/common";
 import { Backdrop, LoadingSpinner, Notification } from "@components/admin/ui";
 
 const GlobalUI = () => {
@@ -29,7 +29,7 @@ const GlobalUI = () => {
             transition={{ duration: 0.2 }}
           >
             <Backdrop />
-            <Modal />
+            <ModalContainer />
           </motion.div>
         )}
       </AnimatePresence>

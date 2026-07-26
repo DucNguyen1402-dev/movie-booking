@@ -48,7 +48,7 @@ const DateInput = ({
         <button
           type="button"
           onClick={() => setDayPickerVisible((prev) => !prev)}
-          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border border-gray-600 bg-slate-900/40 p-1.5 transition-colors hover:ring-1 hover:ring-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none active:hover:border-blue-500/20 disabled:cursor-default ${disabled ? "text-gray-500" : "text-gray-400"}`}
+          className={`flex w-full items-center gap-2 rounded-sm border border-gray-600 bg-slate-900/40 p-1.5 transition-colors ${disabled ? "text-gray-500" : "c cursor-pointer text-gray-400 hover:ring-1 hover:ring-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none active:hover:border-blue-500/2"}`}
           aria-expanded={isDatePickerOpen}
           aria-haspopup="dialog"
           disabled={disabled}

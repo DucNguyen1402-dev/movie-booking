@@ -5,8 +5,7 @@ import { MOVIE_HIGHLIGHTS } from "@config/admin";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { useScrollIntoView } from "@hooks/admin";
-import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import { MODAL_TYPES } from "@constants/admin";
 
 import { useDeleteMovie } from "./useDeleteMovie";
 
@@ -43,11 +42,8 @@ export function useMovieItem({ movie, movieId, highlight }) {
     });
 
   const handleDeleteMovie = async () => {
-    const start = Date.now();
-
     try {
       await mutateAsync(movie.maPhim);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
       modal.close();
       notificationActions.show({
         variant: "success",
@@ -67,7 +63,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const onDeleteClick = () => {
     setOnDeleting(true);
     modal.open({
-      type: MODAL_TYPES.DELETE_MOVIE,
+      type: MODAL_TYPES.DELETE,
       title: `Bạn có chắc muốn xóa phim "${movie.tenPhim}"?`,
       subtitle: "Hành động này không thể hoàn lại.",
       onConfirm: handleDeleteMovie,

@@ -25,6 +25,7 @@ const PasswordChangeForm = () => {
     <form className="space-y-5" onSubmit={onPasswordSubmitEvent}>
       {passwordFieldsConfig.map((field) => (
         <PasswordInput
+          key={field.name}
           label={field.label}
           register={register}
           name={field.name}

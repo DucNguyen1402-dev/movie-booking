@@ -18,6 +18,7 @@ const ProfileView = () => {
     profile: { isLoading, loginedUser },
   } = useProfileContext();
 
+  const consumeLocationState = useConsumeLocationState();
   const { notificationActions } = useNotificationContext();
 
   useEffect(() => {
@@ -26,9 +27,8 @@ const ProfileView = () => {
     if (!notification) return;
 
     notificationActions.show(notification);
-  }, [location.state?.notification, notificationActions]);
-
-  useConsumeLocationState("notification", 10000);
+    consumeLocationState("notification");
+  }, [location.state?.notification, notificationActions, consumeLocationState]);
 
   const profileFields = useMemo(
     () => [

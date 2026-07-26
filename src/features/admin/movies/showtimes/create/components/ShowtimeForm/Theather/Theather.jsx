@@ -13,7 +13,7 @@ const Theather = ({ list, control, isTheaterDisabled }) => {
   return (
     <div className="flex flex-col gap-1.5">
       <label
-        className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
+        className="mb-2 cursor-pointer self-start text-sm font-medium text-slate-200"
         htmlFor="theater"
       >
         Rạp
@@ -35,13 +35,14 @@ const Theather = ({ list, control, isTheaterDisabled }) => {
               styles={{
                 control: (base, state) => ({
                   ...base,
-                  backgroundColor: "#1e293b",
+                  backgroundColor: "#0F172A66",
                   borderColor: state.isFocused ? "#3b82f6" : "#475569",
                   color: "#f8fafc",
                   boxShadow: state.isFocused ? "0 0 0 1px #3b82f6" : "none",
                   "&:hover": {
                     borderColor: "#3b82f6",
                   },
+                  cursor: "pointer",
                 }),
 
                 menuPortal: (base) => ({

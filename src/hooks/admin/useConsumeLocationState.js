@@ -1,41 +1,43 @@
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
-export function useConsumeLocationState(stateKeys, delay = 0) {
+export function useConsumeLocationState() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const state = location.state;
+  return useCallback(
+    (stateKeys, delay = 2000) => {
+      const state = location.state;
 
-    if (!state) return;
+      if (!state) return;
 
-    const consumeKeys = (Array.isArray(stateKeys) ? stateKeys : [stateKeys]).filter(
-      (key) => key in state,
-    );
+      const consumeKeys = (
+        Array.isArray(stateKeys) ? stateKeys : [stateKeys]
+      ).filter((key) => key in state);
 
-    if (consumeKeys.length === 0) return;
+      if (consumeKeys.length === 0) return;
 
-    const consume = () => {
-      const nextState = { ...state };
+      const consume = () => {
+        const nextState = { ...state };
 
-      consumeKeys.forEach((key) => {
-        delete nextState[key];
-      });
+        consumeKeys.forEach((key) => {
+          delete nextState[key];
+        });
 
-      navigate(".", {
-        replace: true,
-        state: Object.keys(nextState).length ? nextState : null,
-      });
-    };
+        navigate(".", {
+          replace: true,
+          state: Object.keys(nextState).length ? nextState : null,
+        });
+      };
 
-    if (delay === 0) {
-      consume();
-      return;
-    }
+      if (delay === 0) {
+        consume();
+        return;
+      }
 
-    const timer = setTimeout(consume, delay);
+      const timer = setTimeout(consume, delay);
 
-    return () => clearTimeout(timer);
-  }, [stateKeys, delay, location.state, navigate]);
+      return () => clearTimeout(timer);
+    },
+    [location.state, navigate],
+  );
 }

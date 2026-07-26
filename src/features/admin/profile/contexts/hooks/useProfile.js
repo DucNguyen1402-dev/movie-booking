@@ -47,7 +47,7 @@ export function useProfile() {
   const onCancelPasswordChangeClick = () => {
     if (isDirty) {
       modal.open({
-        type: MODAL_TYPES.SAVE_PROFILE,
+        type: MODAL_TYPES.UNSAVED_CHANGES,
         title: "Hủy các thay đổi?",
         subtitle: "Những thay đổi chưa lưu sẽ bị mất.",
         onConfirm: handleCancelPasswordChange,
@@ -167,7 +167,7 @@ export function useProfile() {
 
   const handleChangeProfile = (data) =>
     modal.open({
-      type: MODAL_TYPES.SAVE_PROFILE,
+      type: MODAL_TYPES.EDIT,
       title: "Xác nhận lưu thay đổi.",
       subtitle: "Thông tin tài khoản của bạn sẽ được cập nhật trên hệ thống.",
       onConfirm: () => submitProfileChange(data),
@@ -175,7 +175,7 @@ export function useProfile() {
 
   const handleChangePassword = (data) =>
     modal.open({
-      type: MODAL_TYPES.SAVE_PROFILE,
+      type: MODAL_TYPES.EDIT,
       title: "Xác nhận đổi mật khẩu",
       subtitle: "Mật khẩu của bạn sẽ được cập nhật trên hệ thống.",
       onConfirm: () => submitPasswordChange(data),

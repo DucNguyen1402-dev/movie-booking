@@ -1,4 +1,5 @@
 export { avatarList } from "./avatarList";
+export { MODAL_CONFIG } from "./modal";
 export { HIGHLIGHT_TYPES, MOVIE_HIGHLIGHTS } from "./movieHighlight";
 export { PAGE_SIZE_OPTIONS } from "./pagination";
 export { USER_HIGHLIGHTS } from "./userHighlights";

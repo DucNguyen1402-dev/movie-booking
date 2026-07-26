@@ -16,13 +16,15 @@ const ShowtimeSection = ({ showtimeInfor, isPending, hasNoShowtime }) => {
   const location = useLocation();
   const { notificationActions } = useNotificationContext();
 
-  useEffect(() => {
-    if (location.state?.notification) {
-      notificationActions.show(location.state.notification);
-    }
-  }, [location.state, notificationActions]);
+  const consumeLocationState = useConsumeLocationState();
 
-  useConsumeLocationState("notification", 5000);
+  useEffect(() => {
+    const notification = location.state?.notification;
+    if (!notification) return;
+
+    notificationActions.show(notification);
+    consumeLocationState("notification");
+  }, [location.state, notificationActions, consumeLocationState]);
 
   const tongSuatChieu = useMemo(() => {
     let total = 0;

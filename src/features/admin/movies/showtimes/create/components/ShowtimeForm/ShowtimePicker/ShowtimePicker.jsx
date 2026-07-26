@@ -27,7 +27,7 @@ const Showtime = ({ isTimePickerDisabled, watch, control }) => {
   return (
     <div className="flex flex-col gap-1.5">
       <label
-        className="mb-2 cursor-pointer text-sm font-medium text-slate-200"
+        className="mb-2 cursor-pointer self-start text-sm font-medium text-slate-200"
         htmlFor="show-time"
       >
         Giờ chiếu
@@ -37,7 +37,7 @@ const Showtime = ({ isTimePickerDisabled, watch, control }) => {
         <button
           type="button"
           onClick={() => setTimePickerVisible((prev) => !prev)}
-          className={`flex w-full cursor-pointer items-center gap-2 rounded-sm border border-gray-600 p-1.5 transition-colors hover:ring-1 hover:ring-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none active:hover:border-gray-500 disabled:cursor-default ${isTimePickerDisabled ? "text-gray-500" : "text-gray-400"}`}
+          className={`#0F172A66 flex w-full items-center gap-2 rounded-sm border border-gray-600 bg-slate-900/40 p-1.5 transition-colors active:hover:border-gray-500 disabled:cursor-default ${isTimePickerDisabled ? "text-gray-500" : "cursor-pointer text-gray-400 hover:ring-1 hover:ring-blue-500 focus:outline-none"}`}
           aria-expanded={timePickerVisible}
           aria-haspopup="dialog"
           disabled={isTimePickerDisabled}

@@ -35,7 +35,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
   const onCancelClick = () =>
     modal.open({
-      type: MODAL_TYPES.EDIT_MOVIE,
+      type: MODAL_TYPES.UNSAVED_CHANGES,
       title: "Bạn có chắc muốn hủy?",
       subtitle: "Mọi thông tin của bạn sẽ không được lưu.",
       onConfirm: handleCancelChange,
@@ -140,7 +140,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     const isValid = await trigger();
     if (!isValid) return;
     modal.open({
-      type: MODAL_TYPES.EDIT_MOVIE,
+      type: MODAL_TYPES.EDIT,
       title: "Bạn có chắc muốn lưu?",
       subtitle: "Thông tin của người dùng sẽ được thay đổi trên hệ thống.",
       onConfirm: handleSaveMovie,

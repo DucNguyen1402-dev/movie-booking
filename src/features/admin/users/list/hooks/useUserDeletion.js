@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
-import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME } from "@constants/admin";
 import { MODAL_TYPES } from "@constants/admin";
 
 import { useDeleteUser } from "./useDeleteUser";
@@ -16,10 +14,8 @@ export function useUserDeletion() {
   const { notificationActions } = useNotificationContext();
 
   const handleDeleteUser = async (taiKhoan) => {
-    const start = Date.now();
     try {
       await mutateAsync(taiKhoan);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
       modal.close();
       notificationActions.show({
         variant: "success",
@@ -42,7 +38,7 @@ export function useUserDeletion() {
   const onDeletionClick = (taiKhoan) => {
     setDeletingAccount(taiKhoan);
     modal.open({
-      type: MODAL_TYPES.DELETE_USER,
+      type: MODAL_TYPES.DELETE,
       title: "Bạn có chắc muốn xóa người dùng này ?",
       subtitle: "Dữ liệu người dùng sẽ bị xóa ra khỏi hệ thống",
       onConfirm: () => handleDeleteUser(taiKhoan),

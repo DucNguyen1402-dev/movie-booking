@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { useConsumeLocationState } from "@hooks/admin";
 import { useUsersContext } from "@features/admin/users/contexts";
@@ -11,11 +11,10 @@ import { TableRow, TableSkeleton } from ".";
 const UserTable = () => {
   const hasMoveToPage = useRef(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
   const { account, highlight } = location.state ?? {};
 
-  useConsumeLocationState(["account", "highlight"], 5000);
+  const consumeLocationState = useConsumeLocationState();
 
   const {
     usersStates: { isPending, isFetching },
@@ -46,14 +45,9 @@ const UserTable = () => {
     if (!account || isFetching || hasMoveToPage.current) return;
     moveToAccountPage(account);
     hasMoveToPage.current = true;
-  }, [
-    account,
-    isFetching,
-    moveToAccountPage,
-    navigate,
-    location.pathname,
-    location.state?.history,
-  ]);
+
+    consumeLocationState(["account", "highlight"]);
+  }, [account, isFetching, moveToAccountPage, consumeLocationState]);
 
   const isUserListEmpty = pagination.list.length === 0;
   const renderTableContent = () => {

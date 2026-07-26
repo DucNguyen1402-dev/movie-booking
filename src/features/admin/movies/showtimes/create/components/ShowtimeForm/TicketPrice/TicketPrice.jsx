@@ -12,7 +12,7 @@ const TicketPrice = ({
   return (
     <div className="flex flex-col gap-1.5">
       <label
-        className={`mb-2 cursor-pointer text-sm font-medium text-slate-200 ${isTicketPriceDisabled ? "text-slate-300" : "text-slate-200"}`}
+        className={`mb-2 cursor-pointer self-start text-sm font-medium text-slate-200 ${isTicketPriceDisabled ? "text-slate-300" : "text-slate-200"}`}
         htmlFor="ticket-price"
       >
         Giá vé
@@ -43,7 +43,7 @@ const TicketPrice = ({
                     ? "Vui lòng chọn rạp chiếu trước"
                     : "Nhập giá vé (VND)"
                 }
-                className={`w-full cursor-pointer rounded-sm border border-slate-600 px-3 py-1.5 outline-none hover:ring-1 hover:ring-blue-500 focus:ring-1 focus:ring-blue-500 ${isTicketPriceDisabled ? "text-slate-500" : "text-slate-400"}`}
+                className={`w-full rounded-sm border border-slate-600 bg-slate-900/40 px-3 py-1.5 ${isTicketPriceDisabled ? "text-slate-500" : "text-slate-400 hover:ring-1 hover:ring-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"}`}
               />
               {giaVe && (
                 <div className="absolute top-1/2 right-2 -translate-y-1/2">

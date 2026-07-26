@@ -24,19 +24,20 @@ const MovieList = () => {
   const { isSidebarOpen } = useLayoutContext();
   const { notificationActions } = useNotificationContext();
 
+  const consumeLocationState = useConsumeLocationState();
+
   const {
     trailer: { trailer },
     pagination: { currentSize, setSize },
   } = useMovieListContext();
 
   useEffect(() => {
-    if (location.state?.notification) {
-      notificationActions.show(location.state.notification);
-    }
-  }, [location.state?.notification, notificationActions]);
+    if (!location.state?.notification) return;
+    notificationActions.show(location.state.notification);
+    consumeLocationState("notification");
+  }, [location.state?.notification, notificationActions, consumeLocationState]);
 
   useLockBodyScroll(trailer.url !== null);
-  useConsumeLocationState("notification", 10000);
 
   return (
     <>

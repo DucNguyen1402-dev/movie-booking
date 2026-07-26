@@ -12,16 +12,18 @@ import {
 const UsersList = () => {
   const { isSidebarOpen } = useLayoutContext();
 
+  const consumeLocationState = useConsumeLocationState();
+
   const location = useLocation();
   const { notificationActions } = useNotificationContext();
 
   useEffect(() => {
-    if (location.state?.notification) {
-      notificationActions.show(location.state.notification);
-    }
-  }, [location.state, notificationActions]);
+    const notification = location.state?.notification;
+    if (!notification) return;
 
-  useConsumeLocationState("notification", 10000);
+    notificationActions.show(notification);
+    consumeLocationState("notification");
+  }, [location.state, notificationActions, consumeLocationState]);
 
   return (
     <div

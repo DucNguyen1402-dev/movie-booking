@@ -9,37 +9,29 @@ const ModalProvider = ({ children }) => {
     onCancel: null,
     title: "",
     subtitle: "",
-    loading: false,
   });
+  const [isLoading, setIsLoading] = useState(false);
 
-  const startLoading = useCallback(
-    () => setModal((prev) => ({ ...prev, loading: true })),
-    [],
-  );
+  const startLoading = useCallback(() => setIsLoading(true), []);
+  const stopLoading = () => setIsLoading(false);
+
   const open = useCallback(
     ({ type, onConfirm, title, subtitle, onCancel }) =>
       setModal({ type, onConfirm, title, subtitle, onCancel }),
     [],
   );
 
-  const close = useCallback(
-    () =>
-      setModal({
-        type: null,
-        onConfirm: null,
-        title: "",
-        subtitle: "",
-        loading: false,
-        onCancel: null,
-      }),
-    [],
-  );
-
-  const handleConfirmAction = useCallback(() => {
-    if (!modal.onConfirm) return;
-    startLoading();
-    modal.onConfirm();
-  }, [modal, startLoading]);
+  const close = useCallback(() => {
+    setModal({
+      type: null,
+      onConfirm: null,
+      title: "",
+      subtitle: "",
+      loading: false,
+      onCancel: null,
+    });
+    stopLoading();
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -48,9 +40,9 @@ const ModalProvider = ({ children }) => {
       modal,
       setModal,
       startLoading,
-      handleConfirmAction,
+      isLoading,
     }),
-    [open, close, modal, setModal, handleConfirmAction, startLoading],
+    [open, close, modal, setModal, startLoading, isLoading],
   );
 
   return (

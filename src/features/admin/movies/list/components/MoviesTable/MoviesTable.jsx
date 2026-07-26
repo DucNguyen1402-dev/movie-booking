@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 
+import { useConsumeLocationState } from "@hooks/admin";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { EmptyTable, PaginationControls } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
@@ -9,14 +10,12 @@ import MovieItem from "./MovieItem";
 import MovieTableSkeleton from "./MovieTableSkeleton";
 
 const MoviesTable = () => {
-  const navigate = useNavigate();
   const location = useLocation();
 
-  const [rowState, setRowState] = useState(() => ({
-    movieId: location.state?.movieId ?? null,
-    highlight: location.state?.highlight ?? "",
-  }));
+  const consumeLocationState = useConsumeLocationState();
+  const { movieId, highlight } = location.state ?? {};
 
+  const hasMoveToPage = useRef(false);
   const {
     pagination,
     raw: { isPending, isFetching },
@@ -27,12 +26,12 @@ const MoviesTable = () => {
     },
   } = useMovieListContext();
 
-  if (rowState.movieId) {
+  if (movieId) {
     pagination.preventNextReset();
   }
 
   const moveToMoviePage = useCallback(
-    () => (id) => {
+    (id) => {
       const movieIndex = list.findIndex((movie) => movie.maPhim === Number(id));
       if (movieIndex === -1) return;
 
@@ -44,39 +43,11 @@ const MoviesTable = () => {
   );
 
   useEffect(() => {
-    if (!rowState.movieId || isFetching) return;
-
-    moveToMoviePage(rowState.movieId);
-
-    navigate(location.pathname, {
-      replace: true,
-      state: {
-        history: location.state?.history ?? [],
-      },
-    });
-  }, [
-    rowState.movieId,
-    isFetching,
-    rowState,
-    location.pathname,
-    location.state?.history,
-    navigate,
-    moveToMoviePage,
-  ]);
-
-  useEffect(() => {
-    if (!rowState.highlight || !rowState.movieId) return;
-    const keys = ["highlight", "movieId"];
-    const timers = keys
-      .filter((key) => rowState[key])
-      .map((key) =>
-        setTimeout(() => {
-          setRowState((prev) => ({ ...prev, [key]: "" }));
-        }, 10000),
-      );
-
-    return () => timers.forEach(clearTimeout);
-  }, [rowState.highlight, rowState.movieId, rowState]);
+    if (!movieId || isFetching || hasMoveToPage.current) return;
+    moveToMoviePage(movieId);
+    hasMoveToPage.current = true;
+    consumeLocationState(["movieId", "highlight"]);
+  }, [movieId, isFetching, moveToMoviePage, consumeLocationState]);
 
   const isEmptyMovieList = pagination.list.length === 0;
 
@@ -103,8 +74,8 @@ const MoviesTable = () => {
       <MovieItem
         key={movie.maPhim}
         movie={movie}
-        movieId={rowState.movieId}
-        highlight={rowState.highlight}
+        movieId={movieId}
+        highlight={highlight}
       />
     ));
   };

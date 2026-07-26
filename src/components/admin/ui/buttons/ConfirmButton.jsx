@@ -1,22 +1,15 @@
-import clsx from "clsx";
-
 import Button from "./Button";
-
-const surfaceStyles = {
-  light: "bg-rose-500 hover:bg-rose-600",
-  dark: "bg-rose-600 hover:bg-rose-500",
-  deepDark: "bg-rose-600 hover:bg-rose-600/80",
+const confirmClasses = {
+  add: "bg-emerald-600 text-white hover:bg-emerald-500 active:bg-emerald-700",
+  edit: "bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-700",
+  delete: "bg-red-600 text-white hover:bg-red-500 active:bg-red-700",
+  unsavedChanges: "bg-red-600 text-white hover:bg-red-500 active:bg-red-700",
+  default: "bg-indigo-600 text-white hover:bg-indigo-500 active:bg-indigo-700",
 };
 
-const ConfirmButton = ({ children, surface = "light", ...props }) => {
+const ConfirmButton = ({ children, type = "light", ...props }) => {
   return (
-    <Button
-      className={clsx(
-        "text-slate-50",
-        surfaceStyles[surface] ?? surfaceStyles.light,
-      )}
-      {...props}
-    >
+    <Button className={`${confirmClasses[type]}`} {...props}>
       {children}
     </Button>
   );

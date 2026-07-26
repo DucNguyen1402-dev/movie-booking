@@ -1,4 +1,4 @@
-import { useLocation,useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { format } from "date-fns";
 
@@ -8,8 +8,8 @@ import {
   useNotificationContext,
 } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
-import {ensureMinDuration} from "@utils/admin"
-import { MIN_LOADING_TIME,MODAL_TYPES } from "@constants/admin";
+import { ensureMinDuration } from "@utils/admin";
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -17,13 +17,10 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/movies";
 
-
   const modal = useModalContext();
   const { showLoading, hideLoading } = useLoadingContext();
   const { notificationActions } = useNotificationContext();
 
-
-  
   const handleShowtimeCanceling = () => {
     modal.close();
     navigate(previousPath, { state: { history } });
@@ -31,7 +28,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const onCancelClick = () =>
     modal.open({
-      type: MODAL_TYPES.SHOWTIME_CREATION,
+      type: MODAL_TYPES.UNSAVED_CHANGES,
       title: "Hủy tạo lịch chiếu?",
       subtitle: "Mọi thông tin bạn đã nhập sẽ không được lưu.",
       onConfirm: handleShowtimeCanceling,
@@ -50,12 +47,11 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       giaVe: Number(giaVe),
     };
 
-
     try {
       modal.close();
       showLoading();
       await createShowtime(payload);
-      await ensureMinDuration(start, MIN_LOADING_TIME)
+      await ensureMinDuration(start, MIN_LOADING_TIME);
       hideLoading();
       navigate(previousPath, {
         state: {
@@ -78,7 +74,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const onValid = (data) => {
     modal.open({
-      type: MODAL_TYPES.SHOWTIME_CREATION,
+      type: MODAL_TYPES.ADD,
       title: "Xác nhận tạo lịch chiếu?",
       subtitle: "Bạn có chắc muốn tạo lịch chiếu này?",
       onConfirm: () =>
