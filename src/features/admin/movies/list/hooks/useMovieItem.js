@@ -1,7 +1,8 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { MOVIE_HIGHLIGHTS } from "@config/admin";
+import { ENTITIES, MOVIE_HIGHLIGHTS } from "@config/admin";
+import { createDeleteModalContent } from "@helpers/admin/modal";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { useScrollIntoView } from "@hooks/admin";
@@ -26,52 +27,64 @@ export function useMovieItem({ movie, movieId, highlight }) {
 
   useScrollIntoView({ ref: rowRef, enabled: isTargetMovie });
 
-  const onCreateShowTimeClick = () =>
-    navigate(`/admin/movies/showtimes/${movie.maPhim}`, {
-      state: {
-        history: [...(location.state?.history ?? []), location.pathname],
-      },
-    });
+  const onCreateShowTimeClick = useMemo(
+    () => () =>
+      navigate(`/admin/movies/showtimes/${movie.maPhim}`, {
+        state: {
+          history: [...(location.state?.history ?? []), location.pathname],
+        },
+      }),
+    [location.pathname, location.state?.history, movie.maPhim, navigate],
+  );
 
-  const onEditClick = () =>
-    navigate(`/admin/movies/edit/${movie.maPhim}`, {
-      state: {
-        history: [...(location.state?.history ?? []), location.pathname],
-        shouldConfirmLeave: true,
-      },
-    });
+  const onEditClick = useMemo(
+    () => () =>
+      navigate(`/admin/movies/edit/${movie.maPhim}`, {
+        state: {
+          history: [...(location.state?.history ?? []), location.pathname],
+          shouldConfirmLeave: true,
+        },
+      }),
+    [location.pathname, location.state?.history, movie.maPhim, navigate],
+  );
 
-  const handleDeleteMovie = async () => {
-    try {
-      await mutateAsync(movie.maPhim);
-      modal.close();
-      notificationActions.show({
-        variant: "success",
-        message: "Xóa phim thành công",
-      });
-    } catch (error) {
-      modal.close();
-      notificationActions.show({
-        variant: "error",
-        message: error.response.data?.content,
-      });
-    } finally {
-      setOnDeleting(false);
-    }
-  };
-
-  const onDeleteClick = () => {
-    setOnDeleting(true);
-    modal.open({
-      type: MODAL_TYPES.DELETE,
-      entity: "movie",
-      onConfirm: handleDeleteMovie,
-      onCancel: () => {
-        setOnDeleting(false);
+  const handleDeleteMovie = useMemo(
+    () => async () => {
+      try {
+        await mutateAsync(movie.maPhim);
         modal.close();
-      },
-    });
-  };
+        notificationActions.show({
+          variant: "success",
+          message: "Xóa phim thành công",
+        });
+      } catch (error) {
+        modal.close();
+        notificationActions.show({
+          variant: "error",
+          message: error.response.data?.content,
+        });
+      } finally {
+        setOnDeleting(false);
+      }
+    },
+    [modal, movie.maPhim, mutateAsync, notificationActions],
+  );
+
+  const onDeleteClick = useMemo(
+    () => () => {
+      setOnDeleting(true);
+      modal.open({
+        type: MODAL_TYPES.DELETE,
+        content: createDeleteModalContent(ENTITIES.movie, movie.tenPhim),
+        onConfirm: handleDeleteMovie,
+        onCancel: () => {
+          setOnDeleting(false);
+          modal.close();
+        },
+      });
+    },
+    [handleDeleteMovie, modal, movie.tenPhim],
+  );
 
   return {
     onDeleteClick,

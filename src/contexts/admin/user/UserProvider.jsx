@@ -34,6 +34,7 @@ const UserProvider = ({ children }) => {
           ? avatarList[currentUser.avatarIndex]
           : null,
       account: currentUser?.taiKhoan,
+      currentAvatarIndex: currentUser.avatarIndex,
     }),
     [currentUser],
   );

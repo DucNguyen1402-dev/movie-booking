@@ -21,9 +21,11 @@ const ModalContainer = () => {
     modal.onConfirm();
   };
 
+  const onCancelClick = modal.onCancel ?? close;
+
   return (
     <Component
-      onCancel={modal.onCancel ?? close}
+      onCancel={onCancelClick}
       onConfirm={onConfirmClick}
       title={title || modal.defaultTitle}
       subtitle={subtitle || modal.defaultSubtitle}

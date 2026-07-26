@@ -60,7 +60,7 @@ const GlobalUI = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Backdrop />
+            <Backdrop surface="light" />
             <Loading />
           </motion.div>
         )}

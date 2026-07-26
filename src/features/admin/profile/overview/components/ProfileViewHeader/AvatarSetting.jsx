@@ -1,12 +1,13 @@
 import { useMemo } from "react";
 
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 import { useUserContext } from "@contexts/admin/user";
 import { usePagination } from "@hooks/admin";
 
 const AvatarSetting = ({ onClose }) => {
-  const { setAvatarIndex, avatarName, avatarList } = useUserContext();
+  const { setAvatarIndex, avatarName, avatarList, currentAvatarIndex } =
+    useUserContext();
 
   const pagination = usePagination({
     items: avatarList,
@@ -30,7 +31,7 @@ const AvatarSetting = ({ onClose }) => {
         {pagination.page !== 1 && (
           <button
             onClick={() => handleAvatarSelection(-1)}
-            className="flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500 bg-yellow-600 text-4xl text-slate-100 transition-transform duration-300 hover:scale-105"
+            className="flex h-24 w-24 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-slate-500 bg-yellow-600 text-5xl text-slate-100 transition-transform duration-300 hover:scale-105"
           >
             {avatarName}
           </button>
@@ -40,9 +41,14 @@ const AvatarSetting = ({ onClose }) => {
             key={index}
             onClick={() => handleAvatarSelection(index)}
 
-            className="h-24 w-24 cursor-pointer overflow-hidden rounded-full border border-slate-500 transition-transform duration-300 hover:scale-105"
+            className="relative h-24 w-24 cursor-pointer overflow-hidden rounded-full border border-slate-500 transition-transform duration-300 hover:scale-105"
           >
             <img src={avatar} className="object-fit h-full w-full" />
+            {index === currentAvatarIndex && (
+              <div className="absolute right-4 bottom-2 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600">
+                <Check className="size-4 font-bold text-white" />
+              </div>
+            )}
           </button>
         ))}
 

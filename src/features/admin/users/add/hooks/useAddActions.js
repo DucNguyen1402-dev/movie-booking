@@ -1,6 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { HIGHLIGHT_TYPES } from "@config/admin";
+import { ENTITIES, HIGHLIGHT_TYPES } from "@config/admin";
+import {
+  createAddModalContent,
+  createUnsavedChangesModalContent,
+} from "@helpers/admin/modal";
 
 import {
   useLoadingContext,
@@ -32,7 +36,7 @@ export function useAddActions({ handleSubmit }) {
   const onCancelAddUserClick = () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      entity: "user",
+      content: createUnsavedChangesModalContent(ENTITIES.user),
       onConfirm: handleCancelAddUser,
     });
 
@@ -71,7 +75,7 @@ export function useAddActions({ handleSubmit }) {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.ADD,
-      entity: "user",
+      content: createAddModalContent(ENTITIES.user),
       onConfirm: () => handleAddUser(data),
     });
 

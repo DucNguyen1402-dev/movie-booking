@@ -1,7 +1,11 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { HIGHLIGHT_TYPES } from "@config/admin";
+import { ENTITIES, HIGHLIGHT_TYPES } from "@config/admin";
+import {
+  createEditModalContent,
+  createUnsavedChangesModalContent,
+} from "@helpers/admin/modal";
 import { format } from "date-fns";
 
 import {
@@ -10,8 +14,7 @@ import {
   useNotificationContext,
 } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
-import { MODAL_TYPES } from "@constants/admin";
-import { MIN_LOADING_TIME } from "@constants/admin";
+import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
 import { useUpdateMovie } from "./useUpdateMovie";
 
@@ -36,7 +39,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const onCancelClick = () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      entity: "movie",
+      content: createUnsavedChangesModalContent(ENTITIES.movie),
       onConfirm: handleCancelChange,
     });
 
@@ -140,7 +143,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     if (!isValid) return;
     modal.open({
       type: MODAL_TYPES.EDIT,
-      entity: "movie",
+      content: createEditModalContent(ENTITIES.movie),
       onConfirm: handleSaveMovie,
     });
   };

@@ -9,6 +9,7 @@ import {
   ProfileViewHeader,
   ProfileViewInfor,
 } from "@features/admin/profile/overview/components";
+import { Button } from "@components/admin/ui/buttons";
 
 const ProfileView = () => {
   const location = useLocation();
@@ -63,20 +64,20 @@ const ProfileView = () => {
           <ProfileViewInfor fields={profileFields} />
 
           <div className="mt-12 space-y-5">
-            <button
+            <Button
               onClick={onUpdateProfileClick}
-              className="w-full cursor-pointer rounded-md border-none bg-blue-600 py-2.5 text-sm font-medium text-slate-200 transition-colors duration-300 hover:bg-blue-700"
+              className="w-full bg-blue-600 text-slate-200 hover:bg-blue-700"
             >
               Cập nhật thông tin
-            </button>
+            </Button>
 
             <div className="flex justify-center">
-              <button
-                className="flex cursor-pointer items-center gap-2 rounded-md px-6 py-2 text-slate-400 transition-colors duration-300 hover:bg-red-950/10 hover:text-rose-700"
+              <Button
+                className="text-slate-400 hover:bg-red-950/10 hover:text-rose-700"
                 onClick={onChangePasswordClick}
               >
-                <span className="text-">Đổi mật khẩu</span>
-              </button>
+                <span className="text-sm">Đổi mật khẩu</span>
+              </Button>
             </div>
           </div>
         </div>

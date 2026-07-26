@@ -1,4 +1,5 @@
 const SURFACE_CLASSES = {
+  light: "bg-slate-950/10",
   normal: "bg-slate-950/40",
   deepDark: "bg-slate-950/80",
 };

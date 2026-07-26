@@ -1,5 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { ENTITIES } from "@config/admin";
+import {
+  createAddModalContent,
+  createUnsavedChangesModalContent,
+} from "@helpers/admin/modal";
 import { format } from "date-fns";
 
 import {
@@ -29,7 +34,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const onCancelClick = () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      entity: "showtime",
+      content: createUnsavedChangesModalContent(ENTITIES.showtime),
       onConfirm: handleShowtimeCanceling,
     });
 
@@ -74,7 +79,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const onValid = (data) => {
     modal.open({
       type: MODAL_TYPES.ADD,
-      entity: "showtime",
+      content: createAddModalContent(ENTITIES.showtime),
       onConfirm: () =>
         handleShowtimeCreation({
           ...data,

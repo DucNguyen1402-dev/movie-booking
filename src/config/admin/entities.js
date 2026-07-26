@@ -7,9 +7,9 @@ export const ENTITIES = {
 };
 
 export const ENTITY_LABELS = {
-  movie: "phim",
-  user: "người dùng",
-  showtime: "lịch chiếu",
-  profile: "Thông tin tài khoản",
-  password: "mật khẩu",
+  [ENTITIES.movie]: "phim",
+  [ENTITIES.user]: "người dùng",
+  [ENTITIES.showtime]: "lịch chiếu",
+  [ENTITIES.profile]: "tài khoản",
+  [ENTITIES.password]: "mật khẩu",
 };

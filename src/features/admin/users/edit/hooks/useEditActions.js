@@ -1,6 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { HIGHLIGHT_TYPES } from "@config/admin";
+import { ENTITIES, HIGHLIGHT_TYPES } from "@config/admin";
+import {
+  createEditModalContent,
+  createUnsavedChangesModalContent,
+} from "@helpers/admin/modal";
 
 import {
   useLoadingContext,
@@ -38,7 +42,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
 
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
-      entity: "user",
+      content: createUnsavedChangesModalContent(ENTITIES.user),
       onConfirm: () => {
         modal.close();
         navigateBack();
@@ -96,7 +100,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT,
-      entity: "user",
+      content: createEditModalContent(ENTITIES.user),
       onConfirm: () => handleConfirmEdit(data),
     });
 

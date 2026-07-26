@@ -1,5 +1,7 @@
+import { CircleX } from "lucide-react";
+
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { CloseButton } from "@components/admin/ui/buttons";
+import { Button } from "@components/admin/ui/buttons";
 
 const TrailerModal = () => {
   const {
@@ -23,7 +25,14 @@ const TrailerModal = () => {
         </div>
 
         <div className="absolute top-2 right-2">
-          <CloseButton onClick={() => close()} surface="dark" size="xs" />
+          <Button
+            onClick={() => close()}
+            surface="dark"
+            size="sm"
+            className="text-slate-300 hover:text-slate-50"
+          >
+            <CircleX className="size-5" />
+          </Button>
         </div>
 
         <div className="aspect-video w-full">

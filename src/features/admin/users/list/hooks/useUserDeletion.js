@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { ENTITIES } from "@config/admin";
+import { createDeleteModalContent } from "@helpers/admin/modal";
+
 import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { MODAL_TYPES } from "@constants/admin";
 
@@ -39,7 +42,7 @@ export function useUserDeletion() {
     setDeletingAccount(taiKhoan);
     modal.open({
       type: MODAL_TYPES.DELETE,
-      entity: "user",
+      content: createDeleteModalContent(ENTITIES.user, taiKhoan),
       onConfirm: () => handleDeleteUser(taiKhoan),
       onCancel: () => {
         setDeletingAccount(null);

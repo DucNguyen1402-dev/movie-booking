@@ -1,5 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { ENTITIES } from "@config/admin";
+import {
+  createChangePasswordModalContent,
+  createEditModalContent,
+  createUnsavedPasswordChangesModalContent,
+} from "@helpers/admin/modal";
+
 import {
   useLoadingContext,
   useModalContext,
@@ -10,9 +17,9 @@ import { ensureMinDuration } from "@utils/admin";
 import { getCurrentUser } from "@utils/shared";
 import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
 
-import { useProfileEffect, useProfileForm, useUpdateUser } from ".";
+import { useUpdateUser } from ".";
 
-export function useProfile() {
+export function useProfileActions({ handleSubmit, getValues, isDirty }) {
   const location = useLocation();
   const navigate = useNavigate();
   const history = location.state?.history ?? [];
@@ -39,16 +46,11 @@ export function useProfile() {
     });
   };
 
-  const { register, handleSubmit, getValues, reset, errors, isDirty } =
-    useProfileForm();
-
-  useProfileEffect({ reset, loginedUser });
-
   const onCancelPasswordChangeClick = () => {
     if (isDirty) {
       modal.open({
         type: MODAL_TYPES.UNSAVED_CHANGES,
-        entity: "password",
+        content: createUnsavedPasswordChangesModalContent(),
         onConfirm: handleCancelPasswordChange,
       });
       return;
@@ -167,14 +169,14 @@ export function useProfile() {
   const handleChangeProfile = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT,
-      entity: "profile",
+      content: createEditModalContent(ENTITIES.profile),
       onConfirm: () => submitProfileChange(data),
     });
 
   const handleChangePassword = (data) =>
     modal.open({
       type: MODAL_TYPES.EDIT,
-      entity: "password",
+      content: createChangePasswordModalContent(loginedUser.taiKhoan),
       onConfirm: () => submitPasswordChange(data),
     });
 
@@ -202,12 +204,10 @@ export function useProfile() {
   };
 
   return {
-    form: { register, errors, isDirty, onSubmitEvent, onPasswordSubmitEvent },
-
-    profile: {
-      isLoading,
-      onCancelPasswordChangeClick,
-      loginedUser,
-    },
+    isLoading,
+    onCancelPasswordChangeClick,
+    onPasswordSubmitEvent,
+    onSubmitEvent,
+    loginedUser,
   };
 }

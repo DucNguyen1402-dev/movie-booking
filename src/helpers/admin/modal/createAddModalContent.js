@@ -5,6 +5,6 @@ export const createAddModalContent = (entity) => {
 
   return {
     title: `Xác nhận tạo ${entityLabel} mới.`,
-    subtitle: `Hệ thông sẽ tạo ${entityLabel} mới với thông tin bạn đã nhập`,
+    subtitle: `Hệ thống sẽ tạo ${entityLabel} mới với thông tin bạn đã nhập`,
   };
 };

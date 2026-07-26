@@ -4,9 +4,9 @@ import { Plus } from "lucide-react";
 import Button from "./Button";
 
 const surfaceStyles = {
-  light: "bg-green-500 hover:bg-green-600",
-  dark: "bg-green-600 hover:bg-green-500",
-  deepDark: "bg-green-700 hover:bg-green-600",
+  light: "bg-emerald-500 hover:bg-emerald-600",
+  dark: "bg-emerald-600 hover:bg-emerald-500",
+  deepDark: "bg-emerald-700 hover:bg-emerald-600",
 };
 
 const AddButton = ({ children, Icon = Plus, surface = "light", ...props }) => {

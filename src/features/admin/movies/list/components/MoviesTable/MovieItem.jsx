@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+
 import { format } from "date-fns";
 import {
   CalendarPlus2,
@@ -10,6 +12,7 @@ import {
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { useMovieItem } from "@features/admin/movies/list/hooks";
+import { Button } from "@components/admin/ui/buttons";
 
 const MovieItem = ({ movie, movieId, highlight }) => {
   const {
@@ -27,8 +30,40 @@ const MovieItem = ({ movie, movieId, highlight }) => {
   });
   const { trailer } = useMovieListContext();
 
-  const onOpenTrailerClick = () =>
-    trailer.open({ url: movie.trailer, movieName: movie.tenPhim });
+  const onOpenTrailerClick = useMemo(
+    () => () => trailer.open({ url: movie.trailer, movieName: movie.tenPhim }),
+    [movie.trailer, movie.tenPhim, trailer],
+  );
+
+  const actionButtonsConfig = useMemo(
+    () => [
+      {
+        title: "Xem Trailer",
+        className: "hover:bg-pink-500/10 hover:text-pink-400",
+        onClick: onOpenTrailerClick,
+        Icon: TvMinimalPlay,
+      },
+      {
+        title: "Sửa thông tin",
+        className: "hover:bg-indigo-500/10 hover:text-indigo-400",
+        onClick: onEditClick,
+        Icon: SquarePen,
+      },
+      {
+        title: "Tạo lịch chiếu",
+        className: "hover:bg-indigo-500/10 hover:text-indigo-400",
+        onClick: onCreateShowTimeClick,
+        Icon: CalendarPlus2,
+      },
+      {
+        title: "Xóa phim",
+        className: "hover:bg-red-500/10 hover:text-red-400",
+        onClick: onDeleteClick,
+        Icon: Trash2,
+      },
+    ],
+    [onCreateShowTimeClick, onDeleteClick, onEditClick, onOpenTrailerClick],
+  );
 
   return (
     <tr
@@ -101,35 +136,17 @@ const MovieItem = ({ movie, movieId, highlight }) => {
 
       <td className="px-4 py-4">
         <div className="flex items-center justify-end gap-1.5">
-          <button
-            onClick={onOpenTrailerClick}
-            className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-pink-500/10 hover:text-pink-400"
-            title="Xem Trailer"
-          >
-            <TvMinimalPlay className="h-4 w-4" />
-          </button>
-          <button
-            className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-indigo-500/10 hover:text-indigo-400"
-            title="Sửa thông tin"
-            onClick={onEditClick}
-          >
-            <SquarePen className="h-4 w-4" />
-          </button>
-
-          <button
-            className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-blue-500/10 hover:text-blue-400"
-            title="Tạo lịch chiếu"
-            onClick={onCreateShowTimeClick}
-          >
-            <CalendarPlus2 className="h-4 w-4" />
-          </button>
-          <button
-            className="cursor-pointer rounded-lg p-2 text-slate-400 transition-colors duration-300 hover:bg-rose-500/10 hover:text-rose-400"
-            title="Xóa phim"
-            onClick={onDeleteClick}
-          >
-            <Trash2 className="h-4 w-4" />
-          </button>
+          {actionButtonsConfig.map((actionButton) => (
+            <Button
+              key={actionButton.title}
+              onClick={actionButton.onClick}
+              className={`text-slate-400 ${actionButton.className}`}
+              title={actionButton.title}
+              size="sm"
+            >
+              <actionButton.Icon className="h-4 w-4" />
+            </Button>
+          ))}
         </div>
       </td>
     </tr>
