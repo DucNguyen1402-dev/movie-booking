@@ -1,7 +1,8 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { CalendarCog, CalendarX } from "lucide-react";
+import { CalendarX } from "lucide-react";
 
+import { AddButton } from "@components/admin/ui/buttons";
 const EmptyShowtimeState = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,13 +29,11 @@ const EmptyShowtimeState = () => {
         để khán giả có thể đặt vé.
       </p>
 
-      <button
-        onClick={onShowtimeCreationClick}
-        className="mt-6 flex cursor-pointer items-center gap-1 rounded-md bg-green-600 px-3 py-2.5 text-sm font-medium text-slate-100 transition-colors duration-400 hover:bg-green-700"
-      >
-        <CalendarCog className="size-5 font-bold" />
-        <span>Tạo lịch chiếu mới</span>
-      </button>
+      <div className="mt-6">
+        <AddButton onClick={onShowtimeCreationClick} surface="dark">
+          Tạo lịch chiếu mới
+        </AddButton>
+      </div>
     </div>
   );
 };

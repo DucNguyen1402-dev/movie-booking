@@ -39,6 +39,7 @@ const DateInput = ({
     <div className="relative">
       <button
         type="button"
+        id={name}
         onClick={() => setDayPickerVisible((prev) => !prev)}
         className={`flex w-full items-center gap-2 rounded-sm p-1.5 transition-colors ${disabled ? "border border-slate-600 bg-slate-900/80 text-gray-500" : "form-focus cursor-pointer bg-slate-900/40 text-gray-400"}`}
         aria-expanded={isDatePickerOpen}

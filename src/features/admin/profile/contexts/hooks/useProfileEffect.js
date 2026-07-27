@@ -10,6 +10,9 @@ export function useProfileEffect({ loginedUser, reset }) {
       email: loginedUser.email,
       soDT: loginedUser.soDT,
       matKhau: loginedUser.matKhau,
+      matKhauHienTai: "",
+      matKhauMoi: "",
+      xacNhanMatKhauMoi: "",
     });
   }, [loginedUser, reset]);
 }

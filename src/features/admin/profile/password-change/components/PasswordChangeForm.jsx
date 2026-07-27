@@ -3,7 +3,7 @@ import { userValidationRules } from "@config/admin";
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import { CancelButton, SaveButton } from "@components/admin/ui/buttons";
-import { PasswordInput } from "@components/admin/ui/form";
+import { FormLabel, PasswordField } from "@components/admin/ui/form";
 
 const passwordFieldsConfig = [
   { label: "Mật khẩu hiện tại", name: "matKhauHienTai" },
@@ -22,16 +22,17 @@ const PasswordChangeForm = () => {
   useSyncLeaveConfirmation(isDirty);
 
   return (
-    <form className="space-y-5" onSubmit={onPasswordSubmitEvent}>
+    <form className="space-y-10" onSubmit={onPasswordSubmitEvent}>
       {passwordFieldsConfig.map((field) => (
-        <PasswordInput
-          key={field.name}
-          label={field.label}
-          register={register}
-          name={field.name}
-          rules={passwordRules}
-          error={errors[field.name]}
-        />
+        <div className="flex flex-col gap-3" key={field.name}>
+          <FormLabel required={true} htmlFor={field.name}>
+            {field.label}
+          </FormLabel>
+          <PasswordField
+            {...register(field.name, passwordRules)}
+            error={errors[field.name]?.message}
+          />
+        </div>
       ))}
 
       <div className="flex justify-end gap-3 pt-8">

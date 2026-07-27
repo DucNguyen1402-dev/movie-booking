@@ -5,6 +5,7 @@ const UserProfileHeader = ({ initial, taiKhoan, role }) => {
     label,
     variants: { profile: profileClasses },
   } = userRoleMapping[role] ?? {};
+
   return (
     <div className="mb-10 flex flex-col items-center space-y-3">
       <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-600 text-4xl font-bold">

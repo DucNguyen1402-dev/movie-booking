@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 
+import { Button } from "@components/admin/ui";
+
 const TimePicker = ({ value, onChange, timePickerVisible, timePickerRef }) => {
   const [currentHour, currentMinute] = value ? value.split(":") : ["00", "00"];
   const hours = Array.from({ length: 24 }, (_, i) =>
@@ -51,14 +53,15 @@ const TimePicker = ({ value, onChange, timePickerVisible, timePickerRef }) => {
             {hours.map((hour) => {
               const isActive = hour === currentHour;
               return (
-                <button
+                <Button
                   key={hour}
+                  size="none"
                   data-ative-time={isActive}
                   onClick={() => handleSelectHour(hour)}
-                  className={`rounded-full border-none px-5 py-0.75 text-sm transition-colors duration-200 ${isActive ? "bg-blue-500 text-slate-50" : "cursor-pointer text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
+                  className={`rounded-full px-5 py-0.75 ${isActive ? "cursor-default bg-blue-500 text-slate-50" : " text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
                 >
                   {hour}
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -70,14 +73,15 @@ const TimePicker = ({ value, onChange, timePickerVisible, timePickerRef }) => {
             {minutes.map((minute) => {
               const isActive = minute === currentMinute;
               return (
-                <button
+                <Button
                   key={minute}
+                  size="none"
                   data-ative-time={isActive}
                   onClick={() => handleSelectMinute(minute)}
-                  className={`rounded-full border-none px-5 py-0.75 text-sm transition-colors duration-200 ${isActive ? "bg-blue-500 text-slate-50" : "cursor-pointer text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
+                  className={`rounded-full px-5 py-0.75 ${isActive ? "cursor-default bg-blue-500 text-slate-50" : " text-slate-200 hover:bg-blue-400 hover:text-slate-50"}`}
                 >
                   {minute}
-                </button>
+                </Button>
               );
             })}
           </div>

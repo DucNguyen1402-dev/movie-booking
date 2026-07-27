@@ -4,7 +4,7 @@ import { validationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
-import { DateInput, Textarea } from "@components/admin/ui/form";
+import { DateInput, FormLabel, Textarea } from "@components/admin/ui/form";
 
 import { CheckboxFields, InputFields } from "./FormFields";
 
@@ -45,7 +45,10 @@ const EditFormFields = () => {
       />
 
       <div className="flex items-center justify-between">
-        <div className="w-2/5">
+        <div className="flex w-2/5 flex-col gap-4">
+          <FormLabel htmlFor="ngayKhoiChieu" required={true}>
+            Ngày khởi chiếu
+          </FormLabel>
           <DateInput
             control={control}
             value={watch("ngayKhoiChieu")}
@@ -60,9 +63,7 @@ const EditFormFields = () => {
           />
         </div>
         <div className="flex flex-col gap-5">
-          <label className="text-sm font-semibold text-slate-200">
-            Trạng thái phim
-          </label>
+          <FormLabel>Trạng thái phim</FormLabel>
           <CheckboxFields control={control} />
         </div>
       </div>

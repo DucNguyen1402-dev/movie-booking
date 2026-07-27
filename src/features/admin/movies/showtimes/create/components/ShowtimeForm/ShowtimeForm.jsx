@@ -107,7 +107,7 @@ const ShowtimeForm = ({ movie }) => {
             Hủy
           </CancelButton>
 
-          <AddButton surface="dark" onClick={onConfirmClick}>
+          <AddButton surface="deepDark" onClick={onConfirmClick}>
             Tạo lịch chiếu
           </AddButton>
         </div>

@@ -1,7 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { CalendarCog } from "lucide-react";
-
 import { AddButton } from "@components/admin/ui/buttons";
 
 const MovieSelectionCard = ({ movie, hasNoShowtime }) => {
@@ -26,11 +24,7 @@ const MovieSelectionCard = ({ movie, hasNoShowtime }) => {
 
         {!hasNoShowtime && (
           <div className="mt-8 self-end">
-            <AddButton
-              onClick={onShowtimeCreationClick}
-              surface="deepDark"
-              Icon={CalendarCog}
-            >
+            <AddButton onClick={onShowtimeCreationClick} surface="deepDark">
               Tạo lịch chiếu mới
             </AddButton>
           </div>

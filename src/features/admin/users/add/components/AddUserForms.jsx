@@ -2,7 +2,12 @@ import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { addUserFields } from "@features/admin/users/add/config";
 import { useAddActions, useAddForm } from "@features/admin/users/add/hooks";
 import { validationRules } from "@features/admin/users/config";
-import { Input, PasswordInput, SelectForm } from "@components/admin/ui/form";
+import {
+  FormLabel,
+  Input,
+  PasswordField,
+  SelectForm,
+} from "@components/admin/ui/form";
 
 import { FormActions } from ".";
 const AddUserForms = () => {
@@ -19,17 +24,18 @@ const AddUserForms = () => {
       <form className="space-y-8">
         <div className="grid gap-6 md:grid-cols-2">
           {addUserFields.map(({ label, name, required, type }) => {
-            const Component = type === "password" ? PasswordInput : Input;
+            const Component = type === "password" ? PasswordField : Input;
             return (
-              <Component
-                key={name}
-                label={label}
-                required={required}
-                name={name}
-                register={register}
-                rules={validationRules[name]}
-                error={errors[name]}
-              />
+              <div key={name} className="flex flex-col gap-3">
+                <FormLabel htmlFor={name} required={required}>
+                  {label}
+                </FormLabel>
+                <Component
+                  name={name}
+                  {...register(name, validationRules[name])}
+                  error={errors[name]?.message}
+                />
+              </div>
             );
           })}
 
