@@ -212,7 +212,7 @@ select {
     @apply block w-fit text-sm text-slate-200 file:mr-4 file:cursor-pointer file:rounded file:border-2 file:border-indigo-500 file:bg-indigo-700 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-indigo-100 file:transition-colors file:duration-300 hover:file:border-indigo-500 hover:file:ring-2 hover:file:ring-indigo-500/20;
   }
   .input {
-    @apply w-full rounded-md border border-slate-700 px-4 py-2 text-sm text-slate-100 transition-colors duration-200 outline-none;
+    @apply w-full rounded-sm border border-slate-700 px-3 py-2 text-sm text-slate-100 transition-colors duration-200 outline-none;
   }
 
   .input-default {

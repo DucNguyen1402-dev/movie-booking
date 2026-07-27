@@ -1,24 +1,25 @@
-import { Checkbox } from "@components/admin/ui/form";
+import { CheckboxField } from "@components/admin/ui/form";
 
 const checkboxFields = [
   { label: "Hot", name: "hot" },
-  { label: "đang chiếu", name: "dangChieu" },
-  { label: "sắp chiếu", name: "sapChieu" },
+  { label: "Đang chiếu", name: "dangChieu" },
+  { label: "Sắp chiếu", name: "sapChieu" },
 ];
 
-const CheckboxField = ({ control }) => {
+const CheckboxFields = ({ control }) => {
   return (
     <div className="flex items-center gap-10">
-      {checkboxFields.map((field) => (
-        <Checkbox
-          key={field.name}
-          name={field.name}
+      {checkboxFields.map(({ name, label }) => (
+        <CheckboxField
+          key={name}
+          name={name}
           control={control}
-          label={field.label}
+          label={label}
+          labelClassName="text-slate-200 text-[15px] ml-2.5"
         />
       ))}
     </div>
   );
 };
 
-export default CheckboxField;
+export default CheckboxFields;

@@ -4,6 +4,8 @@ import { useFormState } from "react-hook-form";
 import { format } from "date-fns";
 import { Calendar } from "lucide-react";
 
+import { cn } from "@utils/shared";
+
 import DatePicker from "./DatePicker";
 
 const DateInput = ({
@@ -15,7 +17,7 @@ const DateInput = ({
   rules,
 }) => {
   const [isDatePickerOpen, setDayPickerVisible] = useState(null);
-  const datePickerRef = useRef(null);
+  const calendarRef = useRef(null);
   const { errors } = useFormState({ control });
 
   const showDateLabel = value
@@ -25,7 +27,7 @@ const DateInput = ({
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
+      if (calendarRef.current && !calendarRef.current.contains(e.target)) {
         setDayPickerVisible(false);
       }
     };
@@ -41,7 +43,12 @@ const DateInput = ({
         type="button"
         id={name}
         onClick={() => setDayPickerVisible((prev) => !prev)}
-        className={`flex w-full items-center gap-2 rounded-sm p-1.5 transition-colors ${disabled ? "border border-slate-600 bg-slate-900/80 text-gray-500" : "form-focus cursor-pointer bg-slate-900/40 text-gray-400"}`}
+        className={cn(
+          "flex w-full items-center gap-2 rounded-sm p-1.5 transition-colors",
+          disabled
+            ? "border border-slate-600 bg-slate-900/80 text-gray-500"
+            : "form-focus cursor-pointer bg-slate-900/40 text-gray-400",
+        )}
         aria-expanded={isDatePickerOpen}
         aria-haspopup="dialog"
         disabled={disabled}
@@ -50,7 +57,7 @@ const DateInput = ({
         <span>{disabled ? labels.disabled : dateLabel}</span>
       </button>
       <DatePicker
-        datePickerRef={datePickerRef}
+        calendarRef={calendarRef}
         isDatePickerOpen={isDatePickerOpen}
         control={control}
         requiredLabel={labels.required}

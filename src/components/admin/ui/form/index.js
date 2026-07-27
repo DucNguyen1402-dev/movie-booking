@@ -1,8 +1,8 @@
-export { default as Checkbox } from "./Checkbox";
+export * from "./Checkbox";
 export { default as DateInput } from "./DateInput/DateInput";
-export { default as FormLabel } from "./FormLabel";
-export { default as Input } from "./Input2";
-export { default as PasswordField } from "./PasswordField";
-export { default as Select } from "./Select";
-export { default as SelectForm } from "./SelectForm";
-export { default as Textarea } from "./Textarea";
+export { default as ErrorMessage } from "./ErrorMessage/ErrorMessage";
+export { default as FormLabel } from "./FormLabel/FormLabel";
+export * from "./Input";
+export { default as Select } from "./Select/Select";
+export { default as SelectForm } from "./Select/SelectForm";
+export { default as Textarea } from "./Textarea/Textarea";

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { DayPicker } from "react-day-picker";
 import { Controller } from "react-hook-form";
 
@@ -17,38 +18,37 @@ const CustomComponents = {
 };
 
 const DatePicker = ({
-  datePickerRef,
-  isDatePickerOpen,
+  calendarRef,
+  isDatePickerOpen = false,
   control,
   name,
   rules,
 }) => {
+  const today = useMemo(() => new Date(), []);
   return (
-    <>
-      <Controller
-        name={name}
-        control={control}
-        rules={rules}
-        render={({ field }) => (
-          <>
-            <div
-              className={`absolute top-[102%] left-0 z-30 transition-opacity duration-300 ${isDatePickerOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
-              ref={datePickerRef}
-            >
-              <DayPicker
-                mode="single"
-                selected={field.value}
-                onSelect={(date) => field.onChange(date)}
-                defaultMonth={new Date()}
-                disabled={{ before: new Date() }}
-                components={CustomComponents}
-                classNames={datePickerStyles}
-              />
-            </div>
-          </>
-        )}
-      />
-    </>
+    <Controller
+      name={name}
+      control={control}
+      rules={rules}
+      render={({ field }) => (
+        <>
+          <div
+            className={`absolute top-[105%] left-0 z-30 transition-opacity duration-200 ${isDatePickerOpen ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            ref={calendarRef}
+          >
+            <DayPicker
+              mode="single"
+              selected={field.value}
+              onSelect={field.onChange}
+              defaultMonth={today}
+              disabled={{ before: new Date() }}
+              components={CustomComponents}
+              classNames={datePickerStyles}
+            />
+          </div>
+        </>
+      )}
+    />
   );
 };
 

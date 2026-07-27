@@ -28,7 +28,7 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmitEvent} className="space-y-6">
+    <form onSubmit={handleSubmitEvent} className="space-y-6 pb-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <InputFields errors={errors} register={register} />
       </div>
@@ -63,7 +63,7 @@ const Form = () => {
         </div>
       </div>
 
-      <div className="mt-8">
+      <div className="mt-12">
         <FileImageField
           register={register}
           error={errors.hinhAnh}
@@ -72,19 +72,18 @@ const Form = () => {
         />
       </div>
 
-      <div className="mt-8 mb-2 flex justify-between border-t border-neutral-200 pt-4">
-        <p className="text-sm text-gray-300 italic">
-          * Vui lòng kiểm tra kỹ thông tin trước khi tạo phim.
-        </p>
-        <div className="flex gap-5">
-          <CancelButton type="button" onClick={onCancelClick} surface="dark">
-            Hủy
-          </CancelButton>
-          <AddButton type="submit" surface="dark">
-            Thêm Phim
-          </AddButton>
-        </div>
+      <div className="mt-15 flex justify-end gap-5">
+        <CancelButton type="button" onClick={onCancelClick} surface="dark">
+          Hủy
+        </CancelButton>
+        <AddButton type="submit" surface="dark">
+          Thêm Phim
+        </AddButton>
       </div>
+
+      <p className="text-sm text-gray-300 italic select-none">
+        * Vui lòng kiểm tra kỹ thông tin trước khi tạo phim.
+      </p>
     </form>
   );
 };

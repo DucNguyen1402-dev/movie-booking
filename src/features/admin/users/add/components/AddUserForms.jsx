@@ -6,7 +6,7 @@ import {
   FormLabel,
   Input,
   PasswordField,
-  SelectForm,
+  Select,
 } from "@components/admin/ui/form";
 
 import { FormActions } from ".";
@@ -39,18 +39,22 @@ const AddUserForms = () => {
             );
           })}
 
-          <SelectForm
-            label="Vai trò"
-            register={register}
-            name="maLoaiNguoiDung"
-            options={[
-              { value: "KhachHang", label: "Khách hàng" },
-              { value: "QuanTri", label: "Quản trị" },
-            ]}
-            rules={validationRules.maLoaiNguoiDung}
-            error={errors.maLoaiNguoiDung}
-            defaultOptionLabel="-- Chọn loại người dùng --"
-          />
+          <div className="flex flex-col gap-3">
+            <FormLabel htmlFor="maLoaiNguoiDung" required={true}>
+              Vai trò
+            </FormLabel>
+            <Select
+              name="maLoaiNguoiDung"
+              options={[
+                { value: "KhachHang", label: "Khách hàng" },
+                { value: "QuanTri", label: "Quản trị" },
+              ]}
+              {...register("maLoaiNguoiDung", validationRules.maLoaiNguoiDung)}
+
+              error={errors.maLoaiNguoiDung?.message}
+              defaultOptionLabel="-- Chọn loại người dùng --"
+            />
+          </div>
         </div>
       </form>
 

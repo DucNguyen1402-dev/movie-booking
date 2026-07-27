@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 
 import { LockKeyhole } from "lucide-react";
 
+import { ErrorMessage } from "@components/admin/ui/form";
 import { cn } from "@utils/shared";
 
 const Input = forwardRef(
@@ -27,7 +28,7 @@ const Input = forwardRef(
     const shouldShowDisabledIcon = disabled && showDisabledIcon;
     const Icon = shouldShowDisabledIcon ? LockKeyhole : RightIcon;
     return (
-      <div className={cn("flex flex-col gap-3", wrapperClassName)}>
+      <div className={cn("flex flex-col gap-2", wrapperClassName)}>
         <div className="relative">
           {LeftAddon && (
             <div className="absolute top-1/2 left-2 -translate-y-1/2">
@@ -67,14 +68,9 @@ const Input = forwardRef(
           )}
         </div>
         {error && (
-          <div
-            className={cn(
-              "rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300",
-              errorClassName,
-            )}
-          >
+          <ErrorMessage surface="dark" className={errorClassName}>
             {error}
-          </div>
+          </ErrorMessage>
         )}
       </div>
     );
