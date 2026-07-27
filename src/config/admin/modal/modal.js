@@ -2,6 +2,7 @@ import {
   AddModal,
   DeleteModal,
   EditModal,
+  LeavePageModal,
   UnsavedChangesModal,
 } from "@components/admin/common/Modal";
 import { MODAL_TYPES } from "@constants/admin";
@@ -21,6 +22,10 @@ export const MODAL_CONFIG = {
   },
   [MODAL_TYPES.UNSAVED_CHANGES]: {
     Component: UnsavedChangesModal,
+    loading: false,
+  },
+  [MODAL_TYPES.LEAVE_PAGE]: {
+    Component: LeavePageModal,
     loading: false,
   },
 };

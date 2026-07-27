@@ -3,4 +3,5 @@ export const MODAL_TYPES = {
   EDIT: "edit",
   DELETE: "delete",
   UNSAVED_CHANGES: "unsavedChanges",
+  LEAVE_PAGE: "leavePage",
 };

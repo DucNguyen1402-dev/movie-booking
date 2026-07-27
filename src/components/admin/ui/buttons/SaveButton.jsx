@@ -12,7 +12,7 @@ const surfaceStyles = {
 const SaveButton = ({ children, Icon = Save, surface = "light", ...props }) => {
   return (
     <Button
-      Icon={Icon}
+      icon={Icon}
       className={clsx(
         "text-slate-50",
         surfaceStyles[surface] ?? surfaceStyles.light,

@@ -7,7 +7,7 @@ import {
   useShowtimeForm,
 } from "@features/admin/movies/showtimes/create/hooks";
 import { AddButton, CancelButton } from "@components/admin/ui/buttons";
-import { DateInput } from "@components/admin/ui/form";
+import { DateInput, FormLabel } from "@components/admin/ui/form";
 
 import {
   CinemaClusters,
@@ -52,7 +52,7 @@ const ShowtimeForm = ({ movie }) => {
 
       <div>
         <form
-          className="grid gap-5 md:grid-cols-2"
+          className="grid gap-x-6 gap-y-8 md:grid-cols-2"
           onSubmit={(e) => e.preventDefault()}
         >
           <CinemaSystems cinemaSystems={cinemaSystems} control={control} />
@@ -66,19 +66,29 @@ const ShowtimeForm = ({ movie }) => {
             control={control}
             isTheaterDisabled={isTheaterDisabled}
           />
-          <DateInput
-            control={control}
-            value={watch("ngayChieu")}
-            name="ngayChieu"
-            rules={{ required: "Vui lòng nhập ngày chiếu phim" }}
-            disabled={isDatePickerDisabled}
-            labels={{
-              placeholder: "Chọn ngày chiếu",
-              form: "Ngày chiếu",
-              disabled: "Vui lòng chọn rạp chiếu trước",
-              requied: "Vui lòng chọn ngày chiếu phim",
-            }}
-          />
+          <div className="flex flex-col gap-3">
+            <FormLabel
+              htmlFor="ngayChieu"
+              required={true}
+              className={isTimePickerDisabled ? "text-slate-300" : ""}
+            >
+              Ngày chiếu
+            </FormLabel>
+            <DateInput
+              control={control}
+              value={watch("ngayChieu")}
+              required={true}
+              name="ngayChieu"
+              rules={{ required: "Vui lòng nhập ngày chiếu phim" }}
+              disabled={isDatePickerDisabled}
+              labels={{
+                placeholder: "Chọn ngày chiếu",
+                form: "Ngày chiếu",
+                disabled: "Vui lòng chọn rạp chiếu trước",
+                requied: "Vui lòng chọn ngày chiếu phim",
+              }}
+            />
+          </div>
           <TicketPrice
             control={control}
             watch={watch}

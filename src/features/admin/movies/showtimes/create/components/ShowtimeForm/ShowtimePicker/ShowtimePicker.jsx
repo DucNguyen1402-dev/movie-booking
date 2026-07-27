@@ -3,6 +3,10 @@ import { Controller } from "react-hook-form";
 
 import { Clock4 } from "lucide-react";
 
+import { Button } from "@components/admin/ui";
+import { FormLabel } from "@components/admin/ui/form";
+import { cn } from "@utils/shared";
+
 import TimePicker from "./TimePicker";
 
 const Showtime = ({ isTimePickerDisabled, watch, control }) => {
@@ -25,28 +29,35 @@ const Showtime = ({ isTimePickerDisabled, watch, control }) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <label
-        className="mb-2 cursor-pointer self-start text-sm font-medium text-slate-200"
+    <div className="flex flex-col gap-3">
+      <FormLabel
         htmlFor="show-time"
+        required={true}
+        className={isTimePickerDisabled ? "text-slate-300" : ""}
       >
         Giờ chiếu
-      </label>
-
+      </FormLabel>
       <div className="relative">
-        <button
+        <Button
           type="button"
           onClick={() => setTimePickerVisible((prev) => !prev)}
-          className={`#0F172A66 flex w-full items-center gap-2 rounded-sm border border-gray-600 bg-slate-900/40 p-1.5 transition-colors active:hover:border-gray-500 disabled:cursor-default ${isTimePickerDisabled ? "text-gray-500" : "cursor-pointer text-gray-400 hover:ring-1 hover:ring-blue-500 focus:outline-none"}`}
+          className={cn(
+            "py-1.5 pl-2 text-base disabled:cursor-default disabled:opacity-100",
+            "justify-start",
+            isTimePickerDisabled
+              ? "border border-slate-600 bg-slate-900/80 text-gray-500"
+              : "form-focus cursor-pointer bg-slate-900/40 text-gray-400",
+            timePickerVisible && "border-indigo-500 ring-2 ring-indigo-500/20",
+          )}
+
+          icon={Clock4}
+          fullWidth={true}
           aria-expanded={timePickerVisible}
           aria-haspopup="dialog"
           disabled={isTimePickerDisabled}
         >
-          <Clock4 className="size-4.5" />
-          <span>
-            {isTimePickerDisabled ? "Vui lòng chọn rạp chiếu trước" : timeLabel}
-          </span>
-        </button>
+          {isTimePickerDisabled ? "Vui lòng chọn rạp chiếu trước" : timeLabel}
+        </Button>
         <>
           <Controller
             name="gioChieu"

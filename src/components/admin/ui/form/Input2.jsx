@@ -4,7 +4,7 @@ import { LockKeyhole } from "lucide-react";
 
 import { cn } from "@utils/shared";
 
-const Input2 = forwardRef(
+const Input = forwardRef(
   (
     {
       disabled = false,
@@ -16,15 +16,16 @@ const Input2 = forwardRef(
       showDisabledIcon = true,
       wrapperClassName,
       errorClassname,
-      LeftAddon,
-      RightIcon,
-      LeftIcon,
+      leftAddon: LeftAddon,
+      rightIcon: RightIcon,
+      leftIcon: LeftIcon,
+      rightSlot,
       ...props
     },
     ref,
   ) => {
     const shouldShowDisabledIcon = disabled && showDisabledIcon;
-
+    const Icon = shouldShowDisabledIcon ? LockKeyhole : RightIcon;
     return (
       <div className={cn("flex flex-col gap-3", wrapperClassName)}>
         <div className="relative">
@@ -38,11 +39,7 @@ const Input2 = forwardRef(
               <LeftIcon className="size-4 text-slate-400" />
             </div>
           )}
-          {RightIcon && (
-            <div className="absolute top-1/2 right-2 -translate-y-1/2">
-              <RightIcon className="size-4 text-slate-400" />
-            </div>
-          )}
+
           <input
             ref={ref}
             id={id ?? props.name}
@@ -56,9 +53,15 @@ const Input2 = forwardRef(
             )}
             {...props}
           />
-          {shouldShowDisabledIcon && (
+          {rightSlot && (
             <div className="absolute top-1/2 right-2 -translate-y-1/2">
-              <LockKeyhole className="size-4.5 text-yellow-700" />
+              {rightSlot}
+            </div>
+          )}
+
+          {Icon && (
+            <div className="absolute top-1/2 right-2 -translate-y-1/2">
+              <Icon className="size-4 text-slate-400" />
             </div>
           )}
         </div>
@@ -77,5 +80,5 @@ const Input2 = forwardRef(
   },
 );
 
-Input2.displayName = "Input";
-export default Input2;
+Input.displayName = "Input";
+export default Input;

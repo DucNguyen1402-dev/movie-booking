@@ -12,7 +12,7 @@ const surfaceStyles = {
 const AddButton = ({ children, Icon = Plus, surface = "light", ...props }) => {
   return (
     <Button
-      Icon={Icon}
+      icon={Icon}
       className={clsx(
         "text-white",
         surfaceStyles[surface] ?? surfaceStyles.light,

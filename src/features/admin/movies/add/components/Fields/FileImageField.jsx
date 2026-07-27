@@ -4,24 +4,24 @@ const FileImageField = ({ handleFileChange, error, register, imgPreview }) => {
   return (
     <div className="flex justify-between rounded-sm border border-gray-600 px-5 py-3">
       <div className="flex flex-col gap-4">
-        <label className="mb-1 block text-sm font-medium text-slate-200">
+        <label
+          className="mb-1 block text-sm font-medium text-slate-200"
+          htmlFor="hinhAnh"
+        >
           Hình ảnh phim
         </label>
-        <div className="space-y-3">
-          <Input
-            type="file"
-            label="Tên phim"
-            name="hinhAnh"
-            rules={{
-              required: "Vui lòng chọn hình ảnh",
-              onChange: handleFileChange,
-            }}
-            error={error}
-            register={register}
-            accept="image/*"
-            className="input-file"
-          />
-        </div>
+
+        <Input
+          type="file"
+          id="hinhAnh"
+          {...register("hinhAnh", {
+            required: "Vui lòng chọn hình ảnh",
+            onChange: handleFileChange,
+          })}
+          error={error?.message}
+          accept="image/*"
+          inputClassName="input-file bg-slate-950/10"
+        />
       </div>
       {imgPreview && (
         <div>

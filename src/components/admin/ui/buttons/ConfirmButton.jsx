@@ -5,6 +5,7 @@ const confirmClasses = {
   delete: "bg-red-600 text-white hover:bg-red-500 active:bg-red-700",
   unsavedChanges: "bg-red-600 text-white hover:bg-red-500 active:bg-red-700",
   default: "bg-indigo-600 text-white hover:bg-indigo-500 active:bg-indigo-700",
+  leavePage: "bg-amber-600 text-white hover:bg-amber-500 active:bg-amber-700",
 };
 
 const ConfirmButton = ({ children, type = "light", ...props }) => {

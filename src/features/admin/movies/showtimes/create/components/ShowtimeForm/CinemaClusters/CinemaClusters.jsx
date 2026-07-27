@@ -1,6 +1,8 @@
 import { Controller } from "react-hook-form";
 import Select from "react-select";
 
+import { FormLabel } from "@components/admin/ui/form";
+
 import ClusterOption from "./ClusterOption";
 import ClusterSingleValue from "./ClusterSingleValue";
 
@@ -12,13 +14,14 @@ const CinemaClusters = ({ cinemaClusters, control, isClusterDisabled }) => {
   }));
 
   return (
-    <div className="flex flex-col gap-1.5">
-      <label
-        className="mb-2 cursor-pointer self-start text-sm font-medium text-slate-200"
+    <div className="flex flex-col gap-3">
+      <FormLabel
         htmlFor="cinema-cluster"
+        required={true}
+        className={isClusterDisabled ? "text-slate-300" : ""}
       >
         Cụm rạp
-      </label>
+      </FormLabel>
 
       <Controller
         name="maCumRap"
@@ -38,13 +41,14 @@ const CinemaClusters = ({ cinemaClusters, control, isClusterDisabled }) => {
               styles={{
                 control: (base, state) => ({
                   ...base,
-                  backgroundColor: "#0F172A66",
-                  borderColor: state.isFocused ? "#3b82f6" : "#475569",
+                  backgroundColor: state.isDisabled ? "#0F172ACC" : "#0F172A66",
+                  borderColor: state.isFocused ? "#6366F1" : "#475569",
+                  boxShadow: state.isFocused ? "0 0 0 2px #6366F133" : "none",
                   color: "#f8fafc",
-                  boxShadow: state.isFocused ? "0 0 0 1px #3b82f6" : "none",
                   "&:hover": {
-                    borderColor: "#3b82f6",
+                    borderColor: "#6366F1",
                   },
+
                   cursor: "pointer",
                 }),
 

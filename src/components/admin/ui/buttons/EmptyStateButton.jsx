@@ -16,7 +16,7 @@ const EmptyStateButton = ({
 }) => {
   return (
     <Button
-      Icon={Icon}
+      icon={Icon}
       className={clsx(
         "text-white",
         surfaceStyles[surface] ?? surfaceStyles.light,

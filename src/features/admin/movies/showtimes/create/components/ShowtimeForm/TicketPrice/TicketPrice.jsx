@@ -1,6 +1,7 @@
 import { Controller } from "react-hook-form";
 
 import { formatCurrencyDisplay } from "@features/admin/movies/showtimes/create/utils";
+import { FormLabel, Input } from "@components/admin/ui/form";
 
 const TicketPrice = ({
   control,
@@ -10,13 +11,14 @@ const TicketPrice = ({
 }) => {
   const giaVe = watch("giaVe") ?? null;
   return (
-    <div className="flex flex-col gap-1.5">
-      <label
-        className={`mb-2 cursor-pointer self-start text-sm font-medium text-slate-200 ${isTicketPriceDisabled ? "text-slate-300" : "text-slate-200"}`}
+    <div className="flex flex-col gap-3">
+      <FormLabel
+        className={isTicketPriceDisabled ? "text-slate-300" : ""}
         htmlFor="ticket-price"
+        required={true}
       >
         Giá vé
-      </label>
+      </FormLabel>
 
       <Controller
         control={control}
@@ -25,37 +27,30 @@ const TicketPrice = ({
         render={({ field, fieldState }) => (
           <>
             <div className="relative">
-              <input
-                type="text"
-                name={field.name}
+              <Input
+                id="ticket-price"
                 ref={field.ref}
                 onBlur={field.onBlur}
                 inputMode="numeric"
-                id="ticket-price"
                 value={formatCurrencyDisplay(field.value)}
                 onChange={(e) => {
                   const rawValue = e.target.value.replace(/\D/g, "");
                   field.onChange(rawValue);
                 }}
+                disabledClassName="border border-slate-600"
                 disabled={isTicketPriceDisabled}
+                showDisabledIcon={false}
                 placeholder={
                   isTicketPriceDisabled
                     ? "Vui lòng chọn rạp chiếu trước"
                     : "Nhập giá vé (VND)"
                 }
-                className={`w-full rounded-sm border border-slate-600 bg-slate-900/40 px-3 py-1.5 ${isTicketPriceDisabled ? "text-slate-500" : "text-slate-400 hover:ring-1 hover:ring-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"}`}
+                error={fieldState.error?.message}
+                rightSlot={giaVe && <span className="text-gray-200">VND</span>}
+                inputClassName="text-base px-3 py-1.5 rounded-sm"
+                wrapperClassName="gap-1.5"
               />
-              {giaVe && (
-                <div className="absolute top-1/2 right-2 -translate-y-1/2">
-                  <span className="text-gray-200">VND</span>
-                </div>
-              )}
             </div>
-            {fieldState.error && (
-              <p className="rounded-sm border-l-5 border-red-600 bg-red-950/40 px-2 py-2 text-xs text-red-300">
-                {fieldState.error.message}
-              </p>
-            )}
           </>
         )}
       />

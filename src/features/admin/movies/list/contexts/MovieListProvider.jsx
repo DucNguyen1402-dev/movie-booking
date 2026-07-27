@@ -5,7 +5,7 @@ import { useMovieParams, useTrailer } from "./hooks";
 import { MovieListContext } from "./MovieListContext";
 
 const MovieListProvider = ({ children }) => {
-  const { data: movies = [], isPending, isFetching } = useMovies();
+  const { data: movies = [], isPending, isFetching, isSuccess } = useMovies();
 
   // Data có một số phim có state của dangChieu và sapChieu cùng là true
   // Phim không thể cùng lúc đang chiếu và sắp chiếu
@@ -26,6 +26,7 @@ const MovieListProvider = ({ children }) => {
   const moviePagination = usePagination({
     items: list,
     resetDeps: [keyword, status, sortType],
+    enabled: isSuccess,
   });
   const trailer = useTrailer();
 

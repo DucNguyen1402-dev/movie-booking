@@ -25,7 +25,7 @@ const sizes = {
 
 const Button = ({
   children,
-  Icon,
+  icon: Icon,
   size = "md",
   loading = false,
   fullWidth = false,
