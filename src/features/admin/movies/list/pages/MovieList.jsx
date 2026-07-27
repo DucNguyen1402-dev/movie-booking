@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { PAGE_SIZE_OPTIONS } from "@config/admin";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useLayoutContext, useNotificationContext } from "@contexts/admin";
@@ -16,7 +15,7 @@ import {
 } from "@features/admin/movies/list/components";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { Backdrop } from "@components/admin/ui";
-import { Select } from "@components/admin/ui/form";
+import { PaginationSelect } from "@components/admin/ui/form";
 
 const MovieList = () => {
   const location = useLocation();
@@ -51,16 +50,15 @@ const MovieList = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm sm:grid-cols-6">
+          <div className="grid grid-cols-6 gap-3 rounded-2xl border border-slate-800/80 bg-[#1e293b]/50 p-4 backdrop-blur-sm">
             <div className="col-span-3">
               <SearchBar />
             </div>
             <MovieStatusFilter />
             <SortSelect />
-            <Select
+            <PaginationSelect
               value={currentSize}
               onChange={(e) => setSize(e.target.value)}
-              options={PAGE_SIZE_OPTIONS}
             />
           </div>
 

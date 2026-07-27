@@ -1,5 +1,3 @@
-import { useLayoutEffect, useRef } from "react";
-
 import { validationRules } from "@config/admin";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
@@ -15,34 +13,23 @@ const EditFormFields = () => {
 
   useSyncLeaveConfirmation(isDirty);
 
-  const handleInput = (e) => {
-    e.target.style.height = "auto";
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  };
-
   const description = watch("moTa");
-  const textareaRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const el = textareaRef.current;
-    if (!el) return;
-
-    el.style.height = "0px";
-    el.style.height = `${el.scrollHeight}px`;
-  }, [description]);
+  const registerField = register("moTa", validationRules.moTa);
 
   return (
     <div className="space-y-8 rounded-xl bg-gray-800 p-8 pb-60 shadow-sm lg:col-span-2">
       <InputFields errors={errors} register={register} />
-      <Textarea
-        label="Mô tả phim"
-        name="moTa"
-        rules={validationRules.moTa}
-        error={errors.moTa}
-        register={register}
-        onInput={handleInput}
-        textareaRef={textareaRef}
-      />
+      <div className="flex flex-col gap-4">
+        <FormLabel htmlFor="moTa" required={false}>
+          Mô tả phim
+        </FormLabel>
+        <Textarea
+          id="moTa"
+          error={errors?.moTa?.message}
+          resizeKey={description}
+          inputRef={registerField.ref}
+        />
+      </div>
 
       <div className="flex items-center justify-between">
         <div className="flex w-2/5 flex-col gap-4">

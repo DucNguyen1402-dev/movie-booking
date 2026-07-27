@@ -1,4 +1,29 @@
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
+import { Select } from "@components/admin/ui/form";
+
+const options = [
+  {
+    label: "Đánh giá",
+    options: [
+      { label: "Đánh giá cao nhất", value: "rating-desc" },
+      { label: "Đánh giá thấp nhất", value: "rating-asc" },
+    ],
+  },
+  {
+    label: "Ngày khởi chiếu",
+    options: [
+      { label: "Mới khởi chiếu", value: "date-desc" },
+      { label: "Khởi chiếu lâu nhất", value: "date-asc" },
+    ],
+  },
+  {
+    label: "Tên phim",
+    options: [
+      { label: "A → Z", value: "name-asc" },
+      { label: "Z → A", value: "name-desc" },
+    ],
+  },
+];
 
 const SortSelect = () => {
   const {
@@ -11,28 +36,12 @@ const SortSelect = () => {
   const onChange = (e) => setSortType(e.target.value);
 
   return (
-    <select
+    <Select
       value={sortType}
       onChange={onChange}
-      className="text-slate-200shadow-sm h-10 rounded-lg border border-slate-700 bg-[#0f172a] px-3 text-sm transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
-    >
-      <option value="">Sắp xếp mặc định</option>
-
-      <optgroup label="Đánh giá">
-        <option value="rating-desc">Đánh giá cao nhất</option>
-        <option value="rating-asc">Đánh giá thấp nhất</option>
-      </optgroup>
-
-      <optgroup label="Ngày khởi chiếu">
-        <option value="date-desc">Mới khởi chiếu</option>
-        <option value="date-asc">Khởi chiếu lâu nhất</option>
-      </optgroup>
-
-      <optgroup label="Tên phim">
-        <option value="name-asc">A → Z</option>
-        <option value="name-desc">Z → A</option>
-      </optgroup>
-    </select>
+      options={options}
+      defaultOptionLabel="Sắp xếp mặc định"
+    ></Select>
   );
 };
 

@@ -23,20 +23,38 @@ const Select = ({
       {...props}
     >
       {defaultOptionLabel && (
-        <option
-          value=""
-          defaultValue
-          className="bg-slate-900 text-white"
-          disabled
-        >
+        <option value="" defaultValue className="bg-slate-900 text-white">
           {defaultOptionLabel}
         </option>
       )}
-      {options.map(({ value, label }) => (
-        <option key={value} value={value} className="bg-slate-900 text-white">
-          {label}
-        </option>
-      ))}
+
+      {options.map((item) => {
+        if ("options" in item) {
+          return (
+            <optgroup
+              key={item.label}
+              label={item.label}
+              className="bg-slate-900 text-sm text-white"
+            >
+              {item.options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </optgroup>
+          );
+        }
+
+        return (
+          <option
+            key={item.value}
+            value={item.value}
+            className="bg-slate-900 text-white"
+          >
+            {item.label}
+          </option>
+        );
+      })}
     </select>
     {error && <ErrorMessage surface="dark">{error}</ErrorMessage>}
   </div>

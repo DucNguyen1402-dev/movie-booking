@@ -1,6 +1,9 @@
 import { userRoleMapping } from "@features/admin/users/constants";
 
 const UserProfileHeader = ({ initial, taiKhoan, role }) => {
+  const userRole = userRoleMapping[role];
+  if (!userRole) return;
+
   const {
     label,
     variants: { profile: profileClasses },

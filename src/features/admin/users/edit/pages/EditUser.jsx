@@ -45,8 +45,8 @@ const EditUser = () => {
         <div className="mx-auto max-w-lg rounded-2xl border border-slate-700 bg-slate-800 p-8 shadow-xl">
           <UserProfileHeader
             initial={getAvatarInitial(targetUser?.hoTen)}
-            taiKhoan={targetUser.taiKhoan}
-            role={targetUser.maLoaiNguoiDung}
+            taiKhoan={targetUser?.taiKhoan}
+            role={targetUser?.maLoaiNguoiDung}
           />
 
           <UserEditForm register={register} errors={errors} />

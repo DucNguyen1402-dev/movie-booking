@@ -1,9 +1,8 @@
-import { PAGE_SIZE_OPTIONS } from "@config/admin";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
 import { Button } from "@components/admin/ui";
-import { Input, Select } from "@components/admin/ui/form";
+import { Input, PaginationSelect } from "@components/admin/ui/form";
 
 const RevenueToolbar = () => {
   const {
@@ -25,8 +24,7 @@ const RevenueToolbar = () => {
           wrapperClassName="grow"
         />
 
-        <Select
-          options={PAGE_SIZE_OPTIONS}
+        <PaginationSelect
           onChange={(e) => pagination.setSize(e.target.value)}
           value={pagination.currentSize}
         />

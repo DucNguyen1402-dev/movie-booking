@@ -1,8 +1,8 @@
-import { PAGE_SIZE_OPTIONS, USER_ROLE_OPTIONS } from "@config/admin";
+import { USER_ROLE_OPTIONS } from "@config/admin";
 import { Search } from "lucide-react";
 
 import { useUsersContext } from "@features/admin/users/contexts";
-import { Input, Select } from "@components/admin/ui/form";
+import { Input, PaginationSelect, Select } from "@components/admin/ui/form";
 
 const UserToolbar = () => {
   const {
@@ -19,7 +19,7 @@ const UserToolbar = () => {
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Tìm theo tài khoản hoặc họ tên..."
             leftIcon={Search}
-            inputClassName="bg-slate-950/50"
+            inputClassName="bg-slate-950/40"
           />
         </div>
 
@@ -29,10 +29,9 @@ const UserToolbar = () => {
           options={USER_ROLE_OPTIONS}
         />
 
-        <Select
+        <PaginationSelect
           value={pagination.currentSize}
           onChange={(e) => pagination.setSize(e.target.value)}
-          options={PAGE_SIZE_OPTIONS}
         />
       </div>
     </div>

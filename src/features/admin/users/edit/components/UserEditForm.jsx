@@ -4,7 +4,7 @@ import {
   FormLabel,
   Input,
   PasswordField,
-  SelectForm,
+  Select,
 } from "@components/admin/ui/form";
 
 const UserEditForm = ({ register, errors }) => {
@@ -26,17 +26,22 @@ const UserEditForm = ({ register, errors }) => {
         );
       })}
 
-      <SelectForm
-        label="Vai trò"
-        required
-        options={[
-          { label: "Quản trị viên", value: "QuanTri" },
-          { label: "Khách hàng", value: "KhachHang" },
-        ]}
-        name="maLoaiNguoiDung"
-        register={register}
-        error={errors.maLoaiNguoiDung}
-      />
+      <div className="flex flex-col gap-3">
+        <FormLabel htmlFor="maLoaiNguoiDung" required={true}>
+          Vai trò
+        </FormLabel>
+        <Select
+          id="maLoaiNguoiDung"
+          label="Vai trò"
+          required
+          options={[
+            { label: "Quản trị viên", value: "QuanTri" },
+            { label: "Khách hàng", value: "KhachHang" },
+          ]}
+          error={errors.maLoaiNguoiDung?.message}
+          {...register("maLoaiNguoiDung", validationRules.maLoaiNguoiDung)}
+        />
+      </div>
     </form>
   );
 };
