@@ -7,7 +7,7 @@ import {
 } from "@contexts/admin";
 import { useLockBodyScroll } from "@hooks/admin";
 import { ModalContainer } from "@components/admin/common";
-import { Backdrop, Loading, Notification } from "@components/admin/ui";
+import { Backdrop, DualRingSpinner, Notification } from "@components/admin/ui";
 
 const GlobalUI = () => {
   const { modal } = useModalContext();
@@ -23,45 +23,44 @@ const GlobalUI = () => {
         {modal.type !== null && (
           <motion.div
             key="modal"
-            className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Backdrop />
-            <ModalContainer />
+            <Backdrop>
+              <ModalContainer />
+            </Backdrop>
           </motion.div>
         )}
 
         {notification.isOpen && (
           <motion.div
             key="notification"
-            className="fixed inset-0 z-80 flex items-center justify-center"
+            className="pointer-events-none fixed inset-0 z-80 flex w-full max-w-md items-start justify-center px-4 pt-10 lg:max-w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
             <Notification
-              notificationRef={notification.notificationRef}
-              styles={notification.ui.styles}
-              Icon={notification.ui.Icon}
-              message={notification.ui.message}
+              notificationRef={notification.ref}
+              message={notification.message}
+              variant={notification.variant}
             />
           </motion.div>
         )}
         {loading.isVisible && (
           <motion.div
             key="loading"
-            className="fixed inset-0 z-80 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Backdrop surface="light" />
-            <Loading />
+            <Backdrop>
+              <DualRingSpinner color="primary" />
+            </Backdrop>
           </motion.div>
         )}
       </AnimatePresence>

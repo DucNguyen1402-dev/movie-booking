@@ -1,6 +1,3 @@
-import { notificationIcons } from "@config/admin/notification/icons";
-import { notificationStyles } from "@config/admin/notification/styles";
-
 import {
   useNotificationActions,
   useNotificationEffects,
@@ -23,12 +20,9 @@ const NotificationProvider = ({ children }) => {
   });
 
   const value = {
-    notificationRef,
-    ui: {
-      styles: notificationStyles[notification.variant] ?? "",
-      Icon: notificationIcons[notification.variant] ?? "span",
-      message: notification.message,
-    },
+    ref: notificationRef,
+    message: notification.message,
+    variant: notification.variant,
     isOpen: notification.isOpen,
     notificationActions,
   };

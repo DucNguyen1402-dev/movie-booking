@@ -1,50 +1,72 @@
-import { useCallback } from "react";
+import { forwardRef, useLayoutEffect, useMemo, useRef } from "react";
 
 import { ErrorMessage } from "@components/admin/ui/form";
-
-const Textarea = ({
-  register,
-  name,
-  rules,
-  error,
-  id = null,
-  rows = "3",
-  textareaRef = null,
-  onInput,
-}) => {
-  const descriptionField = register("moTa", rules);
-
-  const setRef = useCallback(
-    (node) => {
-      descriptionField.ref(node);
-
-      if (textareaRef) {
-        // eslint-disable-next-line react-hooks/immutability
-        textareaRef.current = node;
-      }
+import { mergeRefs } from "@utils/admin";
+import { cn } from "@utils/shared";
+const Textarea = forwardRef(
+  (
+    {
+      name,
+      error,
+      id = null,
+      rows = 3,
+      textareaClassName,
+      errorClassName,
+      resizeKey,
+      inputRef,
+      onInput,
+      disabled = false,
+      ...props
     },
-    [descriptionField, textareaRef],
-  );
+    ref,
+  ) => {
+    const innerRef = useRef(null);
 
-  return (
-    <div className="flex flex-col gap-2">
-      <textarea
-        onInput={onInput}
-        id={id ?? name}
-        rows={rows}
-        {...descriptionField}
+    const handleInput = (e) => {
+      setSize(e.target);
+      onInput?.(e);
+    };
+    const setSize = (el) => {
+      el.style.height = "0px";
+      el.style.height = `${el.scrollHeight}px`;
+    };
 
-        ref={(e) => {
-          descriptionField.ref(e);
-          if (textareaRef) {
-            setRef(e);
-          }
-        }}
-        className="w-full overflow-hidden rounded-md border border-slate-700 bg-slate-900/40 px-3 py-2 text-[15px] text-slate-100 transition-colors duration-200 outline-none hover:border-indigo-500 hover:ring-2 hover:ring-indigo-500/20 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
-      />
-      {error && <ErrorMessage surface="dark">{error}</ErrorMessage>}
-    </div>
-  );
-};
+    useLayoutEffect(() => {
+      const el = innerRef.current;
+      if (!el) return;
+      setSize(el);
+    }, [resizeKey]);
 
+    // setRef shared textareaElement to all ref in the merge list
+    const setRef = useMemo(
+      () => mergeRefs(innerRef, ref, inputRef),
+      [ref, inputRef],
+    );
+
+    return (
+      <div className="flex flex-col gap-2">
+        <textarea
+          onInput={handleInput}
+          ref={setRef}
+          disabled={disabled}
+          id={id ?? name}
+          rows={rows}
+          {...props}
+          className={cn(
+            "input",
+            disabled ? "input-disabled" : "input-default",
+            "overflow-hidden text-[15px]",
+            textareaClassName,
+          )}
+        />
+        {error && (
+          <ErrorMessage surface="dark" className={errorClassName}>
+            {error}
+          </ErrorMessage>
+        )}
+      </div>
+    );
+  },
+);
+Textarea.displayName = "Textarea";
 export default Textarea;

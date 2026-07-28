@@ -1,5 +1,5 @@
+import { Spinner } from "@components/admin/ui";
 import { cn } from "@utils/shared";
-
 const sizes = {
   none: {
     button: "",
@@ -52,9 +52,7 @@ const Button = ({
     >
       {Icon && !loading && <Icon className={currentSize.icon} />}
 
-      {loading && (
-        <div className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-      )}
+      {loading && <Spinner />}
 
       <span>{children}</span>
     </button>

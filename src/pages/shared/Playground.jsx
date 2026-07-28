@@ -1,35 +1,21 @@
-import { useState } from "react";
-
-import { Eye, EyeOff, Search } from "lucide-react";
-
 import { Button } from "@components/admin/ui";
-import { Input } from "@components/admin/ui/form";
+const confirmClasses = {
+  add: "bg-emerald-600 text-white hover:bg-emerald-500 active:bg-emerald-700",
+  edit: "bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-700",
+  delete: "bg-red-600 text-white hover:bg-red-500 active:bg-red-700",
+  unsavedChanges: "bg-red-600 text-white hover:bg-red-500 active:bg-red-700",
+  default: "bg-indigo-600 text-white hover:bg-indigo-500 active:bg-indigo-700",
+  leavePage: "bg-amber-600 text-white hover:bg-amber-500 active:bg-amber-700",
+};
 
-export default function Playground() {
-  const [showPassword, setShowPassword] = useState(false);
-
+const ConfirmButton = ({ children, type = "add", ...props }) => {
   return (
-    <div className="mx-auto min-h-screen max-w-md space-y-4 bg-slate-900 p-8">
-      <Input placeholder="Default" />
-      <Input error="Required" />
-      <Input disabled />
-      <Input leftIcon={Search} inputClassName="px-7" />
-      <Input
-        rightSlot={
-          <Button
-            size="none"
-            className="text-slate-300 hover:text-slate-100"
-            onClick={() => setShowPassword((prev) => !prev)}
-          >
-            {showPassword ? (
-              <Eye className="size-4" />
-            ) : (
-              <EyeOff className="size-4" />
-            )}
-          </Button>
-        }
-        type={showPassword ? "text" : "password"}
-      />
+    <div className="fixed inset-0 flex items-center justify-center">
+      <Button className={`${confirmClasses[type]}`} {...props} loading={true}>
+        Hello
+      </Button>
     </div>
   );
-}
+};
+
+export default ConfirmButton;

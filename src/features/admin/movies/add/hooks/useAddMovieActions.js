@@ -14,7 +14,11 @@ import {
 } from "@contexts/admin";
 import { createMovieFormData } from "@features/admin/movies/add/utils";
 import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import {
+  MIN_LOADING_TIME,
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+} from "@constants/admin";
 
 import { useAddForm } from "./useAddForm";
 import { useAddMovie } from "./useAddMovie";
@@ -85,7 +89,7 @@ export function useAddMovieActions() {
           movieId: response.data.content.maPhim,
           highlight: HIGHLIGHT_TYPES.ADD,
           notification: {
-            variant: "success",
+            variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Phim đã được thêm thành công vào hệ thống",
           },
           history,
@@ -102,7 +106,7 @@ export function useAddMovieActions() {
 
       hideLoading();
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message,
       });
     }
