@@ -3,12 +3,7 @@ import { Controller } from "react-hook-form";
 import { formatCurrencyDisplay } from "@features/admin/movies/showtimes/create/utils";
 import { FormLabel, Input } from "@components/admin/ui/form";
 
-const TicketPrice = ({
-  control,
-  watch,
-  validationRules,
-  isTicketPriceDisabled,
-}) => {
+const TicketPrice = ({ control, watch, rules, isTicketPriceDisabled }) => {
   const giaVe = watch("giaVe") ?? null;
   return (
     <div className="flex flex-col gap-3">
@@ -23,7 +18,7 @@ const TicketPrice = ({
       <Controller
         control={control}
         name="giaVe"
-        rules={validationRules}
+        rules={rules}
         render={({ field, fieldState }) => (
           <>
             <div className="relative">

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES, HIGHLIGHT_TYPES } from "@config/admin";
+import { ENTITIES } from "@config/admin";
 import {
   createAddModalContent,
   createUnsavedChangesModalContent,
@@ -16,6 +16,7 @@ import {
   MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
+  ROW_ACTION_TYPES,
 } from "@constants/admin";
 
 import { useUserCreation } from ".";
@@ -56,7 +57,7 @@ export function useAddActions({ handleSubmit }) {
       navigate(previousPath, {
         state: {
           account: content.taiKhoan,
-          highlight: HIGHLIGHT_TYPES.ADD,
+          highlight: ROW_ACTION_TYPES.ADD,
           notification: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Người dùng đã được thêm thành công.",

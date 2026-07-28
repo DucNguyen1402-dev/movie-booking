@@ -9,7 +9,7 @@ import { cn } from "@utils/shared";
 
 import TimePicker from "./TimePicker";
 
-const Showtime = ({ isTimePickerDisabled, watch, control }) => {
+const Showtime = ({ isTimePickerDisabled, watch, control, rules }) => {
   const [timePickerVisible, setTimePickerVisible] = useState(false);
   const timePickerRef = useRef(null);
 
@@ -61,7 +61,7 @@ const Showtime = ({ isTimePickerDisabled, watch, control }) => {
         <>
           <Controller
             name="gioChieu"
-            rules={{ required: "Vui lòng chọn giờ chiếu" }}
+            rules={rules}
             control={control}
             render={({ field, fieldState }) => (
               <>

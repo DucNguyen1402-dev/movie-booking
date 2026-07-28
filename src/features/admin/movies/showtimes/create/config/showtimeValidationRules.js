@@ -1,4 +1,4 @@
-export const validationRules = {
+export const showtimeValidationRules = {
   giaVe: {
     required: "Vui lòng nhập giá vé",
     min: {

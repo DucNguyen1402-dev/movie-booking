@@ -1,7 +1,8 @@
+import { userValidationRules } from "@config/admin/users";
+
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { addUserFields } from "@features/admin/users/add/config";
 import { useAddActions, useAddForm } from "@features/admin/users/add/hooks";
-import { validationRules } from "@features/admin/users/config";
 import {
   FormLabel,
   Input,
@@ -31,8 +32,7 @@ const AddUserForms = () => {
                   {label}
                 </FormLabel>
                 <Component
-                  name={name}
-                  {...register(name, validationRules[name])}
+                  {...register(name, userValidationRules[name])}
                   error={errors[name]?.message}
                 />
               </div>
@@ -49,7 +49,10 @@ const AddUserForms = () => {
                 { value: "KhachHang", label: "Khách hàng" },
                 { value: "QuanTri", label: "Quản trị" },
               ]}
-              {...register("maLoaiNguoiDung", validationRules.maLoaiNguoiDung)}
+              {...register(
+                "maLoaiNguoiDung",
+                userValidationRules.maLoaiNguoiDung,
+              )}
 
               error={errors.maLoaiNguoiDung?.message}
               defaultOptionLabel="-- Chọn loại người dùng --"

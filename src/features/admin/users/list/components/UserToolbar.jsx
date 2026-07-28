@@ -1,6 +1,6 @@
-import { USER_ROLE_OPTIONS } from "@config/admin";
 import { Search } from "lucide-react";
 
+import { USER_ROLE_OPTIONS } from "@features/admin/users/config";
 import { useUsersContext } from "@features/admin/users/contexts";
 import { Input, PaginationSelect, Select } from "@components/admin/ui/form";
 

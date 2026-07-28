@@ -1,5 +1,4 @@
-import { validationRules } from "@config/admin";
-
+import { movieValidationRules } from "@features/admin/movies/config";
 import { FormLabel, Input } from "@components/admin/ui/form";
 
 const inputFields = [
@@ -23,7 +22,7 @@ const InputFields = ({ errors, register }) => {
       </FormLabel>
       <Input
         id={field.name}
-        {...register(field.name, validationRules[field.name])}
+        {...register(field.name, movieValidationRules[field.name])}
         error={errors[field.name]?.message}
       />
     </div>

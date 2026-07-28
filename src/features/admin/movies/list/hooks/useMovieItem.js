@@ -1,12 +1,16 @@
 import { useCallback, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES, MOVIE_HIGHLIGHTS } from "@config/admin";
+import { ENTITIES } from "@config/admin";
 import { createDeleteModalContent } from "@helpers/admin/modal";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { useScrollIntoView } from "@hooks/admin";
-import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
+import {
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+  ROW_ACTION_ANIMATIONS,
+} from "@constants/admin";
 
 import { useDeleteMovie } from "./useDeleteMovie";
 
@@ -23,7 +27,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const { mutateAsync } = useDeleteMovie();
 
   const isTargetMovie = movie.maPhim === Number(movieId);
-  const highlightAnimation = MOVIE_HIGHLIGHTS[highlight];
+  const highlightAnimation = ROW_ACTION_ANIMATIONS[highlight];
 
   useScrollIntoView({ ref: rowRef, enabled: isTargetMovie });
 

@@ -1,5 +1,5 @@
 import { useSyncLeaveConfirmation } from "@hooks/admin";
-import { validationRules } from "@features/admin/movies/showtimes/create/config";
+import { showtimeValidationRules } from "@features/admin/movies/showtimes/create/config";
 import {
   useCinemaClusters,
   useCinemaSystems,
@@ -79,7 +79,7 @@ const ShowtimeForm = ({ movie }) => {
               value={watch("ngayChieu")}
               required={true}
               name="ngayChieu"
-              rules={{ required: "Vui lòng nhập ngày chiếu phim" }}
+              rules={showtimeValidationRules.ngayChieu}
               disabled={isDatePickerDisabled}
               labels={{
                 placeholder: "Chọn ngày chiếu",
@@ -92,13 +92,14 @@ const ShowtimeForm = ({ movie }) => {
           <TicketPrice
             control={control}
             watch={watch}
-            validationRules={validationRules.giaVe}
+            rules={showtimeValidationRules.giaVe}
             isTicketPriceDisabled={isTicketPriceDisabled}
           />
           <Showtime
             isTimePickerDisabled={isTimePickerDisabled}
             control={control}
             watch={watch}
+            rules={showtimeValidationRules.gioChieu}
           />
         </form>
 

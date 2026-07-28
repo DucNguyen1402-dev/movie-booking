@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES, HIGHLIGHT_TYPES } from "@config/admin";
+import { ENTITIES } from "@config/admin";
 import {
   createEditModalContent,
   createUnsavedChangesModalContent,
@@ -16,6 +16,7 @@ import {
   MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
+  ROW_ACTION_TYPES,
 } from "@constants/admin";
 
 import { useUserEdit } from "./useUserEdit";
@@ -86,7 +87,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Cập nhật thông tin người dùng thành công.",
           },
-          highlight: HIGHLIGHT_TYPES.UPDATE,
+          highlight: ROW_ACTION_TYPES.UPDATE,
         },
       });
     } catch (error) {

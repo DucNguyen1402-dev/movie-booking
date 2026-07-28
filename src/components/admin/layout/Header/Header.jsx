@@ -1,10 +1,11 @@
 import { matchPath, useLocation, useNavigate } from "react-router-dom";
 
-import { PAGE_CONFIG } from "@config/admin";
 import { MoveLeft } from "lucide-react";
 
 import { useLayoutContext, useModalContext } from "@contexts/admin";
 import { MODAL_TYPES } from "@constants/admin";
+
+import { PAGE_CONFIG } from "./pageConfig";
 
 const Header = () => {
   const { isSidebarOpen } = useLayoutContext();

@@ -1,11 +1,9 @@
 import { useMemo, useState } from "react";
 
-import { avatarList } from "@config/admin";
-
 import { getAvatarInitial } from "@utils/admin";
 import { getCurrentUser, saveCurrentUser } from "@utils/shared";
 
-import { userContext } from "./userContext";
+import { avatarList, UserContext } from ".";
 
 const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(getCurrentUser);
@@ -39,7 +37,7 @@ const UserProvider = ({ children }) => {
     [currentUser],
   );
 
-  return <userContext.Provider value={value}>{children}</userContext.Provider>;
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export default UserProvider;

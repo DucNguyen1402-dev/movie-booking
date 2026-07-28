@@ -1,7 +1,6 @@
-import { validationRules } from "@config/admin";
-
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
+import { movieValidationRules } from "@features/admin/movies/config";
 import { AddButton, CancelButton } from "@components/admin/ui/buttons";
 import { DateInput, FormLabel, Textarea } from "@components/admin/ui/form";
 
@@ -33,7 +32,7 @@ const Form = () => {
         <Textarea
           id="moTa"
           resizeKey={watch("moTa")}
-          {...register("moTa", validationRules.moTa)}
+          {...register("moTa", movieValidationRules.moTa)}
 
           error={errors.moTa?.message}
         />

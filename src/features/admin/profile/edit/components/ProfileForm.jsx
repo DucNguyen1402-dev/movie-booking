@@ -1,4 +1,4 @@
-import { userValidationRules } from "@config/admin";
+import { userValidationRules } from "@config/admin/users";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";

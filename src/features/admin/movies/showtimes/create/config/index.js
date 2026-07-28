@@ -1,1 +1,1 @@
-export { validationRules } from "./validation-rules";
+export { showtimeValidationRules } from "./showtimeValidationRules";

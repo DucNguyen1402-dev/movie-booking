@@ -1,6 +1,5 @@
-import { validationRules } from "@config/admin";
-
 import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { movieValidationRules } from "@features/admin/movies/config";
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
 import { DateInput, FormLabel, Textarea } from "@components/admin/ui/form";
 
@@ -13,9 +12,6 @@ const EditFormFields = () => {
 
   useSyncLeaveConfirmation(isDirty);
 
-  const registerField = register("moTa", validationRules.moTa);
-  const description = watch("moTa");
-
   return (
     <div className="space-y-8 rounded-xl bg-gray-800 p-8 pb-60 shadow-sm lg:col-span-2">
       <InputFields errors={errors} register={register} />
@@ -25,9 +21,9 @@ const EditFormFields = () => {
         </FormLabel>
         <Textarea
           id="moTa"
+          {...register("moTa", movieValidationRules.moTa)}
+          resizeKey={watch("moTa")}
           error={errors.moTa?.message}
-          resizeKey={description}
-          inputRef={registerField.ref}
         />
       </div>
 
@@ -40,7 +36,7 @@ const EditFormFields = () => {
             control={control}
             value={watch("ngayKhoiChieu")}
             name="ngayKhoiChieu"
-            rules={validationRules.ngayKhoiChieu}
+            rules={movieValidationRules.ngayKhoiChieu}
             labels={{
               placeholder: "Chọn ngày khởi chiếu",
               form: "Ngày khởi chiếu",

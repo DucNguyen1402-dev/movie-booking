@@ -2,8 +2,9 @@ import { useMemo } from "react";
 import { DayPicker } from "react-day-picker";
 import { Controller } from "react-hook-form";
 
-import { datePickerStyles } from "@config/admin/date-picker";
 import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
+
+import { datePickerStyles } from "./date-picker";
 
 import "react-day-picker/style.css";
 

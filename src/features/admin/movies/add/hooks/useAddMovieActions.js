@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES, HIGHLIGHT_TYPES } from "@config/admin";
+import { ENTITIES } from "@config/admin";
 import {
   createAddModalContent,
   createUnsavedChangesModalContent,
@@ -18,6 +18,7 @@ import {
   MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
+  ROW_ACTION_TYPES,
 } from "@constants/admin";
 
 import { useAddForm } from "./useAddForm";
@@ -87,7 +88,7 @@ export function useAddMovieActions() {
       navigate(previousPath, {
         state: {
           movieId: response.data.content.maPhim,
-          highlight: HIGHLIGHT_TYPES.ADD,
+          highlight: ROW_ACTION_TYPES.ADD,
           notification: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Phim đã được thêm thành công vào hệ thống",

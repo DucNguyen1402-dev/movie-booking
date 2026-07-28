@@ -1,1 +1,1 @@
-export {validationRules} from "./validationRules"
+export { USER_ROLE_OPTIONS } from "./roleLabelOptions";

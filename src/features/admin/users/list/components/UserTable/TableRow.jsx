@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 
-import { USER_HIGHLIGHTS } from "@config/admin";
 import { CalendarCheck, SquarePen, Trash } from "lucide-react";
 
 import { userRoleMapping } from "@features/admin/users/constants";
 import { useTableRow } from "@features/admin/users/list/hooks";
 import { Button } from "@components/admin/ui";
+import { ROW_ACTION_ANIMATIONS } from "@constants/admin";
 
 const TableRow = ({ user, isMatched, highlight }) => {
   const {
@@ -16,7 +16,7 @@ const TableRow = ({ user, isMatched, highlight }) => {
     deletingAccount,
   } = useTableRow({ isMatched });
 
-  const highlightClass = USER_HIGHLIGHTS[highlight];
+  const highlightClass = ROW_ACTION_ANIMATIONS[highlight];
   const isDeleting = deletingAccount === user.taiKhoan;
 
   const {

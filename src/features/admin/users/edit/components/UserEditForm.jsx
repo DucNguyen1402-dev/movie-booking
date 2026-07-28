@@ -1,4 +1,5 @@
-import { validationRules } from "@features/admin/users/config";
+import { userValidationRules } from "@config/admin/users";
+
 import { editUserFields } from "@features/admin/users/edit/config";
 import {
   FormLabel,
@@ -19,7 +20,7 @@ const UserEditForm = ({ register, errors }) => {
             </FormLabel>
             <Component
               name={name}
-              {...register(name, validationRules[name])}
+              {...register(name, userValidationRules[name])}
               error={errors[name]?.message}
             />
           </div>
@@ -39,7 +40,7 @@ const UserEditForm = ({ register, errors }) => {
             { label: "Khách hàng", value: "KhachHang" },
           ]}
           error={errors.maLoaiNguoiDung?.message}
-          {...register("maLoaiNguoiDung", validationRules.maLoaiNguoiDung)}
+          {...register("maLoaiNguoiDung", userValidationRules.maLoaiNguoiDung)}
         />
       </div>
     </form>
