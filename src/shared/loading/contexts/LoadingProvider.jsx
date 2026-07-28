@@ -5,16 +5,16 @@ import { LoadingContext } from "./LoadingContext";
 const LoadingProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const showLoading = useCallback(() => setIsVisible(true), []);
-  const hideLoading = useCallback(() => setIsVisible(false), []);
+  const show = useCallback(() => setIsVisible(true), []);
+  const hide = useCallback(() => setIsVisible(false), []);
 
   const value = useMemo(
     () => ({
       isVisible,
-      showLoading,
-      hideLoading,
+      show,
+      hide,
     }),
-    [isVisible, showLoading, hideLoading],
+    [isVisible, show, hide],
   );
 
   return (

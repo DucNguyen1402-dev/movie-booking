@@ -1,4 +1,4 @@
-import { usePagination } from "@hooks/admin";
+import { usePagination } from "@shared/pagination";
 
 import { useUserFilter, useUsersActions, useUsersStates } from "./hooks";
 import { usersContext } from "./usersContext";

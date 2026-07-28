@@ -1,5 +1,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { Button } from "@components/admin/ui";
+import { cn } from "@utils/shared";
+
 const PaginationControls = ({ controls, label }) => {
   const {
     currentPage,
@@ -24,32 +27,50 @@ const PaginationControls = ({ controls, label }) => {
       </p>
 
       <div className="flex gap-2">
-        <button
+        <Button
           disabled={isPrevDisabled}
-          className={`cursor-pointer rounded border px-1.5 transition-colors duration-300 ${isPrevDisabled ? "text-slate-500" : "hover:bg-slate-800"}`}
+          size="sm"
+          className={cn(
+            "rounded border px-1.5 transition-colors duration-300",
+            isPrevDisabled
+              ? "cursor-default text-slate-500"
+              : "cursor-pointer hover:bg-slate-800",
+          )}
           onClick={onPrevClick}
         >
           <ChevronLeft className="size-5" />
-        </button>
+        </Button>
         {pages.map((page) => {
           const isCurrentPage = page === currentPage;
           return (
-            <button
+            <Button
               key={page}
-              className={`cursor-pointer rounded border border-slate-400 px-2.5 py-1.5 transition-colors duration-300 ${isCurrentPage ? "bg-orange-600 text-white" : "hover:bg-orange-500 hover:text-slate-100"}`}
+              size="none"
+              className={cn(
+                "min-w-8 rounded border border-slate-400 transition-colors duration-300",
+                isCurrentPage
+                  ? "cursor-default bg-orange-600 text-white"
+                  : "cursor-pointer hover:bg-orange-500 hover:text-slate-100",
+              )}
               onClick={() => onPageClick(page)}
             >
               {page}
-            </button>
+            </Button>
           );
         })}
-        <button
+        <Button
           disabled={isNextDisabled}
-          className={`cursor-pointer rounded border px-1.5 transition-colors duration-300 ${isNextDisabled ? "text-slate-500" : "hover:bg-slate-800"}`}
+          size="sm"
+          className={cn(
+            "rounded border px-1.5 transition-colors duration-300",
+            isNextDisabled
+              ? "cursor-default text-slate-500"
+              : "cursor-pointer hover:bg-slate-800",
+          )}
           onClick={onNextClick}
         >
           <ChevronRight className="size-5" />
-        </button>
+        </Button>
       </div>
     </div>
   );

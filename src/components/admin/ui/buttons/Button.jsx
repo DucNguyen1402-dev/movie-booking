@@ -43,7 +43,6 @@ const Button = ({
         "rounded-md",
         "select-none",
         "cursor-pointer",
-        "disabled:cursor-not-allowed disabled:opacity-50",
         currentSize.button,
         fullWidth ? "w-full" : "",
         className,

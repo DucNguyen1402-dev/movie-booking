@@ -27,6 +27,7 @@ export default defineConfig({
       "@managers": path.resolve(__dirname, "./src/managers"),
       "@helpers": path.resolve(__dirname, "./src/helpers"),
       "@pages": path.resolve(__dirname, "./src/pages"),
+      "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
 });

@@ -1,5 +1,7 @@
+import { PaginationControls } from "@shared/pagination";
+
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { EmptyTable, PaginationControls } from "@components/admin/common";
+import { EmptyTable } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import { RevenueRankingRow, RevenueRankingSkeleton } from ".";

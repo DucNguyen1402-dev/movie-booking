@@ -5,12 +5,9 @@ import {
   createAddModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { loading } from "@shared/loading";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
 import {
   MIN_LOADING_TIME,
@@ -32,7 +29,7 @@ export function useAddActions({ handleSubmit }) {
   const modal = useModalContext();
 
   const { notificationActions } = useNotificationContext();
-  const { showLoading, hideLoading } = useLoadingContext();
+  const loader = loading.use();
 
   const handleCancelAddUser = () => {
     modal.close();
@@ -47,12 +44,12 @@ export function useAddActions({ handleSubmit }) {
 
   const handleAddUser = async (data) => {
     modal.close();
-    showLoading();
+    loader.show();
     const start = new Date();
     try {
       const content = await mutateAsync(data);
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
+      loader.hide();
 
       navigate(previousPath, {
         state: {
@@ -66,8 +63,7 @@ export function useAddActions({ handleSubmit }) {
         },
       });
     } catch (error) {
-      modal.close();
-      hideLoading();
+      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message:

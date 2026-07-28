@@ -6,12 +6,9 @@ import {
   createEditModalContent,
   createUnsavedPasswordChangesModalContent,
 } from "@helpers/admin/modal";
+import { loading } from "@shared/loading";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { useUserInfor } from "@features/admin/users";
 import { ensureMinDuration } from "@utils/admin";
 import { getCurrentUser } from "@utils/shared";
@@ -38,7 +35,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
   const { mutateAsync } = useUpdateUser();
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoadingContext();
+  const loader = loading.use();
   const { notificationActions } = useNotificationContext();
 
   const handleCancelPasswordChange = () => {
@@ -68,7 +65,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const submitProfileChange = async (data) => {
     modal.close();
-    showLoading();
+    loader.show();
     const start = new Date();
 
     try {
@@ -83,7 +80,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
       };
       await mutateAsync(payload);
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
+      loader.hide();
 
       navigate(previousPath, {
         state: {
@@ -95,7 +92,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         },
       });
     } catch (error) {
-      hideLoading();
+      loader.hide();
 
       const message =
         error?.response?.data?.content ??
@@ -110,14 +107,14 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const submitPasswordChange = async (data) => {
     modal.close();
-    showLoading();
+    loader.show();
     const start = new Date();
 
     const { matKhau, matKhauHienTai, matKhauMoi, xacNhanMatKhauMoi } =
       getValues();
 
     if (matKhau !== matKhauHienTai) {
-      hideLoading();
+      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message: "Mật khẩu hiện tại không chính xác!",
@@ -126,7 +123,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
     }
 
     if (matKhauMoi !== xacNhanMatKhauMoi) {
-      hideLoading();
+      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message: "Mật khẩu mới không giống nhau",
@@ -147,7 +144,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
       await mutateAsync(payload);
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
+      loader.hidde();
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
@@ -158,7 +155,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         },
       });
     } catch (error) {
-      hideLoading();
+      loader.hide();
       const message =
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";

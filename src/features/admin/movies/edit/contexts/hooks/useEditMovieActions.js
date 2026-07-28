@@ -6,13 +6,10 @@ import {
   createEditModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { loading } from "@shared/loading";
 import { format } from "date-fns";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
 import {
   MIN_LOADING_TIME,
@@ -29,7 +26,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const { mutateAsync } = useUpdateMovie();
 
   const { notificationActions } = useNotificationContext();
-  const { showLoading, hideLoading } = useLoadingContext();
+  const loader = loading.use();
   const modal = useModalContext();
 
   const handleCancelChange = () => {
@@ -101,10 +98,10 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
     try {
       modal.close();
-      showLoading();
+      loader.show();
       await mutateAsync(formData);
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
+      loader.hide();
       navigate("/admin/movies", {
         state: {
           movieId: editId,
@@ -116,7 +113,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         },
       });
     } catch (error) {
-      hideLoading();
+      loader.hide();
       const content =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra. Vui lòng thử lại sau";
@@ -136,9 +133,8 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     editMovie,
     modal,
     notificationActions,
-    showLoading,
+    loader,
     mutateAsync,
-    hideLoading,
     navigate,
     editId,
   ]);

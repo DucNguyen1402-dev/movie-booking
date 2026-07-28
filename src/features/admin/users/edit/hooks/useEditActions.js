@@ -5,12 +5,9 @@ import {
   createEditModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { loading } from "@shared/loading";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
 import {
   MIN_LOADING_TIME,
@@ -35,7 +32,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
   };
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoadingContext();
+  const loader = loading.use();
   const { notificationActions } = useNotificationContext();
   const { mutateAsync } = useUserEdit();
 
@@ -58,13 +55,13 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
   const handleConfirmEdit = async (data) => {
     modal.close();
 
-    showLoading();
+    loader.show();
     const hasFieldChange = Object.keys(initialUser).some(
       (key) => initialUser[key] !== data[key],
     );
 
     if (!hasFieldChange) {
-      hideLoading();
+      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.WARNING,
         message:
@@ -78,7 +75,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
     try {
       await mutateAsync(data);
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
+      loader.hide();
       navigate(previousPath, {
         state: {
           account: data.taiKhoan,
@@ -91,7 +88,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
         },
       });
     } catch (error) {
-      hideLoading();
+      loader.hide();
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";

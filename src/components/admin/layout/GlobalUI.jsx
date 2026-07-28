@@ -1,20 +1,16 @@
+import { DualRingLoading } from "@shared/loading";
 import { AnimatePresence, motion } from "motion/react";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { useLockBodyScroll } from "@hooks/admin";
 import { ModalContainer } from "@components/admin/common";
-import { Backdrop, DualRingSpinner, Notification } from "@components/admin/ui";
+import { Backdrop, Notification } from "@components/admin/ui";
 
 const GlobalUI = () => {
   const { modal } = useModalContext();
-  const loading = useLoadingContext();
   const notification = useNotificationContext();
 
-  const shouldLock = modal.type !== null || loading.isVisible;
+  const shouldLock = modal.type !== null;
   useLockBodyScroll(shouldLock);
 
   return (
@@ -50,20 +46,9 @@ const GlobalUI = () => {
             />
           </motion.div>
         )}
-        {loading.isVisible && (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Backdrop>
-              <DualRingSpinner color="primary" />
-            </Backdrop>
-          </motion.div>
-        )}
       </AnimatePresence>
+
+      <DualRingLoading />
     </>
   );
 };

@@ -5,13 +5,10 @@ import {
   createAddModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { loading } from "@shared/loading";
 import { format } from "date-fns";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
 import { ensureMinDuration } from "@utils/admin";
 import {
@@ -27,7 +24,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const previousPath = history.at(-1) ?? "/admin/movies";
 
   const modal = useModalContext();
-  const { showLoading, hideLoading } = useLoadingContext();
+  const loader = loading.use();
   const { notificationActions } = useNotificationContext();
 
   const handleShowtimeCanceling = () => {
@@ -57,10 +54,10 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
     try {
       modal.close();
-      showLoading();
+      loader.show();
       await createShowtime(payload);
       await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
+      loader.hide();
       navigate(previousPath, {
         state: {
           maCumRap,
@@ -72,7 +69,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
         },
       });
     } catch (error) {
-      hideLoading();
+      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message: error.response?.data?.content,

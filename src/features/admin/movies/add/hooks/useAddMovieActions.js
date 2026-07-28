@@ -6,16 +6,12 @@ import {
   createAddModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { runWithLoading } from "@shared/async";
+import { loading } from "@shared/loading";
 
-import {
-  useLoadingContext,
-  useModalContext,
-  useNotificationContext,
-} from "@contexts/admin";
+import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { createMovieFormData } from "@features/admin/movies/add/utils";
-import { ensureMinDuration } from "@utils/admin";
 import {
-  MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
   ROW_ACTION_TYPES,
@@ -32,7 +28,7 @@ export function useAddMovieActions() {
   const previousPath = history.at(-1) ?? "/admin/movies";
   const navigate = useNavigate();
 
-  const { showLoading, hideLoading } = useLoadingContext();
+  const loader = loading.use();
   const { notificationActions } = useNotificationContext();
   const modal = useModalContext();
 
@@ -76,41 +72,39 @@ export function useAddMovieActions() {
 
   const onSubmit = async (data) => {
     modal.close();
-    const start = Date.now();
-    showLoading();
-    const formData = createMovieFormData(data);
 
-    try {
-      const response = await mutateAsync(formData);
+    const task = async () => {
+      const formData = createMovieFormData(data);
 
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      hideLoading();
-      navigate(previousPath, {
-        state: {
-          movieId: response.data.content.maPhim,
-          highlight: ROW_ACTION_TYPES.ADD,
-          notification: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Phim đã được thêm thành công vào hệ thống",
+      try {
+        const response = await mutateAsync(formData);
+        navigate(previousPath, {
+          state: {
+            movieId: response.data.content.maPhim,
+            highlight: ROW_ACTION_TYPES.ADD,
+            notification: {
+              variant: NOTIFICATION_TYPES.SUCCESS,
+              message: "Phim đã được thêm thành công vào hệ thống",
+            },
+            history,
           },
-          history,
-        },
-      });
-    } catch (error) {
-      const content = error.response?.data?.content;
-      //Chỗ này có vẻ là do tên phim bị trùng nhưng content trả về tử backend không rõ ràng
-      // mình fix tạm
-      const message =
-        content === "Upload file không thành công!"
-          ? "Tên phim đã tồn tại"
-          : content;
+        });
+      } catch (error) {
+        const content = error.response?.data?.content;
+        // Chỗ này có vẻ là do tên phim bị trùng nhưng content trả về tử backend không rõ ràng
+        // mình fix tạm
+        const message =
+          content === "Upload file không thành công!"
+            ? "Tên phim đã tồn tại"
+            : content;
+        notificationActions.show({
+          variant: NOTIFICATION_TYPES.ERROR,
+          message,
+        });
+      }
+    };
 
-      hideLoading();
-      notificationActions.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message,
-      });
-    }
+    await runWithLoading(task, loader);
   };
 
   return {

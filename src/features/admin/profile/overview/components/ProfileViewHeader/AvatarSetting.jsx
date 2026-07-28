@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 
+import { usePagination } from "@shared/pagination";
 import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 import { useUserContext } from "@contexts/admin/user";
-import { usePagination } from "@hooks/admin";
 import { Button } from "@components/admin/ui";
 
 const AvatarSetting = ({ onClose }) => {

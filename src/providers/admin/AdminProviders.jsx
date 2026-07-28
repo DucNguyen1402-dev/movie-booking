@@ -1,4 +1,5 @@
-import { LoadingProvider } from "@contexts/admin/loading";
+import { LoadingProvider } from "@shared/providers";
+
 import { ModalProvider } from "@contexts/admin/modal";
 import { NotificationProvider } from "@contexts/admin/notification";
 import { UserProvider } from "@contexts/admin/user";

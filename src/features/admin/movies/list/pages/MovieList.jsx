@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import { PaginationSelect } from "@shared/pagination";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useLayoutContext, useNotificationContext } from "@contexts/admin";
@@ -15,7 +16,6 @@ import {
 } from "@features/admin/movies/list/components";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { Backdrop } from "@components/admin/ui";
-import { PaginationSelect } from "@components/admin/ui/form";
 
 const MovieList = () => {
   const location = useLocation();

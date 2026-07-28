@@ -1,4 +1,4 @@
-export async function ensureMinDuration(startTime, minDuration) {
+export async function waitForMinimumDuration(startTime, minDuration) {
   const elapsed = Date.now() - startTime;
   const remaining = Math.max(0, minDuration - elapsed);
 

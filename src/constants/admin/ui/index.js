@@ -1,1 +1,1 @@
-export { ROW_ACTION_ANIMATIONS, ROW_ACTION_TYPES } from "./rowAction";
+export { ROW_ACTION_ANIMATIONS, ROW_ACTION_TYPES } from "./table";
