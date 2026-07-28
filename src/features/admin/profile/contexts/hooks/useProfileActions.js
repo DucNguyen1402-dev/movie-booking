@@ -15,7 +15,11 @@ import {
 import { useUserInfor } from "@features/admin/users";
 import { ensureMinDuration } from "@utils/admin";
 import { getCurrentUser } from "@utils/shared";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import {
+  MIN_LOADING_TIME,
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+} from "@constants/admin";
 
 import { useUpdateUser } from ".";
 
@@ -98,7 +102,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message,
       });
     }
@@ -115,7 +119,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
     if (matKhau !== matKhauHienTai) {
       hideLoading();
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message: "Mật khẩu hiện tại không chính xác!",
       });
       return;
@@ -124,7 +128,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
     if (matKhauMoi !== xacNhanMatKhauMoi) {
       hideLoading();
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message: "Mật khẩu mới không giống nhau",
       });
       return;
@@ -148,7 +152,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         state: {
           history: history.slice(0, -1),
           notification: {
-            variant: "success",
+            variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Mật khẩu của bạn đã được thay đổi thành công.",
           },
         },
@@ -160,7 +164,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message,
       });
     }

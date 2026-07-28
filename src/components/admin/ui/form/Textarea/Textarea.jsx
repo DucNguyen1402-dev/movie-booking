@@ -42,16 +42,17 @@ const Textarea = forwardRef(
       () => mergeRefs(innerRef, ref, inputRef),
       [ref, inputRef],
     );
-
     return (
       <div className="flex flex-col gap-2">
         <textarea
+          name={name}
           onInput={handleInput}
           ref={setRef}
           disabled={disabled}
           id={id ?? name}
           rows={rows}
           {...props}
+
           className={cn(
             "input",
             disabled ? "input-disabled" : "input-default",

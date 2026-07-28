@@ -12,7 +12,11 @@ import {
   useNotificationContext,
 } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import {
+  MIN_LOADING_TIME,
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+} from "@constants/admin";
 
 import { useUserEdit } from "./useUserEdit";
 
@@ -61,7 +65,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
     if (!hasFieldChange) {
       hideLoading();
       notificationActions.show({
-        variant: "warning",
+        variant: NOTIFICATION_TYPES.WARNING,
         message:
           "Không phát hiện dữ liệu thay đổi, vui lòng kiểm tra lại hoặc rời trang.",
       });
@@ -79,7 +83,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
           account: data.taiKhoan,
           history: history.slice(0, -1),
           notification: {
-            variant: "success",
+            variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Cập nhật thông tin người dùng thành công.",
           },
           highlight: HIGHLIGHT_TYPES.UPDATE,

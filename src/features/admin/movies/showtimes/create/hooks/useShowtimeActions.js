@@ -14,7 +14,11 @@ import {
 } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
 import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import {
+  MIN_LOADING_TIME,
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+} from "@constants/admin";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -61,7 +65,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
         state: {
           maCumRap,
           notification: {
-            variant: "success",
+            variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Đã tạo lịch chiếu thành công.",
           },
           history,
@@ -70,7 +74,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
     } catch (error) {
       hideLoading();
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message: error.response?.data?.content,
       });
     }

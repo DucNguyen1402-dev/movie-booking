@@ -3,7 +3,7 @@ import { validationRules } from "@config/admin";
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
 import { AddButton, CancelButton } from "@components/admin/ui/buttons";
-import { DateInput, Textarea } from "@components/admin/ui/form";
+import { DateInput, FormLabel, Textarea } from "@components/admin/ui/form";
 
 import { CheckboxFields, FileImageField, InputFields } from "./Fields";
 
@@ -22,28 +22,26 @@ const Form = () => {
 
   useSyncLeaveConfirmation(isDirty);
 
-  const handleInput = (e) => {
-    e.target.style.height = "auto";
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  };
-
   return (
     <form onSubmit={handleSubmitEvent} className="space-y-6 pb-4">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <InputFields errors={errors} register={register} />
       </div>
 
-      <Textarea
-        label="Mô tả phim"
-        name="moTa"
-        rules={validationRules.moTa}
-        error={errors.moTa}
-        register={register}
-        onInput={handleInput}
-      />
+      <div className="flex flex-col gap-3">
+        <FormLabel htmlFor="moTa">Mô tả phim</FormLabel>
+        <Textarea
+          id="moTa"
+          resizeKey={watch("moTa")}
+          {...register("moTa", validationRules.moTa)}
 
-      <div className="mt-5 flex justify-between">
-        <div className="min-w-1/3">
+          error={errors.moTa?.message}
+        />
+      </div>
+
+      <div className="mt-10 flex justify-between">
+        <div className="flex min-w-1/3 flex-col gap-4">
+          <FormLabel htmlFor="ngayKhoiChieu">Ngày khởi chiếu</FormLabel>
           <DateInput
             control={control}
             value={watch("ngayKhoiChieu")}
@@ -57,13 +55,17 @@ const Form = () => {
             }}
           />
         </div>
+        <div />
 
-        <div className="flex flex-wrap gap-6 self-end py-2">
+        <div className="flex flex-col gap-3">
+          <FormLabel htmlFor="Trang" className="cursor-default">
+            Trạng thái phim
+          </FormLabel>
           <CheckboxFields control={control} />
         </div>
       </div>
 
-      <div className="mt-12">
+      <div className="mt-20">
         <FileImageField
           register={register}
           error={errors.hinhAnh}

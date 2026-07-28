@@ -4,7 +4,7 @@ import { ENTITIES } from "@config/admin";
 import { createDeleteModalContent } from "@helpers/admin/modal";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
-import { MODAL_TYPES } from "@constants/admin";
+import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
 
 import { useDeleteUser } from "./useDeleteUser";
 
@@ -22,7 +22,7 @@ export function useUserDeletion() {
         await mutateAsync(taiKhoan);
         modal.close();
         notificationActions.show({
-          variant: "success",
+          variant: NOTIFICATION_TYPES.SUCCESS,
           message: "Xóa tài khoản thành công.",
         });
       } catch (error) {
@@ -31,7 +31,7 @@ export function useUserDeletion() {
           error.response?.data?.content ??
           "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
         notificationActions.show({
-          variant: "error",
+          variant: NOTIFICATION_TYPES.ERROR,
           message,
         });
       } finally {

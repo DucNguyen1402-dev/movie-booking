@@ -12,7 +12,11 @@ import {
   useNotificationContext,
 } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import {
+  MIN_LOADING_TIME,
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+} from "@constants/admin";
 
 import { useUserCreation } from ".";
 
@@ -54,7 +58,7 @@ export function useAddActions({ handleSubmit }) {
           account: content.taiKhoan,
           highlight: HIGHLIGHT_TYPES.ADD,
           notification: {
-            variant: "success",
+            variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Người dùng đã được thêm thành công.",
           },
           history: history.slice(0, -1),
@@ -64,7 +68,7 @@ export function useAddActions({ handleSubmit }) {
       modal.close();
       hideLoading();
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message:
           error.response?.data?.content ??
           "Đã có lỗi xảy ra! vui lòng kiểm tra lại dữ liệu hoặc kết nối mạng",

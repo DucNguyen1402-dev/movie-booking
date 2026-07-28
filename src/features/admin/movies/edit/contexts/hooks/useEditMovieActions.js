@@ -14,7 +14,11 @@ import {
   useNotificationContext,
 } from "@contexts/admin";
 import { ensureMinDuration } from "@utils/admin";
-import { MIN_LOADING_TIME, MODAL_TYPES } from "@constants/admin";
+import {
+  MIN_LOADING_TIME,
+  MODAL_TYPES,
+  NOTIFICATION_TYPES,
+} from "@constants/admin";
 
 import { useUpdateMovie } from "./useUpdateMovie";
 
@@ -66,7 +70,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
       modal.close();
       notificationActions.show({
-        variant: "warning",
+        variant: NOTIFICATION_TYPES.WARNING,
         message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
       });
 
@@ -104,7 +108,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         state: {
           movieId: editId,
           notification: {
-            variant: "success",
+            variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Cập nhật thông tin phim thành công.",
           },
           highlight: HIGHLIGHT_TYPES.UPDATE,
@@ -122,7 +126,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
           ? "Phim này không thể chỉnh sửa "
           : content;
       notificationActions.show({
-        variant: "error",
+        variant: NOTIFICATION_TYPES.ERROR,
         message,
       });
     }

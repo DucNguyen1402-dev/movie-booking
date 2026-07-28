@@ -13,8 +13,8 @@ const EditFormFields = () => {
 
   useSyncLeaveConfirmation(isDirty);
 
-  const description = watch("moTa");
   const registerField = register("moTa", validationRules.moTa);
+  const description = watch("moTa");
 
   return (
     <div className="space-y-8 rounded-xl bg-gray-800 p-8 pb-60 shadow-sm lg:col-span-2">
@@ -25,7 +25,7 @@ const EditFormFields = () => {
         </FormLabel>
         <Textarea
           id="moTa"
-          error={errors?.moTa?.message}
+          error={errors.moTa?.message}
           resizeKey={description}
           inputRef={registerField.ref}
         />
