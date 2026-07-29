@@ -73,7 +73,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
       toaster.show(
-        toastContent.warning.forUpdate(
+        toastContent.warning(
           "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
         ),
       );
@@ -92,7 +92,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
       navigate(previousPath, {
         state: {
           movieId: data?.content?.maPhim,
-          toastState: toastContent.success.forUpdate(ENTITIES.movie),
+          toastState: toastContent.success.update(ENTITIES.movie),
           highlight: ROW_ACTION_TYPES.UPDATE,
           history: history.slice(0, -1),
         },
@@ -107,7 +107,8 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         content === "Phim này không thể bị xóa!"
           ? "Phim này không thể chỉnh sửa "
           : content;
-      toaster.show(toastContent.error.forUpdate(message));
+
+      toaster.show(toastContent.error(message));
     }
   };
 

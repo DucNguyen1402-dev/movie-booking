@@ -82,7 +82,7 @@ export function useAddMovieActions() {
         state: {
           movieId: response.data?.content?.maPhim,
           highlight: ROW_ACTION_TYPES.ADD,
-          toastState: toastContent.success.forAdd(ENTITIES.movie),
+          toastState: toastContent.success.add(ENTITIES.movie),
           history,
         },
       });
@@ -95,7 +95,7 @@ export function useAddMovieActions() {
         content === "Upload file không thành công!"
           ? "Tên phim đã tồn tại"
           : content;
-      toaster.show(toastContent.error.forAdd(message));
+      toaster.show(toastContent.error(message));
     }
   };
 

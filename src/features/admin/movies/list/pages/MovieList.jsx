@@ -30,15 +30,15 @@ const MovieList = () => {
     trailer: { trailer },
     pagination: { currentSize, setSize },
   } = useMovieListContext();
-  const toaster = toast.use();
+  const { show: showToast } = toast.use();
 
   const [toastState] = useTemporaryState(location.state?.toastState);
 
   useConsumeLocationState("toastState");
   useEffect(() => {
     if (!toastState) return;
-    toaster.show(toastState);
-  }, [toastState, toaster]);
+    showToast(toastState);
+  }, [toastState, showToast]);
 
   useLockBodyScroll(trailer.url !== null);
 

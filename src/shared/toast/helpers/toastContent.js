@@ -1,4 +1,6 @@
-import { errorToastContent, successToastContent, warningToastContent } from ".";
+import { errorToastContent } from "./errorToastContent";
+import { successToastContent } from "./successToastContent";
+import { warningToastContent } from "./warningToastContent";
 
 export const toastContent = {
   success: successToastContent,

@@ -79,7 +79,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
-          toastState: toastContent.success.forupdate(ENTITIES.profile),
+          toastState: toastContent.success.update(ENTITIES.profile),
         },
       });
     } catch (error) {
@@ -87,7 +87,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      toaster.show(toastContent.error.forUpdate(message));
+      toaster.show(toastContent.error(message));
     }
   };
 
@@ -99,15 +99,18 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         getValues();
 
       if (matKhau !== matKhauHienTai) {
-        toaster.show(
-          toastContent.error.forUpdate("Mật khẩu hiện tại không chính xác"),
-        );
+        toaster.show(toastContent.error("Mật khẩu hiện tại không chính xác"));
         return;
       }
 
       if (matKhauMoi !== xacNhanMatKhauMoi) {
+        toaster.show(toastContent.error("Mật khẩu mới không giống nhau"));
+        return;
+      }
+
+      if (matKhauMoi === matKhau) {
         toaster.show(
-          toastContent.error.forUpdate("Mật khẩu mới không giống nhau"),
+          toastContent.error("Mật khẩu mới không được trùng với mật khẩu cũ."),
         );
         return;
       }
@@ -128,7 +131,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         navigate(previousPath, {
           state: {
             history: history.slice(0, -1),
-            toastState: toastContent.success.forChangePassword(),
+            toastState: toastContent.success.changePassword(),
           },
         });
       } catch (error) {
@@ -136,7 +139,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
           error?.response?.data?.content ??
           "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-        toaster.show(toastContent.error.forChangePassword(message));
+        toaster.show(toastContent.error(message));
       }
     };
 

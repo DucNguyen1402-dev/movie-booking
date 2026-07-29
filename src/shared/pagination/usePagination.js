@@ -33,7 +33,20 @@ export function usePagination({ items, resetDeps, enabled, size = 10 }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...resetDeps, setPagination, enabled]);
 
+  useEffect(() => {
+    const totalPages = Math.max(1, Math.ceil(items.length / pagination.size));
+
+    if (pagination.page > totalPages) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPagination((prev) => ({
+        ...prev,
+        page: totalPages,
+      }));
+    }
+  }, [items.length, pagination.page, pagination.size]);
+
   const startIndex = (pagination.page - 1) * pagination.size;
+
   const endIndex = pagination.page * pagination.size;
 
   const list = useMemo(() => {

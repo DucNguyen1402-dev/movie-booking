@@ -57,7 +57,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       navigate(previousPath, {
         state: {
           maCumRap,
-          toastState: toastContent.success.forAdd(ENTITIES.showtime),
+          toastState: toastContent.success.add(ENTITIES.showtime),
           history,
         },
       });
@@ -65,7 +65,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       const message =
         error?.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      toaster.show(toastContent.error.forAdd(message));
+      toaster.show(toastContent.error(message));
     }
   };
 

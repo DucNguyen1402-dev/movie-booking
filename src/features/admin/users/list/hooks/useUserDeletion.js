@@ -22,13 +22,13 @@ export function useUserDeletion() {
       try {
         await mutateAsync(taiKhoan);
         modal.close();
-        toaster.show(toastContent.success.forDelete(ENTITIES.user));
+        toaster.show(toastContent.success.delete(ENTITIES.user));
       } catch (error) {
         modal.close();
         const message =
           error.response?.data?.content ??
           "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
-        toaster.show(toastContent.error.forDelete(message));
+        toaster.show(toastContent.error(message));
       } finally {
         setDeletingAccount(null);
       }

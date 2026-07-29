@@ -56,7 +56,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
 
     if (!hasFieldChange) {
       toaster.show(
-        toastContent.warning.forUpdate(
+        toastContent.warning(
           "Không phát hiện dữ liệu thay đổi, vui lòng kiểm tra lại hoặc rời trang.",
         ),
       );
@@ -72,7 +72,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
         state: {
           account: data.taiKhoan,
           history: history.slice(0, -1),
-          toastState: toastContent.success.forUpdate(ENTITIES.user),
+          toastState: toastContent.success.update(ENTITIES.user),
           highlight: ROW_ACTION_TYPES.UPDATE,
         },
       });
@@ -80,7 +80,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      toaster.show(toastContent.error.forUpdate(message));
+      toaster.show(toastContent.error(message));
     }
   };
 

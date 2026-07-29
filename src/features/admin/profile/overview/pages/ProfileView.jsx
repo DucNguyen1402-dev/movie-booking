@@ -20,7 +20,7 @@ const ProfileView = () => {
     profile: { isLoading, loginedUser },
   } = useProfileContext();
 
-  const toaster = toast.use();
+  const { show: showToast } = toast.use();
 
   useConsumeLocationState("toastState");
 
@@ -29,8 +29,8 @@ const ProfileView = () => {
   useEffect(() => {
     if (!toastState) return;
 
-    toaster.show(toastState);
-  }, [toastState, toaster]);
+    showToast(toastState);
+  }, [toastState, showToast]);
 
   const profileFields = useMemo(
     () => [

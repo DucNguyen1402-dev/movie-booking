@@ -15,7 +15,7 @@ import {
 
 const ShowtimeSection = ({ showtimeInfor, isPending, hasNoShowtime }) => {
   const location = useLocation();
-  const toaster = toast.use();
+  const { show: showToast } = toast.use();
 
   useConsumeLocationState("toastState");
 
@@ -24,8 +24,8 @@ const ShowtimeSection = ({ showtimeInfor, isPending, hasNoShowtime }) => {
   useEffect(() => {
     if (!toastState) return;
 
-    toaster.show(toastState);
-  }, [toastState, toaster]);
+    showToast(toastState);
+  }, [toastState, showToast]);
 
   const tongSuatChieu = useMemo(() => {
     let total = 0;

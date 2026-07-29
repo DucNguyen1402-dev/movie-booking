@@ -53,12 +53,12 @@ export function useMovieItem({ movie, movieId, highlight }) {
     try {
       await mutateAsync(movie.maPhim);
       modal.close();
-      toaster.show(toastContent.success.forDelete(ENTITIES.movie));
+      toaster.show(toastContent.success.delete(ENTITIES.movie));
     } catch (error) {
       modal.close();
       const message =
         error?.response?.data.content ?? "Đã xảy ra lỗi, vui lòng thử lại sau.";
-      toaster.show(toastContent.error.forDelete(message));
+      toaster.show(toastContent.error(message));
     } finally {
       setOnDeleting(false);
     }

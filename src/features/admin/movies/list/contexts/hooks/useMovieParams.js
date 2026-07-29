@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { movieSortMapping } from "@features/admin/movies/list/config";
-import { applyFilter,applySort } from "@features/admin/movies/list/utils";
+import { applyFilter, applySort } from "@features/admin/movies/list/utils";
 
 export function useMovieParams({ movies }) {
   const [params, setParams] = useState({

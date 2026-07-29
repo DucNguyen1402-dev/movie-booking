@@ -18,13 +18,13 @@ const UsersList = () => {
   const [toastState] = useTemporaryState(location.state?.toastState);
   useConsumeLocationState("toastState");
 
-  const toaster = toast.use();
+  const { show: showToast } = toast.use();
 
   useEffect(() => {
     if (!toastState) return;
 
-    toaster.show(toastState);
-  }, [toaster, toastState]);
+    showToast(toastState);
+  }, [showToast, toastState]);
 
   return (
     <div

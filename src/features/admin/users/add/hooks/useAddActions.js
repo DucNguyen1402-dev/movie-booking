@@ -50,7 +50,7 @@ export function useAddActions({ handleSubmit }) {
         state: {
           account: content.taiKhoan,
           highlight: ROW_ACTION_TYPES.ADD,
-          toastState: toastContent.success.forAdd(ENTITIES.user),
+          toastState: toastContent.success.add(ENTITIES.user),
           history: history.slice(0, -1),
         },
       });
@@ -58,7 +58,7 @@ export function useAddActions({ handleSubmit }) {
       const message =
         error?.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      toaster.show(toastContent.error.forAdd(message));
+      toaster.show(toastContent.error(message));
     }
   };
 
