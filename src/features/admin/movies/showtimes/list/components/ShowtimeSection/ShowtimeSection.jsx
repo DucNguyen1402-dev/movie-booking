@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
-import { notification } from "@shared/notification";
+import { toast } from "@shared/toast";
 
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 
@@ -15,19 +15,17 @@ import {
 
 const ShowtimeSection = ({ showtimeInfor, isPending, hasNoShowtime }) => {
   const location = useLocation();
-  const notifier = notification.user();
+  const toaster = toast.use();
 
-  useConsumeLocationState("notification");
+  useConsumeLocationState("toastState");
 
-  const [notificationState] = useTemporaryState(
-    location.state?.notificationState,
-  );
+  const [toastState] = useTemporaryState(location.state?.toastState);
 
   useEffect(() => {
-    if (!notification) return;
+    if (!toastState) return;
 
-    notifier.show(notificationState);
-  }, [notificationState, notifier]);
+    toaster.show(toastState);
+  }, [toastState, toaster]);
 
   const tongSuatChieu = useMemo(() => {
     let total = 0;

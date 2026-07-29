@@ -7,12 +7,12 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
-import { notification } from "@shared/notification";
+import { toast, toastContent } from "@shared/toast";
 import { format } from "date-fns";
 
 import { useModalContext } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
-import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
+import { MODAL_TYPES } from "@constants/admin";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const modal = useModalContext();
   const loader = loading.use();
-  const notifier = notification.use();
+  const toaster = toast.use();
 
   const handleShowtimeCanceling = () => {
     modal.close();
@@ -57,18 +57,15 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       navigate(previousPath, {
         state: {
           maCumRap,
-          notificationState: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Đã tạo lịch chiếu thành công.",
-          },
+          toastState: toastContent.success.forAdd(ENTITIES.showtime),
           history,
         },
       });
     } catch (error) {
-      notifier.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message: error.response?.data?.content,
-      });
+      const message =
+        error?.response?.data?.content ??
+        "Đã có lỗi xảy ra, vui lòng thử lại sau.";
+      toaster.show(toastContent.error.forAdd(message));
     }
   };
 

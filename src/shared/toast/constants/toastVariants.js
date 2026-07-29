@@ -1,4 +1,4 @@
-export const TOAST_TYPES = {
+export const TOAST_VARIANT = {
   SUCCESS: "success",
   ERROR: "error",
   WARNING: "warning",

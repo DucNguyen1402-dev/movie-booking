@@ -1,31 +1,31 @@
 import { useCallback, useMemo } from "react";
 
-export function useNotificationActions({ timeoutRef, setNotification }) {
+export function useToastActions({ autoHideTimeoutRef, setToast }) {
   const show = useCallback(
     ({ variant, message }) => {
-      setNotification({ isOpen: true, variant, message });
+      setToast({ isOpen: true, variant, message });
 
-      clearTimeout(timeoutRef.current);
+      clearTimeout(autoHideTimeoutRef.current);
 
-      timeoutRef.current = setTimeout(() => {
-        setNotification({
+      autoHideTimeoutRef.current = setTimeout(() => {
+        setToast({
           isOpen: false,
           message: null,
           variant: null,
         });
       }, 2500);
     },
-    [setNotification, timeoutRef],
+    [setToast, autoHideTimeoutRef],
   );
 
   const hide = useCallback(
     () =>
-      setNotification({
+      setToast({
         isOpen: false,
         message: null,
         variant: null,
       }),
-    [setNotification],
+    [setToast],
   );
 
   return useMemo(

@@ -8,12 +8,12 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
-import { notification } from "@shared/notification";
+import { toast, toastContent } from "@shared/toast";
 
 import { useModalContext } from "@contexts/admin";
 import { useUserInfor } from "@features/admin/users";
 import { getCurrentUser } from "@utils/shared";
-import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
+import { MODAL_TYPES } from "@constants/admin";
 
 import { useUpdateUser } from ".";
 
@@ -33,7 +33,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const modal = useModalContext();
   const loader = loading.use();
-  const notifier = notification.use();
+  const toaster = toast.use();
 
   const handleCancelPasswordChange = () => {
     modal.close();
@@ -79,10 +79,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
-          notification: {
-            variant: "success",
-            message: "Thông tin của bạn đã được cập nhật thành công",
-          },
+          toastState: toastContent.success.forupdate(ENTITIES.profile),
         },
       });
     } catch (error) {
@@ -90,10 +87,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      notifier.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message,
-      });
+      toaster.show(toastContent.error.forUpdate(message));
     }
   };
 
@@ -105,18 +99,16 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         getValues();
 
       if (matKhau !== matKhauHienTai) {
-        notifier.show({
-          variant: NOTIFICATION_TYPES.ERROR,
-          message: "Mật khẩu hiện tại không chính xác!",
-        });
+        toaster.show(
+          toastContent.error.forUpdate("Mật khẩu hiện tại không chính xác"),
+        );
         return;
       }
 
       if (matKhauMoi !== xacNhanMatKhauMoi) {
-        notifier.show({
-          variant: NOTIFICATION_TYPES.ERROR,
-          message: "Mật khẩu mới không giống nhau",
-        });
+        toaster.show(
+          toastContent.error.forUpdate("Mật khẩu mới không giống nhau"),
+        );
         return;
       }
 
@@ -136,10 +128,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         navigate(previousPath, {
           state: {
             history: history.slice(0, -1),
-            notificationState: {
-              variant: NOTIFICATION_TYPES.SUCCESS,
-              message: "Mật khẩu của bạn đã được thay đổi thành công.",
-            },
+            toastState: toastContent.success.forChangePassword(),
           },
         });
       } catch (error) {
@@ -147,10 +136,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
           error?.response?.data?.content ??
           "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-        notifier.show({
-          variant: NOTIFICATION_TYPES.ERROR,
-          message,
-        });
+        toaster.show(toastContent.error.forChangePassword(message));
       }
     };
 

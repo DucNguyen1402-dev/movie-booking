@@ -8,15 +8,11 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
-import { notification } from "@shared/notification";
+import { toast, toastContent } from "@shared/toast";
 
 import { useModalContext } from "@contexts/admin";
 import { createMovieFormData } from "@features/admin/movies/add/utils";
-import {
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-  ROW_ACTION_TYPES,
-} from "@constants/admin";
+import { MODAL_TYPES, ROW_ACTION_TYPES } from "@constants/admin";
 
 import { useAddForm } from "./useAddForm";
 import { useAddMovieMutation } from "./useAddMovieMutation";
@@ -30,7 +26,7 @@ export function useAddMovieActions() {
   const navigate = useNavigate();
 
   const loader = loading.use();
-  const notifier = notification.use();
+  const toaster = toast.use();
   const modal = useModalContext();
 
   const { register, handleSubmit, errors, isDirty, control, watch } =
@@ -86,10 +82,7 @@ export function useAddMovieActions() {
         state: {
           movieId: response.data?.content?.maPhim,
           highlight: ROW_ACTION_TYPES.ADD,
-          notificationState: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Phim đã được thêm thành công vào hệ thống",
-          },
+          toastState: toastContent.success.forAdd(ENTITIES.movie),
           history,
         },
       });
@@ -102,10 +95,7 @@ export function useAddMovieActions() {
         content === "Upload file không thành công!"
           ? "Tên phim đã tồn tại"
           : content;
-      notifier.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message,
-      });
+      toaster.show(toastContent.error.forAdd(message));
     }
   };
 

@@ -3,15 +3,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
 import { createDeleteModalContent } from "@helpers/admin/modal";
-import { notification } from "@shared/notification";
+import { toast, toastContent } from "@shared/toast";
 
 import { useModalContext } from "@contexts/admin";
 import { useScrollIntoView } from "@hooks/admin";
-import {
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-  ROW_ACTION_ANIMATIONS,
-} from "@constants/admin";
+import { MODAL_TYPES, ROW_ACTION_ANIMATIONS } from "@constants/admin";
 
 import { useDeleteMovie } from "./useDeleteMovie";
 
@@ -23,7 +19,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const location = useLocation();
 
   const modal = useModalContext();
-  const notifier = notification.use();
+  const toaster = toast.use();
 
   const { mutateAsync } = useDeleteMovie();
 
@@ -57,20 +53,16 @@ export function useMovieItem({ movie, movieId, highlight }) {
     try {
       await mutateAsync(movie.maPhim);
       modal.close();
-      notifier.show({
-        variant: NOTIFICATION_TYPES.SUCCESS,
-        message: "Xóa phim thành công",
-      });
+      toaster.show(toastContent.success.forDelete(ENTITIES.movie));
     } catch (error) {
       modal.close();
-      notifier.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message: error.response.data?.content,
-      });
+      const message =
+        error?.response?.data.content ?? "Đã xảy ra lỗi, vui lòng thử lại sau.";
+      toaster.show(toastContent.error.forDelete(message));
     } finally {
       setOnDeleting(false);
     }
-  }, [modal, movie.maPhim, mutateAsync, notifier]);
+  }, [modal, movie.maPhim, mutateAsync, toaster]);
 
   const onDeleteClick = useCallback(() => {
     setOnDeleting(true);

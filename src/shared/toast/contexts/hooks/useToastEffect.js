@@ -1,18 +1,15 @@
 import { useEffect } from "react";
 
-export function useNotificationEffects({ notificationRef, hideNotification }) {
+export function useToastEffect({ toastRef, hideToast, autoHideTimeoutRef }) {
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        notificationRef.current &&
-        !notificationRef.current.contains(e.target)
-      ) {
-        hideNotification();
+      if (toastRef.current && !toastRef.current.contains(e.target)) {
+        hideToast();
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [hideNotification, notificationRef]);
+  }, [autoHideTimeoutRef, hideToast, toastRef]);
 }

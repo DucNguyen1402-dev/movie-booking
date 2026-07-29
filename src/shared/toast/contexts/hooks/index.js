@@ -1,3 +1,3 @@
-export {useNotificationActions} from "./useNotificationActions"
-export {useNotificationEffects} from "./useNotificationEffects"
-export {useNotificationStates} from "./useNotificationStates"
+export { useToastActions } from "./useToastActions";
+export { useToastEffect } from "./useToastEffect";
+export { useToastState } from "./useToastState";

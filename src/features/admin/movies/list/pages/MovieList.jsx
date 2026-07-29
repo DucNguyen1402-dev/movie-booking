@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { notification } from "@shared/notification";
 import { PaginationSelect } from "@shared/pagination";
+import { toast } from "@shared/toast";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useLayoutContext } from "@contexts/admin";
@@ -30,17 +30,15 @@ const MovieList = () => {
     trailer: { trailer },
     pagination: { currentSize, setSize },
   } = useMovieListContext();
-  const notifier = notification.use();
+  const toaster = toast.use();
 
-  const [notificationState] = useTemporaryState(
-    location.state?.notificationState,
-  );
+  const [toastState] = useTemporaryState(location.state?.toastState);
 
-  useConsumeLocationState("notificationState");
+  useConsumeLocationState("toastState");
   useEffect(() => {
-    if (!notificationState) return;
-    notifier.show(notificationState);
-  }, [notificationState, notifier]);
+    if (!toastState) return;
+    toaster.show(toastState);
+  }, [toastState, toaster]);
 
   useLockBodyScroll(trailer.url !== null);
 

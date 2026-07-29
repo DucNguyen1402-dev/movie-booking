@@ -8,16 +8,12 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
-import { notification } from "@shared/notification";
+import { toast, toastContent } from "@shared/toast";
 import { format } from "date-fns";
 
 import { useModalContext } from "@contexts/admin";
 import { createUpdateFormData } from "@features/admin/movies/edit/helpers";
-import {
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-  ROW_ACTION_TYPES,
-} from "@constants/admin";
+import { MODAL_TYPES, ROW_ACTION_TYPES } from "@constants/admin";
 
 import { useUpdateMovie } from "./useUpdateMovie";
 
@@ -32,7 +28,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
   const { mutateAsync } = useUpdateMovie();
 
-  const notifier = notification.use();
+  const toaster = toast.use();
   const loader = loading.use();
   const modal = useModalContext();
 
@@ -76,10 +72,11 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     const movie = getValues();
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
-      notifier.show({
-        variant: NOTIFICATION_TYPES.WARNING,
-        message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
-      });
+      toaster.show(
+        toastContent.warning.forUpdate(
+          "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
+        ),
+      );
 
       return;
     }
@@ -95,10 +92,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
       navigate(previousPath, {
         state: {
           movieId: data?.content?.maPhim,
-          notificationState: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Cập nhật thông tin phim thành công.",
-          },
+          toastState: toastContent.success.forUpdate(ENTITIES.movie),
           highlight: ROW_ACTION_TYPES.UPDATE,
           history: history.slice(0, -1),
         },
@@ -113,10 +107,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         content === "Phim này không thể bị xóa!"
           ? "Phim này không thể chỉnh sửa "
           : content;
-      notifier.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message,
-      });
+      toaster.show(toastContent.error.forUpdate(message));
     }
   };
 

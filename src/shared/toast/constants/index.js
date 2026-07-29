@@ -1,1 +1,1 @@
-export { TOAST_TYPES } from "./toastTypes";
+export { TOAST_VARIANT } from "./toastVariants";

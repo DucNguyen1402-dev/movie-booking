@@ -7,14 +7,10 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
-import { notification } from "@shared/notification";
+import { toast, toastContent } from "@shared/toast";
 
 import { useModalContext } from "@contexts/admin";
-import {
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-  ROW_ACTION_TYPES,
-} from "@constants/admin";
+import { MODAL_TYPES, ROW_ACTION_TYPES } from "@constants/admin";
 
 import { useUserCreation } from ".";
 
@@ -28,7 +24,7 @@ export function useAddActions({ handleSubmit }) {
 
   const modal = useModalContext();
 
-  const notifier = notification.use();
+  const toaster = toast.use();
   const loader = loading.use();
 
   const handleCancelAddUser = () => {
@@ -54,20 +50,15 @@ export function useAddActions({ handleSubmit }) {
         state: {
           account: content.taiKhoan,
           highlight: ROW_ACTION_TYPES.ADD,
-          notificationState: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Người dùng đã được thêm thành công.",
-          },
+          toastState: toastContent.success.forAdd(ENTITIES.user),
           history: history.slice(0, -1),
         },
       });
     } catch (error) {
-      notifier.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message:
-          error.response?.data?.content ??
-          "Đã có lỗi xảy ra! vui lòng kiểm tra lại dữ liệu hoặc kết nối mạng",
-      });
+      const message =
+        error?.response?.data?.content ??
+        "Đã có lỗi xảy ra, vui lòng thử lại sau.";
+      toaster.show(toastContent.error.forAdd(message));
     }
   };
 

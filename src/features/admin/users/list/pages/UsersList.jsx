@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { notification } from "@shared/notification";
+import { toast } from "@shared/toast";
 
 import { useLayoutContext } from "@contexts/admin";
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
@@ -15,18 +15,16 @@ const UsersList = () => {
   const { isSidebarOpen } = useLayoutContext();
 
   const location = useLocation();
-  const [notificationState] = useTemporaryState(
-    location.state?.notificationState,
-  );
-  useConsumeLocationState("notification");
+  const [toastState] = useTemporaryState(location.state?.toastState);
+  useConsumeLocationState("toastState");
 
-  const notifier = notification.use();
+  const toaster = toast.use();
 
   useEffect(() => {
-    if (!notificationState) return;
+    if (!toastState) return;
 
-    notifier.show(notificationState);
-  }, [notifier, notificationState]);
+    toaster.show(toastState);
+  }, [toaster, toastState]);
 
   return (
     <div

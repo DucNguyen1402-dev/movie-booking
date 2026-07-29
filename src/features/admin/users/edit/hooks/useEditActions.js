@@ -7,13 +7,10 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
+import { toast, toastContent } from "@shared/toast";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
-import {
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-  ROW_ACTION_TYPES,
-} from "@constants/admin";
+import { useModalContext } from "@contexts/admin";
+import { MODAL_TYPES, ROW_ACTION_TYPES } from "@constants/admin";
 
 import { useUserEdit } from "./useUserEdit";
 
@@ -32,7 +29,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
 
   const modal = useModalContext();
   const loader = loading.use();
-  const { notificationActions } = useNotificationContext();
+  const toaster = toast.use();
   const { mutateAsync } = useUserEdit();
 
   const onCancelEditClick = () => {
@@ -58,11 +55,11 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
     );
 
     if (!hasFieldChange) {
-      notificationActions.show({
-        variant: NOTIFICATION_TYPES.WARNING,
-        message:
+      toaster.show(
+        toastContent.warning.forUpdate(
           "Không phát hiện dữ liệu thay đổi, vui lòng kiểm tra lại hoặc rời trang.",
-      });
+        ),
+      );
       return;
     }
 
@@ -75,10 +72,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
         state: {
           account: data.taiKhoan,
           history: history.slice(0, -1),
-          notificationState: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Cập nhật thông tin người dùng thành công.",
-          },
+          toastState: toastContent.success.forUpdate(ENTITIES.user),
           highlight: ROW_ACTION_TYPES.UPDATE,
         },
       });
@@ -86,10 +80,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      notificationActions.show({
-        variant: "error",
-        message,
-      });
+      toaster.show(toastContent.error.forUpdate(message));
     }
   };
 

@@ -1,39 +1,35 @@
 import {
   messageClasses,
-  notificationIconSizes,
-  notificationIconTypes,
-  notificationSizeClasses,
-  notificationTypeClasses,
-} from "@config/admin";
+  toastIconSizes,
+  toastIconTypes,
+  toastSizeClasses,
+  toastTypeClasses,
+} from "@shared/toast/config";
 
 import { cn } from "@utils/shared";
 const ToastContainer = ({
   message = "something went wrong",
   variant,
-  notificationRef,
+  toastRef,
   size = "md",
 }) => {
-  if (import.meta.env.DEV && !(variant in notificationTypeClasses)) {
-    console.warn(`Unknown notification variant: "${variant}"`);
+  if (import.meta.env.DEV && !(variant in toastTypeClasses)) {
+    console.warn(`Unknown toast variant: "${variant}"`);
   }
 
-  const notificationSize = notificationSizeClasses[size];
-  const typeClass =
-    notificationTypeClasses[variant] ?? notificationTypeClasses.system;
+  const toastSize = toastSizeClasses[size];
+  const typeClass = toastTypeClasses[variant] ?? toastTypeClasses.system;
 
-  const Icon = notificationIconTypes[variant];
-  const iconSize = notificationIconSizes[size];
+  const Icon = toastIconTypes[variant];
+  const iconSize = toastIconSizes[size];
   const messageSize = messageClasses[size];
   return (
-    <div
-      ref={notificationRef}
-      className={cn("notification", typeClass, notificationSize)}
-    >
+    <div ref={toastRef} className={cn("toast", typeClass, toastSize)}>
       <Icon className={cn("text-white", iconSize)} />
 
       <p className={cn("flex-1 font-medium", messageSize)}>{message}</p>
     </div>
   );
 };
-ToastContainer.displayName = "ToastContainer    ";
+ToastContainer.displayName = "ToastContainer";
 export default ToastContainer;

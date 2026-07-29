@@ -239,7 +239,7 @@ select {
   .backdrop-dark {
     @apply bg-slate-950/80;
   }
-  .notification {
+  .toast {
     @apply pointer-events-auto flex items-center gap-3 rounded-md border-l-6 shadow-xl backdrop-blur;
   }
 }
