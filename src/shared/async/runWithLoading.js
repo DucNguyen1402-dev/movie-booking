@@ -5,9 +5,7 @@ export async function runWithLoading(task, loader) {
   const start = performance.now();
   loader.show();
   try {
-    const result = await task();
-
-    return result;
+    return await task();
   } finally {
     await waitForMinimumDuration(start, MIN_LOADING_TIME);
     loader.hide();

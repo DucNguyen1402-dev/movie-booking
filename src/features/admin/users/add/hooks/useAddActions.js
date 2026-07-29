@@ -5,12 +5,11 @@ import {
   createAddModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
-import { ensureMinDuration } from "@utils/admin";
 import {
-  MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
   ROW_ACTION_TYPES,
@@ -42,14 +41,13 @@ export function useAddActions({ handleSubmit }) {
       onConfirm: handleCancelAddUser,
     });
 
-  const handleAddUser = async (data) => {
+  const handleSubmitNewUser = async (data) => {
     modal.close();
-    loader.show();
-    const start = new Date();
+
+    const submitNewUserTask = async () => await mutateAsync(data);
+
     try {
-      const content = await mutateAsync(data);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      loader.hide();
+      const content = await runWithLoading(submitNewUserTask, loader);
 
       navigate(previousPath, {
         state: {
@@ -63,7 +61,6 @@ export function useAddActions({ handleSubmit }) {
         },
       });
     } catch (error) {
-      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message:
@@ -77,7 +74,7 @@ export function useAddActions({ handleSubmit }) {
     modal.open({
       type: MODAL_TYPES.ADD,
       content: createAddModalContent(ENTITIES.user),
-      onConfirm: () => handleAddUser(data),
+      onConfirm: () => handleSubmitNewUser(data),
     });
 
   const onInvalid = () => modal.close();

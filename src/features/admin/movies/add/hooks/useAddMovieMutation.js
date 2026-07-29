@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { addMovie } from "@features/admin/movies/add/api";
 
-export function useAddMovie() {
+export function useAddMovieMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: addMovie,

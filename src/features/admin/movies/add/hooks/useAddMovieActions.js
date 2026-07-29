@@ -18,7 +18,7 @@ import {
 } from "@constants/admin";
 
 import { useAddForm } from "./useAddForm";
-import { useAddMovie } from "./useAddMovie";
+import { useAddMovieMutation } from "./useAddMovieMutation";
 
 export function useAddMovieActions() {
   const [imgPreview, setImgPreview] = useState("");
@@ -35,7 +35,7 @@ export function useAddMovieActions() {
   const { register, handleSubmit, errors, isDirty, control, watch } =
     useAddForm();
 
-  const { mutateAsync } = useAddMovie();
+  const { mutateAsync } = useAddMovieMutation();
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -61,7 +61,7 @@ export function useAddMovieActions() {
   const onValid = (data) =>
     modal.open({
       type: MODAL_TYPES.ADD,
-      onConfirm: () => onSubmit(data),
+      onConfirm: () => handleSubmitNewMovie(data),
       content: createAddModalContent(ENTITIES.movie),
     });
 
@@ -70,41 +70,42 @@ export function useAddMovieActions() {
     handleSubmit(onValid)();
   };
 
-  const onSubmit = async (data) => {
+  const handleSubmitNewMovie = async (data) => {
     modal.close();
 
-    const task = async () => {
+    const submitNewMovieTask = async () => {
       const formData = createMovieFormData(data);
-
-      try {
-        const response = await mutateAsync(formData);
-        navigate(previousPath, {
-          state: {
-            movieId: response.data.content.maPhim,
-            highlight: ROW_ACTION_TYPES.ADD,
-            notification: {
-              variant: NOTIFICATION_TYPES.SUCCESS,
-              message: "Phim đã được thêm thành công vào hệ thống",
-            },
-            history,
-          },
-        });
-      } catch (error) {
-        const content = error.response?.data?.content;
-        // Chỗ này có vẻ là do tên phim bị trùng nhưng content trả về tử backend không rõ ràng
-        // mình fix tạm
-        const message =
-          content === "Upload file không thành công!"
-            ? "Tên phim đã tồn tại"
-            : content;
-        notificationActions.show({
-          variant: NOTIFICATION_TYPES.ERROR,
-          message,
-        });
-      }
+      return await mutateAsync(formData);
     };
 
-    await runWithLoading(task, loader);
+    try {
+      const response = await runWithLoading(submitNewMovieTask, loader);
+
+      navigate(previousPath, {
+        state: {
+          movieId: response.data?.content?.maPhim,
+          highlight: ROW_ACTION_TYPES.ADD,
+          notification: {
+            variant: NOTIFICATION_TYPES.SUCCESS,
+            message: "Phim đã được thêm thành công vào hệ thống",
+          },
+          history,
+        },
+      });
+    } catch (error) {
+      console.log("throw:", error?.message);
+      const content = error.response?.data?.content;
+      // Chỗ này có vẻ là do tên phim bị trùng nhưng content trả về tử backend không rõ ràng
+      // mình fix tạm
+      const message =
+        content === "Upload file không thành công!"
+          ? "Tên phim đã tồn tại"
+          : content;
+      notificationActions.show({
+        variant: NOTIFICATION_TYPES.ERROR,
+        message,
+      });
+    }
   };
 
   return {

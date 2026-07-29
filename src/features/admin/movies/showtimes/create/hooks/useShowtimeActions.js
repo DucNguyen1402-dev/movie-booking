@@ -5,17 +5,13 @@ import {
   createAddModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
 import { format } from "date-fns";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
-import { ensureMinDuration } from "@utils/admin";
-import {
-  MIN_LOADING_TIME,
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-} from "@constants/admin";
+import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -32,7 +28,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
     navigate(previousPath, { state: { history } });
   };
 
-  const onCancelClick = () =>
+  const onCancelClick = async () =>
     modal.open({
       type: MODAL_TYPES.UNSAVED_CHANGES,
       content: createUnsavedChangesModalContent(ENTITIES.showtime),
@@ -40,11 +36,12 @@ export function useShowtimeActions({ handleSubmit, movie }) {
     });
 
   const handleShowtimeCreation = async (data) => {
+    modal.close();
+
     const { ngayChieu, gioChieu, giaVe, maCumRap } = data;
 
-    const start = new Date();
-
-    //Chỗ này backend yêu cầu payload là maRap nhưng giá trị thực phải là maCumRap thì mới tạo lịch được
+    //Chỗ này backend requires payload là maRap nhưng giá trị thực truyền vào phải là maCumRap thì mới tạo lịch được
+    //fix tạm :
     const payload = {
       maRap: String(maCumRap),
       maPhim: movie.maPhim,
@@ -52,12 +49,10 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       giaVe: Number(giaVe),
     };
 
+    const createShowtimeTask = async () => await createShowtime(payload);
+
     try {
-      modal.close();
-      loader.show();
-      await createShowtime(payload);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      loader.hide();
+      await runWithLoading(createShowtimeTask, loader);
       navigate(previousPath, {
         state: {
           maCumRap,
@@ -69,7 +64,6 @@ export function useShowtimeActions({ handleSubmit, movie }) {
         },
       });
     } catch (error) {
-      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message: error.response?.data?.content,

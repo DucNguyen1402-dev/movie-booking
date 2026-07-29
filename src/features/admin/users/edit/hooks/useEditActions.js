@@ -5,12 +5,11 @@ import {
   createEditModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
-import { ensureMinDuration } from "@utils/admin";
 import {
-  MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
   ROW_ACTION_TYPES,
@@ -52,16 +51,13 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
     });
   };
 
-  const handleConfirmEdit = async (data) => {
+  const handleSubmitUpdatedUser = async (data) => {
     modal.close();
-
-    loader.show();
     const hasFieldChange = Object.keys(initialUser).some(
       (key) => initialUser[key] !== data[key],
     );
 
     if (!hasFieldChange) {
-      loader.hide();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.WARNING,
         message:
@@ -70,12 +66,11 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
       return;
     }
 
-    const start = new Date();
+    const submitUpdateUserTask = async () => mutateAsync(data);
 
     try {
-      await mutateAsync(data);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      loader.hide();
+      await runWithLoading(submitUpdateUserTask, loader);
+
       navigate(previousPath, {
         state: {
           account: data.taiKhoan,
@@ -88,7 +83,6 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
         },
       });
     } catch (error) {
-      loader.hide();
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
@@ -103,7 +97,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
     modal.open({
       type: MODAL_TYPES.EDIT,
       content: createEditModalContent(ENTITIES.user),
-      onConfirm: () => handleConfirmEdit(data),
+      onConfirm: () => handleSubmitUpdatedUser(data),
     });
 
   const onConfirmEditClick = () => handleSubmit(onValid)();

@@ -6,17 +6,13 @@ import {
   createEditModalContent,
   createUnsavedPasswordChangesModalContent,
 } from "@helpers/admin/modal";
+import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
 import { useUserInfor } from "@features/admin/users";
-import { ensureMinDuration } from "@utils/admin";
 import { getCurrentUser } from "@utils/shared";
-import {
-  MIN_LOADING_TIME,
-  MODAL_TYPES,
-  NOTIFICATION_TYPES,
-} from "@constants/admin";
+import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
 
 import { useUpdateUser } from ".";
 
@@ -65,23 +61,20 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const submitProfileChange = async (data) => {
     modal.close();
-    loader.show();
-    const start = new Date();
+    const payload = {
+      maNhom: currentUser.maNhom,
+      taiKhoan: data.taiKhoan,
+      hoTen: data.hoTen,
+      matKhau: data.matKhau,
+      email: data.email,
+      soDt: data.soDT,
+      maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
+    };
+
+    const changeProfileTask = async () => await mutateAsync(payload);
 
     try {
-      const payload = {
-        maNhom: currentUser.maNhom,
-        taiKhoan: data.taiKhoan,
-        hoTen: data.hoTen,
-        matKhau: data.matKhau,
-        email: data.email,
-        soDt: data.soDT,
-        maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
-      };
-      await mutateAsync(payload);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      loader.hide();
-
+      await runWithLoading(changeProfileTask, loader);
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
@@ -92,8 +85,6 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         },
       });
     } catch (error) {
-      loader.hide();
-
       const message =
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
@@ -107,64 +98,62 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const submitPasswordChange = async (data) => {
     modal.close();
-    loader.show();
-    const start = new Date();
 
-    const { matKhau, matKhauHienTai, matKhauMoi, xacNhanMatKhauMoi } =
-      getValues();
+    const submitChangedPasswordTask = async () => {
+      const { matKhau, matKhauHienTai, matKhauMoi, xacNhanMatKhauMoi } =
+        getValues();
 
-    if (matKhau !== matKhauHienTai) {
-      loader.hide();
-      notificationActions.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message: "Mật khẩu hiện tại không chính xác!",
-      });
-      return;
-    }
+      if (matKhau !== matKhauHienTai) {
+        notificationActions.show({
+          variant: NOTIFICATION_TYPES.ERROR,
+          message: "Mật khẩu hiện tại không chính xác!",
+        });
+        return;
+      }
 
-    if (matKhauMoi !== xacNhanMatKhauMoi) {
-      loader.hide();
-      notificationActions.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message: "Mật khẩu mới không giống nhau",
-      });
-      return;
-    }
+      if (matKhauMoi !== xacNhanMatKhauMoi) {
+        notificationActions.show({
+          variant: NOTIFICATION_TYPES.ERROR,
+          message: "Mật khẩu mới không giống nhau",
+        });
+        return;
+      }
 
-    try {
-      const payload = {
-        maNhom: currentUser.maNhom,
-        taiKhoan: data.taiKhoan,
-        hoTen: data.hoTen,
-        matKhau: matKhauMoi,
-        email: data.email,
-        soDt: data.soDT,
-        maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
-      };
+      try {
+        const payload = {
+          maNhom: currentUser.maNhom,
+          taiKhoan: data.taiKhoan,
+          hoTen: data.hoTen,
+          matKhau: matKhauMoi,
+          email: data.email,
+          soDt: data.soDT,
+          maLoaiNguoiDung: currentUser.maLoaiNguoiDung,
+        };
 
-      await mutateAsync(payload);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      loader.hidde();
-      navigate(previousPath, {
-        state: {
-          history: history.slice(0, -1),
-          notification: {
-            variant: NOTIFICATION_TYPES.SUCCESS,
-            message: "Mật khẩu của bạn đã được thay đổi thành công.",
+        await mutateAsync(payload);
+
+        navigate(previousPath, {
+          state: {
+            history: history.slice(0, -1),
+            notification: {
+              variant: NOTIFICATION_TYPES.SUCCESS,
+              message: "Mật khẩu của bạn đã được thay đổi thành công.",
+            },
           },
-        },
-      });
-    } catch (error) {
-      loader.hide();
-      const message =
-        error?.response?.data?.content ??
-        "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
+        });
+      } catch (error) {
+        const message =
+          error?.response?.data?.content ??
+          "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      notificationActions.show({
-        variant: NOTIFICATION_TYPES.ERROR,
-        message,
-      });
-    }
+        notificationActions.show({
+          variant: NOTIFICATION_TYPES.ERROR,
+          message,
+        });
+      }
+    };
+
+    await runWithLoading(submitChangedPasswordTask, loader);
   };
 
   const handleChangeProfile = (data) =>

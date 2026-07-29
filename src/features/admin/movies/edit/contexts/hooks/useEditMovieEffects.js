@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 
-export function useEditMovieEffects({
-  editMovie,
-  formReset
-}) {
+export function useEditMovieEffects({ editMovie, formReset }) {
   useEffect(() => {
     if (!editMovie) return;
     formReset({
@@ -11,5 +8,4 @@ export function useEditMovieEffects({
       ngayKhoiChieu: editMovie.ngayKhoiChieu.split("T")[0],
     });
   }, [editMovie, formReset]);
-
 }

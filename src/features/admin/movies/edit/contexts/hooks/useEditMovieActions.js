@@ -1,18 +1,18 @@
-import { useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
 import {
   createEditModalContent,
   createUnsavedChangesModalContent,
 } from "@helpers/admin/modal";
+import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
 import { format } from "date-fns";
 
 import { useModalContext, useNotificationContext } from "@contexts/admin";
-import { ensureMinDuration } from "@utils/admin";
+import { createUpdateFormData } from "@features/admin/movies/edit/helpers";
 import {
-  MIN_LOADING_TIME,
   MODAL_TYPES,
   NOTIFICATION_TYPES,
   ROW_ACTION_TYPES,
@@ -22,6 +22,12 @@ import { useUpdateMovie } from "./useUpdateMovie";
 
 export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const history = useMemo(
+    () => location.state?.history ?? [],
+    [location.state?.history],
+  );
+  const previousPath = history.at(-1) ?? "/admin/movies";
 
   const { mutateAsync } = useUpdateMovie();
 
@@ -31,9 +37,10 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
   const handleCancelChange = () => {
     modal.close();
-    navigate("/admin/movies", {
+    navigate(previousPath, {
       state: {
         movieId: editId,
+        history: history.slice(0, -1),
       },
     });
   };
@@ -62,11 +69,12 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     return false;
   };
 
-  const handleSaveMovie = useCallback(async () => {
+  const handleSaveMovie = async () => {
+    modal.close();
+
     const movie = getValues();
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
-      modal.close();
       notificationActions.show({
         variant: NOTIFICATION_TYPES.WARNING,
         message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
@@ -75,45 +83,26 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
       return;
     }
 
-    const start = Date.now();
-
-    const formData = new FormData();
-
-    Object.entries(movie).forEach(([key, value]) => {
-      if (key === "ngayKhoiChieu") {
-        formData.append(key, format(value, "dd/MM/yyyy"));
-        return;
-      }
-
-      if (key === "hinhAnh") {
-        const file = value?.[0];
-        if (file) {
-          formData.append("File", file);
-        }
-        return;
-      }
-
-      formData.append(key, value);
-    });
+    const saveMovieTask = async () => {
+      const formData = createUpdateFormData(movie);
+      return await mutateAsync(formData);
+    };
 
     try {
-      modal.close();
-      loader.show();
-      await mutateAsync(formData);
-      await ensureMinDuration(start, MIN_LOADING_TIME);
-      loader.hide();
-      navigate("/admin/movies", {
+      const { data } = await runWithLoading(saveMovieTask, loader);
+
+      navigate(previousPath, {
         state: {
-          movieId: editId,
+          movieId: data?.content?.maPhim,
           notification: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Cập nhật thông tin phim thành công.",
           },
           highlight: ROW_ACTION_TYPES.UPDATE,
+          history: history.slice(0, -1),
         },
       });
     } catch (error) {
-      loader.hide();
       const content =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra. Vui lòng thử lại sau";
@@ -128,16 +117,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         message,
       });
     }
-  }, [
-    getValues,
-    editMovie,
-    modal,
-    notificationActions,
-    loader,
-    mutateAsync,
-    navigate,
-    editId,
-  ]);
+  };
 
   const onSaveClick = async () => {
     const isValid = await trigger();

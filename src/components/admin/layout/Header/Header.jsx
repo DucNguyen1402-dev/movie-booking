@@ -26,7 +26,6 @@ const Header = () => {
 
   const onBackClick = () => {
     if (!previous) return;
-
     const goBack = () => {
       navigate(previous, {
         state: {
