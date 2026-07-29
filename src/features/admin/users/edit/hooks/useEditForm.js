@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export function useEditForm({ user }) {
   const [initialUser, setInitialUser] = useState(null);
-
+  const lastUserAccount = useRef(null);
   const {
     register,
     handleSubmit,
@@ -12,7 +12,7 @@ export function useEditForm({ user }) {
   } = useForm();
 
   useEffect(() => {
-    if (!user) return;
+    if (!user || lastUserAccount.current === user.taiKhoan) return;
     reset({
       taiKhoan: user.taiKhoan,
       hoTen: user.hoTen,
@@ -22,13 +22,14 @@ export function useEditForm({ user }) {
       maNhom: "GP01",
       maLoaiNguoiDung: user.maLoaiNguoiDung,
     });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     setInitialUser({
       hoTen: user.hoTen,
       email: user.email,
       soDT: user.soDT,
       maLoaiNguoiDung: user.maLoaiNguoiDung,
     });
+    lastUserAccount.current = user.taiKhoan;
   }, [reset, user]);
 
   return {

@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useNotificationContext } from "@contexts/admin";
-import { useConsumeLocationState } from "@hooks/admin";
+import { notification } from "@shared/notification";
+
+import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import {
   ProfileSkeleton,
@@ -19,17 +20,19 @@ const ProfileView = () => {
     profile: { isLoading, loginedUser },
   } = useProfileContext();
 
-  const consumeLocationState = useConsumeLocationState();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
+
+  useConsumeLocationState("notification");
+
+  const [notificationState] = useTemporaryState(
+    location.state?.notificationState,
+  );
 
   useEffect(() => {
-    const notification = location.state?.notification;
+    if (!notificationState) return;
 
-    if (!notification) return;
-
-    notificationActions.show(notification);
-    consumeLocationState("notification");
-  }, [location.state?.notification, notificationActions, consumeLocationState]);
+    notifier.show(notificationState);
+  }, [notificationState, notifier]);
 
   const profileFields = useMemo(
     () => [

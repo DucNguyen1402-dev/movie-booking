@@ -7,9 +7,10 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
+import { notification } from "@shared/notification";
 import { format } from "date-fns";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
 import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
 
@@ -21,7 +22,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
 
   const modal = useModalContext();
   const loader = loading.use();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
 
   const handleShowtimeCanceling = () => {
     modal.close();
@@ -56,7 +57,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       navigate(previousPath, {
         state: {
           maCumRap,
-          notification: {
+          notificationState: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Đã tạo lịch chiếu thành công.",
           },
@@ -64,7 +65,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
         },
       });
     } catch (error) {
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message: error.response?.data?.content,
       });

@@ -1,6 +1,6 @@
 import { CheckCircle, Frown, Info, TriangleAlert, XCircle } from "lucide-react";
 
-export const notificationIconTypes = {
+export const toastIconTypes = {
   success: CheckCircle,
   error: XCircle,
   warning: TriangleAlert,
@@ -8,7 +8,7 @@ export const notificationIconTypes = {
   system: Frown,
 };
 
-export const notificationIconSizes = {
+export const toastIconSizes = {
   sm: "size-5",
   md: "size-6",
   lg: "size-7",

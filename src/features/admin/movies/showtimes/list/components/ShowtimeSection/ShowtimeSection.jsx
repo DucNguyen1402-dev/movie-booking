@@ -1,8 +1,9 @@
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useNotificationContext } from "@contexts/admin";
-import { useConsumeLocationState } from "@hooks/admin";
+import { notification } from "@shared/notification";
+
+import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 
 import {
   EmptyShowtimeState,
@@ -14,17 +15,19 @@ import {
 
 const ShowtimeSection = ({ showtimeInfor, isPending, hasNoShowtime }) => {
   const location = useLocation();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.user();
 
-  const consumeLocationState = useConsumeLocationState();
+  useConsumeLocationState("notification");
+
+  const [notificationState] = useTemporaryState(
+    location.state?.notificationState,
+  );
 
   useEffect(() => {
-    const notification = location.state?.notification;
     if (!notification) return;
 
-    notificationActions.show(notification);
-    consumeLocationState("notification");
-  }, [location.state, notificationActions, consumeLocationState]);
+    notifier.show(notificationState);
+  }, [notificationState, notifier]);
 
   const tongSuatChieu = useMemo(() => {
     let total = 0;

@@ -7,7 +7,7 @@ import {
 } from "@config/admin";
 
 import { cn } from "@utils/shared";
-const Notification = ({
+const ToastContainer = ({
   message = "something went wrong",
   variant,
   notificationRef,
@@ -35,5 +35,5 @@ const Notification = ({
     </div>
   );
 };
-Notification.displayName = "Notification";
-export default Notification;
+ToastContainer.displayName = "ToastContainer    ";
+export default ToastContainer;

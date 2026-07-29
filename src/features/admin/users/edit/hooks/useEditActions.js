@@ -75,7 +75,7 @@ export function useEditActions({ handleSubmit, initialUser, isDirty }) {
         state: {
           account: data.taiKhoan,
           history: history.slice(0, -1),
-          notification: {
+          notificationState: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Cập nhật thông tin người dùng thành công.",
           },

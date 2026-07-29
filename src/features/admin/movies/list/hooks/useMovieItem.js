@@ -3,8 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
 import { createDeleteModalContent } from "@helpers/admin/modal";
+import { notification } from "@shared/notification";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { useScrollIntoView } from "@hooks/admin";
 import {
   MODAL_TYPES,
@@ -22,7 +23,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const location = useLocation();
 
   const modal = useModalContext();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
 
   const { mutateAsync } = useDeleteMovie();
 
@@ -56,20 +57,20 @@ export function useMovieItem({ movie, movieId, highlight }) {
     try {
       await mutateAsync(movie.maPhim);
       modal.close();
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.SUCCESS,
         message: "Xóa phim thành công",
       });
     } catch (error) {
       modal.close();
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message: error.response.data?.content,
       });
     } finally {
       setOnDeleting(false);
     }
-  }, [modal, movie.maPhim, mutateAsync, notificationActions]);
+  }, [modal, movie.maPhim, mutateAsync, notifier]);
 
   const onDeleteClick = useCallback(() => {
     setOnDeleting(true);

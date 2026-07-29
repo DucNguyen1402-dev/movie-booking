@@ -1,14 +1,15 @@
 import { DualRingLoading } from "@shared/loading";
+import { notification } from "@shared/notification";
 import { AnimatePresence, motion } from "motion/react";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { useLockBodyScroll } from "@hooks/admin";
 import { ModalContainer } from "@components/admin/common";
 import { Backdrop, Notification } from "@components/admin/ui";
 
 const GlobalUI = () => {
   const { modal } = useModalContext();
-  const notification = useNotificationContext();
+  const { ui } = notification.use();
 
   const shouldLock = modal.type !== null;
   useLockBodyScroll(shouldLock);
@@ -40,9 +41,9 @@ const GlobalUI = () => {
             transition={{ duration: 0.3 }}
           >
             <Notification
-              notificationRef={notification.ref}
-              message={notification.message}
-              variant={notification.variant}
+              notificationRef={ui.ref}
+              message={ui.message}
+              variant={ui.variant}
             />
           </motion.div>
         )}

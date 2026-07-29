@@ -8,8 +8,9 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
+import { notification } from "@shared/notification";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { createMovieFormData } from "@features/admin/movies/add/utils";
 import {
   MODAL_TYPES,
@@ -29,7 +30,7 @@ export function useAddMovieActions() {
   const navigate = useNavigate();
 
   const loader = loading.use();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
   const modal = useModalContext();
 
   const { register, handleSubmit, errors, isDirty, control, watch } =
@@ -85,7 +86,7 @@ export function useAddMovieActions() {
         state: {
           movieId: response.data?.content?.maPhim,
           highlight: ROW_ACTION_TYPES.ADD,
-          notification: {
+          notificationState: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Phim đã được thêm thành công vào hệ thống",
           },
@@ -101,7 +102,7 @@ export function useAddMovieActions() {
         content === "Upload file không thành công!"
           ? "Tên phim đã tồn tại"
           : content;
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message,
       });

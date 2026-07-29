@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useLayoutContext, useNotificationContext } from "@contexts/admin";
-import { useConsumeLocationState } from "@hooks/admin";
+import { notification } from "@shared/notification";
+
+import { useLayoutContext } from "@contexts/admin";
+import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import {
   UserHeader,
   UserTable,
@@ -12,18 +14,19 @@ import {
 const UsersList = () => {
   const { isSidebarOpen } = useLayoutContext();
 
-  const consumeLocationState = useConsumeLocationState();
-
   const location = useLocation();
-  const { notificationActions } = useNotificationContext();
+  const [notificationState] = useTemporaryState(
+    location.state?.notificationState,
+  );
+  useConsumeLocationState("notification");
+
+  const notifier = notification.use();
 
   useEffect(() => {
-    const notification = location.state?.notification;
-    if (!notification) return;
+    if (!notificationState) return;
 
-    notificationActions.show(notification);
-    consumeLocationState("notification");
-  }, [location.state, notificationActions, consumeLocationState]);
+    notifier.show(notificationState);
+  }, [notifier, notificationState]);
 
   return (
     <div

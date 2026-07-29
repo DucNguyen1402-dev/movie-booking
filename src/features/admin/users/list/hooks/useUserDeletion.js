@@ -2,8 +2,9 @@ import { useMemo, useState } from "react";
 
 import { ENTITIES } from "@config/admin";
 import { createDeleteModalContent } from "@helpers/admin/modal";
+import { notification } from "@shared/notification";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
 
 import { useDeleteUser } from "./useDeleteUser";
@@ -14,14 +15,14 @@ export function useUserDeletion() {
   const { mutateAsync } = useDeleteUser();
 
   const modal = useModalContext();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
 
   const handleDeleteUser = useMemo(
     () => async (taiKhoan) => {
       try {
         await mutateAsync(taiKhoan);
         modal.close();
-        notificationActions.show({
+        notifier.show({
           variant: NOTIFICATION_TYPES.SUCCESS,
           message: "Xóa tài khoản thành công.",
         });
@@ -30,7 +31,7 @@ export function useUserDeletion() {
         const message =
           error.response?.data?.content ??
           "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
-        notificationActions.show({
+        notifier.show({
           variant: NOTIFICATION_TYPES.ERROR,
           message,
         });
@@ -38,7 +39,7 @@ export function useUserDeletion() {
         setDeletingAccount(null);
       }
     },
-    [modal, mutateAsync, notificationActions],
+    [modal, mutateAsync, notifier],
   );
 
   const onDeletionClick = useMemo(

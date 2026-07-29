@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import { PaginationControls } from "@shared/pagination";
 
-import { useConsumeLocationState } from "@hooks/admin";
+import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import { useUsersContext } from "@features/admin/users/contexts";
 import { EmptyTable } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
@@ -14,9 +14,12 @@ const UserTable = () => {
   const hasMoveToPage = useRef(false);
   const location = useLocation();
 
-  const { account, highlight } = location.state ?? {};
+  const [rowState] = useTemporaryState({
+    account: location.state?.account,
+    highlight: location.state?.highlight,
+  });
 
-  const consumeLocationState = useConsumeLocationState();
+  useConsumeLocationState(["account", "highlight"]);
 
   const {
     usersStates: { isPending, isFetching },
@@ -24,7 +27,7 @@ const UserTable = () => {
     userFilters: { filters, resetSearchFilter, filteredUsers },
   } = useUsersContext();
 
-  if (account) {
+  if (rowState?.account) {
     pagination.preventNextReset();
   }
 
@@ -44,12 +47,10 @@ const UserTable = () => {
   );
 
   useEffect(() => {
-    if (!account || isFetching || hasMoveToPage.current) return;
-    moveToAccountPage(account);
+    if (!rowState?.account || isFetching || hasMoveToPage.current) return;
+    moveToAccountPage(rowState?.account);
     hasMoveToPage.current = true;
-
-    consumeLocationState(["account", "highlight"]);
-  }, [account, isFetching, moveToAccountPage, consumeLocationState]);
+  }, [rowState?.account, isFetching, moveToAccountPage]);
 
   const isUserListEmpty = pagination.list.length === 0;
   const renderTableContent = () => {
@@ -75,8 +76,8 @@ const UserTable = () => {
       <TableRow
         key={user.taiKhoan}
         user={user}
-        isMatched={user.taiKhoan === account}
-        highlight={highlight}
+        isMatched={user.taiKhoan === rowState?.account}
+        highlight={rowState?.highlight}
       />
     ));
   };

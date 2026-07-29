@@ -7,8 +7,9 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
+import { notification } from "@shared/notification";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import {
   MODAL_TYPES,
   NOTIFICATION_TYPES,
@@ -27,7 +28,7 @@ export function useAddActions({ handleSubmit }) {
 
   const modal = useModalContext();
 
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
   const loader = loading.use();
 
   const handleCancelAddUser = () => {
@@ -53,7 +54,7 @@ export function useAddActions({ handleSubmit }) {
         state: {
           account: content.taiKhoan,
           highlight: ROW_ACTION_TYPES.ADD,
-          notification: {
+          notificationState: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Người dùng đã được thêm thành công.",
           },
@@ -61,7 +62,7 @@ export function useAddActions({ handleSubmit }) {
         },
       });
     } catch (error) {
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message:
           error.response?.data?.content ??

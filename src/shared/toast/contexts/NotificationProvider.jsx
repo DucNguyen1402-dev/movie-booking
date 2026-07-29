@@ -3,28 +3,37 @@ import {
   useNotificationEffects,
   useNotificationStates,
 } from "./hooks";
-import { notificationContext } from "./notificationContext";
+import { notificationContext } from "./NotificationContext";
 
 const NotificationProvider = ({ children }) => {
-  const { notification, dispatch, notificationRef, timeoutRef } =
-    useNotificationStates();
-
-  const notificationActions = useNotificationActions({
-    dispatch,
+  const {
+    isOpen,
+    variant,
+    message,
+    notificationRef,
     timeoutRef,
+    setNotification,
+  } = useNotificationStates();
+
+  const { show, hide } = useNotificationActions({
+    timeoutRef,
+    setNotification,
   });
 
   useNotificationEffects({
     notificationRef,
-    hideNotification: notificationActions.hide,
+    hideNotification: hide,
   });
 
   const value = {
-    ref: notificationRef,
-    message: notification.message,
-    variant: notification.variant,
-    isOpen: notification.isOpen,
-    notificationActions,
+    state: {
+      ref: notificationRef,
+      message,
+      variant,
+      isOpen,
+    },
+    show,
+    hide,
   };
 
   return (

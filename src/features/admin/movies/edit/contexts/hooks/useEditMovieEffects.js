@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function useEditMovieEffects({ editMovie, formReset }) {
+  const lastMovieId = useRef(null);
+
   useEffect(() => {
-    if (!editMovie) return;
+    if (!editMovie || lastMovieId.current === editMovie.maPhim) return;
+
     formReset({
       ...editMovie,
       ngayKhoiChieu: editMovie.ngayKhoiChieu.split("T")[0],
     });
+    lastMovieId.current = editMovie.maPhim;
   }, [editMovie, formReset]);
 }

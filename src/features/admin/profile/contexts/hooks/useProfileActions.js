@@ -8,8 +8,9 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
+import { notification } from "@shared/notification";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { useUserInfor } from "@features/admin/users";
 import { getCurrentUser } from "@utils/shared";
 import { MODAL_TYPES, NOTIFICATION_TYPES } from "@constants/admin";
@@ -32,7 +33,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const modal = useModalContext();
   const loader = loading.use();
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
 
   const handleCancelPasswordChange = () => {
     modal.close();
@@ -89,7 +90,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message,
       });
@@ -104,7 +105,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         getValues();
 
       if (matKhau !== matKhauHienTai) {
-        notificationActions.show({
+        notifier.show({
           variant: NOTIFICATION_TYPES.ERROR,
           message: "Mật khẩu hiện tại không chính xác!",
         });
@@ -112,7 +113,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
       }
 
       if (matKhauMoi !== xacNhanMatKhauMoi) {
-        notificationActions.show({
+        notifier.show({
           variant: NOTIFICATION_TYPES.ERROR,
           message: "Mật khẩu mới không giống nhau",
         });
@@ -135,7 +136,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         navigate(previousPath, {
           state: {
             history: history.slice(0, -1),
-            notification: {
+            notificationState: {
               variant: NOTIFICATION_TYPES.SUCCESS,
               message: "Mật khẩu của bạn đã được thay đổi thành công.",
             },
@@ -146,7 +147,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
           error?.response?.data?.content ??
           "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-        notificationActions.show({
+        notifier.show({
           variant: NOTIFICATION_TYPES.ERROR,
           message,
         });

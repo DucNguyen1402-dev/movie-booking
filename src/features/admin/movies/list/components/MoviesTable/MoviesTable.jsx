@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import { PaginationControls } from "@shared/pagination";
 
-import { useConsumeLocationState } from "@hooks/admin";
+import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { EmptyTable } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
@@ -14,8 +14,12 @@ import MovieTableSkeleton from "./MovieTableSkeleton";
 const MoviesTable = () => {
   const location = useLocation();
 
-  const consumeLocationState = useConsumeLocationState();
-  const { movieId, highlight } = location.state ?? {};
+  const [rowState] = useTemporaryState({
+    movieId: location.state?.movieId,
+    highlight: location.state?.highlight,
+  });
+
+  useConsumeLocationState(["movieId", "highlight"]);
 
   const hasMoveToPage = useRef(false);
   const {
@@ -28,7 +32,7 @@ const MoviesTable = () => {
     },
   } = useMovieListContext();
 
-  if (movieId) {
+  if (rowState?.movieId) {
     pagination.preventNextReset();
   }
 
@@ -45,11 +49,10 @@ const MoviesTable = () => {
   );
 
   useEffect(() => {
-    if (!movieId || isFetching || hasMoveToPage.current) return;
-    moveToMoviePage(movieId);
+    if (!rowState?.movieId || isFetching || hasMoveToPage.current) return;
+    moveToMoviePage(rowState?.movieId);
     hasMoveToPage.current = true;
-    consumeLocationState(["movieId", "highlight"]);
-  }, [movieId, isFetching, moveToMoviePage, consumeLocationState]);
+  }, [rowState?.movieId, isFetching, moveToMoviePage]);
 
   const isEmptyMovieList = pagination.list.length === 0;
 
@@ -76,8 +79,8 @@ const MoviesTable = () => {
       <MovieItem
         key={movie.maPhim}
         movie={movie}
-        movieId={movieId}
-        highlight={highlight}
+        movieId={rowState?.movieId}
+        highlight={rowState?.highlight}
       />
     ));
   };

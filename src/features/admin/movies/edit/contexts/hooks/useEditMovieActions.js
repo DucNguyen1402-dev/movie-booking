@@ -8,9 +8,10 @@ import {
 } from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
 import { loading } from "@shared/loading";
+import { notification } from "@shared/notification";
 import { format } from "date-fns";
 
-import { useModalContext, useNotificationContext } from "@contexts/admin";
+import { useModalContext } from "@contexts/admin";
 import { createUpdateFormData } from "@features/admin/movies/edit/helpers";
 import {
   MODAL_TYPES,
@@ -31,7 +32,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
   const { mutateAsync } = useUpdateMovie();
 
-  const { notificationActions } = useNotificationContext();
+  const notifier = notification.use();
   const loader = loading.use();
   const modal = useModalContext();
 
@@ -75,7 +76,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     const movie = getValues();
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.WARNING,
         message: "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
       });
@@ -94,7 +95,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
       navigate(previousPath, {
         state: {
           movieId: data?.content?.maPhim,
-          notification: {
+          notificationState: {
             variant: NOTIFICATION_TYPES.SUCCESS,
             message: "Cập nhật thông tin phim thành công.",
           },
@@ -112,7 +113,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
         content === "Phim này không thể bị xóa!"
           ? "Phim này không thể chỉnh sửa "
           : content;
-      notificationActions.show({
+      notifier.show({
         variant: NOTIFICATION_TYPES.ERROR,
         message,
       });
