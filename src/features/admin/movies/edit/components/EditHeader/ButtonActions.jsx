@@ -1,5 +1,6 @@
+import { CancelButton, SaveButton } from "@shared/ui";
+
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
-import { CancelButton, SaveButton } from "@components/admin/ui/buttons";
 
 const ActionButtons = () => {
   const {

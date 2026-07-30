@@ -1,8 +1,7 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { AddButton } from "@shared/ui";
 import { CalendarX } from "lucide-react";
-
-import { AddButton } from "@components/admin/ui/buttons";
 const EmptyShowtimeState = () => {
   const { id } = useParams();
   const navigate = useNavigate();

@@ -1,8 +1,9 @@
+import { DateInput, FormLabel, Textarea } from "@shared/fields";
+import { AddButton, CancelButton } from "@shared/ui";
+
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
 import { movieValidationRules } from "@features/admin/movies/config";
-import { AddButton, CancelButton } from "@components/admin/ui/buttons";
-import { DateInput, FormLabel, Textarea } from "@components/admin/ui/form";
 
 import { CheckboxFields, FileImageField, InputFields } from "./Fields";
 

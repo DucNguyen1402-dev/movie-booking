@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 
-import { ENTITIES } from "@config/admin";
-import { modal } from "@shared/overlays";
-import { toast, toastContent } from "@shared/toast";
+import { modal, toast } from "@shared/overlays";
+
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { useDeleteUser } from "./useDeleteUser";
 
@@ -19,12 +19,12 @@ export function useUserDeletion() {
       try {
         await mutateAsync(taiKhoan);
         modalApi.close();
-        toaster.show(toastContent.success.delete(ENTITIES.user));
+        toaster.show(toast.config.success.delete(ENTITIES.user));
       } catch (error) {
         const message =
           error.response?.data?.content ??
           "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
-        toaster.show(toastContent.error(message));
+        toaster.show(toast.config.error(message));
       } finally {
         setDeletingAccount(null);
       }

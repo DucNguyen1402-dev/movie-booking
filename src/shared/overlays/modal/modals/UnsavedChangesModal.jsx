@@ -1,4 +1,4 @@
-import { CancelButton, ConfirmButton } from "@components/admin/ui/buttons";
+import { CancelButton, ConfirmButton } from "@shared/ui";
 
 const DEFAULT_TITLE = "Bạn có chắc muốn rời trang?";
 const DEFAULT_SUBTITLE = "Những thay đổi chưa lưu sẽ bị mất.";

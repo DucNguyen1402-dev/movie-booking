@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { toast } from "@shared/toast";
+import { toast } from "@shared/overlays";
+import { Button } from "@shared/ui";
 
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
@@ -10,7 +11,6 @@ import {
   ProfileViewHeader,
   ProfileViewInfor,
 } from "@features/admin/profile/overview/components";
-import { Button } from "@components/admin/ui/buttons";
 
 const ProfileView = () => {
   const location = useLocation();

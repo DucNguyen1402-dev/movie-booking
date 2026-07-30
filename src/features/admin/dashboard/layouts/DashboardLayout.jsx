@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 
+import { ScrollToTop } from "@shared/navigation";
+
 import { DashboardProvider } from "@features/admin/dashboard/contexts";
-import { ScrollToTop } from "@components/admin/common";
 
 const DashboardLayout = () => {
   return (

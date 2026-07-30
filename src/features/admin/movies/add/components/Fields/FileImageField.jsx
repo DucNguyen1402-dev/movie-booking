@@ -1,4 +1,4 @@
-import { Input } from "@components/admin/ui/form";
+import { Input } from "@shared/fields";
 
 const FileImageField = ({ handleFileChange, error, register, imgPreview }) => {
   return (

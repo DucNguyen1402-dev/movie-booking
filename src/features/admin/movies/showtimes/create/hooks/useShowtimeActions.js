@@ -1,12 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { runWithLoading } from "@shared/async";
-import { loading, modal } from "@shared/overlays";
-import { toast, toastContent } from "@shared/toast";
+import { loading, modal, toast } from "@shared/overlays";
 import { format } from "date-fns";
 
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
+import { ENTITIES } from "@features/admin/shared/config";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -45,7 +44,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       navigate(previousPath, {
         state: {
           maCumRap,
-          toastState: toastContent.success.add(ENTITIES.showtime),
+          toastState: toast.config.success.add(ENTITIES.showtime),
           history,
         },
       });
@@ -53,7 +52,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
       const message =
         error?.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     }
   };
 

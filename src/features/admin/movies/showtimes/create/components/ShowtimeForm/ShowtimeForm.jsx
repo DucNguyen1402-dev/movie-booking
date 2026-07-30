@@ -1,3 +1,6 @@
+import { DateInput, FormLabel } from "@shared/fields";
+import { AddButton, CancelButton } from "@shared/ui";
+
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { showtimeValidationRules } from "@features/admin/movies/showtimes/create/config";
 import {
@@ -6,8 +9,6 @@ import {
   useShowtimeActions,
   useShowtimeForm,
 } from "@features/admin/movies/showtimes/create/hooks";
-import { AddButton, CancelButton } from "@components/admin/ui/buttons";
-import { DateInput, FormLabel } from "@components/admin/ui/form";
 
 import {
   CinemaClusters,

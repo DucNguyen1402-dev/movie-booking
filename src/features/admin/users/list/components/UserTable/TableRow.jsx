@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 
 import { ROW_ACTION_ANIMATIONS } from "@shared/table";
+import { Button } from "@shared/ui";
 import { CalendarCheck, SquarePen, Trash } from "lucide-react";
 
 import { userRoleMapping } from "@features/admin/users/constants";
 import { useTableRow } from "@features/admin/users/list/hooks";
-import { Button } from "@components/admin/ui";
 
 const TableRow = ({ user, isMatched, highlight }) => {
   const {

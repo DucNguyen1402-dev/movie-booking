@@ -5,5 +5,5 @@ export { createEditModal } from "./createEditModal";
 export { createLeavePageModal } from "./createLeavePageModal";
 export { createUnsavedChangesModal } from "./createUnsavedChangesModal";
 export { createUnsavedPasswordChangesModal } from "./createUnsavedPasswordChangesModal";
-export { ENTITY_LABELS } from "@config/admin";
+export { ENTITY_LABELS } from "@features/admin";
 export { MODAL_TYPES } from "@shared/overlays/modal/constants";

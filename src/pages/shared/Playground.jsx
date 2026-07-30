@@ -1,4 +1,4 @@
-import { Button } from "@components/admin/ui";
+import { Button } from "@shared/ui";
 const confirmClasses = {
   add: "bg-emerald-600 text-white hover:bg-emerald-500 active:bg-emerald-700",
   edit: "bg-blue-600 text-white hover:bg-blue-500 active:bg-blue-700",

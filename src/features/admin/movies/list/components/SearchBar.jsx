@@ -1,7 +1,7 @@
+import { Input } from "@shared/fields";
 import { Search } from "lucide-react";
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { Input } from "@components/admin/ui/form";
 
 const SearchBar = () => {
   const {

@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { AddButton } from "@components/admin/ui/buttons";
+import { AddButton } from "@shared/ui";
 
 const MovieSelectionCard = ({ movie, hasNoShowtime }) => {
   const navigate = useNavigate();

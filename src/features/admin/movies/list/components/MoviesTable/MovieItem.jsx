@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import { Button } from "@shared/ui";
 import { format } from "date-fns";
 import {
   CalendarPlus2,
@@ -12,7 +13,6 @@ import {
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { useMovieItem } from "@features/admin/movies/list/hooks";
-import { Button } from "@components/admin/ui/buttons";
 
 const MovieItem = ({ movie, movieId, highlight }) => {
   const {

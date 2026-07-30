@@ -1,9 +1,9 @@
+import { Input } from "@shared/fields";
 import { PaginationSelect } from "@shared/pagination";
+import { Button } from "@shared/ui";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { Button } from "@components/admin/ui";
-import { Input } from "@components/admin/ui/form";
 
 const RevenueToolbar = () => {
   const {

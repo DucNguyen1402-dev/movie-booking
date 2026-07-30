@@ -2,12 +2,12 @@ import { Outlet } from "react-router-dom";
 
 import { GlobalUI } from "@shared/overlays";
 import { Header, Sidebar } from "@shared/shell";
-
-import { useLayoutContext } from "@contexts/admin";
 import {
   SIDEBAR_COLLAPSED_OFFSET,
   SIDEBAR_CONTENT_OFFSET,
-} from "@constants/admin";
+} from "@shared/shell/constants";
+
+import { useLayoutContext } from "@contexts/admin";
 
 function MainLayout() {
   const { isSidebarOpen } = useLayoutContext();

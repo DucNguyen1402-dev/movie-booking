@@ -1,17 +1,12 @@
-import { userValidationRules } from "@config/admin/users";
+import { FormLabel, Input, PasswordField, Select } from "@shared/fields";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { userValidationRules } from "@features/admin/shared/config";
 import { addUserFields } from "@features/admin/users/add/config";
 import {
   useAddUserActions,
   useAddUserForm,
 } from "@features/admin/users/add/hooks";
-import {
-  FormLabel,
-  Input,
-  PasswordField,
-  Select,
-} from "@components/admin/ui/form";
 
 import { FormActions } from ".";
 const AddUserForms = () => {
@@ -59,6 +54,7 @@ const AddUserForms = () => {
 
               error={errors.maLoaiNguoiDung?.message}
               defaultOptionLabel="-- Chọn loại người dùng --"
+              disabledDefaultOption={true}
             />
           </div>
         </div>

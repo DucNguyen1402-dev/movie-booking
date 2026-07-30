@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { toast } from "@shared/toast";
+import { toast } from "@shared/overlays";
 
 import { useLayoutContext } from "@contexts/admin";
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";

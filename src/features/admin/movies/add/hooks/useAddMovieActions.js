@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { runWithLoading } from "@shared/async";
-import { loading, modal } from "@shared/overlays";
+import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
-import { toast, toastContent } from "@shared/toast";
 
 import { createMovieFormData } from "@features/admin/movies/add/utils";
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { useAddForm } from "./useAddForm";
 import { useAddMovieMutation } from "./useAddMovieMutation";
@@ -48,7 +47,7 @@ export function useAddMovieActions() {
 
   const onValid = (data) =>
     modalApi.open({
-      ...modal.config.createAddModal(ENTITIES.movie),
+      ...modal.config.add(ENTITIES.movie),
       onConfirm: () => handleSubmitNewMovie(data),
     });
 
@@ -70,7 +69,7 @@ export function useAddMovieActions() {
         state: {
           movieId: response.data?.content?.maPhim,
           highlight: ROW_ACTION_TYPES.ADD,
-          toastState: toastContent.success.add(ENTITIES.movie),
+          toastState: toast.config.success.add(ENTITIES.movie),
           history,
         },
       });
@@ -83,7 +82,7 @@ export function useAddMovieActions() {
         content === "Upload file không thành công!"
           ? "Tên phim đã tồn tại"
           : content;
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     }
   };
 

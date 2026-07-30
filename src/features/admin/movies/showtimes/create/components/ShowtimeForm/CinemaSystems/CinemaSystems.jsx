@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import Select from "react-select";
 
-import { FormLabel } from "@components/admin/ui/form";
+import { FormLabel } from "@shared/fields";
 
 import CinemaOption from "./CinemaOption";
 import CinemaSingleValue from "./CinemaSingleValue";

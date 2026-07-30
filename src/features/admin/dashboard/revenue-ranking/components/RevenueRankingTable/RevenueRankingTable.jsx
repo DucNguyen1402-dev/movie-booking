@@ -1,9 +1,9 @@
-import { ENTITIES } from "@config/admin";
 import { PaginationControls } from "@shared/pagination";
 import { createEmptyStateContent, TableEmptyState } from "@shared/table";
+import { EmptyStateButton } from "@shared/ui";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { EmptyStateButton } from "@components/admin/ui/buttons";
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { RevenueRankingRow, RevenueRankingSkeleton } from ".";
 

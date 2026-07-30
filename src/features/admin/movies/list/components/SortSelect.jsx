@@ -1,5 +1,6 @@
+import { Select } from "@shared/fields";
+
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { Select } from "@components/admin/ui/form";
 
 const options = [
   {

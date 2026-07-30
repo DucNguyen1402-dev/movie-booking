@@ -1,14 +1,13 @@
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { runWithLoading } from "@shared/async";
-import { loading, modal } from "@shared/overlays";
+import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
-import { toast, toastContent } from "@shared/toast";
 import { format } from "date-fns";
 
 import { createUpdateFormData } from "@features/admin/movies/edit/helpers";
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { useUpdateMovie } from "./useUpdateMovie";
 
@@ -62,7 +61,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
       toaster.show(
-        toastContent.warning(
+        toast.config.warning(
           "Không phát hiện thay đổi. Vui lòng chỉnh sửa trước khi lưu.",
         ),
       );
@@ -81,7 +80,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
       navigate(previousPath, {
         state: {
           movieId: data?.content?.maPhim,
-          toastState: toastContent.success.update(ENTITIES.movie),
+          toastState: toast.config.success.update(ENTITIES.movie),
           highlight: ROW_ACTION_TYPES.UPDATE,
           history: history.slice(0, -1),
         },
@@ -97,7 +96,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
           ? "Phim này không thể chỉnh sửa "
           : content;
 
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     }
   };
 

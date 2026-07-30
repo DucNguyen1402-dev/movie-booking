@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { runWithLoading } from "@shared/async";
-import { loading, modal } from "@shared/overlays";
+import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
-import { toast, toastContent } from "@shared/toast";
+
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { useUserCreation } from ".";
 
@@ -39,7 +39,7 @@ export function useAddUserActions({ handleSubmit }) {
         state: {
           account: content.taiKhoan,
           highlight: ROW_ACTION_TYPES.ADD,
-          toastState: toastContent.success.add(ENTITIES.user),
+          toastState: toast.config.success.add(ENTITIES.user),
           history: history.slice(0, -1),
         },
       });
@@ -47,7 +47,7 @@ export function useAddUserActions({ handleSubmit }) {
       const message =
         error?.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     }
   };
 

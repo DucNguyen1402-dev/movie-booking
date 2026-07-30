@@ -1,10 +1,10 @@
 import { useState } from "react";
 
+import { Button } from "@shared/ui";
 import { Pen } from "lucide-react";
 
 import { useUserContext } from "@contexts/admin";
 import { useLockBodyScroll } from "@hooks/admin";
-import { Button } from "@components/admin/ui";
 
 import AvatarSetting from "./AvatarSetting";
 

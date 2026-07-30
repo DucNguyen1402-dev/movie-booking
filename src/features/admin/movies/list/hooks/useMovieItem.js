@@ -1,12 +1,11 @@
 import { useCallback, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
-import { modal } from "@shared/overlays";
+import { modal, toast } from "@shared/overlays";
 import { ROW_ACTION_ANIMATIONS } from "@shared/table";
-import { toast, toastContent } from "@shared/toast";
 
 import { useScrollIntoView } from "@hooks/admin";
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { useDeleteMovie } from "./useDeleteMovie";
 
@@ -52,11 +51,11 @@ export function useMovieItem({ movie, movieId, highlight }) {
     try {
       await mutateAsync(movie.maPhim);
       modalApi.close();
-      toaster.show(toastContent.success.delete(ENTITIES.movie));
+      toaster.show(toast.config.success.delete(ENTITIES.movie));
     } catch (error) {
       const message =
         error?.response?.data.content ?? "Đã xảy ra lỗi, vui lòng thử lại sau.";
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     } finally {
       setOnDeleting(false);
     }

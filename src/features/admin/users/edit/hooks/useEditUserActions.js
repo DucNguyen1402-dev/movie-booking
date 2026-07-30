@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { runWithLoading } from "@shared/async";
-import { loading, modal } from "@shared/overlays";
+import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
-import { toast, toastContent } from "@shared/toast";
+
+import { ENTITIES } from "@features/admin/shared/config";
 
 import { useEditUser } from "./useEditUser";
 
@@ -45,7 +45,7 @@ export function useEditUserActions({ handleSubmit, initialUser, isDirty }) {
 
     if (!hasFieldChange) {
       toaster.show(
-        toastContent.warning(
+        toast.config.warning(
           "Không phát hiện dữ liệu thay đổi, vui lòng kiểm tra lại hoặc rời trang.",
         ),
       );
@@ -61,7 +61,7 @@ export function useEditUserActions({ handleSubmit, initialUser, isDirty }) {
         state: {
           account: data.taiKhoan,
           history: history.slice(0, -1),
-          toastState: toastContent.success.update(ENTITIES.user),
+          toastState: toast.config.success.update(ENTITIES.user),
           highlight: ROW_ACTION_TYPES.UPDATE,
         },
       });
@@ -69,7 +69,7 @@ export function useEditUserActions({ handleSubmit, initialUser, isDirty }) {
       const message =
         error.response?.data?.content ??
         "Đã có lỗi xảy ra, vui lòng thử lại sau.";
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     }
   };
 

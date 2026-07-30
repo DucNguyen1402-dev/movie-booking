@@ -1,1 +1,0 @@
-export { toastContent } from "./toastContent";

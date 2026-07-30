@@ -1,1 +1,0 @@
-export { userValidationRules } from "./userValidationRules";

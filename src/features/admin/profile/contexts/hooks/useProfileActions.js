@@ -1,10 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { runWithLoading } from "@shared/async";
-import { loading, modal } from "@shared/overlays";
-import { toast, toastContent } from "@shared/toast";
+import { loading, modal, toast } from "@shared/overlays";
 
+import { ENTITIES } from "@features/admin/shared/config";
 import { useUserInfor } from "@features/admin/users";
 import { getCurrentUser } from "@utils/shared";
 
@@ -67,7 +66,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
-          toastState: toastContent.success.update(ENTITIES.profile),
+          toastState: toast.config.success.update(ENTITIES.profile),
         },
       });
     } catch (error) {
@@ -75,7 +74,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         error?.response?.data?.content ??
         "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-      toaster.show(toastContent.error(message));
+      toaster.show(toast.config.error(message));
     }
   };
 
@@ -85,18 +84,18 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         getValues();
 
       if (matKhau !== matKhauHienTai) {
-        toaster.show(toastContent.error("Mật khẩu hiện tại không chính xác"));
+        toaster.show(toast.config.error("Mật khẩu hiện tại không chính xác"));
         return;
       }
 
       if (matKhauMoi !== xacNhanMatKhauMoi) {
-        toaster.show(toastContent.error("Mật khẩu mới không giống nhau"));
+        toaster.show(toast.config.error("Mật khẩu mới không giống nhau"));
         return;
       }
 
       if (matKhauMoi === matKhau) {
         toaster.show(
-          toastContent.error("Mật khẩu mới không được trùng với mật khẩu cũ."),
+          toast.config.error("Mật khẩu mới không được trùng với mật khẩu cũ."),
         );
         return;
       }
@@ -117,7 +116,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
         navigate(previousPath, {
           state: {
             history: history.slice(0, -1),
-            toastState: toastContent.success.changePassword(),
+            toastState: toast.config.success.changePassword(),
           },
         });
       } catch (error) {
@@ -125,7 +124,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
           error?.response?.data?.content ??
           "Đã có lỗi hệ thống xảy ra, vui lòng thử lại sau.";
 
-        toaster.show(toastContent.error(message));
+        toaster.show(toast.config.error(message));
       }
     };
 

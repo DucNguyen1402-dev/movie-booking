@@ -4,4 +4,5 @@ export const MODAL_TYPES = {
   DELETE: "delete",
   UNSAVED_CHANGES: "unsavedChanges",
   LEAVE_PAGE: "leavePage",
+  CHANGE_PASSWORD: "changePassword",
 };

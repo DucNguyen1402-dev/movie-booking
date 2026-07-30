@@ -1,7 +1,7 @@
+import { Button } from "@shared/ui";
 import { CircleX } from "lucide-react";
 
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { Button } from "@components/admin/ui/buttons";
 
 const TrailerModal = () => {
   const {

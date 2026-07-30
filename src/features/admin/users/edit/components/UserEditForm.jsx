@@ -1,12 +1,7 @@
-import { userValidationRules } from "@config/admin/users";
+import { FormLabel, Input, PasswordField, Select } from "@shared/fields";
 
+import { userValidationRules } from "@features/admin/shared/config";
 import { editUserFields } from "@features/admin/users/edit/config";
-import {
-  FormLabel,
-  Input,
-  PasswordField,
-  Select,
-} from "@components/admin/ui/form";
 
 const UserEditForm = ({ register, errors }) => {
   return (

@@ -4,6 +4,7 @@ import {
   DeleteModal,
   EditModal,
   LeavePageModal,
+  PasswordChangeModal,
   UnsavedChangesModal,
 } from "@shared/overlays/modal/modals";
 
@@ -26,6 +27,10 @@ export const MODAL_TYPE_CONFIG = {
   },
   [MODAL_TYPES.LEAVE_PAGE]: {
     ModalComponent: LeavePageModal,
+    loading: false,
+  },
+  [MODAL_TYPES.CHANGE_PASSWORD]: {
+    ModalComponent: PasswordChangeModal,
     loading: false,
   },
 };

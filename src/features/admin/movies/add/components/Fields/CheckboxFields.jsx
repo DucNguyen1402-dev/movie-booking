@@ -1,4 +1,4 @@
-import { CheckboxField } from "@components/admin/ui/form";
+import { CheckboxField } from "@shared/fields";
 
 const checkboxFields = [
   { label: "Hot", name: "hot" },

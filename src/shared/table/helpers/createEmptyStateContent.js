@@ -1,4 +1,4 @@
-import { ENTITY_LABELS } from "@config/admin";
+import { ENTITY_LABELS } from "@features/admin";
 
 export const createEmptyStateContent = (entity, keyword) => {
   const entityLabel = ENTITY_LABELS[entity];

@@ -1,7 +1,8 @@
 import { Controller } from "react-hook-form";
 
+import { FormLabel, Input } from "@shared/fields";
+
 import { formatCurrencyDisplay } from "@features/admin/movies/showtimes/create/utils";
-import { FormLabel, Input } from "@components/admin/ui/form";
 
 const TicketPrice = ({ control, watch, rules, isTicketPriceDisabled }) => {
   const giaVe = watch("giaVe") ?? null;

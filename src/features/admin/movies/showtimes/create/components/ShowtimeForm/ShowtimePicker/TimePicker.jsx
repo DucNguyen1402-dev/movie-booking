@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { Button } from "@components/admin/ui";
+import { Button } from "@shared/ui";
 
 const TimePicker = ({ value, onChange, timePickerVisible, timePickerRef }) => {
   const [currentHour, currentMinute] = value ? value.split(":") : ["00", "00"];

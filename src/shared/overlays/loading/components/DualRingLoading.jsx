@@ -1,8 +1,10 @@
+import { Backdrop } from "@shared/overlays";
 import { useLoadingContext } from "@shared/overlays/loading/contexts";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useLockBodyScroll } from "@hooks/admin";
-import { Backdrop, DualRingSpinner } from "@components/admin/ui";
+
+import { DualRingSpinner } from "./spinners";
 
 const DualRingLoading = () => {
   const { isVisible } = useLoadingContext();

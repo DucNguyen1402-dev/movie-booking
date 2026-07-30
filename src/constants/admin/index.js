@@ -1,1 +1,0 @@
-export { SIDEBAR_COLLAPSED_OFFSET, SIDEBAR_CONTENT_OFFSET } from "./layout";

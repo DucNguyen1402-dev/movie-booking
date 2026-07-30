@@ -1,10 +1,10 @@
-import { userValidationRules } from "@config/admin/users";
+import { userValidationRules } from "@features/admin/shared/config";
+import { FormLabel, Input } from "@shared/fields";
+import { SaveButton } from "@shared/ui";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import { createProfileFields } from "@features/admin/profile/edit/utils";
-import { SaveButton } from "@components/admin/ui/buttons";
-import { FormLabel, Input } from "@components/admin/ui/form";
 
 const ProfileForm = () => {
   const {

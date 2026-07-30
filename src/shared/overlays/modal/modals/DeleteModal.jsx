@@ -1,6 +1,5 @@
 import { Modal } from "@shared/overlays/modal/components";
-
-import { CancelButton, ConfirmButton } from "@components/admin/ui/buttons";
+import { CancelButton, ConfirmButton } from "@shared/ui";
 
 const DeleteModal = ({ onCancel, onConfirm, title, subtitle, loading }) => {
   return (

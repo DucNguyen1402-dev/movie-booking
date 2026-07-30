@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 
+import { CancelButton, SaveButton } from "@shared/ui";
 import { PencilLine } from "lucide-react";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
@@ -12,7 +13,6 @@ import {
   useEditUserActions,
   useEditUserForm,
 } from "@features/admin/users/edit/hooks";
-import { CancelButton, SaveButton } from "@components/admin/ui/buttons";
 import { getAvatarInitial } from "@utils/admin";
 
 const EditUser = () => {

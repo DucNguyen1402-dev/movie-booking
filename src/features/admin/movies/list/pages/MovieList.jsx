@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import { toast } from "@shared/overlays";
+import { Backdrop } from "@shared/overlays";
 import { PaginationSelect } from "@shared/pagination";
-import { toast } from "@shared/toast";
 import { AnimatePresence, motion } from "motion/react";
 
 import { useLayoutContext } from "@contexts/admin";
@@ -20,7 +21,6 @@ import {
   TrailerModal,
 } from "@features/admin/movies/list/components";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { Backdrop } from "@components/admin/ui";
 
 const MovieList = () => {
   const location = useLocation();

@@ -1,5 +1,4 @@
-import { DualRingLoading, ModalShell } from "@shared/overlays";
-import { Toast } from "@shared/toast";
+import { DualRingLoading, ModalShell, Toast } from "@shared/overlays";
 
 const GlobalUI = () => {
   return (

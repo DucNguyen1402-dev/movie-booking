@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 
+import { FormLabel, Input } from "@shared/fields";
+
 import { useEditMovieContext } from "@features/admin/movies/edit/contexts";
-import { FormLabel, Input } from "@components/admin/ui/form";
 const EditImageSection = () => {
   const {
     editForm: { watch, register },

@@ -1,6 +1,6 @@
+import { Button } from "@shared/ui";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { Button } from "@components/admin/ui";
 import { cn } from "@utils/shared";
 
 const PaginationControls = ({ pagination, label }) => {

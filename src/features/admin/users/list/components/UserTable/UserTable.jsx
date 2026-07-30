@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-import { ENTITIES } from "@config/admin";
 import { PaginationControls } from "@shared/pagination";
 import { createEmptyStateContent, TableEmptyState } from "@shared/table";
+import { EmptyStateButton } from "@shared/ui";
 
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
+import { ENTITIES } from "@features/admin/shared/config";
 import { useUsersContext } from "@features/admin/users/contexts";
-import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import { TableRow, TableSkeleton } from ".";
 

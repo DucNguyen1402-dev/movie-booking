@@ -1,5 +1,6 @@
+import { FormLabel, Input } from "@shared/fields";
+
 import { movieValidationRules } from "@features/admin/movies/config";
-import { FormLabel, Input } from "@components/admin/ui/form";
 
 const inputFields = [
   {

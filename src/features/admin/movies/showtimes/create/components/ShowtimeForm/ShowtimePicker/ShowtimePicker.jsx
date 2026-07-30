@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Controller } from "react-hook-form";
 
+import { FormLabel } from "@shared/fields";
+import { Button } from "@shared/ui";
 import { Clock4 } from "lucide-react";
 
-import { Button } from "@components/admin/ui";
-import { FormLabel } from "@components/admin/ui/form";
 import { cn } from "@utils/shared";
 
 import TimePicker from "./TimePicker";

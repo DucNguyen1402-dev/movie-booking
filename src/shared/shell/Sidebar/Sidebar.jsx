@@ -106,11 +106,13 @@ const Sidebar = () => {
         ))}
       </nav>
 
-      <div className="flex items-center space-x-3 border-t border-gray-800 p-4">
+      <div
+        className={`flex items-center space-x-3 border-t border-gray-800 p-4 transition-opacity duration-300 ${isSidebarOpen ? "" : "pointer-events-none opacity-0"}`}
+      >
         <div className="group relative">
           <div className="before:absolute before:bottom-full before:left-0 before:h-4 before:w-full before:bg-transparent before:content-['']"></div>
 
-          <button className="flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500">
+          <button className="flex h-9 w-9 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-slate-100 bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500">
             {storageAvatar ? (
               <img src={storageAvatar} alt="user avatar" />
             ) : (
@@ -179,6 +181,21 @@ const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
+
+      <div
+        className={`absolute right-2 bottom-3 rounded-full border-2 border-slate-100 ${isSidebarOpen ? "pointer-events-none opacity-0" : ""}`}
+      >
+        <Link
+          to="/admin/profile"
+          className="flex h-8.5 w-8.5 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-yellow-600 text-lg font-bold text-slate-100 transition-colors duration-300 hover:bg-yellow-500"
+        >
+          {storageAvatar ? (
+            <img src={storageAvatar} alt="user avatar" />
+          ) : (
+            avatarName
+          )}
+        </Link>
+      </div>
     </aside>
   );
 };
