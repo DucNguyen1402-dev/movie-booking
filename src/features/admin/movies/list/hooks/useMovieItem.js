@@ -2,12 +2,11 @@ import { useCallback, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
-import { createDeleteModalContent } from "@helpers/admin/modal";
+import { modal } from "@shared/overlays";
+import { ROW_ACTION_ANIMATIONS } from "@shared/table";
 import { toast, toastContent } from "@shared/toast";
 
-import { useModalContext } from "@contexts/admin";
 import { useScrollIntoView } from "@hooks/admin";
-import { MODAL_TYPES, ROW_ACTION_ANIMATIONS } from "@constants/admin";
 
 import { useDeleteMovie } from "./useDeleteMovie";
 
@@ -18,7 +17,7 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const modal = useModalContext();
+  const modalApi = modal.use();
   const toaster = toast.use();
 
   const { mutateAsync } = useDeleteMovie();
@@ -52,30 +51,25 @@ export function useMovieItem({ movie, movieId, highlight }) {
   const handleDeleteMovie = useCallback(async () => {
     try {
       await mutateAsync(movie.maPhim);
-      modal.close();
+      modalApi.close();
       toaster.show(toastContent.success.delete(ENTITIES.movie));
     } catch (error) {
-      modal.close();
       const message =
         error?.response?.data.content ?? "Đã xảy ra lỗi, vui lòng thử lại sau.";
       toaster.show(toastContent.error(message));
     } finally {
       setOnDeleting(false);
     }
-  }, [modal, movie.maPhim, mutateAsync, toaster]);
+  }, [modalApi, movie.maPhim, mutateAsync, toaster]);
 
   const onDeleteClick = useCallback(() => {
     setOnDeleting(true);
-    modal.open({
-      type: MODAL_TYPES.DELETE,
-      content: createDeleteModalContent(ENTITIES.movie, movie.tenPhim),
+    modalApi.open({
+      ...modal.config.delete(ENTITIES.movie, movie.tenPhim),
       onConfirm: handleDeleteMovie,
-      onCancel: () => {
-        setOnDeleting(false);
-        modal.close();
-      },
+      onCancel: () => setOnDeleting(false),
     });
-  }, [handleDeleteMovie, modal, movie.tenPhim]);
+  }, [handleDeleteMovie, modalApi, movie.tenPhim]);
 
   return {
     onDeleteClick,

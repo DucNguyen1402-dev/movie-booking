@@ -1,11 +1,8 @@
-import { useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { ENTITIES } from "@config/admin";
-import { createDeleteModalContent } from "@helpers/admin/modal";
+import { modal } from "@shared/overlays";
 import { toast, toastContent } from "@shared/toast";
-
-import { useModalContext } from "@contexts/admin";
-import { MODAL_TYPES } from "@constants/admin";
 
 import { useDeleteUser } from "./useDeleteUser";
 
@@ -14,17 +11,16 @@ export function useUserDeletion() {
 
   const { mutateAsync } = useDeleteUser();
 
-  const modal = useModalContext();
+  const modalApi = modal.use();
   const toaster = toast.use();
 
-  const handleDeleteUser = useMemo(
-    () => async (taiKhoan) => {
+  const handleDeleteUser = useCallback(
+    async (taiKhoan) => {
       try {
         await mutateAsync(taiKhoan);
-        modal.close();
+        modalApi.close();
         toaster.show(toastContent.success.delete(ENTITIES.user));
       } catch (error) {
-        modal.close();
         const message =
           error.response?.data?.content ??
           "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
@@ -33,23 +29,19 @@ export function useUserDeletion() {
         setDeletingAccount(null);
       }
     },
-    [modal, mutateAsync, toaster],
+    [modalApi, mutateAsync, toaster],
   );
 
-  const onDeletionClick = useMemo(
-    () => (taiKhoan) => {
+  const onDeletionClick = useCallback(
+    (taiKhoan) => {
       setDeletingAccount(taiKhoan);
-      modal.open({
-        type: MODAL_TYPES.DELETE,
-        content: createDeleteModalContent(ENTITIES.user, taiKhoan),
+      modalApi.open({
+        ...modal.config.delete(ENTITIES.user, taiKhoan),
         onConfirm: () => handleDeleteUser(taiKhoan),
-        onCancel: () => {
-          setDeletingAccount(null);
-          modal.close();
-        },
+        onCancel: () => setDeletingAccount(null),
       });
     },
-    [handleDeleteUser, modal],
+    [handleDeleteUser, modalApi],
   );
 
   return {

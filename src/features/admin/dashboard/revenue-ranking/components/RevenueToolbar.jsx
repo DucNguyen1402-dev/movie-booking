@@ -26,8 +26,8 @@ const RevenueToolbar = () => {
         />
 
         <PaginationSelect
-          onChange={(e) => pagination.setSize(e.target.value)}
-          value={pagination.currentSize}
+          onChange={(e) => pagination.actions.setSize(e.target.value)}
+          value={pagination.state.currentSize}
         />
       </div>
       <Button

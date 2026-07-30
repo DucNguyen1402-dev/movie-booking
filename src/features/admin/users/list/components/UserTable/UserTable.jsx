@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
+import { ENTITIES } from "@config/admin";
 import { PaginationControls } from "@shared/pagination";
+import { createEmptyStateContent, TableEmptyState } from "@shared/table";
 
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import { useUsersContext } from "@features/admin/users/contexts";
-import { EmptyTable } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import { TableRow, TableSkeleton } from ".";
@@ -28,9 +29,13 @@ const UserTable = () => {
   } = useUsersContext();
 
   if (rowState?.account) {
-    pagination.preventNextReset();
+    pagination.actions.preventNextResetPage();
   }
 
+  const {
+    state: { currentSize },
+    actions: { setPage },
+  } = pagination;
   const moveToAccountPage = useCallback(
     (account) => {
       const userIndex = filteredUsers.findIndex(
@@ -39,11 +44,11 @@ const UserTable = () => {
 
       if (userIndex === -1) return;
 
-      const targetPage = Math.floor(userIndex / pagination.currentSize) + 1;
+      const targetPage = Math.floor(userIndex / currentSize) + 1;
 
-      pagination.setPage(targetPage);
+      setPage(targetPage);
     },
-    [filteredUsers, pagination],
+    [currentSize, filteredUsers, setPage],
   );
 
   useEffect(() => {
@@ -52,7 +57,7 @@ const UserTable = () => {
     hasMoveToPage.current = true;
   }, [rowState?.account, isFetching, moveToAccountPage]);
 
-  const isUserListEmpty = pagination.list.length === 0;
+  const isUserListEmpty = pagination.state.totalItems === 0;
   const renderTableContent = () => {
     if (isPending) {
       return <TableSkeleton />;
@@ -60,19 +65,18 @@ const UserTable = () => {
 
     if (isUserListEmpty) {
       return (
-        <EmptyTable
+        <TableEmptyState
           colSpan={6}
-          title="Không tìm thấy user"
-          description={`Không có tên user nào khớp với từ khóa "${filters.keyword}"`}
+          {...createEmptyStateContent(ENTITIES.user, filters.keyword)}
         >
           <EmptyStateButton surface="dark" onClick={resetSearchFilter}>
             Xóa bộ lọc
           </EmptyStateButton>
-        </EmptyTable>
+        </TableEmptyState>
       );
     }
 
-    return pagination.list.map((user) => (
+    return pagination.state.list.map((user) => (
       <TableRow
         key={user.taiKhoan}
         user={user}
@@ -85,7 +89,7 @@ const UserTable = () => {
   return (
     <div className="flex flex-col space-y-10">
       {!isUserListEmpty && (
-        <PaginationControls controls={pagination.controls} label="người dùng" />
+        <PaginationControls pagination={pagination} label="người dùng" />
       )}
       <main className="min-h-screen flex-1 overflow-hidden rounded-lg pb-10">
         <table className="w-full table-fixed border-t border-slate-700 bg-[#1e293b] text-sm text-slate-100">

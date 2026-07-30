@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
+import { ENTITIES } from "@config/admin";
 import { PaginationControls } from "@shared/pagination";
+import { createEmptyStateContent, TableEmptyState } from "@shared/table";
 
 import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
-import { EmptyTable } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import MovieItem from "./MovieItem";
@@ -33,19 +34,24 @@ const MoviesTable = () => {
   } = useMovieListContext();
 
   if (rowState?.movieId) {
-    pagination.preventNextReset();
+    pagination.actions.preventNextResetPage();
   }
+
+  const {
+    state: { currentSize },
+    actions: { setPage },
+  } = pagination;
 
   const moveToMoviePage = useCallback(
     (id) => {
       const movieIndex = list.findIndex((movie) => movie.maPhim === Number(id));
       if (movieIndex === -1) return;
 
-      const moviePage = Math.floor(movieIndex / pagination.currentSize) + 1;
+      const moviePage = Math.floor(movieIndex / currentSize) + 1;
 
-      pagination.setPage(moviePage);
+      setPage(moviePage);
     },
-    [list, pagination],
+    [currentSize, list, setPage],
   );
 
   useEffect(() => {
@@ -54,7 +60,7 @@ const MoviesTable = () => {
     hasMoveToPage.current = true;
   }, [rowState?.movieId, isFetching, moveToMoviePage]);
 
-  const isEmptyMovieList = pagination.list.length === 0;
+  const isEmptyMovieList = pagination.state.totalItems === 0;
 
   const renderTableContent = () => {
     if (isPending) {
@@ -63,19 +69,18 @@ const MoviesTable = () => {
 
     if (isEmptyMovieList) {
       return (
-        <EmptyTable
+        <TableEmptyState
           colSpan={6}
-          title="Không tìm thấy phim"
-          description={`Không có tên user nào khớp với từ khóa "${keyword}"`}
+          {...createEmptyStateContent(ENTITIES.movie, keyword)}
         >
           <EmptyStateButton surface="dark" onClick={resetSearchKeyword}>
             Xóa bộ lọc
           </EmptyStateButton>
-        </EmptyTable>
+        </TableEmptyState>
       );
     }
 
-    return pagination.list.map((movie) => (
+    return pagination.state.list.map((movie) => (
       <MovieItem
         key={movie.maPhim}
         movie={movie}
@@ -88,7 +93,7 @@ const MoviesTable = () => {
   return (
     <div className="flex min-h-screen flex-col space-y-8">
       {!isEmptyMovieList && (
-        <PaginationControls controls={pagination.controls} label="phim" />
+        <PaginationControls pagination={pagination} label="phim" />
       )}
       <div className="flex-1 overflow-hidden rounded-lg border border-slate-800/80 bg-[#1e293b] shadow-xl">
         <table className="w-full table-fixed border-collapse text-left">

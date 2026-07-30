@@ -8,7 +8,10 @@ import {
   UserEditForm,
   UserProfileHeader,
 } from "@features/admin/users/edit/components";
-import { useEditActions, useEditForm } from "@features/admin/users/edit/hooks";
+import {
+  useEditUserActions,
+  useEditUserForm,
+} from "@features/admin/users/edit/hooks";
 import { CancelButton, SaveButton } from "@components/admin/ui/buttons";
 import { getAvatarInitial } from "@utils/admin";
 
@@ -20,13 +23,14 @@ const EditUser = () => {
   } = useUsersContext();
   const targetUser = users.find((user) => user.taiKhoan === account) ?? {};
 
-  const { register, handleSubmit, errors, initialUser, isDirty } = useEditForm({
-    user: targetUser,
-  });
+  const { register, handleSubmit, errors, initialUser, isDirty } =
+    useEditUserForm({
+      user: targetUser,
+    });
 
   useSyncLeaveConfirmation(isDirty);
 
-  const { onCancelEditClick, onConfirmEditClick } = useEditActions({
+  const { onCancelEditClick, onConfirmEditClick } = useEditUserActions({
     handleSubmit,
     initialUser,
     isDirty,

@@ -1,7 +1,8 @@
+import { ENTITIES } from "@config/admin";
 import { PaginationControls } from "@shared/pagination";
+import { createEmptyStateContent, TableEmptyState } from "@shared/table";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
-import { EmptyTable } from "@components/admin/common";
 import { EmptyStateButton } from "@components/admin/ui/buttons";
 
 import { RevenueRankingRow, RevenueRankingSkeleton } from ".";
@@ -15,7 +16,7 @@ const RevenueRankingTable = () => {
   } = useDashboardContext();
 
   const highestRevenue = ranking.highestRevenueMovie?.revenue;
-  const isFilterNotFound = pagination.list.length === 0;
+  const isFilterNotFound = pagination.state.totalItems === 0;
 
   const renderTableContent = () => {
     if (isPending) {
@@ -24,19 +25,18 @@ const RevenueRankingTable = () => {
 
     if (isFilterNotFound) {
       return (
-        <EmptyTable
+        <TableEmptyState
           colSpan={6}
-          title="Không tìm thấy phim"
-          description={`Không có tên phim nào khớp với từ khóa "${params.keyword}"`}
+          {...createEmptyStateContent(ENTITIES.movie, params.keyword)}
         >
           <EmptyStateButton surface="dark" onClick={resetSearchParam}>
             Xóa bộ lọc
           </EmptyStateButton>
-        </EmptyTable>
+        </TableEmptyState>
       );
     }
 
-    return pagination.list.map((movie) => (
+    return pagination.state.list.map((movie) => (
       <RevenueRankingRow
         key={movie.maPhim}
         movie={movie}
@@ -48,7 +48,7 @@ const RevenueRankingTable = () => {
 
   return (
     <div className="mt-16 space-y-8">
-      <PaginationControls label="phim" controls={pagination.controls} />
+      <PaginationControls label="phim" pagination={pagination} />
       <div className="min-h-screen overflow-hidden rounded-xl border border-slate-700 bg-slate-800">
         <main>
           <table className="w-full table-fixed">

@@ -2,18 +2,13 @@ import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
-import {
-  createEditModalContent,
-  createUnsavedChangesModalContent,
-} from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
-import { loading } from "@shared/loading";
+import { loading, modal } from "@shared/overlays";
+import { ROW_ACTION_TYPES } from "@shared/table";
 import { toast, toastContent } from "@shared/toast";
 import { format } from "date-fns";
 
-import { useModalContext } from "@contexts/admin";
 import { createUpdateFormData } from "@features/admin/movies/edit/helpers";
-import { MODAL_TYPES, ROW_ACTION_TYPES } from "@constants/admin";
 
 import { useUpdateMovie } from "./useUpdateMovie";
 
@@ -30,22 +25,18 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
 
   const toaster = toast.use();
   const loader = loading.use();
-  const modal = useModalContext();
+  const modalApi = modal.use();
 
-  const handleCancelChange = () => {
-    modal.close();
+  const handleCancelChange = () =>
     navigate(previousPath, {
       state: {
         movieId: editId,
         history: history.slice(0, -1),
       },
     });
-  };
-
   const onCancelClick = () =>
-    modal.open({
-      type: MODAL_TYPES.UNSAVED_CHANGES,
-      content: createUnsavedChangesModalContent(ENTITIES.movie),
+    modalApi.open({
+      ...modal.config.unsavedChanges(ENTITIES.movie),
       onConfirm: handleCancelChange,
     });
 
@@ -67,8 +58,6 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   };
 
   const handleSaveMovie = async () => {
-    modal.close();
-
     const movie = getValues();
 
     if (!hasMovieChanged(normalizeMovie(movie), normalizeMovie(editMovie))) {
@@ -115,9 +104,8 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
   const onSaveClick = async () => {
     const isValid = await trigger();
     if (!isValid) return;
-    modal.open({
-      type: MODAL_TYPES.EDIT,
-      content: createEditModalContent(ENTITIES.movie),
+    modalApi.open({
+      ...modal.config.edit(ENTITIES.movie),
       onConfirm: handleSaveMovie,
     });
   };

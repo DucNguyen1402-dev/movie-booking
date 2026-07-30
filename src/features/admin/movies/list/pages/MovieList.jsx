@@ -28,7 +28,7 @@ const MovieList = () => {
   const { isSidebarOpen } = useLayoutContext();
   const {
     trailer: { trailer },
-    pagination: { currentSize, setSize },
+    pagination,
   } = useMovieListContext();
   const { show: showToast } = toast.use();
 
@@ -61,8 +61,8 @@ const MovieList = () => {
             <MovieStatusFilter />
             <SortSelect />
             <PaginationSelect
-              value={currentSize}
-              onChange={(e) => setSize(e.target.value)}
+              value={pagination.state.currentSize}
+              onChange={(e) => pagination.actions.setSize(e.target.value)}
             />
           </div>
 

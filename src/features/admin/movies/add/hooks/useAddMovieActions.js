@@ -2,17 +2,12 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
-import {
-  createAddModalContent,
-  createUnsavedChangesModalContent,
-} from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
-import { loading } from "@shared/loading";
+import { loading, modal } from "@shared/overlays";
+import { ROW_ACTION_TYPES } from "@shared/table";
 import { toast, toastContent } from "@shared/toast";
 
-import { useModalContext } from "@contexts/admin";
 import { createMovieFormData } from "@features/admin/movies/add/utils";
-import { MODAL_TYPES, ROW_ACTION_TYPES } from "@constants/admin";
 
 import { useAddForm } from "./useAddForm";
 import { useAddMovieMutation } from "./useAddMovieMutation";
@@ -27,7 +22,7 @@ export function useAddMovieActions() {
 
   const loader = loading.use();
   const toaster = toast.use();
-  const modal = useModalContext();
+  const modalApi = modal.use();
 
   const { register, handleSubmit, errors, isDirty, control, watch } =
     useAddForm();
@@ -43,23 +38,18 @@ export function useAddMovieActions() {
     }
   };
 
-  const handleCancelClick = () => {
-    modal.close();
+  const handleCancelClick = () =>
     navigate(previousPath, { state: { history: history.slice(0, -1) } });
-  };
-
   const onCancelClick = () =>
-    modal.open({
-      type: MODAL_TYPES.UNSAVED_CHANGES,
+    modalApi.open({
+      ...modal.config.unsavedChanges(ENTITIES.movie),
       onConfirm: handleCancelClick,
-      content: createUnsavedChangesModalContent(ENTITIES.movie),
     });
 
   const onValid = (data) =>
-    modal.open({
-      type: MODAL_TYPES.ADD,
+    modalApi.open({
+      ...modal.config.createAddModal(ENTITIES.movie),
       onConfirm: () => handleSubmitNewMovie(data),
-      content: createAddModalContent(ENTITIES.movie),
     });
 
   const handleSubmitEvent = (e) => {
@@ -68,8 +58,6 @@ export function useAddMovieActions() {
   };
 
   const handleSubmitNewMovie = async (data) => {
-    modal.close();
-
     const submitNewMovieTask = async () => {
       const formData = createMovieFormData(data);
       return await mutateAsync(formData);

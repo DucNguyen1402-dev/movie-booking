@@ -1,2 +1,2 @@
-export {useEditActions} from "./useEditActions"
-export {useEditForm} from "./useEditForm"
+export { useEditUserActions } from "./useEditUserActions";
+export { useEditUserForm } from "./useEditUserForm";

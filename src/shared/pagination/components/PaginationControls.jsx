@@ -3,19 +3,19 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@components/admin/ui";
 import { cn } from "@utils/shared";
 
-const PaginationControls = ({ controls, label }) => {
+const PaginationControls = ({ pagination, label }) => {
   const {
-    currentPage,
-    pages,
-    displayStart,
-    displayEnd,
-    total,
-    isPrevDisabled,
-    isNextDisabled,
-    onPrevClick,
-    onNextClick,
-    onPageClick,
-  } = controls;
+    state: {
+      currentPage,
+      pages,
+      displayStart,
+      displayEnd,
+      totalItems,
+      isPrevDisabled,
+      isNextDisabled,
+    },
+    actions: { onPrevClick, onNextClick, onPageClick },
+  } = pagination;
   return (
     <div className="flex items-center justify-between px-4 text-sm text-slate-400">
       <p className="text-sm text-slate-400">
@@ -23,7 +23,8 @@ const PaginationControls = ({ controls, label }) => {
         <span className="font-medium text-slate-200">
           {displayStart}-{displayEnd}
         </span>{" "}
-        trên <span className="font-medium text-slate-200">{total}</span> {label}
+        trên <span className="font-medium text-slate-200">{totalItems}</span>{" "}
+        {label}
       </p>
 
       <div className="flex gap-2">

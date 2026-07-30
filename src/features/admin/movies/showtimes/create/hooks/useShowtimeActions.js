@@ -1,18 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
-import {
-  createAddModalContent,
-  createUnsavedChangesModalContent,
-} from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
-import { loading } from "@shared/loading";
+import { loading, modal } from "@shared/overlays";
 import { toast, toastContent } from "@shared/toast";
 import { format } from "date-fns";
 
-import { useModalContext } from "@contexts/admin";
 import { createShowtime } from "@features/admin/movies/showtimes/create/api";
-import { MODAL_TYPES } from "@constants/admin";
 
 export function useShowtimeActions({ handleSubmit, movie }) {
   const navigate = useNavigate();
@@ -20,25 +14,19 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   const history = location.state?.history ?? [];
   const previousPath = history.at(-1) ?? "/admin/movies";
 
-  const modal = useModalContext();
+  const modalApi = modal.use();
   const loader = loading.use();
   const toaster = toast.use();
 
-  const handleShowtimeCanceling = () => {
-    modal.close();
+  const handleShowtimeCanceling = () =>
     navigate(previousPath, { state: { history } });
-  };
-
   const onCancelClick = async () =>
-    modal.open({
-      type: MODAL_TYPES.UNSAVED_CHANGES,
-      content: createUnsavedChangesModalContent(ENTITIES.showtime),
+    modalApi.open({
+      ...modal.config.unsavedChanges(ENTITIES.showtime),
       onConfirm: handleShowtimeCanceling,
     });
 
   const handleShowtimeCreation = async (data) => {
-    modal.close();
-
     const { ngayChieu, gioChieu, giaVe, maCumRap } = data;
 
     //Chỗ này backend requires payload là maRap nhưng giá trị thực truyền vào phải là maCumRap thì mới tạo lịch được
@@ -70,9 +58,8 @@ export function useShowtimeActions({ handleSubmit, movie }) {
   };
 
   const onValid = (data) => {
-    modal.open({
-      type: MODAL_TYPES.ADD,
-      content: createAddModalContent(ENTITIES.showtime),
+    modalApi.open({
+      ...modal.config.add(ENTITIES.showtime),
       onConfirm: () =>
         handleShowtimeCreation({
           ...data,

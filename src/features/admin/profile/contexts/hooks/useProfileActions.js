@@ -1,19 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { ENTITIES } from "@config/admin";
-import {
-  createChangePasswordModalContent,
-  createEditModalContent,
-  createUnsavedPasswordChangesModalContent,
-} from "@helpers/admin/modal";
 import { runWithLoading } from "@shared/async";
-import { loading } from "@shared/loading";
+import { loading, modal } from "@shared/overlays";
 import { toast, toastContent } from "@shared/toast";
 
-import { useModalContext } from "@contexts/admin";
 import { useUserInfor } from "@features/admin/users";
 import { getCurrentUser } from "@utils/shared";
-import { MODAL_TYPES } from "@constants/admin";
 
 import { useUpdateUser } from ".";
 
@@ -31,24 +24,20 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
 
   const { mutateAsync } = useUpdateUser();
 
-  const modal = useModalContext();
+  const modalApi = modal.use();
   const loader = loading.use();
   const toaster = toast.use();
 
-  const handleCancelPasswordChange = () => {
-    modal.close();
+  const handleCancelPasswordChange = () =>
     navigate(previousPath, {
       state: {
         history: history.slice(0, -1),
       },
     });
-  };
-
   const onCancelPasswordChangeClick = () => {
     if (isDirty) {
-      modal.open({
-        type: MODAL_TYPES.UNSAVED_CHANGES,
-        content: createUnsavedPasswordChangesModalContent(),
+      modalApi.open({
+        ...modal.config.unsavedPasswordChange(),
         onConfirm: handleCancelPasswordChange,
       });
       return;
@@ -61,7 +50,6 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
   };
 
   const submitProfileChange = async (data) => {
-    modal.close();
     const payload = {
       maNhom: currentUser.maNhom,
       taiKhoan: data.taiKhoan,
@@ -92,8 +80,6 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
   };
 
   const submitPasswordChange = async (data) => {
-    modal.close();
-
     const submitChangedPasswordTask = async () => {
       const { matKhau, matKhauHienTai, matKhauMoi, xacNhanMatKhauMoi } =
         getValues();
@@ -147,16 +133,14 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
   };
 
   const handleChangeProfile = (data) =>
-    modal.open({
-      type: MODAL_TYPES.EDIT,
-      content: createEditModalContent(ENTITIES.profile),
+    modalApi.open({
+      ...modal.config.edit(ENTITIES.profile),
       onConfirm: () => submitProfileChange(data),
     });
 
   const handleChangePassword = (data) =>
-    modal.open({
-      type: MODAL_TYPES.EDIT,
-      content: createChangePasswordModalContent(loginedUser.taiKhoan),
+    modalApi.open({
+      ...modal.config.passwordChange(loginedUser.taiKhoan),
       onConfirm: () => submitPasswordChange(data),
     });
 

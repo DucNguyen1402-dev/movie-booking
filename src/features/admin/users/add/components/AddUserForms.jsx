@@ -2,7 +2,10 @@ import { userValidationRules } from "@config/admin/users";
 
 import { useSyncLeaveConfirmation } from "@hooks/admin";
 import { addUserFields } from "@features/admin/users/add/config";
-import { useAddActions, useAddForm } from "@features/admin/users/add/hooks";
+import {
+  useAddUserActions,
+  useAddUserForm,
+} from "@features/admin/users/add/hooks";
 import {
   FormLabel,
   Input,
@@ -12,9 +15,9 @@ import {
 
 import { FormActions } from ".";
 const AddUserForms = () => {
-  const { register, handleSubmit, errors, isDirty } = useAddForm();
+  const { register, handleSubmit, errors, isDirty } = useAddUserForm();
 
-  const { onCancelAddUserClick, onAddUserClick } = useAddActions({
+  const { onCancelAddUserClick, onAddUserClick } = useAddUserActions({
     handleSubmit,
   });
 

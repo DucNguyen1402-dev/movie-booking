@@ -31,8 +31,8 @@ const UserToolbar = () => {
         />
 
         <PaginationSelect
-          value={pagination.currentSize}
-          onChange={(e) => pagination.setSize(e.target.value)}
+          value={pagination.state.currentSize}
+          onChange={(e) => pagination.state.setSize(e.target.value)}
         />
       </div>
     </div>

@@ -1,6 +1,9 @@
-import { LoadingProvider, ToastProvider } from "@shared/providers";
+import {
+  LoadingProvider,
+  ModalProvider,
+  ToastProvider,
+} from "@shared/providers";
 
-import { ModalProvider } from "@contexts/admin/modal";
 import { UserProvider } from "@contexts/admin/user";
 
 const AdminProviders = ({ children }) => {

@@ -24,7 +24,7 @@ const MovieListProvider = ({ children }) => {
     resetSearchKeyword,
   } = useMovieParams({ movies: normalizedMovies });
 
-  const moviePagination = usePagination({
+  const pagination = usePagination({
     items: list,
     resetDeps: [keyword, status, sortType],
     enabled: isSuccess,
@@ -54,7 +54,7 @@ const MovieListProvider = ({ children }) => {
     },
 
     trailer,
-    pagination: moviePagination,
+    pagination,
   };
 
   return (

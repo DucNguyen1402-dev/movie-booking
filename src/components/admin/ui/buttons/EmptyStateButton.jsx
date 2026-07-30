@@ -4,8 +4,8 @@ import { Trash } from "lucide-react";
 import Button from "./Button";
 
 const surfaceStyles = {
-  light: "bg-orange-500 hover:bg-orange-600",
-  dark: "bg-orange-600 hover:bg-orange-500",
+  light: "bg-amber-500 hover:bg-amber-600",
+  dark: "bg-amber-600 hover:bg-amber-500",
 };
 
 const EmptyStateButton = ({

@@ -1,7 +1,6 @@
 import { waitForMinimumDuration } from "@shared/async/utils";
-import { MIN_LOADING_TIME } from "@shared/loading";
 
-export async function runWithLoading(task, loader) {
+export async function runWithLoading(task, loader, MIN_LOADING_TIME = 800) {
   const start = performance.now();
   loader.show();
   try {

@@ -1,2 +1,2 @@
-export { LoadingProvider } from "@shared/loading";
+export { LoadingProvider, ModalProvider } from "@shared/overlays";
 export { ToastProvider } from "@shared/toast";

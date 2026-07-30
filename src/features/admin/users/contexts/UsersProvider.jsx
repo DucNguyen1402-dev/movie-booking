@@ -13,7 +13,7 @@ const UsersProvider = ({ children }) => {
     resetDeps: [
       userFilters.filters.keyword,
       userFilters.filters.role,
-      userFilters.filteredUsers,
+      // userFilters.filteredUsers,
     ],
     enabled: usersStates.isSuccess,
   });

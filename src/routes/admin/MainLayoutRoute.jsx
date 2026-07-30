@@ -1,4 +1,4 @@
-import { MainLayout } from "@layouts/admin";
+import { MainLayout } from "@shared/shell";
 
 import { LayoutProvider } from "@contexts/admin/layout";
 
