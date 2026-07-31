@@ -1,3 +1,6 @@
+import { useMemo, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
 import {
   ArrowLeft,
   CalendarDays,
@@ -9,8 +12,7 @@ import {
   Star,
   Ticket,
 } from "lucide-react";
-import { useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+
 import { useMovieShowtime } from "@/hooks/customer/useCinema";
 import {
   formatCurrency,

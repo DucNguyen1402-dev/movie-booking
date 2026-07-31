@@ -1,0 +1,1 @@
+export {UserBookingInfor} from "@features/admin/users/booking-infor/pages"

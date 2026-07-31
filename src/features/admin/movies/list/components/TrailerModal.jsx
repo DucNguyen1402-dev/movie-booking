@@ -1,0 +1,52 @@
+import { Button } from "@shared/ui";
+import { CircleX } from "lucide-react";
+
+import { useMovieListContext } from "@features/admin/movies/list/contexts";
+
+const TrailerModal = () => {
+  const {
+    trailer: { close, trailer },
+  } = useMovieListContext();
+
+  const embedUrl = trailer.url
+    ? trailer.url.replace("watch?v=", "embed/")
+    : null;
+
+  return (
+    <div className="fixed inset-0 z-120 flex items-center justify-center p-4">
+      <div
+        className="relative w-full max-w-4xl overflow-hidden rounded-xl bg-zinc-900 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="border-b border-zinc-700 px-6 py-4">
+          <h2 className="text-lg font-semibold text-white">
+            {trailer.movieName} Trailer
+          </h2>
+        </div>
+
+        <div className="absolute top-2 right-2">
+          <Button
+            onClick={() => close()}
+            surface="dark"
+            size="sm"
+            className="text-slate-300 hover:text-slate-50"
+          >
+            <CircleX className="size-5" />
+          </Button>
+        </div>
+
+        <div className="aspect-video w-full">
+          <iframe
+            className="h-full w-full"
+            src={embedUrl}
+            title={trailer.movieName}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default TrailerModal;

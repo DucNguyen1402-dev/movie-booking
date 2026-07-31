@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   CalendarDays,
   Heart,
@@ -7,7 +9,6 @@ import {
   Star,
   Ticket,
 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
 
 const getMovieAgeLabel = (movie) => {
   if (movie?.danhGia >= 8) return "T18";

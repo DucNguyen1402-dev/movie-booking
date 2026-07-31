@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { cinemaApi } from "@/services/customer/cinemaApi";
 
 export const useCinemaSystems = () => {

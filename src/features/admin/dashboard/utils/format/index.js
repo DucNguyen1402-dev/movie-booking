@@ -1,2 +1,2 @@
-export { formatCurrency, formatCompactCurrency } from "./currency";
+export { formatCompactCurrency,formatCurrency } from "./currency";
 export { formatRoundedNumber } from "./number";

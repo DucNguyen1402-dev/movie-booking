@@ -1,7 +1,11 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
 import path from "path";
+import { defineConfig } from "vite";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
@@ -21,6 +25,9 @@ export default defineConfig({
       "@layouts": path.resolve(__dirname, "./src/layouts"),
       "@providers": path.resolve(__dirname, "./src/providers"),
       "@managers": path.resolve(__dirname, "./src/managers"),
+      "@helpers": path.resolve(__dirname, "./src/helpers"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
 });

@@ -1,5 +1,5 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { selectSeat } from "@/redux/slices/customer/movie-booking/movieBookingSlice";
 
 const SeatItem = ({ seat, rowLetter }) => {
@@ -11,14 +11,16 @@ const SeatItem = ({ seat, rowLetter }) => {
   // 1. Safe guard for the top row header (empty row letter)
   if (!rowLetter || rowLetter.trim() === "") {
     return (
-      <span className="rowNumber flex items-center justify-center font-bold  w-8 h-8 rounded-sm text-yellow-500">
+      <span className="rowNumber flex h-8 w-8 items-center justify-center rounded-sm font-bold text-yellow-500">
         {seat.seatNumber}
       </span>
     );
   }
 
   // 2. Determine class and state for actual interactive seats
-  const isSelecting = selectedSeatList.some((s) => s.seatNumber === seat.seatNumber);
+  const isSelecting = selectedSeatList.some(
+    (s) => s.seatNumber === seat.seatNumber,
+  );
 
   const seatStateClass = seat.isBooked
     ? "bg-orange-500 text-white"
@@ -32,7 +34,6 @@ const SeatItem = ({ seat, rowLetter }) => {
   border-2 border-black text-xs font-bold
   ${seatStateClass}
 `;
-
 
   const seatLabel = seat.seatNumber.match(/\d+/)?.[0];
 

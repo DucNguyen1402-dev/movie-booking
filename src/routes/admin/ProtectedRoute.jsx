@@ -1,11 +1,11 @@
 import { Navigate } from "react-router-dom";
-import {getCurrentUser} from "@utils/shared"
 
+import { getCurrentUser } from "@shared/utils";
 
-export default function ProtectedRoutes({ children }) {
+const ProtectedRoutes = ({ children }) => {
   const accountInfo = getCurrentUser();
   const token = localStorage.getItem("accessToken");
-  
+
   if (!token) {
     return <Navigate to="/login" replace />;
   }
@@ -15,4 +15,6 @@ export default function ProtectedRoutes({ children }) {
   }
 
   return children;
-}
+};
+
+export default ProtectedRoutes;

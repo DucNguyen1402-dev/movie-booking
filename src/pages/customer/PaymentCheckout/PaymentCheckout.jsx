@@ -1,3 +1,7 @@
+import { useMemo, useState } from "react";
+import Cards from "react-credit-cards-2";
+import { Link } from "react-router-dom";
+
 import { QRCode } from "antd";
 import {
   ArrowLeft,
@@ -11,10 +15,8 @@ import {
   Store,
   WalletCards,
 } from "lucide-react";
-import { useMemo, useState } from "react";
-import Cards from "react-credit-cards-2";
+
 import "react-credit-cards-2/dist/es/styles-compiled.css";
-import { Link } from "react-router-dom";
 
 const formatPrice = (price) =>
   new Intl.NumberFormat("vi-VN", {

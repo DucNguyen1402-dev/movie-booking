@@ -1,0 +1,1 @@
+export { avatarList } from "./avatarList";

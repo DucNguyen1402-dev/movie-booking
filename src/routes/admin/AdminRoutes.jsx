@@ -1,13 +1,15 @@
-import { Route, Routes, Navigate } from "react-router-dom";
-import { dashboardRoutes } from "@features/admin/dashboard/routes/dashboardRoutes";
-import { movieRoutes } from "@features/admin/movies-management/routes/movieRoutes";
-import { profileRoutes } from "@features/admin/profile/routes/profileRoutes";
-import { usersRoutes } from "@features/admin/users/routes/usersRoutes";
-import MainLayoutRoute from "./MainLayoutRoute";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import { AdminProviders } from "@providers/admin";
 
-export default function AdminRoutes() {
+import { dashboardRoutes } from "@features/admin/dashboard/routes/dashboardRoutes";
+import { movieRoutes } from "@features/admin/movies/routes/movieRoutes";
+import { profileRoutes } from "@features/admin/profile/routes/profileRoutes";
+import { usersRoutes } from "@features/admin/users/routes/usersRoutes";
+
+import MainLayoutRoute from "./MainLayoutRoute";
+
+const AdminRoutes = () => {
   return (
     <AdminProviders>
       <Routes>
@@ -21,4 +23,6 @@ export default function AdminRoutes() {
       </Routes>
     </AdminProviders>
   );
-}
+};
+
+export default AdminRoutes;

@@ -1,0 +1,1 @@
+export {useMovieItem} from "./useMovieItem"

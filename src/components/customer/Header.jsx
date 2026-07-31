@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+
 import {
   CircleUserRound,
   House,
@@ -7,19 +8,17 @@ import {
   Star,
   Ticket,
 } from "lucide-react";
+
 import { useCurrentUser } from "@/hooks/customer/useAuth";
 
-export default function Header() {
+const Header = () => {
   const currentUser = useCurrentUser();
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0b1024]/95 text-white backdrop-blur-xl">
       <div className="cine-container">
-        <div className="flex min-h-[86px] items-center justify-between gap-5">
-          <Link
-            to="/"
-            className="group flex items-center gap-3"
-          >
+        <div className="flex min-h-21.5 items-center justify-between gap-5">
+          <Link to="/" className="group flex items-center gap-3">
             <div className="relative grid h-12 w-12 place-items-center rounded-full bg-[#e4252d] shadow-[0_0_0_4px_rgba(255,255,255,0.08)]">
               <div className="absolute inset-1 rounded-full border-2 border-[#f6c21a]" />
 
@@ -31,17 +30,13 @@ export default function Header() {
             </div>
 
             <div className="leading-none">
-              <p className="text-[26px] font-black uppercase tracking-[-0.04em]">
-                <span className="text-white">
-                  CINE
-                </span>
+              <p className="text-[26px] font-black tracking-[-0.04em] uppercase">
+                <span className="text-white">CINE</span>
 
-                <span className="text-[#ffeb00]">
-                  STAR
-                </span>
+                <span className="text-[#ffeb00]">STAR</span>
               </p>
 
-              <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.22em] text-white/45">
+              <p className="mt-1 text-[11px] font-bold tracking-[0.22em] text-white/45 uppercase">
                 Movie ticket
               </p>
             </div>
@@ -50,24 +45,20 @@ export default function Header() {
           <div className="hidden items-center gap-3 lg:flex">
             <Link
               to="/movies"
-              className="inline-flex h-12 items-center justify-center rounded-md bg-[#ffeb00] px-6 text-sm font-black uppercase text-[#111827] shadow-[0_7px_0_#b58c00] transition hover:-translate-y-0.5 hover:bg-[#fff45c]"
+              className="inline-flex h-12 items-center justify-center rounded-md bg-[#ffeb00] px-6 text-sm font-black text-[#111827] uppercase shadow-[0_7px_0_#b58c00] transition hover:-translate-y-0.5 hover:bg-[#fff45c]"
             >
               <Ticket size={18} />
 
-              <span className="ml-2">
-                Đặt vé ngay
-              </span>
+              <span className="ml-2">Đặt vé ngay</span>
             </Link>
 
             <Link
               to="/popcorn-drink"
-              className="inline-flex h-12 items-center justify-center rounded-md bg-[#6f35b5] px-6 text-sm font-black uppercase text-white shadow-[0_7px_0_#3e1b72] transition hover:-translate-y-0.5 hover:bg-[#8244ce]"
+              className="inline-flex h-12 items-center justify-center rounded-md bg-[#6f35b5] px-6 text-sm font-black text-white uppercase shadow-[0_7px_0_#3e1b72] transition hover:-translate-y-0.5 hover:bg-[#8244ce]"
             >
               <Popcorn size={18} />
 
-              <span className="ml-2">
-                Đặt bắp nước
-              </span>
+              <span className="ml-2">Đặt bắp nước</span>
             </Link>
           </div>
 
@@ -77,10 +68,7 @@ export default function Header() {
               placeholder="Tìm phim, rạp"
             />
 
-            <Search
-              size={19}
-              className="text-slate-700"
-            />
+            <Search size={19} className="text-slate-700" />
           </div>
 
           <div className="flex items-center gap-4">
@@ -90,15 +78,10 @@ export default function Header() {
                 title={currentUser.taiKhoan}
                 className="hidden max-w-[190px] items-center gap-2 text-sm font-extrabold text-white transition hover:text-[#ffeb00] sm:flex"
               >
-                <CircleUserRound
-                  size={24}
-                  className="shrink-0"
-                />
+                <CircleUserRound size={24} className="shrink-0" />
 
                 <span className="truncate">
-                  Hi,{" "}
-                  {currentUser.taiKhoan ||
-                    currentUser.hoTen}
+                  Hi, {currentUser.taiKhoan || currentUser.hoTen}
                 </span>
               </Link>
             ) : (
@@ -144,4 +127,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

@@ -1,0 +1,36 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+import { adminIcon } from "@assets/icons/admin";
+import { userIcon } from "@assets/icons/customer";
+
+const titles = {
+  "/admin/dashboard": "Dashboard",
+  "/admin/movies": "Movie Management",
+  "/admin/users": "User Management",
+  "/admin/profile": "Profile",
+};
+
+const FaviconManager = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const favicon =
+      document.querySelector("link[rel='icon']") ||
+      document.createElement("link");
+
+    const title = titles[pathname]
+      ? `${titles[pathname]} | Movie Admin`
+      : "Movie Admin";
+    document.title = pathname.startsWith("/admin") ? title : "Cinema booking";
+
+    favicon.rel = "icon";
+    favicon.href = pathname.startsWith("/admin") ? adminIcon : userIcon;
+
+    document.head.appendChild(favicon);
+  }, [pathname]);
+
+  return null;
+};
+
+export default FaviconManager;

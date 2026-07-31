@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import { PlayCircle, Ticket } from "lucide-react";
 
 export default function MovieCard({ movie }) {

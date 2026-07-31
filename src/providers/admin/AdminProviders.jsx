@@ -1,17 +1,20 @@
-import { NotificationProvider } from "@contexts/admin/NotificationContext";
-import { LoadingProvider } from "@contexts/admin/loading";
-import { ModalProvider } from "@contexts/admin/modal";
-import { UserProvider } from "@contexts/admin";
+import {
+  LoadingProvider,
+  ModalProvider,
+  ToastProvider,
+} from "@shared/providers";
+
+import { AuthProvider } from "@features/admin";
 
 const AdminProviders = ({ children }) => {
   return (
-    <UserProvider>
-      <NotificationProvider>
-        <LoadingProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </LoadingProvider>
-      </NotificationProvider>
-    </UserProvider>
+    <ToastProvider>
+      <LoadingProvider>
+        <ModalProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ModalProvider>
+      </LoadingProvider>
+    </ToastProvider>
   );
 };
 

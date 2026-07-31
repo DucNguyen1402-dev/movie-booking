@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
+
 import { LogOut, Ticket, UserRound, UserStar } from "lucide-react";
+
 import {
-  getStoredUser,
   getStoredAccessToken,
+  getStoredUser,
   useAccountInfo,
   useLogout,
 } from "@/hooks/customer/useAuth";

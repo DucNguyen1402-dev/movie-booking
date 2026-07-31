@@ -1,2 +1,0 @@
-export {default as ProfileForm} from "./ProfileForm"
-export {default as ProfileSkeleton} from "./ProfileSkeleton"
