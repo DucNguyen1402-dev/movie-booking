@@ -1,4 +1,4 @@
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const SURFACE_CLASSES = {
   light: "backdrop-light",

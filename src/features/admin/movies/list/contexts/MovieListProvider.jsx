@@ -1,4 +1,4 @@
-import { usePagination } from "@shared/pagination";
+import { usePagination } from "@shared/table";
 
 import { useMovies } from "@features/admin/movies/hooks";
 

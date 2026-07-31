@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-import { getCurrentUser } from "@utils/shared";
+import { getCurrentUser } from "@shared/utils";
 
 const ProtectedRoutes = ({ children }) => {
   const accountInfo = getCurrentUser();

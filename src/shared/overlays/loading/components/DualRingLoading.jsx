@@ -1,8 +1,7 @@
+import { useLockBodyScroll } from "@shared/hooks";
 import { Backdrop } from "@shared/overlays";
 import { useLoadingContext } from "@shared/overlays/loading/contexts";
 import { AnimatePresence, motion } from "motion/react";
-
-import { useLockBodyScroll } from "@hooks/admin";
 
 import { DualRingSpinner } from "./spinners";
 

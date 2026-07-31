@@ -1,9 +1,8 @@
+import { useLockBodyScroll } from "@shared/hooks";
 import { Backdrop } from "@shared/overlays";
 import { ModalContainer } from "@shared/overlays/modal/containers";
 import { useModalContext } from "@shared/overlays/modal/contexts";
 import { AnimatePresence, motion } from "motion/react";
-
-import { useLockBodyScroll } from "@hooks/admin";
 
 const ModalShell = () => {
   const {

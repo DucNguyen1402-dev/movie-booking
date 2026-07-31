@@ -5,8 +5,7 @@ import {
   toastSizeClasses,
   toastTypeClasses,
 } from "@shared/overlays/toast/config";
-
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 const ToastContainer = ({
   message = "something went wrong",
   variant,

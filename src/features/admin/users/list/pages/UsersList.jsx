@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import { layout } from "@shared/layouts";
 import { toast } from "@shared/overlays";
 
-import { useLayoutContext } from "@contexts/admin";
-import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
+import {
+  useConsumeLocationState,
+  useTemporaryState,
+} from "@features/admin/hooks";
 import {
   UserHeader,
   UserTable,
@@ -12,7 +15,7 @@ import {
 } from "@features/admin/users/list/components";
 
 const UsersList = () => {
-  const { isSidebarOpen } = useLayoutContext();
+  const { isSidebarOpen } = layout.use();
 
   const location = useLocation();
   const [toastState] = useTemporaryState(location.state?.toastState);

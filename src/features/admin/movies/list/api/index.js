@@ -1,3 +1,2 @@
-
-export {deleteMovie} from "./deleteMovie"
-export { api } from "@services/admin/client";
+export { deleteMovie } from "./deleteMovie";
+export { api } from "@shared/api";

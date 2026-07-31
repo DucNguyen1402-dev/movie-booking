@@ -1,7 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import Playground from "@pages/shared/Playground";
-
 import MainLayout from "./layouts/customer/MainLayout";
 import { AdminRoutes, ProtectedRoute } from "./routes/admin";
 
@@ -47,7 +45,6 @@ export default function App() {
       />
 
       <Route path="*" element={<Navigate to="/" replace />} />
-      <Route path="/playground" element={<Playground />} />
     </Routes>
   );
 }

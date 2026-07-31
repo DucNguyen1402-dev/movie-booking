@@ -1,6 +1,5 @@
 import { ErrorMessage } from "@shared/fields";
-
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const Select = ({
   value,

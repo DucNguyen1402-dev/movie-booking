@@ -1,4 +1,4 @@
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const TITLE_SIZE_CLASSES = {
   md: "text-lg",

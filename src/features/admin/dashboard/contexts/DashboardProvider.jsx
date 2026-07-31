@@ -1,4 +1,4 @@
-import { usePagination } from "@shared/pagination";
+import { usePagination } from "@shared/table";
 
 import { dashboardContext } from "./dashboardContext";
 import {

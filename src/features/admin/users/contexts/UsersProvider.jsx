@@ -1,12 +1,12 @@
-import { usePagination } from "@shared/pagination";
+import { usePagination } from "@shared/table";
 
-import { useUserFilter, useUsersActions, useUsersStates } from "./hooks";
+import { useManageUsers, useUserFilter, useUsersActions } from "./hooks";
 import { usersContext } from "./usersContext";
 
 const UsersProvider = ({ children }) => {
-  const usersStates = useUsersStates();
+  const manageUsers = useManageUsers();
   const usersActions = useUsersActions();
-  const userFilters = useUserFilter({ users: usersStates.users });
+  const userFilters = useUserFilter({ visibleUsers: manageUsers.visibleUsers });
 
   const pagination = usePagination({
     items: userFilters.filteredUsers,
@@ -15,11 +15,11 @@ const UsersProvider = ({ children }) => {
       userFilters.filters.role,
       // userFilters.filteredUsers,
     ],
-    enabled: usersStates.isSuccess,
+    enabled: manageUsers.isSuccess,
   });
 
   const value = {
-    usersStates,
+    manageUsers,
     userFilters,
     pagination,
     usersActions,

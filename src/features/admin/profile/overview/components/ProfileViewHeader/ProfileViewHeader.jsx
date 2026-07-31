@@ -1,17 +1,17 @@
 import { useState } from "react";
 
+import { useLockBodyScroll } from "@shared/hooks";
 import { Button } from "@shared/ui";
 import { Pen } from "lucide-react";
 
-import { useUserContext } from "@contexts/admin";
-import { useLockBodyScroll } from "@hooks/admin";
+import { auth } from "@features/admin/auth";
 
 import AvatarSetting from "./AvatarSetting";
 
 const ProfileViewHeader = ({ name }) => {
   const [isAvatarSettingOpen, setIsAvatarSettingOpen] = useState(false);
 
-  const { storageAvatar, avatarName } = useUserContext();
+  const { storageAvatar, avatarName } = auth.use();
 
   useLockBodyScroll(isAvatarSettingOpen);
 

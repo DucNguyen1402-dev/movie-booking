@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { runWithLoading } from "@shared/async";
+import * as execution from "@shared/execution";
 import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
 
@@ -33,7 +33,7 @@ export function useAddUserActions({ handleSubmit }) {
     const submitNewUserTask = async () => await mutateAsync(data);
 
     try {
-      const content = await runWithLoading(submitNewUserTask, loader);
+      const content = await execution.runWithLoading(submitNewUserTask, loader);
 
       navigate(previousPath, {
         state: {

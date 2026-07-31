@@ -1,4 +1,4 @@
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const FormLabel = ({ htmlFor, children, required = false, className = "" }) => {
   return (

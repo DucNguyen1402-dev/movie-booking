@@ -2,8 +2,7 @@ import {
   dualSpinnerColorClasses,
   dualSpinnerSizeClasses,
 } from "@shared/overlays/loading/config";
-
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const DualRingSpinner = ({ size = "md", color = "primary" }) => {
   const sizeClass = dualSpinnerSizeClasses[size] ?? dualSpinnerSizeClasses.md;

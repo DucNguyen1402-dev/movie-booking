@@ -1,9 +1,8 @@
 import { forwardRef } from "react";
 
 import { ErrorMessage } from "@shared/fields";
+import { cn } from "@shared/utils";
 import { LockKeyhole } from "lucide-react";
-
-import { cn } from "@utils/shared";
 
 const Input = forwardRef(
   (

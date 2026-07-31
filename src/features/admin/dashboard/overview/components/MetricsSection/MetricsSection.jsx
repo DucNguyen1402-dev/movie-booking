@@ -1,3 +1,4 @@
+import { layout } from "@shared/layouts";
 import {
   CircleDollarSign,
   Star,
@@ -7,7 +8,6 @@ import {
   Users,
 } from "lucide-react";
 
-import { useLayoutContext } from "@contexts/admin";
 import {
   formatCurrency,
   formatRoundedNumber,
@@ -111,7 +111,7 @@ const MetricsSection = ({
     averageTicketsSold,
     averageRating,
   });
-  const { isSidebarOpen } = useLayoutContext();
+  const { isSidebarOpen } = layout.use();
 
   return (
     <section

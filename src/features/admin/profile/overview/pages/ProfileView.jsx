@@ -4,7 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "@shared/overlays";
 import { Button } from "@shared/ui";
 
-import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
+import {
+  useConsumeLocationState,
+  useTemporaryState,
+} from "@features/admin/hooks";
 import { useProfileContext } from "@features/admin/profile/contexts";
 import {
   ProfileSkeleton,

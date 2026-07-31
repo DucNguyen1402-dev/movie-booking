@@ -1,9 +1,8 @@
 import { forwardRef, useLayoutEffect, useMemo, useRef } from "react";
 
 import { ErrorMessage } from "@shared/fields";
-
-import { mergeRefs } from "@utils/admin";
-import { cn } from "@utils/shared";
+import { mergeRefs } from "@shared/utils";
+import { cn } from "@shared/utils";
 const Textarea = forwardRef(
   (
     {

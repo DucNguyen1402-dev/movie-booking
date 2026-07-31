@@ -16,6 +16,6 @@ export function useProfileEffect({ loginedUser, reset }) {
       matKhauMoi: "",
       xacNhanMatKhauMoi: "",
     });
-    lastProfileAccount.current === loginedUser.taiKhoan;
+    lastProfileAccount.current = loginedUser.taiKhoan;
   }, [loginedUser, reset]);
 }

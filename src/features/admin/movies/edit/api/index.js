@@ -1,2 +1,2 @@
-export {updateMovie} from "./updateMovie"
-export { api } from "@services/admin/client";
+export { updateMovie } from "./updateMovie";
+export { api } from "@shared/api";

@@ -1,5 +1,5 @@
 import { Input, Select } from "@shared/fields";
-import { PaginationSelect } from "@shared/pagination";
+import { PaginationSelect } from "@shared/table";
 import { Search } from "lucide-react";
 
 import { USER_ROLE_OPTIONS } from "@features/admin/users/config";
@@ -32,7 +32,7 @@ const UserToolbar = () => {
 
         <PaginationSelect
           value={pagination.state.currentSize}
-          onChange={(e) => pagination.state.setSize(e.target.value)}
+          onChange={(e) => pagination.actions.setSize(e.target.value)}
         />
       </div>
     </div>

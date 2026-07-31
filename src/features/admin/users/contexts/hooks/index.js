@@ -1,4 +1,4 @@
-export {useUserFilter} from "./useUserFilter"
-export {useUsers} from "./useUsers"
-export {useUsersActions} from "./useUsersActions"
-export {useUsersStates} from "./useUsersStates"
+export { useManageUsers } from "./useManageUsers";
+export { useUserFilter } from "./useUserFilter";
+export { useUsers } from "./useUsers";
+export { useUsersActions } from "./useUsersActions";

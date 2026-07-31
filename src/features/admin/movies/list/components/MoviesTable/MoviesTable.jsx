@@ -1,11 +1,17 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-import { PaginationControls } from "@shared/pagination";
-import { createEmptyStateContent, TableEmptyState } from "@shared/table";
+import {
+  createEmptyStateContent,
+  PaginationControls,
+  TableEmptyState,
+} from "@shared/table";
 import { EmptyStateButton } from "@shared/ui";
 
-import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
+import {
+  useConsumeLocationState,
+  useTemporaryState,
+} from "@features/admin/hooks";
 import { useMovieListContext } from "@features/admin/movies/list/contexts";
 import { ENTITIES } from "@features/admin/shared/config";
 

@@ -2,8 +2,7 @@ import {
   spinnerColorClasses,
   spinnerSizeClasses,
 } from "@shared/overlays/loading/config";
-
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const Spinner = ({ size = "md", color = "primary" }) => {
   const colorClass = spinnerColorClasses[color];

@@ -1,6 +1,5 @@
 import { Spinner } from "@shared/overlays";
-
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 const sizes = {
   none: {
     button: "",

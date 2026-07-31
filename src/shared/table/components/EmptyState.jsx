@@ -1,6 +1,5 @@
+import { cn } from "@shared/utils";
 import { X } from "lucide-react";
-
-import { cn } from "@utils/shared";
 
 const EmptyState = ({
   icon: Icon = X,

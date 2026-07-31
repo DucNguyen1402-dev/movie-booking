@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 
 import { CancelButton, SaveButton } from "@shared/ui";
+import { getAvatarInitial } from "@shared/utils";
 import { PencilLine } from "lucide-react";
 
-import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { useSyncLeaveConfirmation } from "@features/admin/hooks";
 import { useUsersContext } from "@features/admin/users/contexts";
 import {
   UserEditForm,
@@ -13,15 +14,15 @@ import {
   useEditUserActions,
   useEditUserForm,
 } from "@features/admin/users/edit/hooks";
-import { getAvatarInitial } from "@utils/admin";
 
 const EditUser = () => {
   const { account } = useParams();
 
   const {
-    usersStates: { users },
+    manageUsers: { visibleUsers },
   } = useUsersContext();
-  const targetUser = users.find((user) => user.taiKhoan === account) ?? {};
+  const targetUser =
+    visibleUsers.find((user) => user.taiKhoan === account) ?? {};
 
   const { register, handleSubmit, errors, initialUser, isDirty } =
     useEditUserForm({

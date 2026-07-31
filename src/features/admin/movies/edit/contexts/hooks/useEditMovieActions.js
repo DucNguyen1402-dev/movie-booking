@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { runWithLoading } from "@shared/async";
+import * as execution from "@shared/execution";
 import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
 import { format } from "date-fns";
@@ -75,7 +75,7 @@ export function useEditMovieActions({ editId, editMovie, trigger, getValues }) {
     };
 
     try {
-      const { data } = await runWithLoading(saveMovieTask, loader);
+      const { data } = await execution.runWithLoading(saveMovieTask, loader);
 
       navigate(previousPath, {
         state: {

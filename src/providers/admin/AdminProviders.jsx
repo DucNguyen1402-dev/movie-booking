@@ -4,17 +4,17 @@ import {
   ToastProvider,
 } from "@shared/providers";
 
-import { UserProvider } from "@contexts/admin/user";
+import { AuthProvider } from "@features/admin";
 
 const AdminProviders = ({ children }) => {
   return (
-    <UserProvider>
-      <ToastProvider>
-        <LoadingProvider>
-          <ModalProvider>{children}</ModalProvider>
-        </LoadingProvider>
-      </ToastProvider>
-    </UserProvider>
+    <ToastProvider>
+      <LoadingProvider>
+        <ModalProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </ModalProvider>
+      </LoadingProvider>
+    </ToastProvider>
   );
 };
 

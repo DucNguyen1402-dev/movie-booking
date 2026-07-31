@@ -1,2 +1,2 @@
 export { getMovies } from "./getMovies";
-export { api } from "@services/admin/client";
+export { api } from "@shared/api";

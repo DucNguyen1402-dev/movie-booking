@@ -1,4 +1,5 @@
-import { useLayoutContext } from "@contexts/admin/layout";
+import { layout } from "@shared/layouts";
+
 import {
   RevenueHeader,
   RevenueRankingTable,
@@ -7,7 +8,7 @@ import {
 } from "@features/admin/dashboard/revenue-ranking/components";
 
 const RevenueRanking = () => {
-  const { isSidebarOpen } = useLayoutContext();
+  const { isSidebarOpen } = layout.use();
 
   return (
     <section className="bg-linear-to-br from-slate-900 to-slate-800 px-8 py-10">

@@ -1,6 +1,6 @@
 import { FormLabel, Input, PasswordField, Select } from "@shared/fields";
 
-import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { useSyncLeaveConfirmation } from "@features/admin/hooks";
 import { userValidationRules } from "@features/admin/shared/config";
 import { addUserFields } from "@features/admin/users/add/config";
 import {

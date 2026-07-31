@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { modal, toast } from "@shared/overlays";
 import { ROW_ACTION_ANIMATIONS } from "@shared/table";
 
-import { useScrollIntoView } from "@hooks/admin";
+import { useScrollIntoView } from "@features/admin/hooks";
 import { ENTITIES } from "@features/admin/shared/config";
 
 import { useDeleteMovie } from "./useDeleteMovie";

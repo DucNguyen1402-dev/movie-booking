@@ -15,15 +15,15 @@ const applyFilters = (users, { keyword, role }) => {
   });
 };
 
-export function useUserFilter({ users }) {
+export function useUserFilter({ visibleUsers }) {
   const [filters, setFilters] = useState({
     keyword: "",
     role: "all",
   });
 
   const filteredUsers = useMemo(
-    () => applyFilters(users, filters),
-    [users, filters],
+    () => applyFilters(visibleUsers, filters),
+    [visibleUsers, filters],
   );
 
   const onSearch = (value) =>

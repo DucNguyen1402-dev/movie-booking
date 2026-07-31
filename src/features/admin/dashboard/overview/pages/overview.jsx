@@ -1,6 +1,6 @@
+import { layout } from "@shared/layouts";
 import { FileClock } from "lucide-react";
 
-import { useLayoutContext } from "@contexts/admin";
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
 import {
   HighestRevenueMovieCard,
@@ -15,7 +15,7 @@ function Dashboard() {
     users,
     dashboardDerived: { derivedMovies, revenue, tickets, rating, ranking },
   } = useDashboardContext();
-  const { isSidebarOpen } = useLayoutContext();
+  const { isSidebarOpen } = layout.use();
 
   return (
     <div

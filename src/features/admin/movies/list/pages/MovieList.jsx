@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+import { useLockBodyScroll } from "@shared/hooks";
+import { layout } from "@shared/layouts";
 import { toast } from "@shared/overlays";
 import { Backdrop } from "@shared/overlays";
-import { PaginationSelect } from "@shared/pagination";
+import { PaginationSelect } from "@shared/table";
 import { AnimatePresence, motion } from "motion/react";
 
-import { useLayoutContext } from "@contexts/admin";
 import {
   useConsumeLocationState,
-  useLockBodyScroll,
   useTemporaryState,
-} from "@hooks/admin";
+} from "@features/admin/hooks";
 import {
   AddMovieBtn,
   MoviesTable,
@@ -25,7 +25,7 @@ import { useMovieListContext } from "@features/admin/movies/list/contexts";
 const MovieList = () => {
   const location = useLocation();
 
-  const { isSidebarOpen } = useLayoutContext();
+  const { isSidebarOpen } = layout.use();
   const {
     trailer: { trailer },
     pagination,

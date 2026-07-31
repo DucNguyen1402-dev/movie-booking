@@ -3,9 +3,8 @@ import { Controller } from "react-hook-form";
 
 import { FormLabel } from "@shared/fields";
 import { Button } from "@shared/ui";
+import { cn } from "@shared/utils";
 import { Clock4 } from "lucide-react";
-
-import { cn } from "@utils/shared";
 
 import TimePicker from "./TimePicker";
 

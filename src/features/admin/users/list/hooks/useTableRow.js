@@ -1,7 +1,7 @@
 import { useMemo, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { useScrollIntoView } from "@hooks/admin";
+import { useScrollIntoView } from "@features/admin/hooks";
 
 import { useUserDeletion } from "./useUserDeletion";
 

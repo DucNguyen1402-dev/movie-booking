@@ -1,4 +1,4 @@
-import { cn } from "@utils/shared";
+import { cn } from "@shared/utils";
 
 const surfaceClasses = {
   dark: "border-red-600 bg-red-950/40 text-red-300",

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { runWithLoading } from "@shared/async";
+import * as execution from "@shared/execution";
 import { loading, modal, toast } from "@shared/overlays";
 import { ROW_ACTION_TYPES } from "@shared/table";
 
@@ -63,7 +63,10 @@ export function useAddMovieActions() {
     };
 
     try {
-      const response = await runWithLoading(submitNewMovieTask, loader);
+      const response = await execution.runWithLoading(
+        submitNewMovieTask,
+        loader,
+      );
 
       navigate(previousPath, {
         state: {

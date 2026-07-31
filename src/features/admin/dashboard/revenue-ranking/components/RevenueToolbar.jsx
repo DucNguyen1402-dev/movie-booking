@@ -1,5 +1,5 @@
 import { Input } from "@shared/fields";
-import { PaginationSelect } from "@shared/pagination";
+import { PaginationSelect } from "@shared/table";
 import { Button } from "@shared/ui";
 import { ArrowDown, ArrowUp, Search } from "lucide-react";
 

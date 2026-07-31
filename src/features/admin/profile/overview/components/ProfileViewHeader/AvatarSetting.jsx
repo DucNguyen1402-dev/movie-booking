@@ -1,14 +1,14 @@
 import { useCallback } from "react";
 
-import { usePagination } from "@shared/pagination";
+import { usePagination } from "@shared/table";
 import { Button } from "@shared/ui";
 import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 
-import { useUserContext } from "@contexts/admin/user";
+import { auth } from "@features/admin/auth";
 
 const AvatarSetting = ({ onClose }) => {
   const { setAvatarIndex, avatarName, avatarList, currentAvatarIndex } =
-    useUserContext();
+    auth.use();
 
   const pagination = usePagination({
     items: avatarList,

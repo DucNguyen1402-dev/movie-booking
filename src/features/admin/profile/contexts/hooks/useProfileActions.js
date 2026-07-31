@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { runWithLoading } from "@shared/async";
+import * as execution from "@shared/execution";
 import { loading, modal, toast } from "@shared/overlays";
+import { getCurrentUser } from "@shared/utils";
 
 import { ENTITIES } from "@features/admin/shared/config";
 import { useUserInfor } from "@features/admin/users";
-import { getCurrentUser } from "@utils/shared";
 
 import { useUpdateUser } from ".";
 
@@ -62,7 +62,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
     const changeProfileTask = async () => await mutateAsync(payload);
 
     try {
-      await runWithLoading(changeProfileTask, loader);
+      await execution.runWithLoading(changeProfileTask, loader);
       navigate(previousPath, {
         state: {
           history: history.slice(0, -1),
@@ -128,7 +128,7 @@ export function useProfileActions({ handleSubmit, getValues, isDirty }) {
       }
     };
 
-    await runWithLoading(submitChangedPasswordTask, loader);
+    await execution.runWithLoading(submitChangedPasswordTask, loader);
   };
 
   const handleChangeProfile = (data) =>

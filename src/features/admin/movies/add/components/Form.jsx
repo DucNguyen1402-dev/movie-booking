@@ -1,7 +1,7 @@
 import { DateInput, FormLabel, Textarea } from "@shared/fields";
 import { AddButton, CancelButton } from "@shared/ui";
 
-import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { useSyncLeaveConfirmation } from "@features/admin/hooks";
 import { useAddMovieActions } from "@features/admin/movies/add/hooks";
 import { movieValidationRules } from "@features/admin/movies/config";
 

@@ -3,7 +3,10 @@ import { useLocation } from "react-router-dom";
 
 import { toast } from "@shared/overlays";
 
-import { useConsumeLocationState, useTemporaryState } from "@hooks/admin";
+import {
+  useConsumeLocationState,
+  useTemporaryState,
+} from "@features/admin/hooks";
 
 import {
   EmptyShowtimeState,

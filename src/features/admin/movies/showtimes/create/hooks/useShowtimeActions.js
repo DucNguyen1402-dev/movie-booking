@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { runWithLoading } from "@shared/async";
+import * as execution from "@shared/execution";
 import { loading, modal, toast } from "@shared/overlays";
 import { format } from "date-fns";
 
@@ -40,7 +40,7 @@ export function useShowtimeActions({ handleSubmit, movie }) {
     const createShowtimeTask = async () => await createShowtime(payload);
 
     try {
-      await runWithLoading(createShowtimeTask, loader);
+      await execution.runWithLoading(createShowtimeTask, loader);
       navigate(previousPath, {
         state: {
           maCumRap,

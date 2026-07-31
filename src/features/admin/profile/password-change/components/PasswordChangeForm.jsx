@@ -1,9 +1,9 @@
-import { userValidationRules } from "@features/admin/shared/config";
 import { FormLabel, PasswordField } from "@shared/fields";
 import { CancelButton, SaveButton } from "@shared/ui";
 
-import { useSyncLeaveConfirmation } from "@hooks/admin";
+import { useSyncLeaveConfirmation } from "@features/admin/hooks";
 import { useProfileContext } from "@features/admin/profile/contexts";
+import { userValidationRules } from "@features/admin/shared/config";
 
 const passwordFieldsConfig = [
   { label: "Mật khẩu hiện tại", name: "matKhauHienTai" },

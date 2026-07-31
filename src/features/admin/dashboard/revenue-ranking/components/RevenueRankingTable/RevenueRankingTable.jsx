@@ -1,5 +1,8 @@
-import { PaginationControls } from "@shared/pagination";
-import { createEmptyStateContent, TableEmptyState } from "@shared/table";
+import {
+  createEmptyStateContent,
+  PaginationControls,
+  TableEmptyState,
+} from "@shared/table";
 import { EmptyStateButton } from "@shared/ui";
 
 import { useDashboardContext } from "@features/admin/dashboard/contexts";
